@@ -2,8 +2,9 @@ Pod::Spec.new do |spec|
   spec.name         = 'JivoShared'
   spec.version      = '1.0.56'
   spec.license      = { :type => 'MIT', :file => "LICENSE" }
-  spec.homepage     = 'https://github.com/habrabro'
+  spec.homepage     = 'https://github.com/JivoChat'
   spec.authors      = { 'Anton Karpushko' => 'karpushko@jivosite.com' }
+  spec.summary      = 'Shared sources for Jivo projects'
 
   spec.requires_arc = true
 
@@ -11,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.swift_version = "5.0"
   spec.platform = :ios, "10.0"
 
-  spec.source       = { :git => '/JivoShared', :tag => "1.0.16" }
+  spec.source       = { :git => 'https://github.com/JivoChat/JMShared.git', :tag => "#{ spec.version }" }
   # spec.public_header_files = "JivoShared.framework/Headers/*.h"
   spec.source_files = "JivoShared/**/*.*"
   spec.resource = "Assets.xcassets"
