@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public extension List {
     public func toArray() -> [Element] {

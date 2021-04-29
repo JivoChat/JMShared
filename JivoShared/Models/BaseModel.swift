@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import JMRepicKit
-import JivoShared
+import JMShared
 
 open class BaseModel: Object {
     

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class MessageMedia: BaseModel {
     @objc dynamic public var _type: String = ""

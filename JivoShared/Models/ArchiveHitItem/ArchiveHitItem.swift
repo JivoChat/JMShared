@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 open class ArchiveHitItem: BaseModel {
     @objc dynamic public var _ID: String = UUID().uuidString
     @objc dynamic public var _type: String = ""

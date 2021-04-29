@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import JivoShared
+import JMShared
 import JMRepicKit
 
 fileprivate let dynamicFontEnabled = true

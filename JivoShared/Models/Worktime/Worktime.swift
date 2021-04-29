@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class Worktime: BaseModel {
     @objc dynamic public var _agentID: Int = 0

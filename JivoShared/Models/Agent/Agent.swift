@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 open class Agent: BaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""

@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 import AVFoundation
-import JivoShared
+import JMShared
 
 public struct UserTechConfig: Codable {
     public var guestInsightEnabled: Bool = true

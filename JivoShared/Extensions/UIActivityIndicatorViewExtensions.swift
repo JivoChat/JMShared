@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import JivoShared
+import JMShared
 import UIKit
 
 extension UIActivityIndicatorView {

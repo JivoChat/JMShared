@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import JivoShared
+import JMShared
 
 public extension Array {
     public var hasElements: Bool {

@@ -8,7 +8,7 @@
 
 import Foundation
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class ChatAttendee: BaseModel {
     @objc dynamic public var _agent: Agent?

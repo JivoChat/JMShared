@@ -7,7 +7,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import JMRepicKit
-import JivoShared
+import JMShared
 
 public final class Reminder: BaseModel {
     @objc dynamic public var _ID: Int = 0

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class ArchiveHitChatItem: ArchiveHitItem {
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {

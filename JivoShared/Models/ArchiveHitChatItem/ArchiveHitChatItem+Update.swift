@@ -8,7 +8,7 @@
 
 import Foundation
 import JMCodingKit
-import JivoShared
+import JMShared
 
 extension ArchiveHitChatItem {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {

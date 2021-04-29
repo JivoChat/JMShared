@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class Channel: BaseModel {
     @objc dynamic public var _ID: Int = 0

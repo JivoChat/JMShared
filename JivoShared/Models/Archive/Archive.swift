@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class Archive: BaseModel {
     @objc dynamic public var _ID: String = Archive.globalID()

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class ArchiveHitCallItem: ArchiveHitItem {
     @objc dynamic public var _status: String = ""

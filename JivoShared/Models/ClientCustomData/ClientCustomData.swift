@@ -8,7 +8,7 @@
 
 import Foundation
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public final class ClientCustomData: BaseModel {
     @objc dynamic public var _title: String?

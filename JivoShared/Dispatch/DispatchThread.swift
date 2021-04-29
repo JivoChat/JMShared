@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import JivoShared
+import JMShared
 
 public final class DispatchThread: NSObject {
     private var thread: Thread?

@@ -8,7 +8,7 @@
 
 import Foundation
 import JMCodingKit
-import JivoShared
+import JMShared
 
 public enum UploadingPurpose: Equatable {
     case transfer(Sender)

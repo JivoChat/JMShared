@@ -8,7 +8,7 @@
 
 import Foundation
 import JMCodingKit
-import JivoShared
+import JMShared
 
 extension Channel {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {

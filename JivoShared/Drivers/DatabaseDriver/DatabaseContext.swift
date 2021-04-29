@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMTimelineKit
-import JivoShared
+import JMShared
 
 fileprivate var exceptionHandler: (Error) -> Void = { _ in }
 public func DatabaseContextSetExceptionHandler(_ handler: @escaping (Error) -> Void) { exceptionHandler = handler }
