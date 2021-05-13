@@ -138,6 +138,10 @@ public struct WorktimeDayMetaPair: Equatable {
 }
 
 extension Worktime {
+    public var agentID: Int {
+        return _agentID
+    }
+    
     public var timezoneID: Int? {
         if _timezoneID > 0 {
             return _timezoneID
