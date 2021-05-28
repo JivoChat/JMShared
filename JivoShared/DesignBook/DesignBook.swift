@@ -11,9 +11,10 @@ import UIKit
 import JMShared
 import JMRepicKit
 
+fileprivate var sharedInstance: DesignBook!
 fileprivate let dynamicFontEnabled = true
 fileprivate let usingForcedStyle: DesignBookStyle? = nil
-fileprivate var sharedInstance: DesignBook!
+fileprivate var initialStatusBarHeight = CGFloat.zero
 
 public final class DesignBook {
     public static var shared: DesignBook {
@@ -28,6 +29,7 @@ public final class DesignBook {
         self.window = window
         
         lastStyleTraits = window.traitCollection
+        initialStatusBarHeight = UIApplication.shared.statusBarFrame.height
         sharedInstance = self
     }
     
@@ -51,13 +53,16 @@ public final class DesignBook {
     
     public class func screenSize() -> DesignBookScreenSize {
         let idiom = UI_USER_INTERFACE_IDIOM()
-        let height = UIScreen.main.nativeBounds.height
+        let scale = UIScreen.main.nativeScale
+        let height = UIScreen.main.nativeBounds.height / scale
         
         switch true {
         case idiom == .pad: return .extraLarge
-        case height > 2500: return .extraLarge
-        case height > 1250: return .large
-        case height > 1000: return .standard
+        case height > 850 where scale >= 3: return .extraLarge
+        case height > 850: return .large
+        case height > 700 where initialStatusBarHeight == 50: return .standard
+        case height > 700: return .large
+        case height > 600: return .standard
         default: return .small
         }
     }
