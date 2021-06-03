@@ -9,34 +9,21 @@
 import Foundation
 import RealmSwift
 
-public enum ModelRefBehavior {
-    case threading
-    case storage
+public struct ModelRefBehavior: OptionSet {
+    public let rawValue: Int
+    public init(rawValue: Int) { self.rawValue = rawValue }
+    public static let strong = ModelRefBehavior(rawValue: 1 << 0)
 }
 
 public final class ModelRef<Value: BaseModel> {
     private weak var databaseDriver: IDatabaseDriver?
-    
     private let uuid: String?
-    private var reference: ThreadSafeReference<Value>?
+    private let behavior: ModelRefBehavior
     
     public init(databaseDriver: IDatabaseDriver, value: Value?, behavior: ModelRefBehavior) {
         self.databaseDriver = databaseDriver
-        
-        if let value = value {
-            switch behavior {
-            case .threading:
-                reference = ThreadSafeReference(to: value)
-                uuid = nil
-            case .storage:
-                reference = nil
-                uuid = value._UUID
-            }
-        }
-        else {
-            reference = nil
-            uuid = nil
-        }
+        self.uuid = value?._UUID
+        self.behavior = behavior
     }
     
     public var resolved: Value? {
@@ -44,16 +31,16 @@ public final class ModelRef<Value: BaseModel> {
     }
     
     public func resolve() -> Value? {
-        if let ref = reference {
-            reference = nil
-            
-            guard let object = databaseDriver?.resolve(ref: ref), object.isValid else { return nil }
-            reference = ThreadSafeReference(to: object)
-            
+        guard let uuid = uuid else {
+            return nil
+        }
+        
+        let mainKey = DatabaseContextMainKey(key: "_UUID", value: uuid)
+        if let object = databaseDriver?.object(Value.self, mainKey: mainKey) {
             return object
         }
-        else if let uuid = uuid {
-            let mainKey = DatabaseContextMainKey(key: "_UUID", value: uuid)
+        else if behavior.contains(.strong) {
+            databaseDriver?.refresh()
             return databaseDriver?.object(Value.self, mainKey: mainKey)
         }
         else {
@@ -61,3 +48,4 @@ public final class ModelRef<Value: BaseModel> {
         }
     }
 }
+
