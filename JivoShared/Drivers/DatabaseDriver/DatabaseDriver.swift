@@ -65,8 +65,6 @@ open class DatabaseDriver: IDatabaseDriver {
         self.memoryIdentifier = memoryIdentifier
         self.timelineCache = timelineCache
         self.localizer = localizer
-        
-        print("{database-driver} ::init @file-url[\(fileURL)]")
     }
     
     public func parallel() -> IDatabaseDriver {

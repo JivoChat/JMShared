@@ -30,6 +30,8 @@ public protocol ILocaleProvider: class {
 }
 
 public final class LocaleProvider: ILocaleProvider {
+    private let containingBundle: Bundle
+
     public static var baseLocaleBundle: Bundle?
     public static var activeLocale: Locale!
     public static var activeBundle: Bundle?
@@ -43,11 +45,12 @@ public final class LocaleProvider: ILocaleProvider {
         return baseLocaleBundle ?? Bundle.main
     }
     
-    public init(activeLocale: Locale) {
+    public init(containingBundle: Bundle, activeLocale: Locale) {
         if let path = Bundle.main.path(forResource: "Base", ofType: "lproj") {
             LocaleProvider.baseLocaleBundle = Bundle(path: path)
         }
         
+        self.containingBundle = containingBundle
         self.activeLocale = activeLocale
     }
     
@@ -62,7 +65,7 @@ public final class LocaleProvider: ILocaleProvider {
         set {
             LocaleProvider.activeLocale = newValue
             LocaleProvider.activeBundle = newValue.langID.flatMap({ LocaleProvider.obtainBundle(lang: $0) }) ?? LocaleProvider.baseLocaleBundle
-            NotificationCenter.default.post(name: .localeChanged, object: LocaleProvider.activeLocale)
+            NotificationCenter.default.post(name: .localeChanged, object: containingBundle)
         }
     }
     
