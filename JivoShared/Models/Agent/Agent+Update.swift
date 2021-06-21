@@ -19,6 +19,7 @@ extension Agent {
             _stateID = c.stateID
             _avatarLink = c.avatarLink.valuable
             _displayName = c.displayName
+            _isOwner = c.isOwner ?? _isOwner
             _isAdmin = c.isAdmin
             _isOperator = c.isOperator
             _callingDestination = (c.callingDestination > -1 ? c.callingDestination : _callingDestination)
@@ -100,6 +101,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
     public var title: String = ""
     public var callingDestination: Int
     public var callingOptions = 0
+    public let isOwner: Bool?
     public let isAdmin: Bool
     public let isOperator: Bool
     public let isWorking: Bool?
@@ -133,6 +135,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
         title = agentInfo["title"].stringValue
         callingDestination = agentInfo["web_call_dest"].int ?? -1
         callingOptions = flags.reduce(0, +)
+        isOwner = agentInfo["is_owner"].bool
         isAdmin = agentInfo["is_admin"].bool ?? true
         isOperator = agentInfo["is_operator"].bool ?? true
         isWorking = agentInfo["work_state"].int.flatMap { $0 > 0 }
@@ -155,6 +158,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
         title = ""
         callingDestination = -1
         callingOptions = 0
+        isOwner = nil
         isAdmin = false
         isOperator = false
         isWorking = true
@@ -175,6 +179,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
          title: String,
          callingDestination: Int,
          callingOptions: Int,
+         isOwner: Bool?,
          isAdmin: Bool,
          isOperator: Bool,
          isWorking: Bool?,
@@ -192,6 +197,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
         self.title = title
         self.callingDestination = callingDestination
         self.callingOptions = callingOptions
+        self.isOwner = isOwner
         self.isAdmin = isAdmin
         self.isOperator = isOperator
         self.isWorking = isWorking
@@ -218,6 +224,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
             title: title,
             callingDestination: callingDestination,
             callingOptions: callingOptions,
+            isOwner: isOwner,
             isAdmin: isAdmin,
             isOperator: isOperator,
             isWorking: isWorking,

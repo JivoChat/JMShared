@@ -19,6 +19,7 @@ open class Agent: BaseModel {
     @objc dynamic public var _avatarLink: String?
     @objc dynamic public var _displayName: String = ""
     @objc dynamic public var _title: String = ""
+    @objc dynamic public var _isOwner: Bool = false
     @objc dynamic public var _isAdmin: Bool = true
     @objc dynamic public var _isOperator: Bool = true
     @objc dynamic public var _callingDestination: Int = 0

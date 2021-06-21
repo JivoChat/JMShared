@@ -140,6 +140,10 @@ extension Agent: Displayable {
         return _title
     }
     
+    public var isOwner: Bool {
+        return _isOwner
+    }
+    
     public var isAdmin: Bool {
         return _isAdmin
     }

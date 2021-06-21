@@ -109,8 +109,9 @@ public enum DesignBookColorUsage {
     case triggerContrastButtonBackground
     case triggerContrastButtonForeground
     case actionButtonBackground
-    case actionPassiveButtonForeground
     case actionActiveButtonForeground
+    case actionInactiveButtonForeground
+    case actionNeutralButtonForeground
     case actionDangerButtonForeground
     case actionPressedButtonForeground
     case actionDisabledButtonForeground
