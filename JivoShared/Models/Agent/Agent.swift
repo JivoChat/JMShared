@@ -14,6 +14,7 @@ open class Agent: BaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _email: String = ""
+    @objc dynamic public var _emailVerified: Bool = true
     @objc dynamic public var _phone: String = ""
     @objc dynamic public var _stateID: Int = 0
     @objc dynamic public var _avatarLink: String?

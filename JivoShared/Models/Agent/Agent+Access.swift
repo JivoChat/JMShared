@@ -61,6 +61,10 @@ extension Agent: Displayable {
         return _email
     }
     
+    public var emailVerified: Bool {
+        return _emailVerified
+    }
+    
     public var nickname: String {
         return email.split(separator: "@").first.flatMap(String.init) ?? String()
     }

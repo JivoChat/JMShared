@@ -15,6 +15,7 @@ extension Agent {
         if let c = change as? AgentGeneralChange {
             if _ID == 0 { _ID = c.ID }
             _email = c.email.valuable ?? _email
+            _emailVerified = c.emailVerified ?? _emailVerified
             _phone = c.phone ?? _phone
             _stateID = c.stateID
             _avatarLink = c.avatarLink.valuable
@@ -94,6 +95,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
     public var ID: Int = 0
     public var siteID: Int
     public var email: String
+    public var emailVerified: Bool?
     public var phone: String?
     public var stateID: Int = 0
     public var avatarLink: String
@@ -128,6 +130,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
         ID = agentInfo["agent_id"].intValue
         siteID = agentInfo["site_id"].intValue
         email = agentInfo["email"].stringValue
+        emailVerified = agentInfo["email_verified"].bool
         phone = agentInfo["agent_phone"].string?.valuable
         stateID = agentInfo["agent_state_id"].intValue
         avatarLink = agentInfo["avatar_url"].stringValue
@@ -172,6 +175,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
          ID: Int,
          siteID: Int,
          email: String,
+         emailVerified: Bool?,
          phone: String?,
          stateID: Int,
          avatarLink: String,
@@ -190,6 +194,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
         self.ID = ID
         self.siteID = siteID
         self.email = email
+        self.emailVerified = emailVerified
         self.phone = phone
         self.stateID = stateID
         self.avatarLink = avatarLink
@@ -217,6 +222,7 @@ public final class AgentGeneralChange: BaseModelChange, Codable {
             ID: ID,
             siteID: siteID,
             email: email,
+            emailVerified: emailVerified,
             phone: phone,
             stateID: 0,
             avatarLink: avatarLink,
