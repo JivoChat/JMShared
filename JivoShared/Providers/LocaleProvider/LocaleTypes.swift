@@ -65,7 +65,7 @@ public struct SignupCountry {
 }
 
 public struct Localizer {
-    private var bundle: Bundle?
+    private var classFromBundle: AnyClass?
     
     public subscript(_ key: String, lang: String? = nil) -> String {
         let result: String
@@ -74,7 +74,10 @@ public struct Localizer {
             let bundle = LocaleProvider.obtainBundle(lang: lang)
             result = bundle.localizedString(forKey: key, value: nil, table: nil)
         }
-        else if let bundle = self.bundle ?? LocaleProvider.activeBundle {
+        else if let bundle = classFromBundle.flatMap({
+            LocaleProvider.obtainBundle(for: $0, lang: LocaleProvider.activeLocale?.langID ?? Locale.current.langID ?? "")
+        })
+        ?? LocaleProvider.activeBundle {
             let value = bundle.localizedString(forKey: key, value: nil, table: nil)
             if value == key {
                 let bundle = LocaleProvider.baseLocaleBundle
@@ -96,9 +99,7 @@ public struct Localizer {
     }
     
     public init(for classFromBundle: AnyClass? = nil) {
-        if let classFromBundle = classFromBundle {
-            bundle = LocaleProvider.obtainBundle(for: classFromBundle, lang: LocaleProvider.activeLocale?.langID ?? "")
-        }
+        self.classFromBundle = classFromBundle
     }
 }
 public func locale() -> Locale {

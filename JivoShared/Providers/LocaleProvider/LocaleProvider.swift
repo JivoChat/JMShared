@@ -32,8 +32,9 @@ public protocol ILocaleProvider: class {
 public final class LocaleProvider: ILocaleProvider {
     private let containingBundle: Bundle
 
+    private(set) public static var activeLocale: Locale!
+    
     public static var baseLocaleBundle: Bundle?
-    public static var activeLocale: Locale!
     public static var activeBundle: Bundle?
 
     public static func obtainBundle(for classFromBundle: AnyClass? = nil, lang: String) -> Bundle {
