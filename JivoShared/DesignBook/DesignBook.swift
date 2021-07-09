@@ -304,10 +304,10 @@ public final class DesignBook {
                 if client.hasActiveCall {
                     control.setActivity(.calling, context: repicContext)
                 }
-                else if let reminder = client.reminder {
-                    switch reminder.status {
-                    case .active: control.setActivity(.reminderActive, context: repicContext)
-                    case .fired: control.setActivity(.reminderFired, context: repicContext)
+                else if let task = client.task {
+                    switch task.status {
+                    case .active: control.setActivity(.taskActive, context: repicContext)
+                    case .fired: control.setActivity(.taskFired, context: repicContext)
                     case .unknown: control.setActivity(nil, context: repicContext)
                     }
                 }
@@ -452,8 +452,8 @@ public final class DesignBook {
         case .counterBackground: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.brightBlue))
         case .counterForeground: return dynamicColor(light: .alias(.white), dark: .alias(.white))
         case .activityCall: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
-        case .activityActiveReminder: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
-        case .activityFiredReminder: return dynamicColor(light: .alias(.reddishPink), dark: .alias(.reddishPink))
+        case .activityActiveTask: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
+        case .activityFiredTask: return dynamicColor(light: .alias(.reddishPink), dark: .alias(.reddishPink))
         // elements
         case .clientBackground: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
         case .clientForeground: return dynamicColor(light: .alias(.white), dark: .alias(.white))

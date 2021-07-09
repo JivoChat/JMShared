@@ -144,8 +144,8 @@ public enum DesignBookColorUsage {
     case counterBackground
     case counterForeground
     case activityCall
-    case activityActiveReminder
-    case activityFiredReminder
+    case activityActiveTask
+    case activityFiredTask
     // elements
     case clientBackground
     case clientForeground

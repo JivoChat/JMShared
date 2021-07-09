@@ -51,9 +51,9 @@ extension Task {
         }
     }
     
-    public func convertToMessageBody() -> MessageBodyReminder {
+    public func convertToMessageBody() -> MessageBodyTask {
         return MessageBodyTask(
-            reminderID: _ID,
+            taskID: _ID,
             agent: _agent,
             text: _text,
             createdAt: Date(timeIntervalSince1970: _createdTimestamp),

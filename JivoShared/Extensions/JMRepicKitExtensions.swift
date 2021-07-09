@@ -8,8 +8,8 @@ import JMRepicKit
 
 public enum JMRepicActivity {
     case calling
-    case reminderActive
-    case reminderFired
+    case taskActive
+    case taskFired
 }
 
 public extension JMRepicConfig {
@@ -130,16 +130,16 @@ public extension JMRepicView {
                 config: .activityIndicatorConfig(context: context)
             )
 
-        case .reminderActive?:
+        case .taskActive?:
             setIndicator(
-                fillColor: DesignBook.shared.color(usage: .activityActiveReminder),
+                fillColor: DesignBook.shared.color(usage: .activityActiveTask),
                 icon: UIImage(named: "activity_reminder")?.withRenderingMode(.alwaysTemplate),
                 config: .activityIndicatorConfig(context: context)
             )
             
-        case .reminderFired?:
+        case .taskFired?:
             setIndicator(
-                fillColor: DesignBook.shared.color(usage: .activityFiredReminder),
+                fillColor: DesignBook.shared.color(usage: .activityFiredTask),
                 icon: UIImage(named: "activity_reminder")?.withRenderingMode(.alwaysTemplate),
                 config: .activityIndicatorConfig(context: context)
             )
