@@ -585,7 +585,7 @@ public final class ChatShortChange: BaseModelChange, NSCoding {
             client: ClientShortChange(
                 ID: clientID,
                 channelID: nil,
-                reminder: nil),
+                task: nil),
             attendee: nil,
             teammateID: nil,
             isGroup: nil,

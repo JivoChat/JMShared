@@ -68,27 +68,27 @@ extension Message {
             }
         }
 
-        func _adjustReminder(reminder: MessageBodyReminder?) {
-            guard let reminder = reminder else { return }
-            guard let agentID = reminder.agent?.ID else { return }
+        func _adjustTask(task: MessageBodyTask?) {
+            guard let task = task else { return }
+            guard let agentID = task.agent?.ID else { return }
             
             let status: String
-            switch reminder.status {
-            case .created, .updated: status = ReminderStatus.active.rawValue
-            case .completed, .deleted: status = ReminderStatus.unknown.rawValue
-            case .fired: status = ReminderStatus.fired.rawValue
-            case .unknown: status = ReminderStatus.unknown.rawValue
+            switch task.status {
+            case .created, .updated: status = TaskStatus.active.rawValue
+            case .completed, .deleted: status = TaskStatus.unknown.rawValue
+            case .fired: status = TaskStatus.fired.rawValue
+            case .unknown: status = TaskStatus.unknown.rawValue
             }
 
             _ = context.upsert(
-                of: Reminder.self,
-                with: ReminderGeneralChange(
-                    ID: reminder.reminderID,
+                of: Task.self,
+                with: TaskGeneralChange(
+                    ID: task.taskID,
                     agentID: agentID,
-                    text: reminder.text,
-                    createdTs: reminder.createdAt?.timeIntervalSince1970,
-                    modifiedTs: reminder.updatedAt?.timeIntervalSince1970,
-                    notifyTs: reminder.notifyAt.timeIntervalSince1970,
+                    text: task.text,
+                    createdTs: task.createdAt?.timeIntervalSince1970,
+                    modifiedTs: task.updatedAt?.timeIntervalSince1970,
+                    notifyTs: task.notifyAt.timeIntervalSince1970,
                     status: status
                 )
             )
@@ -211,7 +211,7 @@ extension Message {
 
             _adjustSender(type: c.senderType, ID: c.senderID, body: c.body)
             _adjustIncomingState(clientID: nil)
-            _adjustReminder(reminder: _body?.reminder)
+            _adjustTask(task: _body?.task)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
             _adjustHidden()
         }
@@ -289,7 +289,7 @@ extension Message {
                     )
                 )
                 
-            case .proactive, .transfer, .join, .left, .call, .line, .reminder, .bot, .order:
+            case .proactive, .transfer, .join, .left, .call, .line, .task, .bot, .order:
                 assertionFailure()
             }
             
@@ -376,7 +376,7 @@ extension Message {
 
             _adjustSender(type: c.senderType, ID: c.agent.ID, body: c.body)
             _adjustIncomingState(clientID: nil)
-            _adjustReminder(reminder: _body?.reminder)
+            _adjustTask(task: _body?.task)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
             _adjustHidden()
         }

@@ -26,7 +26,7 @@ public final class MessageBody: BaseModel {
     @objc dynamic public var _type: String?
     @objc dynamic public var _reason: String?
     @objc dynamic public var _recordLink: String?
-    @objc dynamic public var _reminderID: Int = 0
+    @objc dynamic public var _taskID: Int = 0
     @objc dynamic public var _createdAt: Date?
     @objc dynamic public var _updatedAt: Date?
     @objc dynamic public var _transitionedAt: Date?

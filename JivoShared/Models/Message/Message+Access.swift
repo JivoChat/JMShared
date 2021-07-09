@@ -22,7 +22,7 @@ public enum MessageContent {
     case join(assistant: Agent, by: Agent?)
     case left(agent: Agent, kicker: Agent?)
     case call(call: MessageBodyCall)
-    case reminder(reminder: MessageBodyReminder)
+    case task(task: MessageBodyTask)
     case line
     
     public var isEditable: Bool {
@@ -37,7 +37,7 @@ public enum MessageContent {
         case .join: return false
         case .left: return false
         case .call: return false
-        case .reminder: return false
+        case .task: return false
         case .line: return false
         case .bot: return false
         case .order: return false
@@ -56,7 +56,7 @@ public enum MessageContent {
         case .join: return false
         case .left: return false
         case .call: return false
-        case .reminder: return false
+        case .task: return false
         case .line: return false
         case .bot: return false
         case .order: return false
@@ -251,9 +251,9 @@ public extension Message {
                     call: call
                 )
             }
-            else if let reminder = _body?.reminder {
-                return .reminder(
-                    reminder: reminder
+            else if let task = _body?.task {
+                return .task(
+                    task: task
                 )
             }
             else {
@@ -311,9 +311,9 @@ public extension Message {
             return .line
 
         case "reminder":
-            if let reminder = _body?.reminder {
-                return .reminder(
-                    reminder: reminder
+            if let task = _body?.task {
+                return .task(
+                    task: task
                 )
             }
             
@@ -418,9 +418,9 @@ public extension Message {
         }
     }
     
-    var reminderStatus: MessageBodyReminderStatus {
-        if case .reminder(let reminder) = content {
-            return _body?.status.flatMap(MessageBodyReminderStatus.init) ?? reminder.status
+    var taskStatus: MessageBodyTaskStatus {
+        if case .task(let task) = content {
+            return _body?.status.flatMap(MessageBodyTaskStatus.init) ?? task.status
         }
         else {
             return .unknown
@@ -475,7 +475,7 @@ public extension Message {
             case .unknown: return nil
             }
 
-        case .reminder:
+        case .task:
             return nil
         }
     }
@@ -557,8 +557,8 @@ public extension Message {
         return _body?.order
     }
 
-    var reminder: MessageBodyReminder? {
-        return _body?.reminder
+    var task: MessageBodyTask? {
+        return _body?.task
     }
     
     var iconURL: URL? {
