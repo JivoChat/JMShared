@@ -26,7 +26,7 @@ extension MessageBody {
             _type = c.type
             _reason = c.reason
             _recordLink = c.recordLink
-            _reminderID = c.reminderID ?? 0
+            _taskID = c.taskID ?? 0
             _createdAt = c.createdTs.flatMap { Date(timeIntervalSince1970: $0) }
             _updatedAt = c.updatedTs.flatMap { Date(timeIntervalSince1970: $0) }
             _transitionedAt = c.transitionTs.flatMap { Date(timeIntervalSince1970: $0) }
@@ -52,7 +52,7 @@ public final class MessageBodyGeneralChange: BaseModelChange {
     public let type: String?
     public let reason: String?
     public let recordLink: String?
-    public let reminderID: Int?
+    public let taskID: Int?
     public let createdTs: TimeInterval?
     public let updatedTs: TimeInterval?
     public let transitionTs: TimeInterval?
@@ -63,7 +63,7 @@ public final class MessageBodyGeneralChange: BaseModelChange {
 
     required public init( json: JsonElement) {
         let call = json.has(key: "call") ?? json
-        let reminder = json.has(key: "reminder") ?? json
+        let task = json.has(key: "reminder") ?? json
 
         let callAgentID = call["agent_id"].int
         event = call["status"].string
@@ -79,20 +79,20 @@ public final class MessageBodyGeneralChange: BaseModelChange {
         from = json["from"].string
         subject = json["subject"].string
 
-        let reminderAgentID = reminder["agent_id"].int
-        let reminderText = reminder["text"].string
-        reminderID = reminder["reminder_id"].int
-        createdTs = reminder["created_ts"].double
-        updatedTs = reminder["updated_ts"].double
-        transitionTs = reminder["transition_ts"].double
-        notifyTs = reminder["notify_ts"].double
-        status = reminder["status"].string ?? json["status"].string
+        let taskAgentID = task["agent_id"].int
+        let taskText = task["text"].string
+        taskID = task["reminder_id"].int
+        createdTs = task["created_ts"].double
+        updatedTs = task["updated_ts"].double
+        transitionTs = task["transition_ts"].double
+        notifyTs = task["notify_ts"].double
+        status = task["status"].string ?? json["status"].string
 
         let defaultAgentID = json["agent"].int ?? json["by_agent"].int
-        agentID = callAgentID ?? reminderAgentID ?? defaultAgentID
+        agentID = callAgentID ?? taskAgentID ?? defaultAgentID
 
         let defaultText = json["text"].string
-        text = reminderText ?? defaultText
+        text = taskText ?? defaultText
         
         if let keyboard = json["keyboard"].array?.compactMap({ $0["text"].string }) {
             buttons = keyboard.isEmpty ? nil : keyboard.joined(separator: "\n")

@@ -1,5 +1,5 @@
 //
-//  Reminder+Update.swift
+//  Task+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -10,9 +10,9 @@ import Foundation
 import JMCodingKit
 import JMShared
 
-extension Reminder {
+extension Task {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
-        if let c = change as? ReminderGeneralChange {
+        if let c = change as? TaskGeneralChange {
             if _ID == 0 { _ID = c.ID }
             _siteID = c.siteID ?? 0
             _clientID = c.clientID ?? 0
@@ -23,13 +23,13 @@ extension Reminder {
             _notifyTimestamp = c.notifyTs
             _status = c.status
         }
-        else if let _ = change as? ReminderCompleteChange {
+        else if let _ = change as? TaskCompleteChange {
             _status = "completed"
         }
     }
 }
 
-public final class ReminderGeneralChange: BaseModelChange, NSCoding {
+public final class TaskGeneralChange: BaseModelChange, NSCoding {
     public let ID: Int
     public let siteID: Int?
     public let clientID: Int?
@@ -111,7 +111,7 @@ public final class ReminderGeneralChange: BaseModelChange, NSCoding {
     }
 }
 
-public final class ReminderCompleteChange: BaseModelChange {
+public final class TaskCompleteChange: BaseModelChange {
     public let ID: Int
 
     public override var primaryValue: Int {

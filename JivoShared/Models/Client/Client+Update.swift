@@ -61,7 +61,7 @@ extension Client {
                 _integrationLink = c.socialLinks[integration]
             }
 
-            _reminder = context.upsert(of: Reminder.self, with: c.reminder) ?? _reminder
+            _task = context.upsert(of: Task.self, with: c.task) ?? _task
             
             if let customData = c.customData {
                 _customData.set(context.insert(of: ClientCustomData.self, with: customData))
@@ -88,7 +88,7 @@ extension Client {
             case .some(let agentID): _assignedAgent = context.agent(for: agentID, provideDefault: true)
             }
             
-            _reminder = context.upsert(of: Reminder.self, with: c.reminder) ?? _reminder
+            _task = context.upsert(of: Task.self, with: c.task) ?? _task
         }
         else if let c = change as? ClientOnlineChange {
             _isOnline = c.isOnline
@@ -96,8 +96,8 @@ extension Client {
         else if let c = change as? ClientHasActiveCallChange {
             _hasActiveCall = c.hasCall
         }
-        else if let c = change as? ClientReminderChange {
-            _reminder = context.object(Reminder.self, primaryKey: c.reminderID)
+        else if let c = change as? ClientTaskChange {
+            _task = context.object(Task.self, primaryKey: c.taskID)
         }
         else if let c = change as? ClientBlockingChange {
             _isBlocked = c.blocking
@@ -112,7 +112,7 @@ extension Client {
     
     public func performDelete(inside context: IDatabaseContext) {
         context.customRemove(objects: _customData.toArray(), recursive: true)
-        context.customRemove(objects: [_activeSession, _proactiveRule, _reminder].flatten(), recursive: true)
+        context.customRemove(objects: [_activeSession, _proactiveRule, _task].flatten(), recursive: true)
     }
 }
 
@@ -136,7 +136,7 @@ public final class ClientGeneralChange: BaseModelChange {
     public let integration: String?
     public let connectionLost: Bool?
     public let hasStartup: Bool
-    public let reminder: ReminderGeneralChange?
+    public let task: TaskGeneralChange?
     public let customData: [ClientCustomDataGeneralChange]?
     public let isBlocked: Bool
 
@@ -168,7 +168,7 @@ public final class ClientGeneralChange: BaseModelChange {
         integration = nil
         connectionLost = nil
         hasStartup = true
-        reminder = nil
+        task = nil
         customData = nil
         isBlocked = false
         super.init()
@@ -246,7 +246,7 @@ public final class ClientGeneralChange: BaseModelChange {
             connectionLost = nil
         }
 
-        reminder = json["reminder"].parse()
+        task = json["reminder"].parse()
         isBlocked = (json.has(key: "blacklist") != nil)
 
         super.init(json: json)
@@ -330,7 +330,7 @@ public final class ClientShortChange: BaseModelChange, NSCoding {
     public let channelID: Int?
     public let displayName: String?
     public let avatarURL: String?
-    public let reminder: ReminderGeneralChange?
+    public let task: TaskGeneralChange?
     public let assignedAgentID: Int?
 
     private let codableIdKey = "id"
@@ -338,7 +338,7 @@ public final class ClientShortChange: BaseModelChange, NSCoding {
     private let codableChannelKey = "channel"
     private let codableNameKey = "name"
     private let codableAvatarKey = "avatar"
-    private let codableReminderKey = "reminder"
+    private let codableTaskKey = "reminder"
     private let codableAssignedAgentKey = "assigned_agent"
 
     public override var primaryValue: Int {
@@ -355,18 +355,18 @@ public final class ClientShortChange: BaseModelChange, NSCoding {
         channelID = json["widget_id"].int
         displayName = json["agent_client_name"].valuable ?? json["client_name"].valuable ?? json["display_name"].valuable
         avatarURL = json["avatar_url"].valuable
-        reminder = json["reminder"].parse()
+        task = json["reminder"].parse()
         assignedAgentID = json["assigned_agent_id"].int
         super.init(json: json)
     }
     
-    public init(ID: Int, channelID: Int?, reminder: ReminderGeneralChange?) {
+    public init(ID: Int, channelID: Int?, task: TaskGeneralChange?) {
         self.ID = ID
         self.guestID = String()
         self.channelID = channelID
         self.displayName = nil
         self.avatarURL = nil
-        self.reminder = reminder
+        self.task = task
         self.assignedAgentID = 0
         super.init()
     }
@@ -377,7 +377,7 @@ public final class ClientShortChange: BaseModelChange, NSCoding {
         channelID = coder.decodeObject(forKey: codableChannelKey) as? Int
         displayName = coder.decodeObject(forKey: codableNameKey) as? String
         avatarURL = coder.decodeObject(forKey: codableAvatarKey) as? String
-        reminder = coder.decodeObject(of: ReminderGeneralChange.self, forKey: codableReminderKey)
+        task = coder.decodeObject(of: TaskGeneralChange.self, forKey: codableTaskKey)
         assignedAgentID = coder.decodeObject(of: NSNumber.self, forKey: codableAssignedAgentKey)?.intValue
         super.init()
     }
@@ -388,7 +388,7 @@ public final class ClientShortChange: BaseModelChange, NSCoding {
         coder.encode(channelID, forKey: codableChannelKey)
         coder.encode(displayName, forKey: codableNameKey)
         coder.encode(avatarURL, forKey: codableAvatarKey)
-        coder.encode(reminder, forKey: codableReminderKey)
+        coder.encode(task, forKey: codableTaskKey)
         coder.encode(assignedAgentID.flatMap(NSNumber.init), forKey: codableAssignedAgentKey)
     }
 }
@@ -456,16 +456,16 @@ public final class ClientHasActiveCallChange: BaseModelChange {
     }
 }
 
-public final class ClientReminderChange: BaseModelChange {
+public final class ClientTaskChange: BaseModelChange {
     public let ID: Int
-    public let reminderID: Int
+    public let taskID: Int
 
     public override var primaryValue: Int {
         return ID
     }
-    public init(ID: Int, reminderID: Int) {
+    public init(ID: Int, taskID: Int) {
         self.ID = ID
-        self.reminderID = reminderID
+        self.taskID = taskID
         super.init()
     }
 

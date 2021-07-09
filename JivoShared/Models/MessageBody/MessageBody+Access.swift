@@ -87,18 +87,18 @@ public enum MessageBodyCallReason: String {
     case unknown
 }
 
-public struct MessageBodyReminder {
-    public let reminderID: Int
+public struct MessageBodyTask {
+    public let taskID: Int
     public let agent: Agent?
     public let text: String
     public let createdAt: Date?
     public let updatedAt: Date?
     public let transitionedAt: Date?
     public let notifyAt: Date
-    public let status: MessageBodyReminderStatus
+    public let status: MessageBodyTaskStatus
 }
 
-public enum MessageBodyReminderStatus: String {
+public enum MessageBodyTaskStatus: String {
     case created = "created"
     case updated = "updated"
     case completed = "completed"
@@ -163,22 +163,22 @@ extension MessageBody {
         )
     }
 
-    public var reminder: MessageBodyReminder? {
+    public var task: MessageBodyTask? {
         guard
-            _reminderID > 0,
+            _taskID > 0,
             let agent = _agent,
             let notifyAt = _notifyAt
         else { return nil }
 
-        return MessageBodyReminder(
-            reminderID: _reminderID,
+        return MessageBodyTask(
+            taskID: _taskID,
             agent: agent,
             text: _text ?? String(),
             createdAt: _createdAt,
             updatedAt: _updatedAt,
             transitionedAt: _transitionedAt,
             notifyAt: notifyAt,
-            status: _status.flatMap(MessageBodyReminderStatus.init) ?? .fired
+            status: _status.flatMap(MessageBodyTaskStatus.init) ?? .fired
         )
     }
     

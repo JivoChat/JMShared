@@ -9,7 +9,7 @@ import JMCodingKit
 import JMRepicKit
 import JMShared
 
-public final class Reminder: BaseModel {
+public final class Task: BaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _siteID: Int = 0
     @objc dynamic public var _clientID: Int = 0

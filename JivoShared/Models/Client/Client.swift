@@ -36,7 +36,7 @@ public final class Client: BaseModel {
     @objc dynamic public var _isOnline: Bool = true
     @objc dynamic public var _hasStartup: Bool = true
     @objc dynamic public var _hasActiveCall: Bool = false
-    @objc dynamic public var _reminder: Reminder?
+    @objc dynamic public var _task: Task?
     @objc dynamic public var _isBlocked: Bool = false
     public let _customData = List<ClientCustomData>()
 

@@ -205,8 +205,8 @@ extension Client: Displayable {
         return _hasActiveCall
     }
 
-    public var reminder: Reminder? {
-        return _reminder
+    public var task: Task? {
+        return _task
     }
     
     public var countryCode: String? {
@@ -221,6 +221,6 @@ extension Client: Displayable {
         return ClientShortChange(
             ID: ID,
             channelID: channel?.ID,
-            reminder: nil)
+            task: nil)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Reminder+Access.swift
+//  Task+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -7,7 +7,8 @@
 //
 
 import Foundation
-public enum ReminderStatus: String {
+
+public enum TaskStatus: String {
     case unknown
     case active = "active"
     case fired = "fired"
@@ -20,7 +21,7 @@ public enum ReminderStatus: String {
     }
 }
 
-extension Reminder {
+extension Task {
     public var ID: Int {
         return _ID
     }
@@ -39,8 +40,8 @@ extension Reminder {
     public var notifyAt: Date {
         return Date(timeIntervalSince1970: _notifyTimestamp)
     }
-    public var status: ReminderStatus {
-        return ReminderStatus(rawValue: _status) ?? .unknown
+    public var status: TaskStatus {
+        return TaskStatus(rawValue: _status) ?? .unknown
     }
         public var iconName: String? {
         switch status {
@@ -51,7 +52,7 @@ extension Reminder {
     }
     
     public func convertToMessageBody() -> MessageBodyReminder {
-        return MessageBodyReminder(
+        return MessageBodyTask(
             reminderID: _ID,
             agent: _agent,
             text: _text,
@@ -59,6 +60,6 @@ extension Reminder {
             updatedAt: Date(timeIntervalSince1970: _modifiedTimestamp),
             transitionedAt: Date(timeIntervalSince1970: _modifiedTimestamp),
             notifyAt: Date(timeIntervalSince1970: _notifyTimestamp),
-            status: MessageBodyReminderStatus(rawValue: _status) ?? .fired
+            status: MessageBodyTaskStatus(rawValue: _status) ?? .fired
         )
     }}
