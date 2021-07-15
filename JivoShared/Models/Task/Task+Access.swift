@@ -31,6 +31,9 @@ extension Task {
     public var clientID: Int {
         return _clientID
     }
+    public var client: Client? {
+        return _client
+    }
     public var agent: Agent? {
         return _agent
     }

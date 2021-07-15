@@ -85,6 +85,7 @@ extension Message {
                 with: TaskGeneralChange(
                     ID: task.taskID,
                     agentID: agentID,
+                    agent: nil,
                     text: task.text,
                     createdTs: task.createdAt?.timeIntervalSince1970,
                     modifiedTs: task.updatedAt?.timeIntervalSince1970,

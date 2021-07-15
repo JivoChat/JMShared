@@ -16,6 +16,7 @@ public final class Client: BaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _guestID: String = ""
+    @objc dynamic public var _chatID: Int = 0
     @objc dynamic public var _channelID: Int = 0
     @objc dynamic public var _channelName: String?
     @objc dynamic public var _channel: Channel?

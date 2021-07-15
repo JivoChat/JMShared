@@ -16,6 +16,7 @@ extension Task {
             if _ID == 0 { _ID = c.ID }
             _siteID = c.siteID ?? 0
             _clientID = c.clientID ?? 0
+            _client = c.client.flatMap { context.client(for: $0.ID, needsDefault: true) }
             _agent = context.agent(for: c.agentID, provideDefault: true)
             _text = c.text
             _createdTimestamp = c.createdTs ?? _createdTimestamp
@@ -33,7 +34,9 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
     public let ID: Int
     public let siteID: Int?
     public let clientID: Int?
+    public let client: ClientGeneralChange?
     public let agentID: Int
+    public let agent: AgentGeneralChange?
     public let text: String
     public let createdTs: TimeInterval?
     public let modifiedTs: TimeInterval?
@@ -42,8 +45,10 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
 
     private let codableIdKey = "id"
     private let codableSiteKey = "site"
-    private let codableClientKey = "client"
-    private let codableAgentKey = "agent"
+    private let codableClientIDKey = "client"
+    private let codableClientKey = "client_object"
+    private let codableAgentIDKey = "agent"
+    private let codableAgentKey = "agent_object"
     private let codableTextKey = "text"
     private let codableCreatedKey = "created_ts"
     private let codableModifiedKey = "updated_ts"
@@ -55,6 +60,7 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
     }
     public init(ID: Int,
          agentID: Int,
+         agent: AgentGeneralChange?,
          text: String,
          createdTs: TimeInterval?,
          modifiedTs: TimeInterval?,
@@ -63,7 +69,9 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
         self.ID = ID
         self.siteID = nil
         self.clientID = nil
+        self.client = nil
         self.agentID = agentID
+        self.agent = agent
         self.text = text
         self.createdTs = createdTs
         self.modifiedTs = modifiedTs
@@ -76,7 +84,9 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
         ID = json["reminder_id"].intValue
         siteID = json["site_id"].int
         clientID = json["client_id"].int
+        client = json["client"].parse()
         agentID = json["agent_id"].intValue
+        agent = json["agent"].parse()
         text = json["text"].stringValue
         createdTs = json["created_ts"].double
         modifiedTs = json["updated_ts"].double
@@ -88,8 +98,10 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
     public init?(coder: NSCoder) {
         ID = coder.decodeInteger(forKey: codableIdKey)
         siteID = coder.decodeObject(forKey: codableSiteKey) as? Int
-        clientID = coder.decodeObject(forKey: codableClientKey) as? Int
-        agentID = coder.decodeInteger(forKey: codableAgentKey)
+        clientID = coder.decodeObject(forKey: codableClientIDKey) as? Int
+        client = coder.decodeObject(forKey: codableClientKey) as? ClientGeneralChange
+        agentID = coder.decodeInteger(forKey: codableAgentIDKey)
+        agent = coder.decodeObject(forKey: codableAgentKey) as? AgentGeneralChange
         text = (coder.decodeObject(forKey: codableTextKey) as? String) ?? String()
         createdTs = coder.decodeObject(forKey: codableCreatedKey) as? Double
         modifiedTs = coder.decodeObject(forKey: codableModifiedKey) as? Double
@@ -101,8 +113,10 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
     public func encode(with coder: NSCoder) {
         coder.encode(ID, forKey: codableIdKey)
         coder.encode(siteID, forKey: codableSiteKey)
-        coder.encode(clientID, forKey: codableClientKey)
-        coder.encode(agentID, forKey: codableAgentKey)
+        coder.encode(clientID, forKey: codableClientIDKey)
+        coder.encode(client, forKey: codableClientKey)
+        coder.encode(agentID, forKey: codableAgentIDKey)
+        coder.encode(agent, forKey: codableAgentKey)
         coder.encode(text, forKey: codableTextKey)
         coder.encode(createdTs, forKey: codableCreatedKey)
         coder.encode(modifiedTs, forKey: codableModifiedKey)

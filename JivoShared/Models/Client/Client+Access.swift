@@ -55,6 +55,15 @@ extension Client: Displayable {
         return _publicID
     }
     
+    public var chatID: Int? {
+        if _chatID > .zero {
+            return _chatID
+        }
+        else {
+            return nil
+        }
+    }
+    
     public var channelID: Int {
         return _channelID
     }

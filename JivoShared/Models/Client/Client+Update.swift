@@ -15,6 +15,7 @@ extension Client {
         if let c = change as? ClientGeneralChange {
             if _ID == 0 { _ID = c.ID }
             _guestID = c.guestID.valuable ?? _guestID
+            _chatID = c.chatID ?? _chatID
             _channelID = c.channelID
             _channelName = c.channelName ?? _channelName
             _channel = context.object(Channel.self, primaryKey: c.channelID)
@@ -119,6 +120,7 @@ extension Client {
 public final class ClientGeneralChange: BaseModelChange {
     public let ID: Int
     public let guestID: String
+    public let chatID: Int?
     public let channelID: Int
     public let channelName: String?
     public let displayName: String?
@@ -151,6 +153,7 @@ public final class ClientGeneralChange: BaseModelChange {
         public init(clientID: Int) {
         ID = clientID
         guestID = String()
+        chatID = nil
         channelID = 0
         channelName = nil
         displayName = nil
@@ -235,6 +238,7 @@ public final class ClientGeneralChange: BaseModelChange {
             hasStartup = true
         }
         
+        chatID = json["chat_id"].int
         channelID = json["widget_id"].intValue
         channelName = json["widget_name"].string
         integration = json["has_integration"].string
