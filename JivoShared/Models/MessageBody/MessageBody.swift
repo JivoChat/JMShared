@@ -32,6 +32,7 @@ public final class MessageBody: BaseModel {
     @objc dynamic public var _transitionedAt: Date?
     @objc dynamic public var _notifyAt: Date?
     @objc dynamic public var _status: String?
+    @objc dynamic public var _taskStatus: String?
     @objc dynamic public var _buttons: String?
     @objc dynamic public var _orderID: String?
 

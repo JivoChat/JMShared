@@ -32,6 +32,7 @@ extension MessageBody {
             _transitionedAt = c.transitionTs.flatMap { Date(timeIntervalSince1970: $0) }
             _notifyAt = c.notifyTs.flatMap { Date(timeIntervalSince1970: $0) }
             _status = c.status
+            _taskStatus = c.taskStatus
             _buttons = c.buttons
             _orderID = c.orderID
         }
@@ -58,6 +59,7 @@ public final class MessageBodyGeneralChange: BaseModelChange {
     public let transitionTs: TimeInterval?
     public let notifyTs: TimeInterval?
     public let status: String?
+    public let taskStatus: String?
     public let buttons: String?
     public let orderID: String?
 
@@ -86,7 +88,8 @@ public final class MessageBodyGeneralChange: BaseModelChange {
         updatedTs = task["updated_ts"].double
         transitionTs = task["transition_ts"].double
         notifyTs = task["notify_ts"].double
-        status = task["status"].string ?? json["status"].string
+        status = json["status"].string
+        taskStatus = task["status"].string
 
         let defaultAgentID = json["agent"].int ?? json["by_agent"].int
         agentID = callAgentID ?? taskAgentID ?? defaultAgentID
