@@ -35,6 +35,8 @@ public final class MessageBody: BaseModel {
     @objc dynamic public var _taskStatus: String?
     @objc dynamic public var _buttons: String?
     @objc dynamic public var _orderID: String?
+    @objc dynamic public var _title: String?
+    @objc dynamic public var _link: String?
 
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)

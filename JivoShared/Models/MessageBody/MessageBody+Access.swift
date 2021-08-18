@@ -98,6 +98,11 @@ public struct MessageBodyTask {
     public let status: MessageBodyTaskStatus
 }
 
+public struct MessageBodyConference {
+    public let url: URL
+    public let title: String
+}
+
 public enum MessageBodyTaskStatus: String {
     case created = "created"
     case updated = "updated"
@@ -207,5 +212,19 @@ extension MessageBody {
     
     public var status: String? {
         return _event
+    }
+    
+    public var conference: MessageBodyConference? {
+        guard
+            let link = _link, let url = URL(string: link),
+            let title = _title
+        else {
+            return nil
+        }
+        
+        return MessageBodyConference(
+            url: url,
+            title: title
+        )
     }
 }
