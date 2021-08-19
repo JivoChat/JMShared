@@ -290,7 +290,7 @@ extension Message {
                     )
                 )
                 
-            case .proactive, .transfer, .join, .left, .call, .line, .task, .bot, .order:
+            case .proactive, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference:
                 assertionFailure()
             }
             

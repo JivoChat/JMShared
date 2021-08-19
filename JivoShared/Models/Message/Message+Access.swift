@@ -23,6 +23,7 @@ public enum MessageContent {
     case left(agent: Agent, kicker: Agent?)
     case call(call: MessageBodyCall)
     case task(task: MessageBodyTask)
+    case conference(conference: MessageBodyConference)
     case line
     
     public var isEditable: Bool {
@@ -39,6 +40,7 @@ public enum MessageContent {
         case .call: return false
         case .task: return false
         case .line: return false
+        case .conference: return false
         case .bot: return false
         case .order: return false
         }
@@ -58,6 +60,7 @@ public enum MessageContent {
         case .call: return false
         case .task: return false
         case .line: return false
+        case .conference: return false
         case .bot: return false
         case .order: return false
         }
@@ -477,6 +480,9 @@ public extension Message {
 
         case .task:
             return nil
+            
+        case .conference:
+            return UIImage(named: "preview_conf")
         }
     }
 
