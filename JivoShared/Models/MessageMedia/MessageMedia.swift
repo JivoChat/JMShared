@@ -25,6 +25,8 @@ public final class MessageMedia: BaseModel {
     @objc dynamic public var _latitude: Double = 0
     @objc dynamic public var _longitude: Double = 0
     @objc dynamic public var _phone: String = ""
+    @objc dynamic public var _title: String?
+    @objc dynamic public var _link: String?
 
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)

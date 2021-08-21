@@ -18,6 +18,7 @@ public enum MessageMediaType {
     case comment
     case location
     case contact
+    case conference
     case unknown
 }
 public enum MessageMediaSizingMode {
@@ -36,6 +37,7 @@ extension MessageMedia {
         case "comment": return .comment
         case "location": return .location
         case "contact": return .contact
+        case "conference": return .conference
         default: return .unknown
         }
     }
@@ -90,6 +92,20 @@ extension MessageMedia {
         }
         else {
             return CLLocationCoordinate2D(latitude: _latitude, longitude: _longitude)
+        }
+    }
+    
+    public var conference: MessageBodyConference? {
+        guard type == .conference else {
+            return nil
+        }
+        
+        if let link = _link, not(link.isEmpty) {
+            let url = URL(string: link)
+            return MessageBodyConference(url: url, title: _title ?? String())
+        }
+        else {
+            return MessageBodyConference(url: nil, title: _title ?? String())
         }
     }
     

@@ -35,8 +35,6 @@ extension MessageBody {
             _taskStatus = c.taskStatus
             _buttons = c.buttons
             _orderID = c.orderID
-            _title = c.title
-            _link = c.link
         }
     }
 }
@@ -64,8 +62,6 @@ public final class MessageBodyGeneralChange: BaseModelChange {
     public let taskStatus: String?
     public let buttons: String?
     public let orderID: String?
-    public let title: String?
-    public let link: String?
 
     required public init( json: JsonElement) {
         let call = json.has(key: "call") ?? json
@@ -110,9 +106,6 @@ public final class MessageBodyGeneralChange: BaseModelChange {
         
         orderID = json["order_id"].string
 
-        title = call["title"].string
-        link = call["url"].string
-        
         super.init(json: json)
     }
     public var isValidCall: Bool {

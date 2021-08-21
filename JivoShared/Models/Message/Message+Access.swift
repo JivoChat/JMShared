@@ -240,6 +240,11 @@ public extension Message {
                         height: Int(media.originalSize.height)
                     )
                 }
+                else if let conference = media.conference {
+                    return .conference(
+                        conference: conference
+                    )
+                }
                 else {
                     return .file(
                         mime: media.mime,
