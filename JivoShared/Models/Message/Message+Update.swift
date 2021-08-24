@@ -622,6 +622,14 @@ public final class MessageGeneralChange: MessageExtendedGeneralChange {
         super.init(json: json)
     }
     
+    public override var isValid: Bool {
+        if type == "message", media?.type == "conference", senderType == "agent" {
+            return false
+        }
+        
+        return super.isValid
+    }
+    
     public var callID: String? {
         return body?.callID
     }

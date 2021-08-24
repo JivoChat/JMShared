@@ -113,6 +113,10 @@ extension MessageMedia {
         return _phone.valuable
     }
     
+    public var text: String? {
+        return _text?.valuable
+    }
+    
     public var originalSize: CGSize {
         let width = CGFloat(_width)
         let height = CGFloat(_height)

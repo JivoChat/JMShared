@@ -27,6 +27,7 @@ extension MessageMedia {
             _phone = c.phone ?? ""
             _title = c.title
             _link = c.link
+            _text = c.text
 
             let name = (c.title.valuable ?? c.name).trimmedZeros()
             if let performer = c.performer?.trimmedZeros() {
@@ -56,6 +57,7 @@ public final class MessageMediaGeneralChange: BaseModelChange {
     public let longitude: Double?
     public let phone: String?
     public let link: String?
+    public let text: String?
 
     public override var isValid: Bool {
         guard type != "error" else { return false }
@@ -78,6 +80,7 @@ public final class MessageMediaGeneralChange: BaseModelChange {
         self.longitude = nil
         self.phone = nil
         self.link = nil
+        self.text = nil
         super.init()
     }
     
@@ -98,6 +101,7 @@ public final class MessageMediaGeneralChange: BaseModelChange {
         longitude = json["longitude"].double ?? json["longitude"].string?.toDouble()
         phone = json["phone"].string
         link = json["url"].string
+        text = json["text"].string
         super.init(json: json)
     }
 }

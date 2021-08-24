@@ -20,6 +20,7 @@ public enum ChannelJoint: String {
     case ya = "ya"
     case tel = "tel"
     case webhook = "bot"
+    case salute = "sb"
     case unknown
     
     public var localizedChannelTitle: String? {
@@ -35,6 +36,7 @@ public enum ChannelJoint: String {
         case .ya: return loc["Client.Integration.YA"]
         case .tel: return loc["Client.Integration.Tel"]
         case .webhook: return loc["Client.Integration.Bot"]
+        case .salute: return loc["Client.Integration.Salute"]
         case .unknown: return nil
         }
     }
@@ -52,6 +54,7 @@ public enum ChannelJoint: String {
         case .ya: return loc["Client.Integration.YA"]
         case .webhook: return loc["Client.Integration.Bot"]
         case .tel: return loc["Channel.Title.Phone"]
+        case .salute: return loc["Client.Integration.Salute"]
         case .unknown: return nil
         }
     }
@@ -69,6 +72,7 @@ public enum ChannelJoint: String {
         case .ya: return false
         case .webhook: return true
         case .tel: return true
+        case .salute: return false
         case .unknown: return false
         }
     }
@@ -133,6 +137,7 @@ extension Channel {
         case .ya: return UIImage(named: "preview_ya")
         case .webhook: return UIImage(named: "preview_webhook")
         case .tel: return UIImage(named: "preview_tel")
+        case .salute: return UIImage(named: "preview_chat")
         case .unknown: return UIImage(named: "preview_chat")
         }
     }
