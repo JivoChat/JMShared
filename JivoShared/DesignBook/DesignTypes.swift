@@ -100,6 +100,9 @@ public enum DesignBookColorUsage {
     case primaryButtonForeground
     case secondaryButtonBackground
     case secondaryButtonForeground
+    case adaptiveButtonBackground
+    case adaptiveButtonForeground
+    case adaptiveButtonBorder
     case saturatedButtonBackground
     case saturatedButtonForeground
     case dimmedButtonBackground
