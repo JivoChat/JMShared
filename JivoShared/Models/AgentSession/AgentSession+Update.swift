@@ -207,21 +207,21 @@ public final class AgentSessionContextChange: BaseModelChange {
             
             if let misc = context.has(key: "misc") {
                 techConfig = UserTechConfig(
-                    guestInsightEnabled: (misc["disable_visitors_insight"].intValue == 0),
+                    guestInsightEnabled: ((misc["disable_visitors_insight"].int ?? 0) == 0),
                     fileSizeLimit: misc["max_file_size"].intValue,
-                    disableArchiveForRegular: (misc["disable_archive_non_admins"].intValue > 0),
+                    disableArchiveForRegular: ((misc["disable_archive_non_admins"].int ?? 0) > 0),
                     iosTelephonyEnabled: ((misc["enable_ios_telephony"].int ?? 1) > 0),
-                    limitedCRM: (misc["enable_crm"].intValue > 0),
+                    limitedCRM: ((misc["enable_crm"].int ?? 1) > 0),
                     assignedAgentEnabled: ((misc["enable_assigned_agent"].int ?? 1) > 0),
                     messageEditingEnabled: ((misc["enable_message_edit"].int ?? 1) > 0),
-                    groupsEnabled: (misc["enable_team_chats"].intValue > 0),
+                    groupsEnabled: ((misc["enable_team_chats"].int ?? 1) > 0),
                     mentionsEnabled: ((misc["enable_mentions"].int ?? 1) > 0),
-                    commentsEnabled: (misc["enable_comments"].intValue > 0),
-                    reactionsEnabled: (misc["enable_reactions"].intValue > 0),
+                    commentsEnabled: ((misc["enable_comments"].int ?? 1) > 0),
+                    reactionsEnabled: ((misc["enable_reactions"].int ?? 1) > 0),
                     businessChatEnabled: ((misc["enable_imessage"].int ?? 1) > 0),
-                    billingUpdateEnabled: ((misc["enable_new_billing"].intValue) > 0 && ((misc["is_operator_model_enabled"].int ?? 0) > 0)),
-                    standaloneTasks: (misc["enable_reminder_without_open_chat"].intValue > 0),
-                    feedbackSdkEnabled: (misc["enable_feedback_sdk"].intValue > 0)
+                    billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 1) > 0 && ((misc["is_operator_model_enabled"].int ?? 1) > 0)),
+                    standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
+                    feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0)
                 )
                 
                 currency = misc["currency"].string
