@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JMShared
 
 public final class ClientSession: BaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0

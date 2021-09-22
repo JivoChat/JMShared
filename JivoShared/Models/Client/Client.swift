@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import JMRepicKit
-import JMShared
 
 public final class Client: BaseModel {
     @objc dynamic public var _ID: Int = 0

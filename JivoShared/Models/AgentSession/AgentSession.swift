@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import AVFoundation
-import JMShared
 
 open class AgentSession: BaseModel {
     @objc dynamic public var _sessionID: String = ""

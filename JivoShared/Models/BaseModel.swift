@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import JMRepicKit
-import JMShared
 
 open class BaseModel: Object {
     

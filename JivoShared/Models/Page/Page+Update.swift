@@ -8,7 +8,6 @@
 
 import Foundation
 import JMCodingKit
-import JMShared
 
 extension Page {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {

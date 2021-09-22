@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JMShared
 
 public final class MessageTransfer: BaseModel {
     @objc dynamic public var _agentID: Int = 0

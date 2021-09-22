@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 import CoreLocation
-import JMShared
 
 public final class MessageBody: BaseModel {
     @objc dynamic public var _agent: Agent?

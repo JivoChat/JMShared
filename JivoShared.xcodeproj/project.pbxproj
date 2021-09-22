@@ -9,22 +9,22 @@
 /* Begin PBXBuildFile section */
 		31C06D64164F5089E6C73D2C /* Pods_JivoShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D921E39B21886772E4E307 /* Pods_JivoShared.framework */; };
 		FA03798025504BF7005D5D30 /* JivoShared.h in Headers */ = {isa = PBXBuildFile; fileRef = FA03797E25504BF7005D5D30 /* JivoShared.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA401ECF26FB336100CB8EE4 /* ModelRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ECE26FB336100CB8EE4 /* ModelRef.swift */; };
+		FA401ED526FB33AE00CB8EE4 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED026FB33AE00CB8EE4 /* UILabelExtensions.swift */; };
+		FA401ED626FB33AE00CB8EE4 /* UINavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED126FB33AE00CB8EE4 /* UINavigationBarExtensions.swift */; };
+		FA401ED726FB33AE00CB8EE4 /* UIActivityIndicatorViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED226FB33AE00CB8EE4 /* UIActivityIndicatorViewExtensions.swift */; };
+		FA401ED826FB33AE00CB8EE4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED326FB33AE00CB8EE4 /* UIImageExtensions.swift */; };
+		FA401ED926FB33AE00CB8EE4 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED426FB33AE00CB8EE4 /* Mappable.swift */; };
+		FA401EDE26FB342400CB8EE4 /* Task+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDB26FB342400CB8EE4 /* Task+Update.swift */; };
+		FA401EDF26FB342400CB8EE4 /* Task+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDC26FB342400CB8EE4 /* Task+Access.swift */; };
+		FA401EE026FB342400CB8EE4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDD26FB342400CB8EE4 /* Task.swift */; };
 		FA620EC426289929003CD741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA620EC326289929003CD741 /* Assets.xcassets */; };
 		FA71BD77256BDEA600E96457 /* LocaleTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */; };
 		FA71BD78256BDEA600E96457 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBD256BDEA100E96457 /* LocaleProvider.swift */; };
-		FA71BD79256BDEA600E96457 /* FormattingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBF256BDEA100E96457 /* FormattingProvider.swift */; };
-		FA71BD7A256BDEA600E96457 /* FormattingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC0256BDEA100E96457 /* FormattingTypes.swift */; };
-		FA71BD7B256BDEA600E96457 /* PreferencesAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC3256BDEA100E96457 /* PreferencesAccessor.swift */; };
-		FA71BD7C256BDEA600E96457 /* PreferencesDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC4256BDEA100E96457 /* PreferencesDriver.swift */; };
 		FA71BD7D256BDEA600E96457 /* DatabaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC6256BDEA100E96457 /* DatabaseTypes.swift */; };
 		FA71BD7E256BDEA600E96457 /* DatabaseContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC7256BDEA100E96457 /* DatabaseContext.swift */; };
 		FA71BD7F256BDEA600E96457 /* DatabaseDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC8256BDEA100E96457 /* DatabaseDriver.swift */; };
 		FA71BD80256BDEA600E96457 /* DatabaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCC9256BDEA100E96457 /* DatabaseListener.swift */; };
-		FA71BD81256BDEA600E96457 /* JournalDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCCB256BDEA100E96457 /* JournalDriver.swift */; };
-		FA71BD82256BDEA600E96457 /* JournalCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCCC256BDEA100E96457 /* JournalCommon.swift */; };
-		FA71BD83256BDEA600E96457 /* SystemMessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCCF256BDEA200E96457 /* SystemMessagingService.swift */; };
-		FA71BD84256BDEA600E96457 /* PhoneCallDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD1256BDEA200E96457 /* PhoneCallDirection.swift */; };
-		FA71BD85256BDEA600E96457 /* APITypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD2256BDEA200E96457 /* APITypes.swift */; };
 		FA71BD86256BDEA600E96457 /* DesignTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD4256BDEA200E96457 /* DesignTypes.swift */; };
 		FA71BD87256BDEA600E96457 /* DesignBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD5256BDEA200E96457 /* DesignBook.swift */; };
 		FA71BD88256BDEA600E96457 /* MediaUpload+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD8256BDEA200E96457 /* MediaUpload+Update.swift */; };
@@ -63,9 +63,6 @@
 		FA71BDA9256BDEA600E96457 /* ClientSession+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD04256BDEA300E96457 /* ClientSession+Update.swift */; };
 		FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD05256BDEA300E96457 /* ClientSession.swift */; };
 		FA71BDAB256BDEA600E96457 /* ClientSession+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */; };
-		FA71BDAC256BDEA600E96457 /* Reminder+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD08256BDEA300E96457 /* Reminder+Update.swift */; };
-		FA71BDAD256BDEA600E96457 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD09256BDEA300E96457 /* Reminder.swift */; };
-		FA71BDAE256BDEA600E96457 /* Reminder+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0A256BDEA300E96457 /* Reminder+Access.swift */; };
 		FA71BDAF256BDEA600E96457 /* Message+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0C256BDEA300E96457 /* Message+Update.swift */; };
 		FA71BDB0256BDEA600E96457 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0D256BDEA300E96457 /* Message.swift */; };
 		FA71BDB1256BDEA600E96457 /* Message+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0E256BDEA300E96457 /* Message+Access.swift */; };
@@ -161,22 +158,22 @@
 		FA03797B25504BF7005D5D30 /* JivoShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JivoShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03797E25504BF7005D5D30 /* JivoShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JivoShared.h; sourceTree = "<group>"; };
 		FA03797F25504BF7005D5D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA401ECE26FB336100CB8EE4 /* ModelRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelRef.swift; sourceTree = "<group>"; };
+		FA401ED026FB33AE00CB8EE4 /* UILabelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
+		FA401ED126FB33AE00CB8EE4 /* UINavigationBarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtensions.swift; sourceTree = "<group>"; };
+		FA401ED226FB33AE00CB8EE4 /* UIActivityIndicatorViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorViewExtensions.swift; sourceTree = "<group>"; };
+		FA401ED326FB33AE00CB8EE4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		FA401ED426FB33AE00CB8EE4 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
+		FA401EDB26FB342400CB8EE4 /* Task+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Update.swift"; sourceTree = "<group>"; };
+		FA401EDC26FB342400CB8EE4 /* Task+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Access.swift"; sourceTree = "<group>"; };
+		FA401EDD26FB342400CB8EE4 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FA620EC326289929003CD741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTypes.swift; sourceTree = "<group>"; };
 		FA71BCBD256BDEA100E96457 /* LocaleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
-		FA71BCBF256BDEA100E96457 /* FormattingProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormattingProvider.swift; sourceTree = "<group>"; };
-		FA71BCC0256BDEA100E96457 /* FormattingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormattingTypes.swift; sourceTree = "<group>"; };
-		FA71BCC3256BDEA100E96457 /* PreferencesAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesAccessor.swift; sourceTree = "<group>"; };
-		FA71BCC4256BDEA100E96457 /* PreferencesDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesDriver.swift; sourceTree = "<group>"; };
 		FA71BCC6256BDEA100E96457 /* DatabaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseTypes.swift; sourceTree = "<group>"; };
 		FA71BCC7256BDEA100E96457 /* DatabaseContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseContext.swift; sourceTree = "<group>"; };
 		FA71BCC8256BDEA100E96457 /* DatabaseDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseDriver.swift; sourceTree = "<group>"; };
 		FA71BCC9256BDEA100E96457 /* DatabaseListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseListener.swift; sourceTree = "<group>"; };
-		FA71BCCB256BDEA100E96457 /* JournalDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalDriver.swift; sourceTree = "<group>"; };
-		FA71BCCC256BDEA100E96457 /* JournalCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalCommon.swift; sourceTree = "<group>"; };
-		FA71BCCF256BDEA200E96457 /* SystemMessagingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemMessagingService.swift; sourceTree = "<group>"; };
-		FA71BCD1256BDEA200E96457 /* PhoneCallDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneCallDirection.swift; sourceTree = "<group>"; };
-		FA71BCD2256BDEA200E96457 /* APITypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITypes.swift; sourceTree = "<group>"; };
 		FA71BCD4256BDEA200E96457 /* DesignTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignTypes.swift; sourceTree = "<group>"; };
 		FA71BCD5256BDEA200E96457 /* DesignBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignBook.swift; sourceTree = "<group>"; };
 		FA71BCD8256BDEA200E96457 /* MediaUpload+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaUpload+Update.swift"; sourceTree = "<group>"; };
@@ -215,9 +212,6 @@
 		FA71BD04256BDEA300E96457 /* ClientSession+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSession+Update.swift"; sourceTree = "<group>"; };
 		FA71BD05256BDEA300E96457 /* ClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSession.swift; sourceTree = "<group>"; };
 		FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSession+Access.swift"; sourceTree = "<group>"; };
-		FA71BD08256BDEA300E96457 /* Reminder+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reminder+Update.swift"; sourceTree = "<group>"; };
-		FA71BD09256BDEA300E96457 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		FA71BD0A256BDEA300E96457 /* Reminder+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reminder+Access.swift"; sourceTree = "<group>"; };
 		FA71BD0C256BDEA300E96457 /* Message+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+Update.swift"; sourceTree = "<group>"; };
 		FA71BD0D256BDEA300E96457 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA71BD0E256BDEA300E96457 /* Message+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+Access.swift"; sourceTree = "<group>"; };
@@ -366,7 +360,6 @@
 				FA71BD5A256BDEA500E96457 /* Extensions */,
 				FA71BCD6256BDEA200E96457 /* Models */,
 				FA71BCBA256BDEA100E96457 /* Providers */,
-				FA71BCCD256BDEA200E96457 /* Services */,
 				FA71BD50256BDEA500E96457 /* Tools */,
 				FA03797E25504BF7005D5D30 /* JivoShared.h */,
 				FA03797F25504BF7005D5D30 /* Info.plist */,
@@ -375,11 +368,20 @@
 			path = JivoShared;
 			sourceTree = "<group>";
 		};
+		FA401EDA26FB342400CB8EE4 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				FA401EDB26FB342400CB8EE4 /* Task+Update.swift */,
+				FA401EDC26FB342400CB8EE4 /* Task+Access.swift */,
+				FA401EDD26FB342400CB8EE4 /* Task.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
 		FA71BCBA256BDEA100E96457 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
 				FA71BCBB256BDEA100E96457 /* LocaleProvider */,
-				FA71BCBE256BDEA100E96457 /* FormattingProvider */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -393,32 +395,12 @@
 			path = LocaleProvider;
 			sourceTree = "<group>";
 		};
-		FA71BCBE256BDEA100E96457 /* FormattingProvider */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCBF256BDEA100E96457 /* FormattingProvider.swift */,
-				FA71BCC0256BDEA100E96457 /* FormattingTypes.swift */,
-			);
-			path = FormattingProvider;
-			sourceTree = "<group>";
-		};
 		FA71BCC1256BDEA100E96457 /* Drivers */ = {
 			isa = PBXGroup;
 			children = (
-				FA71BCC2256BDEA100E96457 /* PreferencesDriver */,
 				FA71BCC5256BDEA100E96457 /* DatabaseDriver */,
-				FA71BCCA256BDEA100E96457 /* JournalDriver */,
 			);
 			path = Drivers;
-			sourceTree = "<group>";
-		};
-		FA71BCC2256BDEA100E96457 /* PreferencesDriver */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCC3256BDEA100E96457 /* PreferencesAccessor.swift */,
-				FA71BCC4256BDEA100E96457 /* PreferencesDriver.swift */,
-			);
-			path = PreferencesDriver;
 			sourceTree = "<group>";
 		};
 		FA71BCC5256BDEA100E96457 /* DatabaseDriver */ = {
@@ -430,41 +412,6 @@
 				FA71BCC9256BDEA100E96457 /* DatabaseListener.swift */,
 			);
 			path = DatabaseDriver;
-			sourceTree = "<group>";
-		};
-		FA71BCCA256BDEA100E96457 /* JournalDriver */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCCB256BDEA100E96457 /* JournalDriver.swift */,
-				FA71BCCC256BDEA100E96457 /* JournalCommon.swift */,
-			);
-			path = JournalDriver;
-			sourceTree = "<group>";
-		};
-		FA71BCCD256BDEA200E96457 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCCE256BDEA200E96457 /* SystemMessagingService */,
-				FA71BCD0256BDEA200E96457 /* APIService */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		FA71BCCE256BDEA200E96457 /* SystemMessagingService */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCCF256BDEA200E96457 /* SystemMessagingService.swift */,
-			);
-			path = SystemMessagingService;
-			sourceTree = "<group>";
-		};
-		FA71BCD0256BDEA200E96457 /* APIService */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BCD1256BDEA200E96457 /* PhoneCallDirection.swift */,
-				FA71BCD2256BDEA200E96457 /* APITypes.swift */,
-			);
-			path = APIService;
 			sourceTree = "<group>";
 		};
 		FA71BCD3256BDEA200E96457 /* DesignBook */ = {
@@ -479,6 +426,8 @@
 		FA71BCD6256BDEA200E96457 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA401EDA26FB342400CB8EE4 /* Task */,
+				FA401ECE26FB336100CB8EE4 /* ModelRef.swift */,
 				FA71BCD7256BDEA200E96457 /* MediaUpload */,
 				FA71BCDB256BDEA200E96457 /* ClientProactiveRule */,
 				FA71BCDF256BDEA200E96457 /* Page */,
@@ -491,7 +440,6 @@
 				FA71BCFB256BDEA300E96457 /* Chat */,
 				FA71BCFF256BDEA300E96457 /* ClientSessionGeo */,
 				FA71BD03256BDEA300E96457 /* ClientSession */,
-				FA71BD07256BDEA300E96457 /* Reminder */,
 				FA71BD0B256BDEA300E96457 /* Message */,
 				FA71BD0F256BDEA300E96457 /* Agent */,
 				FA71BD13256BDEA300E96457 /* MessageImage */,
@@ -632,16 +580,6 @@
 				FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */,
 			);
 			path = ClientSession;
-			sourceTree = "<group>";
-		};
-		FA71BD07256BDEA300E96457 /* Reminder */ = {
-			isa = PBXGroup;
-			children = (
-				FA71BD08256BDEA300E96457 /* Reminder+Update.swift */,
-				FA71BD09256BDEA300E96457 /* Reminder.swift */,
-				FA71BD0A256BDEA300E96457 /* Reminder+Access.swift */,
-			);
-			path = Reminder;
 			sourceTree = "<group>";
 		};
 		FA71BD0B256BDEA300E96457 /* Message */ = {
@@ -847,6 +785,11 @@
 		FA71BD5A256BDEA500E96457 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FA401ED426FB33AE00CB8EE4 /* Mappable.swift */,
+				FA401ED226FB33AE00CB8EE4 /* UIActivityIndicatorViewExtensions.swift */,
+				FA401ED326FB33AE00CB8EE4 /* UIImageExtensions.swift */,
+				FA401ED026FB33AE00CB8EE4 /* UILabelExtensions.swift */,
+				FA401ED126FB33AE00CB8EE4 /* UINavigationBarExtensions.swift */,
 				FA71BD5B256BDEA500E96457 /* CGRectExtensions.swift */,
 				FA71BD5C256BDEA500E96457 /* UITableViewExtensions.swift */,
 				FA71BD5D256BDEA500E96457 /* ObjectExtensions.swift */,
@@ -987,16 +930,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA71BD92256BDEA600E96457 /* AgentSession.swift in Sources */,
-				FA71BD7B256BDEA600E96457 /* PreferencesAccessor.swift in Sources */,
 				FA71BD90256BDEA600E96457 /* Page+Update.swift in Sources */,
 				FA71BDEB256BDEA600E96457 /* UITableViewExtensions.swift in Sources */,
 				FA71BDEC256BDEA600E96457 /* ObjectExtensions.swift in Sources */,
-				FA71BD7A256BDEA600E96457 /* FormattingTypes.swift in Sources */,
+				FA401EE026FB342400CB8EE4 /* Task.swift in Sources */,
 				FA71BDFF256BDEA600E96457 /* JSONExtensions.swift in Sources */,
 				FA71BD80256BDEA600E96457 /* DatabaseListener.swift in Sources */,
 				FA71BDAB256BDEA600E96457 /* ClientSession+Access.swift in Sources */,
 				FA71BE00256BDEA600E96457 /* IntExtensions.swift in Sources */,
 				FA71BDE2256BDEA600E96457 /* ArchiveHit+Access.swift in Sources */,
+				FA401ED626FB33AE00CB8EE4 /* UINavigationBarExtensions.swift in Sources */,
 				FA71BD8B256BDEA600E96457 /* ClientProactiveRule.swift in Sources */,
 				FA71BD98256BDEA600E96457 /* Timezone.swift in Sources */,
 				FA71BDF8256BDEA600E96457 /* GraylogExtensions.swift in Sources */,
@@ -1020,7 +963,6 @@
 				FA71BDF4256BDEA600E96457 /* FormatterExtensions.swift in Sources */,
 				FA71BDEF256BDEA600E96457 /* UIScrollViewExtensions.swift in Sources */,
 				FA71BDFB256BDEA600E96457 /* UIViewExtensions.swift in Sources */,
-				FA71BD7C256BDEA600E96457 /* PreferencesDriver.swift in Sources */,
 				FA71BE04256BDEA600E96457 /* UIDeviceExtensions.swift in Sources */,
 				FA71BDDE256BDEA600E96457 /* MessageMedia+Access.swift in Sources */,
 				FA71BDD0256BDEA600E96457 /* Guest.swift in Sources */,
@@ -1037,31 +979,29 @@
 				FA71BDBC256BDEA600E96457 /* Channel.swift in Sources */,
 				FA71BD95256BDEA600E96457 /* MessageSnippet.swift in Sources */,
 				FA71BDEA256BDEA600E96457 /* CGRectExtensions.swift in Sources */,
-				FA71BD83256BDEA600E96457 /* SystemMessagingService.swift in Sources */,
 				FA71BDB6256BDEA600E96457 /* MessageImage.swift in Sources */,
 				FA71BDB5256BDEA600E96457 /* MessageImage+Access.swift in Sources */,
 				FA71BDCA256BDEA600E96457 /* BaseModel.swift in Sources */,
 				FA71BD96256BDEA600E96457 /* MessageSnippet+Update.swift in Sources */,
 				FA71BD9E256BDEA600E96457 /* ChatAttendee.swift in Sources */,
 				FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */,
-				FA71BD84256BDEA600E96457 /* PhoneCallDirection.swift in Sources */,
-				FA71BDAD256BDEA600E96457 /* Reminder.swift in Sources */,
 				FA71BDFC256BDEA600E96457 /* DispatchQueueExtensions.swift in Sources */,
 				FA71BDA1256BDEA600E96457 /* Archive+Update.swift in Sources */,
 				FA71BDBD256BDEA600E96457 /* Channel+Access.swift in Sources */,
 				FA71BDD9256BDEA600E96457 /* MessageBody+Access.swift in Sources */,
 				FA71BDFD256BDEA600E96457 /* BundleExtensions.swift in Sources */,
 				FA71BD78256BDEA600E96457 /* LocaleProvider.swift in Sources */,
+				FA401ED926FB33AE00CB8EE4 /* Mappable.swift in Sources */,
 				FA71BDB7256BDEA600E96457 /* MessageImage+Update.swift in Sources */,
 				FA71BDF1256BDEA600E96457 /* DatabaseDriverExtensions.swift in Sources */,
 				FA71BDC1256BDEA600E96457 /* ArchiveHitItem.swift in Sources */,
 				FA71BDF6256BDEA600E96457 /* FoundationExtensions.swift in Sources */,
 				FA71BDE4256BDEA600E96457 /* BroadcastObserver.swift in Sources */,
 				FA71BDC3256BDEA600E96457 /* ArchiveHitItem+Access.swift in Sources */,
-				FA71BDAE256BDEA600E96457 /* Reminder+Access.swift in Sources */,
 				FA71BD9C256BDEA600E96457 /* ArchiveHitChatItem+Access.swift in Sources */,
 				FA71BDD3256BDEA600E96457 /* Worktime+Access.swift in Sources */,
 				FA71BDC9256BDEA600E96457 /* MessageTransfer+Access.swift in Sources */,
+				FA401ED526FB33AE00CB8EE4 /* UILabelExtensions.swift in Sources */,
 				FA71BDB3256BDEA600E96457 /* Agent.swift in Sources */,
 				FA71BDB4256BDEA600E96457 /* Agent+Access.swift in Sources */,
 				FA71BDDD256BDEA600E96457 /* MessageMedia+Update.swift in Sources */,
@@ -1070,14 +1010,15 @@
 				FA71BDA8256BDEA600E96457 /* ClientSessionGeo+Update.swift in Sources */,
 				FA71BDC0256BDEA600E96457 /* Call.swift in Sources */,
 				FA71BDDC256BDEA600E96457 /* ClientCustomData+Access.swift in Sources */,
-				FA71BD81256BDEA600E96457 /* JournalDriver.swift in Sources */,
 				FA71BDB0256BDEA600E96457 /* Message.swift in Sources */,
 				FA71BD9D256BDEA600E96457 /* ChatAttendee+Access.swift in Sources */,
 				FA71BD89256BDEA600E96457 /* MediaUpload.swift in Sources */,
 				FA71BD8F256BDEA600E96457 /* Page.swift in Sources */,
 				FA71BD77256BDEA600E96457 /* LocaleTypes.swift in Sources */,
+				FA401EDE26FB342400CB8EE4 /* Task+Update.swift in Sources */,
 				FA71BDB1256BDEA600E96457 /* Message+Access.swift in Sources */,
 				FA71BDE8256BDEA600E96457 /* PureParserTool.swift in Sources */,
+				FA401ED726FB33AE00CB8EE4 /* UIActivityIndicatorViewExtensions.swift in Sources */,
 				FA71BDE7256BDEA600E96457 /* BroadcastTool.swift in Sources */,
 				FA71BD86256BDEA600E96457 /* DesignTypes.swift in Sources */,
 				FA71BDED256BDEA600E96457 /* ArrayExtensions.swift in Sources */,
@@ -1085,9 +1026,9 @@
 				FA71BDBB256BDEA600E96457 /* Channel+Update.swift in Sources */,
 				FA71BD8A256BDEA600E96457 /* MediaUpload+Access.swift in Sources */,
 				FA71BDA2256BDEA600E96457 /* Archive+Access.swift in Sources */,
+				FA401ECF26FB336100CB8EE4 /* ModelRef.swift in Sources */,
 				FA71BDC7256BDEA600E96457 /* MessageTransfer+Update.swift in Sources */,
 				FA71BD94256BDEA600E96457 /* MessageSnippet+Access.swift in Sources */,
-				FA71BD79256BDEA600E96457 /* FormattingProvider.swift in Sources */,
 				FA71BDDB256BDEA600E96457 /* ClientCustomData+Update.swift in Sources */,
 				FA71BDE0256BDEA600E96457 /* ArchiveHit+Update.swift in Sources */,
 				FA71BDFA256BDEA600E96457 /* JMRepicKitExtensions.swift in Sources */,
@@ -1098,10 +1039,10 @@
 				FA71BDD6256BDEA600E96457 /* Client+Access.swift in Sources */,
 				FA71BDC6256BDEA600E96457 /* QuickPhrase+Access.swift in Sources */,
 				FA71BDA0256BDEA600E96457 /* Archive.swift in Sources */,
-				FA71BDAC256BDEA600E96457 /* Reminder+Update.swift in Sources */,
 				FA71BDA7256BDEA600E96457 /* ClientSessionGeo+Access.swift in Sources */,
 				FA71BDBA256BDEA600E96457 /* ArchiveHitCallItem+Update.swift in Sources */,
 				FA71BDEE256BDEA600E96457 /* ListExtensions.swift in Sources */,
+				FA401EDF26FB342400CB8EE4 /* Task+Access.swift in Sources */,
 				FA71BDF3256BDEA600E96457 /* DataExtensions.swift in Sources */,
 				FA71BDC5256BDEA600E96457 /* QuickPhrase.swift in Sources */,
 				FA71BDFE256BDEA600E96457 /* LocaleExtensions.swift in Sources */,
@@ -1114,7 +1055,6 @@
 				FA71BDF7256BDEA600E96457 /* BoolExtensions.swift in Sources */,
 				FA71BDCC256BDEA600E96457 /* ClientSessionUTM.swift in Sources */,
 				FA71BDD8256BDEA600E96457 /* MessageBody+Update.swift in Sources */,
-				FA71BD82256BDEA600E96457 /* JournalCommon.swift in Sources */,
 				FA71BD7D256BDEA600E96457 /* DatabaseTypes.swift in Sources */,
 				FA71BD91256BDEA600E96457 /* AgentSession+Access.swift in Sources */,
 				FA71BDF9256BDEA600E96457 /* URLExtensions.swift in Sources */,
@@ -1124,7 +1064,7 @@
 				FA71BDCD256BDEA600E96457 /* ClientSessionUTM+Update.swift in Sources */,
 				FA71BDE5256BDEA600E96457 /* BroadcastUniqueTool.swift in Sources */,
 				FA71BDDF256BDEA600E96457 /* MessageMedia.swift in Sources */,
-				FA71BD85256BDEA600E96457 /* APITypes.swift in Sources */,
+				FA401ED826FB33AE00CB8EE4 /* UIImageExtensions.swift in Sources */,
 				FA71BDCF256BDEA600E96457 /* Guest+Access.swift in Sources */,
 				FA71BDA6256BDEA600E96457 /* ClientSessionGeo.swift in Sources */,
 			);

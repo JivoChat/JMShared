@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JMShared
 
 public final class MessageImage: BaseModel {
     @objc dynamic public var _fileName: String = ""

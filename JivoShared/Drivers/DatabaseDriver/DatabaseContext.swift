@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMTimelineKit
-import JMShared
 
 fileprivate var exceptionHandler: (Error) -> Void = { _ in }
 public func DatabaseContextSetExceptionHandler(_ handler: @escaping (Error) -> Void) { exceptionHandler = handler }
