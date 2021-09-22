@@ -18,6 +18,7 @@
 		FA401EDE26FB342400CB8EE4 /* Task+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDB26FB342400CB8EE4 /* Task+Update.swift */; };
 		FA401EDF26FB342400CB8EE4 /* Task+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDC26FB342400CB8EE4 /* Task+Access.swift */; };
 		FA401EE026FB342400CB8EE4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDD26FB342400CB8EE4 /* Task.swift */; };
+		FA401EE226FB528D00CB8EE4 /* JMShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EE126FB528D00CB8EE4 /* JMShared.swift */; };
 		FA620EC426289929003CD741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA620EC326289929003CD741 /* Assets.xcassets */; };
 		FA71BD77256BDEA600E96457 /* LocaleTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */; };
 		FA71BD78256BDEA600E96457 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBD256BDEA100E96457 /* LocaleProvider.swift */; };
@@ -167,6 +168,7 @@
 		FA401EDB26FB342400CB8EE4 /* Task+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Update.swift"; sourceTree = "<group>"; };
 		FA401EDC26FB342400CB8EE4 /* Task+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Access.swift"; sourceTree = "<group>"; };
 		FA401EDD26FB342400CB8EE4 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FA401EE126FB528D00CB8EE4 /* JMShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMShared.swift; sourceTree = "<group>"; };
 		FA620EC326289929003CD741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTypes.swift; sourceTree = "<group>"; };
 		FA71BCBD256BDEA100E96457 /* LocaleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				FA71BCD6256BDEA200E96457 /* Models */,
 				FA71BCBA256BDEA100E96457 /* Providers */,
 				FA71BD50256BDEA500E96457 /* Tools */,
+				FA401EE126FB528D00CB8EE4 /* JMShared.swift */,
 				FA03797E25504BF7005D5D30 /* JivoShared.h */,
 				FA03797F25504BF7005D5D30 /* Info.plist */,
 				FA9C152925559E7A00B705CD /* universal-framework.sh */,
@@ -1045,6 +1048,7 @@
 				FA401EDF26FB342400CB8EE4 /* Task+Access.swift in Sources */,
 				FA71BDF3256BDEA600E96457 /* DataExtensions.swift in Sources */,
 				FA71BDC5256BDEA600E96457 /* QuickPhrase.swift in Sources */,
+				FA401EE226FB528D00CB8EE4 /* JMShared.swift in Sources */,
 				FA71BDFE256BDEA600E96457 /* LocaleExtensions.swift in Sources */,
 				FA71BDD4256BDEA600E96457 /* Client+Update.swift in Sources */,
 				FA71BDD1256BDEA600E96457 /* Worktime.swift in Sources */,

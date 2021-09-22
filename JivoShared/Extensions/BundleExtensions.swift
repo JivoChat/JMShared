@@ -9,24 +9,15 @@
 import Foundation
 
 public extension Bundle {
-//    func URLForDocument(named: String) -> URL? {
-//        let fileManager = FileManager.default
-//        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-//        return urls.first?.appendingPathComponent(named)
-//    }
-//
-//    func URLForCache(named: String) -> URL? {
-//        let fileManager = FileManager.default
-//        let urls = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
-//        return urls.first?.appendingPathComponent(named)
-//    }
-        public var ID: String? {
+    var ID: String? {
         return infoDictionary?["CFBundleIdentifier"] as? String
     }
-        public var name: String? {
+    
+    var name: String? {
         return (infoDictionary?["CFBundleDisplayName"] ?? infoDictionary?["CFBundleName"]) as? String
     }
-        public var version: String {
+    
+    var version: String {
         if let value = infoDictionary?["CFBundleShortVersionString"] as? String {
             return value
         }
@@ -34,7 +25,8 @@ public extension Bundle {
             return "0"
         }
     }
-        public var build: String {
+    
+    var build: String {
         if let value = infoDictionary?["CFBundleVersion"] as? String {
             return value
         }
@@ -42,7 +34,14 @@ public extension Bundle {
             return "0"
         }
     }
-        public var versionWithBuild: String {
+    
+    var versionWithBuild: String {
         return "\(version) (\(build))"
+    }
+}
+
+public extension Bundle {
+    static var jmShared: Bundle {
+        return Bundle(for: JMShared.self)
     }
 }
