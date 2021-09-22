@@ -14,6 +14,7 @@ public enum AgentState: Int {
     case active
     case away
 }
+
 public enum AgentCallingDestination: Int {
     case disabled = 0
     case sip = 1
@@ -29,6 +30,7 @@ public enum AgentCallingDestination: Int {
         }
     }
 }
+
 public enum AgentCallingOptions: Int {
     case availableForCalls
     case availableForMobileCalls
@@ -36,6 +38,7 @@ public enum AgentCallingOptions: Int {
     case supportsAway
     case supportsOffline
 }
+
 public enum AgentOrderingGroup: Int {
     case offline
     case awayZZ
