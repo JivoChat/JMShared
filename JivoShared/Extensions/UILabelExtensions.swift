@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JMShared
 import UIKit
 
 extension UILabel {

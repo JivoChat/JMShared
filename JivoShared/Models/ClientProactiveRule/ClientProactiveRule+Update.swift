@@ -8,7 +8,6 @@
 
 import Foundation
 import JMCodingKit
-import JMShared
 
 extension ClientProactiveRule {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {

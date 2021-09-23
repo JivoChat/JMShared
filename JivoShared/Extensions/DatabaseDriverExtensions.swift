@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JMShared
 
 public extension IDatabaseDriver {
     func subscribe<OT>(_ type: OT.Type, options: DatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool = true, callback: @escaping ([OT]) -> Void) -> DatabaseListener {

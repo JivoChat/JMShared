@@ -8,7 +8,6 @@
 
 import Foundation
 import JMCodingKit
-import JMShared
 
 extension Agent {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
@@ -71,6 +70,25 @@ extension Agent {
         }
         else if let c = change as? AgentDraftChange {
             _draft = c.draft
+        }
+        else if let c = change as? SDKAgentAtomChange {
+            if _ID == 0 { _ID = c.id }
+            
+            c.updates.forEach { update in
+                switch update {
+                case let .displayName(newDisplayName):
+                    _displayName = newDisplayName
+                    
+                case let .title(newTitle):
+                    _title = newTitle
+                    
+                case let .avatarLink(avatarLinkURL):
+                    _avatarLink = avatarLinkURL?.absoluteString
+                    
+                case let .status(newState):
+                    state = newState
+                }
+            }
         }
     }
     
@@ -453,6 +471,37 @@ public final class AgentDraftChange: BaseModelChange {
         public init(ID: Int, draft: String?) {
         self.ID = ID
         self.draft = draft
+        super.init()
+    }
+    
+    required public init(json: JsonElement) {
+        fatalError("init(json:) has not been implemented")
+    }
+}
+
+public enum AgentPropertyUpdate {
+    case displayName(String)
+    case title(String)
+    case avatarLink(URL?)
+    case status(AgentState)
+}
+
+open class SDKAgentAtomChange: BaseModelChange {
+    let id: Int
+    let updates: [AgentPropertyUpdate]
+    
+    public override var primaryValue: Int {
+        abort()
+    }
+    
+    open override var integerKey: DatabaseContextMainKey<Int>? {
+        return DatabaseContextMainKey<Int>(key: "_ID", value: id)
+    }
+    
+    public init(id: Int, updates: [AgentPropertyUpdate]) {
+        self.id = id
+        self.updates = updates
+        
         super.init()
     }
     

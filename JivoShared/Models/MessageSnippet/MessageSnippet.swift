@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JMShared
 
 public final class MessageSnippet: BaseModel {
     @objc dynamic public var _URL: String?

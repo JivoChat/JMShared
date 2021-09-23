@@ -14,6 +14,7 @@ public enum AgentState: Int {
     case active
     case away
 }
+
 public enum AgentCallingDestination: Int {
     case disabled = 0
     case sip = 1
@@ -29,6 +30,7 @@ public enum AgentCallingDestination: Int {
         }
     }
 }
+
 public enum AgentCallingOptions: Int {
     case availableForCalls
     case availableForMobileCalls
@@ -36,6 +38,7 @@ public enum AgentCallingOptions: Int {
     case supportsAway
     case supportsOffline
 }
+
 public enum AgentOrderingGroup: Int {
     case offline
     case awayZZ
@@ -115,7 +118,7 @@ extension Agent: Displayable {
     
     public func metaImage(providers: MetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
         let url = _avatarLink.flatMap(URL.init)
-        let icon = UIImage(named: "avatar_agent")
+        let icon = UIImage(named: "avatar_agent", in: Bundle.jmShared, compatibleWith: nil)
         let image = JMRepicItemSource.avatar(URL: url, image: icon, color: nil, transparent: transparent)
         return JMRepicItem(backgroundColor: nil, source: image, scale: scale ?? 1.0, clipping: .dual)
     }

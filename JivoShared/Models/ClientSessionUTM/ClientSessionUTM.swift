@@ -8,7 +8,6 @@
 
 import Foundation
 import JMCodingKit
-import JMShared
 
 public final class ClientSessionUTM: BaseModel {
     @objc dynamic public var _source: String?

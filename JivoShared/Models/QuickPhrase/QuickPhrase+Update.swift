@@ -8,7 +8,6 @@
 
 import Foundation
 import JMCodingKit
-import JMShared
 
 let QuickPhraseStorageSeparator = ","
 

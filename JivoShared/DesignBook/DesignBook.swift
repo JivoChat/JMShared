@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import JMShared
 import JMRepicKit
 
 fileprivate var sharedInstance: DesignBook!

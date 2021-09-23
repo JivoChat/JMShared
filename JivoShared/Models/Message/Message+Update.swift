@@ -452,8 +452,16 @@ extension Message {
                             _senderClient = client
                         }
                         
-                    case let .agent(id):
-                        let agent = context.agent(for: id, provideDefault: true)
+                    case let .agent(id, displayNameUpdate):
+                        let existingAgent = context.agent(for: id, provideDefault: false)
+                        let agent = existingAgent ?? { () -> Agent? in
+                            let defaultAgent = context.agent(for: id, provideDefault: true)
+                            if case let MessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
+                                newValue.flatMap { defaultAgent?._displayName = $0 }
+                            }
+                            return defaultAgent
+                        }()
+                        
                         if _senderAgent?._UUID != agent?._UUID {
                             _senderAgent = agent
                         }
@@ -1307,8 +1315,13 @@ open class SdkMessageStatusChange: BaseModelChange {
 
 public enum MessagePropertyUpdate {
     public enum Sender {
+        public enum DisplayNameUpdatingLogic {
+            case updating(with: String?)
+            case withoutUpdate
+        }
+        
         case client(withId: Int)
-        case agent(withId: Int)
+        case agent(withId: Int, andDisplayName: DisplayNameUpdatingLogic = .withoutUpdate)
     }
     
     case id(Int)

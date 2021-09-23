@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-import JMShared
 
 public final class ArchiveHitCallItem: ArchiveHitItem {
     @objc dynamic public var _status: String = ""

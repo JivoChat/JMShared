@@ -1,0 +1,147 @@
+PODS:
+  - DTModelStorage (8.0.0):
+    - DTModelStorage/Core (= 8.0.0)
+  - DTModelStorage/Core (8.0.0)
+  - JFCollectionViewManager (7.5.2):
+    - DTModelStorage (= 8.0.0)
+  - JFMarkdownKit (1.2.2)
+  - JMCodingKit (5.0.2)
+  - JMDesignKit (1.0.0)
+  - JMImageLoader (0.0.1-beta.0)
+  - JMMarkdownKit (1.1.3):
+    - JFMarkdownKit
+    - JMDesignKit
+    - TypedTextAttributes
+  - JMOnetimeCalculator (1.0.0)
+  - JMRepicKit (1.0.2-beta.0):
+    - JMImageLoader (~> 0.0.1-beta.0)
+  - JMScalableView (1.0.0):
+    - JMDesignKit
+  - JMTimelineKit (1.3.2):
+    - DTModelStorage (~> 8.0.0)
+    - JFCollectionViewManager (= 7.5.2)
+    - JMImageLoader (~> 0.0.1-beta.0)
+    - JMMarkdownKit
+    - JMOnetimeCalculator
+    - JMRepicKit (~> 1.0.2-beta.0)
+    - JMScalableView
+    - lottie-ios
+    - SDWebImage
+    - SDWebImageWebPCoder
+    - SwiftyNSException
+    - TypedTextAttributes
+  - libPhoneNumber-iOS (0.9.15)
+  - libwebp (1.2.0):
+    - libwebp/demux (= 1.2.0)
+    - libwebp/mux (= 1.2.0)
+    - libwebp/webp (= 1.2.0)
+  - libwebp/demux (1.2.0):
+    - libwebp/webp
+  - libwebp/mux (1.2.0):
+    - libwebp/demux
+  - libwebp/webp (1.2.0)
+  - lottie-ios (3.2.3)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - PureParser (1.0.4)
+  - Realm (10.15.1):
+    - Realm/Headers (= 10.15.1)
+  - Realm/Headers (10.15.1)
+  - RealmSwift (10.15.1):
+    - Realm (= 10.15.1)
+  - SafeURL (3.0.1)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SDWebImageWebPCoder (0.8.4):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
+  - SwiftDate (6.3.1)
+  - SwiftGraylog (1.1.1)
+  - SwiftyNSException (2.0.0)
+  - TypedTextAttributes (1.2.0)
+  - XCGLogger (7.0.1):
+    - XCGLogger/Core (= 7.0.1)
+  - XCGLogger/Core (7.0.1):
+    - ObjcExceptionBridging
+
+DEPENDENCIES:
+  - JMCodingKit
+  - JMDesignKit
+  - JMMarkdownKit
+  - JMOnetimeCalculator
+  - JMRepicKit (~> 1.0.2-beta.0)
+  - JMScalableView
+  - JMTimelineKit
+  - libPhoneNumber-iOS
+  - PureParser (= 1.0.4)
+  - Realm
+  - RealmSwift
+  - SafeURL
+  - SwiftDate
+  - SwiftGraylog
+  - XCGLogger
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - DTModelStorage
+    - libPhoneNumber-iOS
+    - libwebp
+    - lottie-ios
+    - ObjcExceptionBridging
+    - PureParser
+    - Realm
+    - RealmSwift
+    - SafeURL
+    - SDWebImage
+    - SDWebImageWebPCoder
+    - SwiftDate
+    - SwiftGraylog
+    - SwiftyNSException
+    - TypedTextAttributes
+    - XCGLogger
+  https://github.com/JivoChat/JMSpecsRepo.git:
+    - JFCollectionViewManager
+    - JFMarkdownKit
+    - JMCodingKit
+    - JMDesignKit
+    - JMMarkdownKit
+    - JMOnetimeCalculator
+    - JMScalableView
+    - JMTimelineKit
+  https://github.com/JivoChat/JMSpecsRepoDevelop.git:
+    - JMImageLoader
+    - JMRepicKit
+
+SPEC CHECKSUMS:
+  DTModelStorage: 3b86a1e37496532bbd74cadc5b9310238d5ba780
+  JFCollectionViewManager: b0fe7e93acfe335d72fae4dad88e9e036ba1c8ed
+  JFMarkdownKit: 9fbf4d7e07ddb4213f7044547497159a55ca3c73
+  JMCodingKit: 5c3095ee9c606088b8d2585bfac2689ded1e991e
+  JMDesignKit: a2504dd6c940691b4a479b871bc2a73a707c8a93
+  JMImageLoader: 08ffa82584a4dd0114e0c5c5422859780326d6e4
+  JMMarkdownKit: b47ad1429d0fa299d803560415dd264ceafcf43d
+  JMOnetimeCalculator: 715be6053625fd4ecbeeccce97b68b376ce4acb3
+  JMRepicKit: 270e62e942f039da37d70c347d252fc23dc5aae9
+  JMScalableView: 5e46b19b98bdd4b132fd75fc3ffe14b5b18ca393
+  JMTimelineKit: cb75418f9892392a6f00471d0dc043c2aaea9d7e
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  PureParser: b2c51cd07abde4d2849d5353164b78a576c4a0ef
+  Realm: fbcbde2620d51623cc5b18e28f5b165c39abef52
+  RealmSwift: e4bea8e42efad3d543aea23b56504069c6faaea2
+  SafeURL: 400aa7860c4a2b7ab0ebdff15190f55fb00738dd
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftGraylog: 4fffb151492baa199e708548ece16f4cf1c75413
+  SwiftyNSException: 14b2593b12fec2a29e8666a3f8db682161b3aa0a
+  TypedTextAttributes: 624acbbc3bd067453d76f7408c6d6c5f0964d51b
+  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
+
+PODFILE CHECKSUM: d63399de80dc8f671567040abdc04b0f047e9c31
+
+COCOAPODS: 1.10.1
