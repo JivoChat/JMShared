@@ -506,7 +506,11 @@ public final class DesignBook {
     }
     
     private func extractFontSize(_ value: DesignBookFontSize) -> CGFloat {
-        switch window.traitCollection.horizontalSizeClass {
+        let horizontalSizeClass = Thread.isMainThread
+            ? window.traitCollection.horizontalSizeClass
+            : lastWindowTraits.horizontalSizeClass
+        
+        switch horizontalSizeClass {
         case .compact: return value.compact
         case .regular: return value.regular
         case .unspecified: return value.compact
