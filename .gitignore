@@ -22,3 +22,7 @@ DerivedData
 *.xcuserstate
 *.xcscheme
 
+# CocoaPods
+#
+Pods/
+

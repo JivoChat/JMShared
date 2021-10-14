@@ -101,7 +101,7 @@ SPEC REPOS:
     - SwiftyNSException
     - TypedTextAttributes
     - XCGLogger
-  https://github.com/JivoChat/JMSpecsRepo.git:
+  https://github.com/jivochat/JMSpecsRepo:
     - JFCollectionViewManager
     - JFMarkdownKit
     - JMCodingKit
@@ -110,7 +110,7 @@ SPEC REPOS:
     - JMOnetimeCalculator
     - JMScalableView
     - JMTimelineKit
-  https://github.com/JivoChat/JMSpecsRepoDevelop.git:
+  https://github.com/jivochat/JMSpecsRepoDevelop:
     - JMImageLoader
     - JMRepicKit
 
@@ -144,4 +144,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d63399de80dc8f671567040abdc04b0f047e9c31
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
