@@ -21,13 +21,13 @@ public final class DesignBook {
     }
     
     private let window: UIWindow
-    private var lastStyleTraits: UITraitCollection
+    private var lastWindowTraits: UITraitCollection
     private var styleObservable = BroadcastTool<DesignBookStyle>()
     
     public init(window: UIWindow) {
         self.window = window
         
-        lastStyleTraits = window.traitCollection
+        lastWindowTraits = window.traitCollection
         initialStatusBarHeight = UIApplication.shared.statusBarFrame.height
         sharedInstance = self
     }
@@ -42,12 +42,13 @@ public final class DesignBook {
 
     public func update() {
         if #available(iOS 12.0, *) {
-            guard window.traitCollection.userInterfaceStyle != lastStyleTraits.userInterfaceStyle else { return }
-            lastStyleTraits = window.traitCollection
+            guard window.traitCollection.userInterfaceStyle != lastWindowTraits.userInterfaceStyle else { return }
             
-            let style = lastStyleTraits.toDesignStyle
+            let style = window.traitCollection.toDesignStyle
             styleObservable.broadcast(style)
         }
+        
+        lastWindowTraits = window.traitCollection
     }
     
     public class func screenSize() -> DesignBookScreenSize {
