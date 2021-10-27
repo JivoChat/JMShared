@@ -25,7 +25,7 @@ extension MediaUpload {
         default:
             guard let type = SenderType(rawValue: _recipientType) else { return nil }
             let target = Sender(type: type, ID: _recipientID)
-            return .transfer(target)
+            return .transfer(target, chatID: _chatID)
         }
     }
 }

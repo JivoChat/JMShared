@@ -10,12 +10,20 @@ import Foundation
 import JMCodingKit
 
 public enum UploadingPurpose: Equatable {
-    case transfer(Sender)
+    case transfer(Sender, chatID: Int)
     case avatar
+    
+    public var chatID: Int? {
+        switch self {
+        case .transfer(_, let chatID): return chatID
+        case .avatar: return nil
+        }
+    }
 }
 
 public enum UploadingResult {
     public struct Success {
+        public let storage: String
         public let mime: String
         public let name: String
         public let key: String
@@ -24,6 +32,7 @@ public enum UploadingResult {
         public let pixelSize: CGSize
         
         public init(
+            storage: String,
             mime: String,
             name: String,
             key: String,
@@ -31,6 +40,7 @@ public enum UploadingResult {
             dataSize: Int,
             pixelSize: CGSize
         ) {
+            self.storage = storage
             self.mime = mime
             self.name = name
             self.key = key
@@ -52,6 +62,7 @@ extension MediaUpload {
         if let c = change as? MediaUploadChange {
             if _ID == "" { _ID = c.ID }
             _filePath = c.filePath ?? String()
+            _chatID = c.chatID ?? 0
             _recipientType = c.recipientType
             _recipientID = c.recipientID
         }
@@ -60,20 +71,23 @@ extension MediaUpload {
 
 public final class MediaUploadChange: BaseModelChange {
     public let ID: String
+    public let chatID: Int?
     public let filePath: String?
     public let purpose: UploadingPurpose
     public let width: Int
     public let height: Int
     public let sessionID: String
     public let completion: (UploadingResult) -> Void
-        public init(ID: String,
-         filePath: String?,
-         purpose: UploadingPurpose,
-         width: Int,
-         height: Int,
-         sessionID: String,
-         completion: @escaping (UploadingResult) -> Void) {
+    public init(ID: String,
+                chatID: Int?,
+                filePath: String?,
+                purpose: UploadingPurpose,
+                width: Int,
+                height: Int,
+                sessionID: String,
+                completion: @escaping (UploadingResult) -> Void) {
         self.ID = ID
+        self.chatID = chatID
         self.filePath = filePath
         self.purpose = purpose
         self.width = width
@@ -82,7 +96,7 @@ public final class MediaUploadChange: BaseModelChange {
         self.completion = completion
         super.init()
     }
-
+    
     required public init( json: JsonElement) {
         abort()
     }
@@ -90,6 +104,7 @@ public final class MediaUploadChange: BaseModelChange {
     public func copy(filePath: String?) -> MediaUploadChange {
         return MediaUploadChange(
             ID: ID,
+            chatID: chatID,
             filePath: filePath,
             purpose: purpose,
             width: width,
@@ -101,14 +116,14 @@ public final class MediaUploadChange: BaseModelChange {
     fileprivate var recipientType: String {
         switch purpose {
         case .avatar: return "self"
-        case .transfer(let target): return target.type.rawValue
+        case .transfer(let target, _): return target.type.rawValue
         }
     }
     
     fileprivate var recipientID: Int {
         switch purpose {
         case .avatar: return 0
-        case .transfer(let target): return target.ID
+        case .transfer(let target, _): return target.ID
         }
     }
 }

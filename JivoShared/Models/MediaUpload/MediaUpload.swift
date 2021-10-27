@@ -15,6 +15,7 @@ public final class MediaUpload: BaseModel {
     @objc dynamic public var _filePath: String = ""
     @objc dynamic public var _recipientType: String = ""
     @objc dynamic public var _recipientID: Int = 0
+    @objc dynamic public var _chatID: Int = 0
 
     public override class func primaryKey() -> String? {
         return "_filePath"
