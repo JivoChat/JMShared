@@ -86,7 +86,8 @@ extension AgentSession {
             businessChatEnabled: _globalBusinessChatEnabled,
             billingUpdateEnabled: _globalBillingUpdateEnabled,
             standaloneTasks: _globalStandaloneTasksEnabled,
-            feedbackSdkEnabled: _globalFeedbackSdkEnabled
+            feedbackSdkEnabled: _globalFeedbackSdkEnabled,
+            mediaServiceEnabled: _globalMediaServiceEnabled
         )
     }
     

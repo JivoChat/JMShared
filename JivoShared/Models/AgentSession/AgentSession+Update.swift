@@ -26,6 +26,7 @@ public struct UserTechConfig: Codable {
     public var billingUpdateEnabled: Bool = true
     public var standaloneTasks: Bool = true
     public var feedbackSdkEnabled: Bool = true
+    public var mediaServiceEnabled: Bool = true
 
     public init() {}
     
@@ -44,7 +45,8 @@ public struct UserTechConfig: Codable {
         businessChatEnabled: Bool,
         billingUpdateEnabled: Bool,
         standaloneTasks: Bool,
-        feedbackSdkEnabled: Bool
+        feedbackSdkEnabled: Bool,
+        mediaServiceEnabled: Bool
     ) {
         self.guestInsightEnabled = guestInsightEnabled
         self.fileSizeLimit = fileSizeLimit
@@ -61,6 +63,7 @@ public struct UserTechConfig: Codable {
         self.billingUpdateEnabled = billingUpdateEnabled
         self.standaloneTasks = standaloneTasks
         self.feedbackSdkEnabled = feedbackSdkEnabled
+        self.mediaServiceEnabled = mediaServiceEnabled
     }
     
     public var canReceiveCalls: Bool? {
@@ -220,7 +223,8 @@ public final class AgentSessionContextChange: BaseModelChange {
                     businessChatEnabled: ((misc["enable_imessage"].int ?? 1) > 0),
                     billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 1) > 0 && ((misc["is_operator_model_enabled"].int ?? 1) > 0)),
                     standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
-                    feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0)
+                    feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0),
+                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 1) > 0)
                 )
                 
                 currency = misc["currency"].string

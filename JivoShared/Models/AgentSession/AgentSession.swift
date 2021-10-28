@@ -33,6 +33,7 @@ open class AgentSession: BaseModel {
     @objc dynamic public var _globalBillingUpdateEnabled: Bool = true
     @objc dynamic public var _globalStandaloneTasksEnabled: Bool = true
     @objc dynamic public var _globalFeedbackSdkEnabled: Bool = true
+    @objc dynamic public var _globalMediaServiceEnabled: Bool = true
     @objc dynamic public var _licenseFeatures: Int = 0
     @objc dynamic public var _isActive: Bool = false
     @objc dynamic public var _voxLogin: String = ""
