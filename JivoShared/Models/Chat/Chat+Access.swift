@@ -56,7 +56,7 @@ extension Chat: Presentable {
     }
     
     public var client: Client? {
-        return _client
+        return validate(_client)
     }
     
     public var hasClient: Bool {

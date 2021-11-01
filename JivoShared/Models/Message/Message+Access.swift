@@ -150,7 +150,7 @@ public extension Message {
     }
     
     var client: Client? {
-        return _client
+        return validate(_client)
     }
     
     var chatID: Int {
@@ -633,7 +633,7 @@ public extension Message {
             return (client.ID == chat.client?.ID)
         }
         else {
-            return (chatID == chat.ID)
+            return (chatID == validate(chat)?.ID)
         }
     }
     
