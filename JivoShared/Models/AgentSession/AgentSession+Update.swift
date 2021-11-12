@@ -127,6 +127,7 @@ extension AgentSession {
                 _globalBillingUpdateEnabled = features.billingUpdateEnabled
                 _globalStandaloneTasksEnabled = features.standaloneTasks
                 _globalFeedbackSdkEnabled = features.feedbackSdkEnabled
+                _globalMediaServiceEnabled = features.mediaServiceEnabled
             }
         }
         else if let c = change as? AgentSessionMobileCallsChange {
@@ -224,7 +225,7 @@ public final class AgentSessionContextChange: BaseModelChange {
                     billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 1) > 0 && ((misc["is_operator_model_enabled"].int ?? 1) > 0)),
                     standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
                     feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0),
-                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 1) > 0)
+                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 0) > 0)
                 )
                 
                 currency = misc["currency"].string
