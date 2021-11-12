@@ -477,6 +477,8 @@ public final class DesignBook {
         case .playingPassed: return dynamicColor(light: .alias(.unknown2), dark: .alias(.unknown2))
         case .playingAwaiting: return dynamicColor(light: .alias(.grayDark), dark: .alias(.grayDark))
         case .orderTint: return dynamicColor(light: .hex(0x8770DC), dark: .hex(0x8770DC))
+        case .photoLoadingErrorStubBackground: return dynamicColor(light: .alias(.grayRegular), dark: .hex(0x333333))
+        case .photoLoadingErrorDescription: return dynamicColor(light: .alias(.steel), dark: .alias(.steel))
         }
     }
     

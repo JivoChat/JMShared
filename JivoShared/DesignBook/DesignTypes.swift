@@ -169,6 +169,8 @@ public enum DesignBookColorUsage {
     case playingPassed
     case playingAwaiting
     case orderTint
+    case photoLoadingErrorStubBackground
+    case photoLoadingErrorDescription
 }
 public enum DesignBookFontWeight {
     case italics
