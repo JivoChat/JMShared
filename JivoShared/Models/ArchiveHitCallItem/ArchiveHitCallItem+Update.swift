@@ -22,7 +22,7 @@ extension ArchiveHitCallItem {
             _costCurrency = c.costCurrency
             _agents.set(c.agentIDs.compactMap { context.object(Agent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
-            _chat = context.upsert(of: Chat.self, with: c.chatChange)
+            _chat = context.upsert(of: Chat.self, with: c.chatChange?.copy(knownArchived: true))
             _call = context.upsert(of: Call.self, with: c.callChange)
         }
     }

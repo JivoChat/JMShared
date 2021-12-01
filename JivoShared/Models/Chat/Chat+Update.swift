@@ -30,7 +30,10 @@ extension Chat {
                 _loadedEntireHistory = false
             }
             
-            if !c.attendees.isEmpty {
+            if c.knownArchived {
+                _isArchived = true
+            }
+            else if !c.attendees.isEmpty {
                 let attendees = context.insert(of: ChatAttendee.self, with: c.attendees)
                 _attendees.set(attendees.filter { $0.agent != nil })
             }
@@ -363,7 +366,8 @@ public final class ChatGeneralChange: BaseModelChange {
     public let lastActivityTimestamp: TimeInterval?
     public let hasActiveCall: Bool
     public let department: String?
-    
+    public let knownArchived: Bool
+
     public override var primaryValue: Int {
         return ID
     }
@@ -389,7 +393,8 @@ public final class ChatGeneralChange: BaseModelChange {
          unreadNumber: Int?,
          lastActivityTimestamp: TimeInterval?,
          hasActiveCall: Bool,
-         department: String?) {
+         department: String?,
+         knownArchived: Bool) {
         self.ID = ID
         self.attendees = attendees
         self.client = client
@@ -407,6 +412,7 @@ public final class ChatGeneralChange: BaseModelChange {
         self.lastActivityTimestamp = lastActivityTimestamp
         self.hasActiveCall = hasActiveCall
         self.department = department
+        self.knownArchived = knownArchived
         super.init()
     }
     
@@ -446,6 +452,7 @@ public final class ChatGeneralChange: BaseModelChange {
         lastActivityTimestamp = json["latest_activity_date"].double
         hasActiveCall = (json.has(key: "active_call") != nil)
         department = json["department"]["display_name"].string
+        knownArchived = false
 
         super.init(json: json)
     }
@@ -469,7 +476,8 @@ public final class ChatGeneralChange: BaseModelChange {
                 unreadNumber: unreadNumber,
                 lastActivityTimestamp: lastActivityTimestamp,
                 hasActiveCall: hasActiveCall,
-                department: department)
+                department: department,
+                knownArchived: knownArchived)
         }
         else {
             return self
@@ -496,10 +504,11 @@ public final class ChatGeneralChange: BaseModelChange {
             unreadNumber: unreadNumber,
             lastActivityTimestamp: lastActivityTimestamp,
             hasActiveCall: hasActiveCall,
-            department: department)
+            department: department,
+            knownArchived: knownArchived)
     }
     
-    public func copy(receivedMessageID: Int) -> ChatGeneralChange {
+    public func copy(receivedMessageID: Int? = nil, knownArchived: Bool? = nil) -> ChatGeneralChange {
         return ChatGeneralChange(
             ID: ID,
             attendees: attendees,
@@ -513,11 +522,12 @@ public final class ChatGeneralChange: BaseModelChange {
             title: title,
             about: about,
             icon: icon,
-            receivedMessageID: receivedMessageID,
+            receivedMessageID: receivedMessageID ?? self.receivedMessageID,
             unreadNumber: unreadNumber,
             lastActivityTimestamp: lastActivityTimestamp,
             hasActiveCall: hasActiveCall,
-            department: department)
+            department: department,
+            knownArchived: knownArchived ?? self.knownArchived)
     }
     
     public func cachable() -> ChatGeneralChange {
@@ -538,7 +548,8 @@ public final class ChatGeneralChange: BaseModelChange {
             unreadNumber: 0,
             lastActivityTimestamp: lastActivityTimestamp,
             hasActiveCall: hasActiveCall,
-            department: department)
+            department: department,
+            knownArchived: knownArchived)
     }
     
     public func findAttendeeRelation(agentID: Int) -> String? {
