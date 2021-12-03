@@ -95,7 +95,8 @@ public struct Localizer {
     }
     
     public subscript(format key: String, _ arguments: CVarArg...) -> String {
-        return String(format: self[key], arguments: arguments)
+        let locale = LocaleProvider.activeLocale
+        return String(format: self[key], locale: locale, arguments: arguments)
     }
     
     public init(for classFromBundle: AnyClass? = nil) {
