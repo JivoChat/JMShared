@@ -629,12 +629,36 @@ public extension Message {
     }
     
     func correspondsTo(chat: Chat) -> Bool {
-        if let client = client {
-            return (client.ID == chat.client?.ID)
+        if let client = _correspondsTo_getSelfClient() {
+            let chatClient = _correspondsTo_getChatClient(chat: chat)
+            return (client.ID == chatClient?.ID)
         }
         else {
-            return (chatID == validate(chat)?.ID)
+            let selfChatId = _correspondsTo_getSelfChatId()
+            let chatId = _correspondsTo_getChat(chat: chat)?.ID
+            return (selfChatId == chatId)
         }
+    }
+    
+    /**
+     Some extra private methods for <func correspondsTo(chat: Chat) Bool>
+     to make the stacktrace more readable for debug purpose
+     */
+    
+    private func _correspondsTo_getSelfChatId() -> Int? {
+        return isValid ? chatID : nil
+    }
+    
+    private func _correspondsTo_getSelfClient() -> Client? {
+        return isValid ? client : nil
+    }
+    
+    private func _correspondsTo_getChat(chat: Chat) -> Chat? {
+        return validate(chat)
+    }
+    
+    private func _correspondsTo_getChatClient(chat: Chat) -> Client? {
+        return chat.isValid ? validate(chat.client) : nil
     }
     
     func canUpgradeStatus(to newStatus: String) -> Bool {
