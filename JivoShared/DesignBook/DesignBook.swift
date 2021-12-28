@@ -85,6 +85,9 @@ public final class DesignBook {
                 return base?.withRenderingMode(.alwaysTemplate)
             }
         }
+        else if let icon = UIImage(named: name) {
+            return icon
+        }
         else {
             return UIImage(named: name, in: Bundle(for: DesignBook.self), compatibleWith: nil)
         }
