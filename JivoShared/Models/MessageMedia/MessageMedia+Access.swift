@@ -19,6 +19,7 @@ public enum MessageMediaType {
     case location
     case contact
     case conference
+    case story
     case unknown
 }
 public enum MessageMediaSizingMode {
@@ -38,6 +39,7 @@ extension MessageMedia {
         case "location": return .location
         case "contact": return .contact
         case "conference": return .conference
+        case "story": return .story
         default: return .unknown
         }
     }
@@ -107,6 +109,20 @@ extension MessageMedia {
         else {
             return MessageBodyConference(url: nil, title: _title ?? String())
         }
+    }
+    
+    public var story: MessageBodyStory? {
+        guard type == .story else {
+            return nil
+        }
+        
+        return MessageBodyStory(
+            text: _text ?? String(),
+            fileName: _name,
+            thumb: thumbURL,
+            file: fullURL,
+            title: _title ?? String()
+        )
     }
     
     public var phone: String? {

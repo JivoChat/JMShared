@@ -103,6 +103,14 @@ public struct MessageBodyConference {
     public let title: String
 }
 
+public struct MessageBodyStory {
+    public let text: String
+    public let fileName: String
+    public let thumb: URL?
+    public let file: URL?
+    public let title: String
+}
+
 public enum MessageBodyTaskStatus: String {
     case created = "created"
     case updated = "updated"

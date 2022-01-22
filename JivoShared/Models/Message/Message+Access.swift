@@ -24,6 +24,7 @@ public enum MessageContent {
     case call(call: MessageBodyCall)
     case task(task: MessageBodyTask)
     case conference(conference: MessageBodyConference)
+    case story(story: MessageBodyStory)
     case line
     
     public var isEditable: Bool {
@@ -41,6 +42,7 @@ public enum MessageContent {
         case .task: return false
         case .line: return false
         case .conference: return false
+        case .story: return false
         case .bot: return false
         case .order: return false
         }
@@ -61,6 +63,7 @@ public enum MessageContent {
         case .task: return false
         case .line: return false
         case .conference: return false
+        case .story: return false
         case .bot: return false
         case .order: return false
         }
@@ -243,6 +246,11 @@ public extension Message {
                 else if let conference = media.conference {
                     return .conference(
                         conference: conference
+                    )
+                }
+                else if let story = media.story {
+                    return .story(
+                        story: story
                     )
                 }
                 else {
@@ -469,7 +477,8 @@ public extension Message {
              .file,
              .line,
              .bot,
-             .order:
+             .order,
+             .story:
             return nil
 
         case .email:
