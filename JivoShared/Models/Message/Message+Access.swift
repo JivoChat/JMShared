@@ -477,9 +477,11 @@ public extension Message {
              .file,
              .line,
              .bot,
-             .order,
-             .story:
+             .order:
             return nil
+            
+        case .story:
+            return UIImage(named: "preview_ig")
 
         case .email:
             return UIImage(named: "preview_email")
