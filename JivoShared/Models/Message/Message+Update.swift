@@ -188,7 +188,7 @@ extension JVMessage {
             _type = "message"
             _isMarkdown = false
             _text = c.text.trimmed()
-            _senderClient = context.object(Client.self, primaryKey: c.clientID)
+            _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
             _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
 
             _adjustIncomingState(clientID: nil)
@@ -391,7 +391,7 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text
-            _senderClient = context.object(Client.self, primaryKey: clientID)
+            _senderClient = context.object(JVClient.self, primaryKey: clientID)
             _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
             
             _adjustIncomingState(clientID: nil)

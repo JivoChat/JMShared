@@ -1,5 +1,5 @@
 //
-//  Client.swift
+//  JVClient.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 11/05/2017.
@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-public final class Client: JVBaseModel {
+public final class JVClient: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _guestID: String = ""

@@ -14,7 +14,7 @@ public final class JVChat: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     public let _attendees = List<ChatAttendee>()
     public let _agents = List<JVAgent>()
-    @objc dynamic public var _client: Client?
+    @objc dynamic public var _client: JVClient?
     @objc dynamic public var _owningAgent: JVAgent?
     @objc dynamic public var _lastMessage: JVMessage?
     @objc dynamic public var _lastMessageValid: Bool = true

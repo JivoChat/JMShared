@@ -17,11 +17,11 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _date: Date?
     @objc open dynamic var _orderingIndex: Int = 0
     @objc open dynamic var _clientID: Int = 0
-    @objc open dynamic var _client: Client?
+    @objc open dynamic var _client: JVClient?
     @objc open dynamic var _chatID: Int = 0
     @objc open dynamic var _type: String = ""
     @objc open dynamic var _isMarkdown: Bool = false
-    @objc open dynamic var _senderClient: Client?
+    @objc open dynamic var _senderClient: JVClient?
     @objc open dynamic var _senderAgent: JVAgent?
     @objc open dynamic var _senderBot = Bool(false)
     @objc open dynamic var _status: String = ""

@@ -94,7 +94,7 @@ public struct Sender: Equatable {
 }
 
 public struct MetaProviders {
-    public let clientProvider: (Int) -> Client?
+    public let clientProvider: (Int) -> JVClient?
 }
 
 public protocol Presentable: Validatable {

@@ -1,5 +1,5 @@
 //
-//  Client+Access.swift
+//  JVClient+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -42,7 +42,7 @@ public struct ClientProfile {
     }
 }
 
-extension Client: Displayable {
+extension JVClient: Displayable {
     public var senderType: SenderType {
         return .client
     }

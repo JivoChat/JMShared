@@ -73,8 +73,8 @@ public extension IDatabaseDriver {
         return chat
     }
 
-    public func client(for clientID: Int, needsDefault: Bool) -> Client? {
-        var client: Client?
+    public func client(for clientID: Int, needsDefault: Bool) -> JVClient? {
+        var client: JVClient?
 
         read { context in
             client = context.client(for: clientID, needsDefault: needsDefault)
@@ -344,12 +344,12 @@ public extension IDatabaseContext {
         }
     }
     
-    public func client(for clientID: Int, needsDefault: Bool) -> Client? {
-        if let value = object(Client.self, primaryKey: clientID) {
+    public func client(for clientID: Int, needsDefault: Bool) -> JVClient? {
+        if let value = object(JVClient.self, primaryKey: clientID) {
             return value
         }
         else if needsDefault {
-            return upsert(of: Client.self, with: ClientGeneralChange(clientID: clientID))
+            return upsert(of: JVClient.self, with: ClientGeneralChange(clientID: clientID))
         }
         else {
             return nil
@@ -373,7 +373,7 @@ public extension IDatabaseContext {
         return object(JVMessage.self, mainKey: DatabaseContextMainKey(key: "_UUID", value: UUID))
     }
     
-    public func chatsWithClient(_ client: Client, includeArchived: Bool) -> [JVChat] {
+    public func chatsWithClient(_ client: JVClient, includeArchived: Bool) -> [JVChat] {
         let predicate: NSPredicate
         if includeArchived {
             predicate = NSPredicate(format: "_client._ID == \(client.ID)")

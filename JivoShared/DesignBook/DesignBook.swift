@@ -299,7 +299,7 @@ public final class DesignBook {
                 }
 
             case .client:
-                guard let client = attendee as? Client else { return }
+                guard let client = attendee as? JVClient else { return }
                 
                 if client.hasActiveCall {
                     control.setActivity(.calling, context: repicContext)

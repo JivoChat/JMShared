@@ -149,7 +149,7 @@ public extension JVMessage {
         return _clientID
     }
     
-    var client: Client? {
+    var client: JVClient? {
         return validate(_client)
     }
     
@@ -363,7 +363,7 @@ public extension JVMessage {
         return senderAgent ?? senderClient ?? client
     }
     
-    var senderClient: Client? {
+    var senderClient: JVClient? {
         return _senderClient
     }
     

@@ -38,7 +38,7 @@ extension JVChat {
                 _isArchived = true
             }
             
-            _client = context.upsert(of: Client.self, with: c.client)
+            _client = context.upsert(of: JVClient.self, with: c.client)
 
             if let clientID = c.client?.ID {
                 context.setValue(clientID, for: c.ID)
@@ -140,7 +140,7 @@ extension JVChat {
                 _attendee = attendee
             }
             
-            _client = context.upsert(of: Client.self, with: c.client)
+            _client = context.upsert(of: JVClient.self, with: c.client)
             
             _loadedEntireHistory = false
             _loadedPartialHistory = false

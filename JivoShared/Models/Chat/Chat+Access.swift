@@ -55,7 +55,7 @@ extension JVChat: Presentable {
         return _isMain
     }
     
-    public var client: Client? {
+    public var client: JVClient? {
         return validate(_client)
     }
     
