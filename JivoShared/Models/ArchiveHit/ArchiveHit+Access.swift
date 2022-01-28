@@ -21,11 +21,11 @@ extension JVArchiveHit {
         return _chatItem ?? _callItem
     }
     
-    public var chatItem: ArchiveHitChatItem? {
+    public var chatItem: JVArchiveHitChatItem? {
         return _chatItem
     }
     
-    public var callItem: ArchiveHitCallItem? {
+    public var callItem: JVArchiveHitCallItem? {
         return _callItem
     }
     

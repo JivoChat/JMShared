@@ -13,8 +13,8 @@ import JMCodingKit
 public final class JVArchiveHit: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _score: Float = 0
-    @objc dynamic public var _chatItem: ArchiveHitChatItem?
-    @objc dynamic public var _callItem: ArchiveHitCallItem?
+    @objc dynamic public var _chatItem: JVArchiveHitChatItem?
+    @objc dynamic public var _callItem: JVArchiveHitCallItem?
     @objc dynamic public var _latestActivityTime: Date?
 
     public override class func primaryKey() -> String? {

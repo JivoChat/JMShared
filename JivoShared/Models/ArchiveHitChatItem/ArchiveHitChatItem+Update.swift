@@ -1,5 +1,5 @@
 //  
-//  ArchiveHitChatItem+Update.swift
+//  JVArchiveHitChatItem+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ArchiveHitChatItem {
+extension JVArchiveHitChatItem {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ArchiveHitChatItemGeneralChange {
             _ID = c.ID

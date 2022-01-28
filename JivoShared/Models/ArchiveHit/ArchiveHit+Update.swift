@@ -14,8 +14,8 @@ extension JVArchiveHit {
         if let c = change as? ArchiveHitGeneralChange {
             if _ID == "" { _ID = c.ID }
             _score = c.score
-            _chatItem = context.upsert(of: ArchiveHitChatItem.self, with: c.chatItem)
-            _callItem = context.upsert(of: ArchiveHitCallItem.self, with: c.callItem)
+            _chatItem = context.upsert(of: JVArchiveHitChatItem.self, with: c.chatItem)
+            _callItem = context.upsert(of: JVArchiveHitCallItem.self, with: c.callItem)
             _latestActivityTime = (_chatItem ?? _callItem)?.chat?.lastMessage?.date
         }
     }
