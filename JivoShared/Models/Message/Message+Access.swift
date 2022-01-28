@@ -628,7 +628,7 @@ public extension JVMessage {
         }
     }
     
-    func correspondsTo(chat: Chat) -> Bool {
+    func correspondsTo(chat: JVChat) -> Bool {
         if let client = client {
             return (client.ID == chat.client?.ID)
         }

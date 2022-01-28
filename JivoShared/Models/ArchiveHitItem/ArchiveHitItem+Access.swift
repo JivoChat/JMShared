@@ -11,7 +11,7 @@ import Foundation
 extension ArchiveHitItem {    public var agents: [JVAgent] {
         return _agents.toArray()
     }
-        public var chat: Chat? {
+        public var chat: JVChat? {
         return _chat
     }
         public var duration: TimeInterval {

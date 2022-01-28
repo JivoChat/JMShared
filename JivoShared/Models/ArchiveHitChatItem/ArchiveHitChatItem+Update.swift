@@ -19,7 +19,7 @@ extension ArchiveHitChatItem {
             _eventsNumber = c.eventsNumber
             _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
-            _chat = context.upsert(of: Chat.self, with: c.chatChange)
+            _chat = context.upsert(of: JVChat.self, with: c.chatChange)
         }
     }
     

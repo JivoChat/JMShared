@@ -29,7 +29,7 @@ extension ArchiveHit {
         return _callItem
     }
     
-    public var chat: Chat? {
+    public var chat: JVChat? {
         return item?.chat
     }
     

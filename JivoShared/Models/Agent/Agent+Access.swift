@@ -216,7 +216,7 @@ extension JVAgent: Displayable {
         return _lastMessage
     }
     
-    public var chat: Chat? {
+    public var chat: JVChat? {
         return _chat
     }
     

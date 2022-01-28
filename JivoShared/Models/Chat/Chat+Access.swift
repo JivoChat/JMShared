@@ -1,5 +1,5 @@
 //
-//  Chat+Access.swift
+//  JVChat+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -42,7 +42,7 @@ public enum ChatAttendeeAssignment {
     case notPresented
 }
 
-extension Chat: Presentable {
+extension JVChat: Presentable {
     public var ID: Int {
         return _ID
     }

@@ -63,8 +63,8 @@ public extension IDatabaseDriver {
         return result
     }
     
-    public func chatWithID(_ ID: Int) -> Chat? {
-        var chat: Chat?
+    public func chatWithID(_ ID: Int) -> JVChat? {
+        var chat: JVChat?
         
         read { context in
             chat = context.chatWithID(ID)
@@ -83,7 +83,7 @@ public extension IDatabaseDriver {
         return client
     }
     
-    public func chatForMessage(_ message: JVMessage, evenArchived: Bool) -> Chat? {
+    public func chatForMessage(_ message: JVMessage, evenArchived: Bool) -> JVChat? {
         if let client = message.client {
             return chat(for: client.ID, evenArchived: evenArchived)
         }
@@ -131,8 +131,8 @@ public extension IDatabaseDriver {
         return agent
     }
     
-    public func chat(for clientID: Int, evenArchived: Bool) -> Chat? {
-        var chat: Chat?
+    public func chat(for clientID: Int, evenArchived: Bool) -> JVChat? {
+        var chat: JVChat?
         
         read { context in
             guard let client = context.client(for: clientID, needsDefault: false) else { return }
@@ -365,15 +365,15 @@ public extension IDatabaseContext {
         }
     }
     
-    public func chatWithID(_ ID: Int) -> Chat? {
-        return object(Chat.self, primaryKey: ID)
+    public func chatWithID(_ ID: Int) -> JVChat? {
+        return object(JVChat.self, primaryKey: ID)
     }
     
     public func messageWithUUID(_ UUID: String) -> JVMessage? {
         return object(JVMessage.self, mainKey: DatabaseContextMainKey(key: "_UUID", value: UUID))
     }
     
-    public func chatsWithClient(_ client: Client, includeArchived: Bool) -> [Chat] {
+    public func chatsWithClient(_ client: Client, includeArchived: Bool) -> [JVChat] {
         let predicate: NSPredicate
         if includeArchived {
             predicate = NSPredicate(format: "_client._ID == \(client.ID)")
@@ -383,7 +383,7 @@ public extension IDatabaseContext {
         }
 
         return objects(
-            Chat.self,
+            JVChat.self,
             options: DatabaseRequestOptions(
                 filter: predicate,
                 sortBy: [],
@@ -407,7 +407,7 @@ public extension IDatabaseContext {
         return objects(JVMessage.self, options: options).last
     }
     
-    public func removeChat(_ chat: Chat, cleanup: Bool) {
+    public func removeChat(_ chat: JVChat, cleanup: Bool) {
         if cleanup, let client = chat.client, client.isValid {
             let messages = objects(
                 JVMessage.self,

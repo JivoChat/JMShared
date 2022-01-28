@@ -1192,7 +1192,7 @@ public final class MessageTextChange: BaseModelChange {
 open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     
     public let agent: JVAgent
-    public let chat: Chat
+    public let chat: JVChat
     public let creationDate: Date?
     public let text: String
     public let media: MessageMediaGeneralChange?
@@ -1206,7 +1206,7 @@ open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     
     public init(id: Int,
          agent: JVAgent,
-         chat: Chat,
+         chat: JVChat,
          text: String,
          body: MessageBodyGeneralChange? = nil,
          media: MessageMediaGeneralChange? = nil,

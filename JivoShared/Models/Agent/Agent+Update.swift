@@ -65,7 +65,7 @@ extension JVAgent {
             _lastMessageDate = _lastMessage?.date
         }
         else if let c = change as? AgentChatChange {
-            _chat = context.object(Chat.self, primaryKey: c.chatID)
+            _chat = context.object(JVChat.self, primaryKey: c.chatID)
             _lastMessageDate = _chat?.lastMessage?.date
         }
         else if let c = change as? AgentDraftChange {
