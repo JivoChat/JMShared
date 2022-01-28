@@ -1,5 +1,5 @@
 //
-//  AgentSession+Access.swift
+//  JVAgentSession+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -15,7 +15,7 @@ public enum AgentSessionWorkingState {
     case hidden
 }
 
-extension AgentSession {
+extension JVAgentSession {
     public var sessionID: String {
         return _sessionID
     }

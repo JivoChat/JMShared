@@ -25,16 +25,16 @@ extension JVAgent {
             _callingDestination = (c.callingDestination > -1 ? c.callingDestination : _callingDestination)
             _callingOptions = c.callingOptions
             _title = c.title
-            _worktime = context.upsert(of: Worktime.self, with: c.worktime)
+            _worktime = context.upsert(of: JVWorktime.self, with: c.worktime)
             _isWorking = c.isWorking ?? _isWorking
-            _session = context.upsert(of: AgentSession.self, with: c.session) ?? _session
+            _session = context.upsert(of: JVAgentSession.self, with: c.session) ?? _session
             _hasSession = (_session != nil)
             
             _orderingName = c.displayName
             adjustOrderingGroup()
         }
         else if let c = change as? AgentWorktimeChange {
-            _worktime = context.upsert(of: Worktime.self, with: c.worktimeChange)
+            _worktime = context.upsert(of: JVWorktime.self, with: c.worktimeChange)
         }
         else if let c = change as? AgentShortChange {
             if _ID == 0 { _ID = c.ID }

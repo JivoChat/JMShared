@@ -25,8 +25,8 @@ open class JVAgent: JVBaseModel {
     @objc dynamic public var _callingDestination: Int = 0
     @objc dynamic public var _callingOptions: Int = 0
     @objc dynamic public var _isWorking: Bool = true
-    @objc dynamic public var _session: AgentSession?
-    @objc dynamic public var _worktime: Worktime?
+    @objc dynamic public var _session: JVAgentSession?
+    @objc dynamic public var _worktime: JVWorktime?
     @objc dynamic public var _hasSession: Bool = false
     @objc dynamic public var _lastMessageDate: Date?
     @objc dynamic public var _lastMessage: JVMessage?

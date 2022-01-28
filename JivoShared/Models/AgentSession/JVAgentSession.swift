@@ -1,5 +1,5 @@
 //
-//  AgentSession.swift
+//  JVAgentSession.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/06/2018.
@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import AVFoundation
 
-open class AgentSession: JVBaseModel {
+open class JVAgentSession: JVBaseModel {
     @objc dynamic public var _sessionID: String = ""
     @objc dynamic public var _email: String = ""
     @objc dynamic public var _siteID: Int = 0

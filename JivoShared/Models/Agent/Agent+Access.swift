@@ -208,7 +208,7 @@ extension JVAgent: Displayable {
         }
     }
 
-    public var session: AgentSession? {
+    public var session: JVAgentSession? {
         return _session
     }
     
@@ -240,7 +240,7 @@ extension JVAgent: Displayable {
         return _callingOptions.hasBit(1 << AgentCallingOptions.onCall.rawValue)
     }
     
-    public var worktime: Worktime? {
+    public var worktime: JVWorktime? {
         return _worktime
     }
     

@@ -1,5 +1,5 @@
 //  
-//  Worktime+Update.swift
+//  JVWorktime+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Worktime {
+extension JVWorktime {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? WorktimeBaseChange, _agentID == 0 {
             _agentID = c.agentID
