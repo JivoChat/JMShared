@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Call: BaseModel {
+public final class Call: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     
     public override class func primaryKey() -> String? {

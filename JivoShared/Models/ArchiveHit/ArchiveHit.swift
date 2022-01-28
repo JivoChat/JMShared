@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ArchiveHit: BaseModel {
+public final class ArchiveHit: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _score: Float = 0
     @objc dynamic public var _chatItem: ArchiveHitChatItem?

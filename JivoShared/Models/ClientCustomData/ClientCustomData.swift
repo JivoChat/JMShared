@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ClientCustomData: BaseModel {
+public final class ClientCustomData: JVBaseModel {
     @objc dynamic public var _title: String?
     @objc dynamic public var _key: String?
     @objc dynamic public var _content: String = ""

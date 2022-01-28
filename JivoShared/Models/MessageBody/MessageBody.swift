@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import CoreLocation
 
-public final class MessageBody: BaseModel {
+public final class MessageBody: JVBaseModel {
     @objc dynamic public var _agent: Agent?
     @objc dynamic public var _to: String?
     @objc dynamic public var _from: String?

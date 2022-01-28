@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Worktime: BaseModel {
+public final class Worktime: JVBaseModel {
     @objc dynamic public var _agentID: Int = 0
     @objc dynamic public var _timezoneID: Int = 0
     @objc dynamic public var _timezone: Timezone?

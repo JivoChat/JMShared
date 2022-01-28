@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MessageImage: BaseModel {
+public final class MessageImage: JVBaseModel {
     @objc dynamic public var _fileName: String = ""
     @objc dynamic public var _URL: String = ""
     @objc dynamic public var _uploadTS: Int = 0

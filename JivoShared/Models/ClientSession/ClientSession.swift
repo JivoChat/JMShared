@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ClientSession: BaseModel {
+public final class ClientSession: JVBaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0
     @objc dynamic public var _UTM: ClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""

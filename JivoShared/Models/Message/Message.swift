@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-open class Message: BaseModel {
+open class Message: JVBaseModel {
     @objc open dynamic var _ID: Int = 0
     @objc open dynamic var _localID: String = ""
     @objc open dynamic var _date: Date?

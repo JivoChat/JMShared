@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-open class ArchiveHitItem: BaseModel {
+open class ArchiveHitItem: JVBaseModel {
     @objc dynamic public var _ID: String = UUID().uuidString
     @objc dynamic public var _type: String = ""
     @objc dynamic public var _responseTimeout: Int = 0

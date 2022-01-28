@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Chat: BaseModel {
+public final class Chat: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     public let _attendees = List<ChatAttendee>()
     public let _agents = List<Agent>()

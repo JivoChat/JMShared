@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ClientSessionGeo: BaseModel {
+public final class ClientSessionGeo: JVBaseModel {
     @objc dynamic public var _country: String?
     @objc dynamic public var _region: String?
     @objc dynamic public var _city: String?

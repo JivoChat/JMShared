@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MediaUpload: BaseModel {
+public final class MediaUpload: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _filePath: String = ""
     @objc dynamic public var _recipientType: String = ""

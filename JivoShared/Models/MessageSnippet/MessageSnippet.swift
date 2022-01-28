@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MessageSnippet: BaseModel {
+public final class MessageSnippet: JVBaseModel {
     @objc dynamic public var _URL: String?
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _iconURL: String?

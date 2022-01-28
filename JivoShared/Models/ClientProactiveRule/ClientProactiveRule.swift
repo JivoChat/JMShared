@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ClientProactiveRule: BaseModel {
+public final class ClientProactiveRule: JVBaseModel {
     @objc dynamic public var _agent: Agent?
     @objc dynamic public var _date: Date?
     @objc dynamic public var _text: String = ""

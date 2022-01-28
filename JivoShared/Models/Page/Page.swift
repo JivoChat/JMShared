@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Page: BaseModel {
+public final class Page: JVBaseModel {
     @objc dynamic public var _URL: String = ""
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _time: String?

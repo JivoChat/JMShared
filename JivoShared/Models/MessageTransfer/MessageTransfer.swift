@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MessageTransfer: BaseModel {
+public final class MessageTransfer: JVBaseModel {
     @objc dynamic public var _agentID: Int = 0
     @objc dynamic public var _comment: String?
     

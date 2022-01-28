@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Guest: BaseModel {
+public final class Guest: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _channelID: String = ""
     @objc dynamic public var _agentID: Int = 0

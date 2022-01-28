@@ -21,7 +21,7 @@ public extension List {
     }
 }
 
-public extension List where Element: BaseModel {
+public extension List where Element: JVBaseModel {
     public func insertAbsent(_ items: [Element]) {
         guard let primaryKey = Element.primaryKey() else { return }
         

@@ -8,7 +8,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-public final class Task: BaseModel {
+public final class Task: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _siteID: Int = 0
     @objc dynamic public var _clientID: Int = 0

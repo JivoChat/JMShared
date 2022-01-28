@@ -91,7 +91,7 @@
 		FA71BDC7256BDEA600E96457 /* MessageTransfer+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2C256BDEA400E96457 /* MessageTransfer+Update.swift */; };
 		FA71BDC8256BDEA600E96457 /* MessageTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2D256BDEA400E96457 /* MessageTransfer.swift */; };
 		FA71BDC9256BDEA600E96457 /* MessageTransfer+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2E256BDEA400E96457 /* MessageTransfer+Access.swift */; };
-		FA71BDCA256BDEA600E96457 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2F256BDEA400E96457 /* BaseModel.swift */; };
+		FA71BDCA256BDEA600E96457 /* JVBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2F256BDEA400E96457 /* JVBaseModel.swift */; };
 		FA71BDCB256BDEA600E96457 /* ClientSessionUTM+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD31256BDEA400E96457 /* ClientSessionUTM+Access.swift */; };
 		FA71BDCC256BDEA600E96457 /* ClientSessionUTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD32256BDEA400E96457 /* ClientSessionUTM.swift */; };
 		FA71BDCD256BDEA600E96457 /* ClientSessionUTM+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD33256BDEA400E96457 /* ClientSessionUTM+Update.swift */; };
@@ -241,7 +241,7 @@
 		FA71BD2C256BDEA400E96457 /* MessageTransfer+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageTransfer+Update.swift"; sourceTree = "<group>"; };
 		FA71BD2D256BDEA400E96457 /* MessageTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTransfer.swift; sourceTree = "<group>"; };
 		FA71BD2E256BDEA400E96457 /* MessageTransfer+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageTransfer+Access.swift"; sourceTree = "<group>"; };
-		FA71BD2F256BDEA400E96457 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		FA71BD2F256BDEA400E96457 /* JVBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVBaseModel.swift; sourceTree = "<group>"; };
 		FA71BD31256BDEA400E96457 /* ClientSessionUTM+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionUTM+Access.swift"; sourceTree = "<group>"; };
 		FA71BD32256BDEA400E96457 /* ClientSessionUTM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSessionUTM.swift; sourceTree = "<group>"; };
 		FA71BD33256BDEA400E96457 /* ClientSessionUTM+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionUTM+Update.swift"; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 				FA71BD23256BDEA300E96457 /* ArchiveHitItem */,
 				FA71BD27256BDEA400E96457 /* QuickPhrase */,
 				FA71BD2B256BDEA400E96457 /* MessageTransfer */,
-				FA71BD2F256BDEA400E96457 /* BaseModel.swift */,
+				FA71BD2F256BDEA400E96457 /* JVBaseModel.swift */,
 				FA71BD30256BDEA400E96457 /* ClientSessionUTM */,
 				FA71BD34256BDEA400E96457 /* Guest */,
 				FA71BD38256BDEA400E96457 /* Worktime */,
@@ -984,7 +984,7 @@
 				FA71BDEA256BDEA600E96457 /* CGRectExtensions.swift in Sources */,
 				FA71BDB6256BDEA600E96457 /* MessageImage.swift in Sources */,
 				FA71BDB5256BDEA600E96457 /* MessageImage+Access.swift in Sources */,
-				FA71BDCA256BDEA600E96457 /* BaseModel.swift in Sources */,
+				FA71BDCA256BDEA600E96457 /* JVBaseModel.swift in Sources */,
 				FA71BD96256BDEA600E96457 /* MessageSnippet+Update.swift in Sources */,
 				FA71BD9E256BDEA600E96457 /* ChatAttendee.swift in Sources */,
 				FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */,

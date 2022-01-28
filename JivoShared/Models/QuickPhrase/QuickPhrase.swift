@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class QuickPhrase: BaseModel {
+public final class QuickPhrase: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _lang: String = ""
     @objc dynamic public var _tags: String = ""

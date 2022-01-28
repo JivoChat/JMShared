@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ChatAttendee: BaseModel {
+public final class ChatAttendee: JVBaseModel {
     @objc dynamic public var _agent: Agent?
     @objc dynamic public var _relation: String?
     @objc dynamic public var _comment: String?

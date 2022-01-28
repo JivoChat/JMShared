@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-public final class Client: BaseModel {
+public final class Client: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _guestID: String = ""

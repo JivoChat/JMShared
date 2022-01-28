@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Archive: BaseModel {
+public final class Archive: JVBaseModel {
     @objc dynamic public var _ID: String = Archive.globalID()
     @objc dynamic public var _total: Int = 0
     @objc dynamic public var _archiveTotal: Int = 0

@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import AVFoundation
 
-open class AgentSession: BaseModel {
+open class AgentSession: JVBaseModel {
     @objc dynamic public var _sessionID: String = ""
     @objc dynamic public var _email: String = ""
     @objc dynamic public var _siteID: Int = 0

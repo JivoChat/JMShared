@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-open class Agent: BaseModel {
+open class Agent: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _email: String = ""

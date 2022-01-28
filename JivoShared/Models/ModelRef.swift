@@ -15,7 +15,7 @@ public struct ModelRefBehavior: OptionSet {
     public static let strong = ModelRefBehavior(rawValue: 1 << 0)
 }
 
-public final class ModelRef<Value: BaseModel> {
+public final class ModelRef<Value: JVBaseModel> {
     private weak var databaseDriver: IDatabaseDriver?
     private let uuid: String?
     private let behavior: ModelRefBehavior

@@ -1,5 +1,5 @@
 //
-//  BaseModel.swift
+//  JVBaseModel.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/05/2017.
@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-open class BaseModel: Object {
+open class JVBaseModel: Object {
     
     @objc dynamic public var _UUID: String = Foundation.UUID().uuidString.lowercased()
     
@@ -45,7 +45,7 @@ open class BaseModelChange: NSObject {
         isOK = json["ok"].boolValue
     }
     
-    open var targetType: BaseModel.Type {
+    open var targetType: JVBaseModel.Type {
         abort()
     }
     

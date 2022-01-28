@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ClientSessionUTM: BaseModel {
+public final class ClientSessionUTM: JVBaseModel {
     @objc dynamic public var _source: String?
     @objc dynamic public var _keyword: String?
     @objc dynamic public var _campaign: String?
