@@ -1,5 +1,5 @@
 //
-//  Task+Update.swift
+//  JVTask+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Task {
+extension JVTask {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? TaskGeneralChange {
             if _ID == 0 { _ID = c.ID }

@@ -1,5 +1,5 @@
 //
-//  Task+Access.swift
+//  JVTask+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -21,7 +21,7 @@ public enum TaskStatus: String {
     }
 }
 
-extension Task {
+extension JVTask {
     public var ID: Int {
         return _ID
     }

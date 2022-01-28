@@ -101,7 +101,7 @@ extension JVAgent: Displayable {
         }
     }
     
-    public var channel: Channel? {
+    public var channel: JVChannel? {
         return nil
     }
     

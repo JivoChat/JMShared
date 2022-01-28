@@ -25,7 +25,7 @@ extension Guest: Displayable {
         return _ID
     }
 
-    public var channel: Channel? {
+    public var channel: JVChannel? {
         abort()
     }
     

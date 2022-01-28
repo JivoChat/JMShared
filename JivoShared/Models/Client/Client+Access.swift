@@ -68,7 +68,7 @@ extension JVClient: Displayable {
         return _channelID
     }
     
-    public var channel: Channel? {
+    public var channel: JVChannel? {
         return _channel
     }
 
@@ -130,18 +130,18 @@ extension JVClient: Displayable {
         return max(1, _navigatesNumber)
     }
     
-    public var session: ClientSession? {
+    public var session: JVClientSession? {
         switch integration {
         case .none: return _activeSession
         case .some(let joint): return joint.isStandalone ? nil : _activeSession
         }
     }
     
-    public var customData: [ClientCustomData] {
+    public var customData: [JVClientCustomData] {
         return _customData.toArray()
     }
     
-//    var proactiveRule: ClientProactiveRule? {
+//    var proactiveRule: JVClientProactiveRule? {
 //        return _proactiveRule
 //    }
     
@@ -214,7 +214,7 @@ extension JVClient: Displayable {
         return _hasActiveCall
     }
 
-    public var task: Task? {
+    public var task: JVTask? {
         return _task
     }
     

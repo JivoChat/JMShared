@@ -109,7 +109,7 @@ public enum DisplayNameKind {
 }
 
 public protocol Displayable: Presentable {
-    var channel: Channel? { get }
+    var channel: JVChannel? { get }
     func displayName(kind: DisplayNameKind) -> String
     var integration: ChannelJoint? { get }
     var hashedID: String { get }

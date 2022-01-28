@@ -108,7 +108,7 @@ extension AgentSession {
         }
         else if let c = change as? AgentSessionContextChange {
             
-//            _channels.set(context.upsert(of: Channel.self, with: c.channels))
+//            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
 
             if let features = c.techConfig {
                 _globalReceived = true
@@ -138,7 +138,7 @@ extension AgentSession {
             _isWorkingHidden = c.isWorkingHidden
         }
         else if let c = change as? AgentSessionChannelsChange {
-            _channels.set(context.upsert(of: Channel.self, with: c.channels))
+            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
         }
     }
     

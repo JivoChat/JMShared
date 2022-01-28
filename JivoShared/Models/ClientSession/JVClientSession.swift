@@ -1,5 +1,5 @@
 //
-//  ClientSession.swift
+//  JVClientSession.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ClientSession: JVBaseModel {
+public final class JVClientSession: JVBaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0
     @objc dynamic public var _UTM: ClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""

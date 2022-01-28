@@ -1,5 +1,5 @@
 //
-//  ClientSession+Update.swift
+//  JVClientSession+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ClientSession {
+extension JVClientSession {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ClientSessionGeneralChange {
             _creationTS = c.creationTS ?? _creationTS

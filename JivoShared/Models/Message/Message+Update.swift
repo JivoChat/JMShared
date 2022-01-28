@@ -81,7 +81,7 @@ extension JVMessage {
             }
 
             _ = context.upsert(
-                of: Task.self,
+                of: JVTask.self,
                 with: TaskGeneralChange(
                     ID: task.taskID,
                     agentID: agentID,

@@ -17,7 +17,7 @@
 		FA401ED926FB33AE00CB8EE4 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401ED426FB33AE00CB8EE4 /* Mappable.swift */; };
 		FA401EDE26FB342400CB8EE4 /* Task+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDB26FB342400CB8EE4 /* Task+Update.swift */; };
 		FA401EDF26FB342400CB8EE4 /* Task+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDC26FB342400CB8EE4 /* Task+Access.swift */; };
-		FA401EE026FB342400CB8EE4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDD26FB342400CB8EE4 /* Task.swift */; };
+		FA401EE026FB342400CB8EE4 /* JVTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EDD26FB342400CB8EE4 /* JVTask.swift */; };
 		FA401EE226FB528D00CB8EE4 /* JMShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA401EE126FB528D00CB8EE4 /* JMShared.swift */; };
 		FA620EC426289929003CD741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA620EC326289929003CD741 /* Assets.xcassets */; };
 		FA71BD77256BDEA600E96457 /* LocaleTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */; };
@@ -31,7 +31,7 @@
 		FA71BD88256BDEA600E96457 /* MediaUpload+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD8256BDEA200E96457 /* MediaUpload+Update.swift */; };
 		FA71BD89256BDEA600E96457 /* MediaUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCD9256BDEA200E96457 /* MediaUpload.swift */; };
 		FA71BD8A256BDEA600E96457 /* MediaUpload+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCDA256BDEA200E96457 /* MediaUpload+Access.swift */; };
-		FA71BD8B256BDEA600E96457 /* ClientProactiveRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCDC256BDEA200E96457 /* ClientProactiveRule.swift */; };
+		FA71BD8B256BDEA600E96457 /* JVClientProactiveRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCDC256BDEA200E96457 /* JVClientProactiveRule.swift */; };
 		FA71BD8C256BDEA600E96457 /* ClientProactiveRule+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCDD256BDEA200E96457 /* ClientProactiveRule+Access.swift */; };
 		FA71BD8D256BDEA600E96457 /* ClientProactiveRule+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCDE256BDEA200E96457 /* ClientProactiveRule+Update.swift */; };
 		FA71BD8E256BDEA600E96457 /* Page+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCE0256BDEA200E96457 /* Page+Access.swift */; };
@@ -62,7 +62,7 @@
 		FA71BDA7256BDEA600E96457 /* ClientSessionGeo+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD01256BDEA300E96457 /* ClientSessionGeo+Access.swift */; };
 		FA71BDA8256BDEA600E96457 /* ClientSessionGeo+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD02256BDEA300E96457 /* ClientSessionGeo+Update.swift */; };
 		FA71BDA9256BDEA600E96457 /* ClientSession+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD04256BDEA300E96457 /* ClientSession+Update.swift */; };
-		FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD05256BDEA300E96457 /* ClientSession.swift */; };
+		FA71BDAA256BDEA600E96457 /* JVClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD05256BDEA300E96457 /* JVClientSession.swift */; };
 		FA71BDAB256BDEA600E96457 /* ClientSession+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */; };
 		FA71BDAF256BDEA600E96457 /* Message+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0C256BDEA300E96457 /* Message+Update.swift */; };
 		FA71BDB0256BDEA600E96457 /* JVMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0D256BDEA300E96457 /* JVMessage.swift */; };
@@ -77,7 +77,7 @@
 		FA71BDB9256BDEA600E96457 /* ArchiveHitCallItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD19256BDEA300E96457 /* ArchiveHitCallItem.swift */; };
 		FA71BDBA256BDEA600E96457 /* ArchiveHitCallItem+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD1A256BDEA300E96457 /* ArchiveHitCallItem+Update.swift */; };
 		FA71BDBB256BDEA600E96457 /* Channel+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD1C256BDEA300E96457 /* Channel+Update.swift */; };
-		FA71BDBC256BDEA600E96457 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD1D256BDEA300E96457 /* Channel.swift */; };
+		FA71BDBC256BDEA600E96457 /* JVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD1D256BDEA300E96457 /* JVChannel.swift */; };
 		FA71BDBD256BDEA600E96457 /* Channel+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD1E256BDEA300E96457 /* Channel+Access.swift */; };
 		FA71BDBE256BDEA600E96457 /* Call+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD20256BDEA300E96457 /* Call+Access.swift */; };
 		FA71BDBF256BDEA600E96457 /* Call+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD21256BDEA300E96457 /* Call+Update.swift */; };
@@ -107,7 +107,7 @@
 		FA71BDD7256BDEA600E96457 /* JVMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD41256BDEA400E96457 /* JVMessageBody.swift */; };
 		FA71BDD8256BDEA600E96457 /* MessageBody+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD42256BDEA400E96457 /* MessageBody+Update.swift */; };
 		FA71BDD9256BDEA600E96457 /* MessageBody+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD43256BDEA400E96457 /* MessageBody+Access.swift */; };
-		FA71BDDA256BDEA600E96457 /* ClientCustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD45256BDEA400E96457 /* ClientCustomData.swift */; };
+		FA71BDDA256BDEA600E96457 /* JVClientCustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD45256BDEA400E96457 /* JVClientCustomData.swift */; };
 		FA71BDDB256BDEA600E96457 /* ClientCustomData+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD46256BDEA400E96457 /* ClientCustomData+Update.swift */; };
 		FA71BDDC256BDEA600E96457 /* ClientCustomData+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD47256BDEA400E96457 /* ClientCustomData+Access.swift */; };
 		FA71BDDD256BDEA600E96457 /* MessageMedia+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD49256BDEA400E96457 /* MessageMedia+Update.swift */; };
@@ -167,7 +167,7 @@
 		FA401ED426FB33AE00CB8EE4 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		FA401EDB26FB342400CB8EE4 /* Task+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Update.swift"; sourceTree = "<group>"; };
 		FA401EDC26FB342400CB8EE4 /* Task+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+Access.swift"; sourceTree = "<group>"; };
-		FA401EDD26FB342400CB8EE4 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FA401EDD26FB342400CB8EE4 /* JVTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVTask.swift; sourceTree = "<group>"; };
 		FA401EE126FB528D00CB8EE4 /* JMShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMShared.swift; sourceTree = "<group>"; };
 		FA620EC326289929003CD741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA71BCBC256BDEA100E96457 /* LocaleTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleTypes.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		FA71BCD8256BDEA200E96457 /* MediaUpload+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaUpload+Update.swift"; sourceTree = "<group>"; };
 		FA71BCD9256BDEA200E96457 /* MediaUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaUpload.swift; sourceTree = "<group>"; };
 		FA71BCDA256BDEA200E96457 /* MediaUpload+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaUpload+Access.swift"; sourceTree = "<group>"; };
-		FA71BCDC256BDEA200E96457 /* ClientProactiveRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientProactiveRule.swift; sourceTree = "<group>"; };
+		FA71BCDC256BDEA200E96457 /* JVClientProactiveRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVClientProactiveRule.swift; sourceTree = "<group>"; };
 		FA71BCDD256BDEA200E96457 /* ClientProactiveRule+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientProactiveRule+Access.swift"; sourceTree = "<group>"; };
 		FA71BCDE256BDEA200E96457 /* ClientProactiveRule+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientProactiveRule+Update.swift"; sourceTree = "<group>"; };
 		FA71BCE0256BDEA200E96457 /* Page+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Page+Access.swift"; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		FA71BD01256BDEA300E96457 /* ClientSessionGeo+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionGeo+Access.swift"; sourceTree = "<group>"; };
 		FA71BD02256BDEA300E96457 /* ClientSessionGeo+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionGeo+Update.swift"; sourceTree = "<group>"; };
 		FA71BD04256BDEA300E96457 /* ClientSession+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSession+Update.swift"; sourceTree = "<group>"; };
-		FA71BD05256BDEA300E96457 /* ClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSession.swift; sourceTree = "<group>"; };
+		FA71BD05256BDEA300E96457 /* JVClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVClientSession.swift; sourceTree = "<group>"; };
 		FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSession+Access.swift"; sourceTree = "<group>"; };
 		FA71BD0C256BDEA300E96457 /* Message+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+Update.swift"; sourceTree = "<group>"; };
 		FA71BD0D256BDEA300E96457 /* JVMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVMessage.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		FA71BD19256BDEA300E96457 /* ArchiveHitCallItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveHitCallItem.swift; sourceTree = "<group>"; };
 		FA71BD1A256BDEA300E96457 /* ArchiveHitCallItem+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArchiveHitCallItem+Update.swift"; sourceTree = "<group>"; };
 		FA71BD1C256BDEA300E96457 /* Channel+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Channel+Update.swift"; sourceTree = "<group>"; };
-		FA71BD1D256BDEA300E96457 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		FA71BD1D256BDEA300E96457 /* JVChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVChannel.swift; sourceTree = "<group>"; };
 		FA71BD1E256BDEA300E96457 /* Channel+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Channel+Access.swift"; sourceTree = "<group>"; };
 		FA71BD20256BDEA300E96457 /* Call+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Call+Access.swift"; sourceTree = "<group>"; };
 		FA71BD21256BDEA300E96457 /* Call+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Call+Update.swift"; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 		FA71BD41256BDEA400E96457 /* JVMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVMessageBody.swift; sourceTree = "<group>"; };
 		FA71BD42256BDEA400E96457 /* MessageBody+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageBody+Update.swift"; sourceTree = "<group>"; };
 		FA71BD43256BDEA400E96457 /* MessageBody+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageBody+Access.swift"; sourceTree = "<group>"; };
-		FA71BD45256BDEA400E96457 /* ClientCustomData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCustomData.swift; sourceTree = "<group>"; };
+		FA71BD45256BDEA400E96457 /* JVClientCustomData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVClientCustomData.swift; sourceTree = "<group>"; };
 		FA71BD46256BDEA400E96457 /* ClientCustomData+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientCustomData+Update.swift"; sourceTree = "<group>"; };
 		FA71BD47256BDEA400E96457 /* ClientCustomData+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientCustomData+Access.swift"; sourceTree = "<group>"; };
 		FA71BD49256BDEA400E96457 /* MessageMedia+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageMedia+Update.swift"; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 			children = (
 				FA401EDB26FB342400CB8EE4 /* Task+Update.swift */,
 				FA401EDC26FB342400CB8EE4 /* Task+Access.swift */,
-				FA401EDD26FB342400CB8EE4 /* Task.swift */,
+				FA401EDD26FB342400CB8EE4 /* JVTask.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -478,7 +478,7 @@
 		FA71BCDB256BDEA200E96457 /* ClientProactiveRule */ = {
 			isa = PBXGroup;
 			children = (
-				FA71BCDC256BDEA200E96457 /* ClientProactiveRule.swift */,
+				FA71BCDC256BDEA200E96457 /* JVClientProactiveRule.swift */,
 				FA71BCDD256BDEA200E96457 /* ClientProactiveRule+Access.swift */,
 				FA71BCDE256BDEA200E96457 /* ClientProactiveRule+Update.swift */,
 			);
@@ -579,7 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				FA71BD04256BDEA300E96457 /* ClientSession+Update.swift */,
-				FA71BD05256BDEA300E96457 /* ClientSession.swift */,
+				FA71BD05256BDEA300E96457 /* JVClientSession.swift */,
 				FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */,
 			);
 			path = ClientSession;
@@ -629,7 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				FA71BD1C256BDEA300E96457 /* Channel+Update.swift */,
-				FA71BD1D256BDEA300E96457 /* Channel.swift */,
+				FA71BD1D256BDEA300E96457 /* JVChannel.swift */,
 				FA71BD1E256BDEA300E96457 /* Channel+Access.swift */,
 			);
 			path = Channel;
@@ -728,7 +728,7 @@
 		FA71BD44256BDEA400E96457 /* ClientCustomData */ = {
 			isa = PBXGroup;
 			children = (
-				FA71BD45256BDEA400E96457 /* ClientCustomData.swift */,
+				FA71BD45256BDEA400E96457 /* JVClientCustomData.swift */,
 				FA71BD46256BDEA400E96457 /* ClientCustomData+Update.swift */,
 				FA71BD47256BDEA400E96457 /* ClientCustomData+Access.swift */,
 			);
@@ -936,14 +936,14 @@
 				FA71BD90256BDEA600E96457 /* Page+Update.swift in Sources */,
 				FA71BDEB256BDEA600E96457 /* UITableViewExtensions.swift in Sources */,
 				FA71BDEC256BDEA600E96457 /* ObjectExtensions.swift in Sources */,
-				FA401EE026FB342400CB8EE4 /* Task.swift in Sources */,
+				FA401EE026FB342400CB8EE4 /* JVTask.swift in Sources */,
 				FA71BDFF256BDEA600E96457 /* JSONExtensions.swift in Sources */,
 				FA71BD80256BDEA600E96457 /* DatabaseListener.swift in Sources */,
 				FA71BDAB256BDEA600E96457 /* ClientSession+Access.swift in Sources */,
 				FA71BE00256BDEA600E96457 /* IntExtensions.swift in Sources */,
 				FA71BDE2256BDEA600E96457 /* ArchiveHit+Access.swift in Sources */,
 				FA401ED626FB33AE00CB8EE4 /* UINavigationBarExtensions.swift in Sources */,
-				FA71BD8B256BDEA600E96457 /* ClientProactiveRule.swift in Sources */,
+				FA71BD8B256BDEA600E96457 /* JVClientProactiveRule.swift in Sources */,
 				FA71BD98256BDEA600E96457 /* Timezone.swift in Sources */,
 				FA71BDF8256BDEA600E96457 /* GraylogExtensions.swift in Sources */,
 				FA71BDA4256BDEA600E96457 /* Chat+Access.swift in Sources */,
@@ -953,7 +953,7 @@
 				FA71BE03256BDEA600E96457 /* UIApplicationExtensions.swift in Sources */,
 				FA71BDF2256BDEA600E96457 /* UITextViewExtensions.swift in Sources */,
 				FA71BD93256BDEA600E96457 /* AgentSession+Update.swift in Sources */,
-				FA71BDDA256BDEA600E96457 /* ClientCustomData.swift in Sources */,
+				FA71BDDA256BDEA600E96457 /* JVClientCustomData.swift in Sources */,
 				FA71BD7E256BDEA600E96457 /* DatabaseContext.swift in Sources */,
 				FA71BDA5256BDEA600E96457 /* Chat+Update.swift in Sources */,
 				FA71BDBE256BDEA600E96457 /* Call+Access.swift in Sources */,
@@ -979,7 +979,7 @@
 				FA71BDE1256BDEA600E96457 /* ArchiveHit.swift in Sources */,
 				FA71BDA3256BDEA600E96457 /* JVChat.swift in Sources */,
 				FA71BDD2256BDEA600E96457 /* Worktime+Update.swift in Sources */,
-				FA71BDBC256BDEA600E96457 /* Channel.swift in Sources */,
+				FA71BDBC256BDEA600E96457 /* JVChannel.swift in Sources */,
 				FA71BD95256BDEA600E96457 /* MessageSnippet.swift in Sources */,
 				FA71BDEA256BDEA600E96457 /* CGRectExtensions.swift in Sources */,
 				FA71BDB6256BDEA600E96457 /* MessageImage.swift in Sources */,
@@ -987,7 +987,7 @@
 				FA71BDCA256BDEA600E96457 /* JVBaseModel.swift in Sources */,
 				FA71BD96256BDEA600E96457 /* MessageSnippet+Update.swift in Sources */,
 				FA71BD9E256BDEA600E96457 /* ChatAttendee.swift in Sources */,
-				FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */,
+				FA71BDAA256BDEA600E96457 /* JVClientSession.swift in Sources */,
 				FA71BDFC256BDEA600E96457 /* DispatchQueueExtensions.swift in Sources */,
 				FA71BDA1256BDEA600E96457 /* Archive+Update.swift in Sources */,
 				FA71BDBD256BDEA600E96457 /* Channel+Access.swift in Sources */,

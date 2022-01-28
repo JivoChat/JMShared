@@ -17,7 +17,7 @@ extension JVClient {
             _chatID = c.chatID ?? _chatID
             _channelID = c.channelID
             _channelName = c.channelName ?? _channelName
-            _channel = context.object(Channel.self, primaryKey: c.channelID)
+            _channel = context.object(JVChannel.self, primaryKey: c.channelID)
             _displayName = c.displayName ?? String()
             _avatarLink = c.avatarURL ?? _avatarLink
             _comment = c.comment
@@ -61,10 +61,10 @@ extension JVClient {
                 _integrationLink = c.socialLinks[integration]
             }
 
-            _task = context.upsert(of: Task.self, with: c.task) ?? _task
+            _task = context.upsert(of: JVTask.self, with: c.task) ?? _task
             
             if let customData = c.customData {
-                _customData.set(context.insert(of: ClientCustomData.self, with: customData))
+                _customData.set(context.insert(of: JVClientCustomData.self, with: customData))
             }
         }
         else if let c = change as? ClientGuestChange {
@@ -79,7 +79,7 @@ extension JVClient {
             
             if let channelID = c.channelID {
                 _channelID = channelID
-                _channel = context.object(Channel.self, primaryKey: channelID)
+                _channel = context.object(JVChannel.self, primaryKey: channelID)
             }
 
             switch c.assignedAgentID {
@@ -88,7 +88,7 @@ extension JVClient {
             case .some(let agentID): _assignedAgent = context.agent(for: agentID, provideDefault: true)
             }
             
-            _task = context.upsert(of: Task.self, with: c.task) ?? _task
+            _task = context.upsert(of: JVTask.self, with: c.task) ?? _task
         }
         else if let c = change as? ClientOnlineChange {
             _isOnline = c.isOnline
@@ -97,7 +97,7 @@ extension JVClient {
             _hasActiveCall = c.hasCall
         }
         else if let c = change as? ClientTaskChange {
-            _task = context.object(Task.self, primaryKey: c.taskID)
+            _task = context.object(JVTask.self, primaryKey: c.taskID)
         }
         else if let c = change as? ClientBlockingChange {
             _isBlocked = c.blocking

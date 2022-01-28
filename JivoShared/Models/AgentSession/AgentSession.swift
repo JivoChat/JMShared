@@ -42,7 +42,7 @@ open class AgentSession: JVBaseModel {
     @objc dynamic public var _isWorking: Bool = true
     @objc dynamic public var _isWorkingHidden: Bool = false
 
-    public let _channels = List<Channel>()
+    public let _channels = List<JVChannel>()
     
     open override class func primaryKey() -> String? {
         return "_siteID"

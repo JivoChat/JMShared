@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ClientProactiveRule {    public var agent: JVAgent? {
+extension JVClientProactiveRule {    public var agent: JVAgent? {
         return _agent
     }
         public var date: Date {
