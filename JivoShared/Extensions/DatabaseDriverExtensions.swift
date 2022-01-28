@@ -83,7 +83,7 @@ public extension IDatabaseDriver {
         return client
     }
     
-    public func chatForMessage(_ message: Message, evenArchived: Bool) -> Chat? {
+    public func chatForMessage(_ message: JVMessage, evenArchived: Bool) -> Chat? {
         if let client = message.client {
             return chat(for: client.ID, evenArchived: evenArchived)
         }
@@ -142,8 +142,8 @@ public extension IDatabaseDriver {
         return chat
     }
     
-    public func message(for UUID: String) -> Message? {
-        var message: Message?
+    public func message(for UUID: String) -> JVMessage? {
+        var message: JVMessage?
         
         read { context in
             message = context.messageWithUUID(UUID)
@@ -369,8 +369,8 @@ public extension IDatabaseContext {
         return object(Chat.self, primaryKey: ID)
     }
     
-    public func messageWithUUID(_ UUID: String) -> Message? {
-        return object(Message.self, mainKey: DatabaseContextMainKey(key: "_UUID", value: UUID))
+    public func messageWithUUID(_ UUID: String) -> JVMessage? {
+        return object(JVMessage.self, mainKey: DatabaseContextMainKey(key: "_UUID", value: UUID))
     }
     
     public func chatsWithClient(_ client: Client, includeArchived: Bool) -> [Chat] {
@@ -392,25 +392,25 @@ public extension IDatabaseContext {
         )
     }
     
-    public func createMessage(with change: BaseModelChange) -> Message {
-        let message = Message(localizer: localizer)
+    public func createMessage(with change: BaseModelChange) -> JVMessage {
+        let message = JVMessage(localizer: localizer)
         message.apply(inside: self, with: change)
         add([message])
         return message
     }
     
-    public func messageWithCallID(_ callID: String?) -> Message? {
+    public func messageWithCallID(_ callID: String?) -> JVMessage? {
         guard let callID = callID else { return nil }
 
         let filter = NSPredicate(format: "_body._callID == %@", callID)
         let options = DatabaseRequestOptions(filter: filter)
-        return objects(Message.self, options: options).last
+        return objects(JVMessage.self, options: options).last
     }
     
     public func removeChat(_ chat: Chat, cleanup: Bool) {
         if cleanup, let client = chat.client, client.isValid {
             let messages = objects(
-                Message.self,
+                JVMessage.self,
                 options: DatabaseRequestOptions(
                     filter: NSPredicate(format: "_clientID == %d", client.ID),
                     sortBy: []
@@ -427,7 +427,7 @@ public extension IDatabaseContext {
         guard !uuids.isEmpty else { return }
 
         let messages = objects(
-            Message.self,
+            JVMessage.self,
             options: DatabaseRequestOptions(
                 filter: NSPredicate(format: "_UUID in %@", uuids)
             )

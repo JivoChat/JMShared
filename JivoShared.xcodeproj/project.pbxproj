@@ -65,7 +65,7 @@
 		FA71BDAA256BDEA600E96457 /* ClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD05256BDEA300E96457 /* ClientSession.swift */; };
 		FA71BDAB256BDEA600E96457 /* ClientSession+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */; };
 		FA71BDAF256BDEA600E96457 /* Message+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0C256BDEA300E96457 /* Message+Update.swift */; };
-		FA71BDB0256BDEA600E96457 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0D256BDEA300E96457 /* Message.swift */; };
+		FA71BDB0256BDEA600E96457 /* JVMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0D256BDEA300E96457 /* JVMessage.swift */; };
 		FA71BDB1256BDEA600E96457 /* Message+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD0E256BDEA300E96457 /* Message+Access.swift */; };
 		FA71BDB2256BDEA600E96457 /* Agent+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD10256BDEA300E96457 /* Agent+Update.swift */; };
 		FA71BDB3256BDEA600E96457 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD11256BDEA300E96457 /* Agent.swift */; };
@@ -215,7 +215,7 @@
 		FA71BD05256BDEA300E96457 /* ClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSession.swift; sourceTree = "<group>"; };
 		FA71BD06256BDEA300E96457 /* ClientSession+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSession+Access.swift"; sourceTree = "<group>"; };
 		FA71BD0C256BDEA300E96457 /* Message+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+Update.swift"; sourceTree = "<group>"; };
-		FA71BD0D256BDEA300E96457 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		FA71BD0D256BDEA300E96457 /* JVMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVMessage.swift; sourceTree = "<group>"; };
 		FA71BD0E256BDEA300E96457 /* Message+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+Access.swift"; sourceTree = "<group>"; };
 		FA71BD10256BDEA300E96457 /* Agent+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Agent+Update.swift"; sourceTree = "<group>"; };
 		FA71BD11256BDEA300E96457 /* Agent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Agent.swift; sourceTree = "<group>"; };
@@ -589,7 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				FA71BD0C256BDEA300E96457 /* Message+Update.swift */,
-				FA71BD0D256BDEA300E96457 /* Message.swift */,
+				FA71BD0D256BDEA300E96457 /* JVMessage.swift */,
 				FA71BD0E256BDEA300E96457 /* Message+Access.swift */,
 			);
 			path = Message;
@@ -1013,7 +1013,7 @@
 				FA71BDA8256BDEA600E96457 /* ClientSessionGeo+Update.swift in Sources */,
 				FA71BDC0256BDEA600E96457 /* Call.swift in Sources */,
 				FA71BDDC256BDEA600E96457 /* ClientCustomData+Access.swift in Sources */,
-				FA71BDB0256BDEA600E96457 /* Message.swift in Sources */,
+				FA71BDB0256BDEA600E96457 /* JVMessage.swift in Sources */,
 				FA71BD9D256BDEA600E96457 /* ChatAttendee+Access.swift in Sources */,
 				FA71BD89256BDEA600E96457 /* MediaUpload.swift in Sources */,
 				FA71BD8F256BDEA600E96457 /* Page.swift in Sources */,

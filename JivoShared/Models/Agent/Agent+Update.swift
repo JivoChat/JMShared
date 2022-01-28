@@ -56,10 +56,10 @@ extension Agent {
         }
         else if let c = change as? AgentLastMessageChange {
             if let key = c.messageGlobalKey {
-                _lastMessage = context.object(Message.self, mainKey: key)
+                _lastMessage = context.object(JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                _lastMessage = context.object(Message.self, mainKey: key)
+                _lastMessage = context.object(JVMessage.self, mainKey: key)
             }
             
             _lastMessageDate = _lastMessage?.date

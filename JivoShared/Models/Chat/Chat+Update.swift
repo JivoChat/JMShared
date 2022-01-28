@@ -47,7 +47,7 @@ extension Chat {
                 updateLastMessageIfNeeded(context: context, change: parsedLastMessage)
 
                 let parsedActiveRing = c.activeRing?.attach(clientID: clientID)
-                _activeRing = context.upsert(of: Message.self, with: parsedActiveRing)
+                _activeRing = context.upsert(of: JVMessage.self, with: parsedActiveRing)
 
                 _client?.apply(
                     inside: context,
@@ -62,7 +62,7 @@ extension Chat {
                     updateLastMessageIfNeeded(context: context, change: c.lastMessage)
                 }
 
-                _activeRing = context.upsert(of: Message.self, with: c.activeRing)
+                _activeRing = context.upsert(of: JVMessage.self, with: c.activeRing)
             }
 
             if let attendeeIndex = _attendees.firstIndex(where: { $0.agent?.isMe == true }) {
@@ -165,12 +165,12 @@ extension Chat {
             _isArchived = c.isArchived
         }
         else if let c = change as? ChatLastMessageChange {
-            let wantedMessage: Message?
+            let wantedMessage: JVMessage?
             if let key = c.messageGlobalKey {
-                wantedMessage = context.object(Message.self, mainKey: key)
+                wantedMessage = context.object(JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                wantedMessage = context.object(Message.self, mainKey: key)
+                wantedMessage = context.object(JVMessage.self, mainKey: key)
             }
             else {
                 wantedMessage = nil
@@ -188,12 +188,12 @@ extension Chat {
             }
         }
         else if let c = change as? ChatPreviewMessageChange {
-            let wantedMessage: Message?
+            let wantedMessage: JVMessage?
             if let key = c.messageGlobalKey {
-                wantedMessage = context.object(Message.self, mainKey: key)
+                wantedMessage = context.object(JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                wantedMessage = context.object(Message.self, mainKey: key)
+                wantedMessage = context.object(JVMessage.self, mainKey: key)
             }
             else {
                 wantedMessage = nil
@@ -317,7 +317,7 @@ extension Chat {
     
     private func updateLastMessageIfNeeded(context: IDatabaseContext, change: MessageLocalChange?) {
         guard let message = _lastMessage else {
-            _lastMessage = context.upsert(of: Message.self, with: change)
+            _lastMessage = context.upsert(of: JVMessage.self, with: change)
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change?.creationTS ?? 0))
             return
         }
@@ -335,11 +335,11 @@ extension Chat {
         }
 
         if let _ = context.messageWithCallID(change.body?.callID) {
-             _lastMessage = context.update(of: Message.self, with: change.copy(ID: message.ID))
+             _lastMessage = context.update(of: JVMessage.self, with: change.copy(ID: message.ID))
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change.creationTS))
         }
         else {
-            _lastMessage = context.upsert(of: Message.self, with: change)
+            _lastMessage = context.upsert(of: JVMessage.self, with: change)
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change.creationTS))
         }
     }

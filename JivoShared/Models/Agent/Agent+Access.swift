@@ -212,7 +212,7 @@ extension Agent: Displayable {
         return _session
     }
     
-    public var lastMessage: Message? {
+    public var lastMessage: JVMessage? {
         return _lastMessage
     }
     

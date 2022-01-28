@@ -132,11 +132,11 @@ extension Chat: Presentable {
         return attendees.compactMap { $0.agent }
     }
     
-    public var lastMessage: Message? {
+    public var lastMessage: JVMessage? {
         return _lastMessage
     }
     
-    public var previewMessage: Message? {
+    public var previewMessage: JVMessage? {
         return _previewMessage ?? _lastMessage
     }
 

@@ -1,5 +1,5 @@
 //
-//  Message+Update.swift
+//  JVMessage+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Message {
+extension JVMessage {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         func _adjustSender(type: String, ID: Int, body: MessageBodyGeneralChange?) {
             if let body = body, let _ = body.callID {

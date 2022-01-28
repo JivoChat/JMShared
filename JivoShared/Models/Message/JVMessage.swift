@@ -1,5 +1,5 @@
 //
-//  Message.swift
+//  JVMessage.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 11/05/2017.
@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-open class Message: JVBaseModel {
+open class JVMessage: JVBaseModel {
     @objc open dynamic var _ID: Int = 0
     @objc open dynamic var _localID: String = ""
     @objc open dynamic var _date: Date?

@@ -29,7 +29,7 @@ open class Agent: JVBaseModel {
     @objc dynamic public var _worktime: Worktime?
     @objc dynamic public var _hasSession: Bool = false
     @objc dynamic public var _lastMessageDate: Date?
-    @objc dynamic public var _lastMessage: Message?
+    @objc dynamic public var _lastMessage: JVMessage?
     @objc dynamic public var _chat: Chat?
     @objc dynamic public var _orderingUnread: Bool = false
     @objc dynamic public var _orderingGroup: Int = 0

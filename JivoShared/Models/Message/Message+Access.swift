@@ -1,5 +1,5 @@
 //
-//  Message+Access.swift
+//  JVMessage+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -128,7 +128,7 @@ public enum MessageType: String {
     case message = "message"
 }
 
-public extension Message {
+public extension JVMessage {
     var UUID: String {
         return _UUID
     }

@@ -16,10 +16,10 @@ public final class Chat: JVBaseModel {
     public let _agents = List<Agent>()
     @objc dynamic public var _client: Client?
     @objc dynamic public var _owningAgent: Agent?
-    @objc dynamic public var _lastMessage: Message?
+    @objc dynamic public var _lastMessage: JVMessage?
     @objc dynamic public var _lastMessageValid: Bool = true
-    @objc dynamic public var _previewMessage: Message?
-    @objc dynamic public var _activeRing: Message?
+    @objc dynamic public var _previewMessage: JVMessage?
+    @objc dynamic public var _activeRing: JVMessage?
     @objc dynamic public var _attendee: ChatAttendee?
     @objc dynamic public var _isGroup: Bool = false
     @objc dynamic public var _isMain: Bool = false
