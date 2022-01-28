@@ -1,5 +1,5 @@
 //  
-//  ArchiveHit+Access.swift
+//  JVArchiveHit+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -12,7 +12,7 @@ public enum ArchiveHitSort {
     case byScore
 }
 
-extension ArchiveHit {
+extension JVArchiveHit {
     public var ID: String {
         return _ID
     }

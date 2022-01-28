@@ -14,7 +14,7 @@ public final class JVClientSession: JVBaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0
     @objc dynamic public var _UTM: JVClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""
-    @objc dynamic public var _geo: ClientSessionGeo?
+    @objc dynamic public var _geo: JVClientSessionGeo?
     @objc dynamic public var _chatStartPage: JVPage?
     @objc dynamic public var _currentPage: JVPage?
     public let _history = List<JVPage>()

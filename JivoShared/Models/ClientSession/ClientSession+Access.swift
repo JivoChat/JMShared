@@ -28,7 +28,7 @@ extension JVClientSession {    public var creationDate: Date? {
         public var history: [JVPage] {
         return _history.toArray()
     }
-        public var geo: ClientSessionGeo? {
+        public var geo: JVClientSessionGeo? {
         return _geo
     }
         public var chatStartPage: JVPage? {

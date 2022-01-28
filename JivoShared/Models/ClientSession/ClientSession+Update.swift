@@ -22,7 +22,7 @@ extension JVClientSession {
             }
             
             if let value = c.geo {
-                _geo = context.insert(of: ClientSessionGeo.self, with: value)
+                _geo = context.insert(of: JVClientSessionGeo.self, with: value)
             }
             
             if let value = c.chatStartPage {

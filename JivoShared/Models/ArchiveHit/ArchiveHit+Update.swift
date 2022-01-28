@@ -1,5 +1,5 @@
 //  
-//  ArchiveHit+Update.swift
+//  JVArchiveHit+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ArchiveHit {
+extension JVArchiveHit {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ArchiveHitGeneralChange {
             if _ID == "" { _ID = c.ID }

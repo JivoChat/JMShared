@@ -1,5 +1,5 @@
 //
-//  ClientSessionGeo.swift
+//  JVClientSessionGeo.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ClientSessionGeo: JVBaseModel {
+public final class JVClientSessionGeo: JVBaseModel {
     @objc dynamic public var _country: String?
     @objc dynamic public var _region: String?
     @objc dynamic public var _city: String?

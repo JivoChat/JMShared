@@ -1,5 +1,5 @@
 //  
-//  ArchiveHit.swift
+//  JVArchive.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,13 +10,19 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ArchiveHit: JVBaseModel {
-    @objc dynamic public var _ID: String = ""
-    @objc dynamic public var _score: Float = 0
-    @objc dynamic public var _chatItem: ArchiveHitChatItem?
-    @objc dynamic public var _callItem: ArchiveHitCallItem?
-    @objc dynamic public var _latestActivityTime: Date?
-
+public final class JVArchive: JVBaseModel {
+    @objc dynamic public var _ID: String = JVArchive.globalID()
+    @objc dynamic public var _total: Int = 0
+    @objc dynamic public var _archiveTotal: Int = 0
+    @objc dynamic public var _latest: Double = 0
+    @objc dynamic public var _lastID: String?
+    @objc dynamic public var _isCleanedUp: Bool = false
+    public let _hits = List<JVArchiveHit>()
+    
+    public class func globalID() -> String {
+        return ":archive:"
+    }
+    
     public override class func primaryKey() -> String? {
         return "_ID"
     }
