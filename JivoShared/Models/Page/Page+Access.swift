@@ -1,5 +1,5 @@
 //  
-//  Page+Access.swift
+//  JVPage+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Page {    public var URL: URL? {
+extension JVPage {    public var URL: URL? {
         return Foundation.URL(string: _URL)
     }
         public var title: String {

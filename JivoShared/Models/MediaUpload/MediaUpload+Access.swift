@@ -1,5 +1,5 @@
 //  
-//  MediaUpload+Access.swift
+//  JVMediaUpload+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension MediaUpload {
+extension JVMediaUpload {
     public var ID: String {
         return _ID
     }

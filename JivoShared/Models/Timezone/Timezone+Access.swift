@@ -1,5 +1,5 @@
 //  
-//  Timezone+Access.swift
+//  JVTimezone+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Timezone {    public var ID: Int {
+extension JVTimezone {    public var ID: Int {
         return _ID
     }
         public var identifier: String {

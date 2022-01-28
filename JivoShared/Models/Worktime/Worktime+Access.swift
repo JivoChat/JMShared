@@ -151,7 +151,7 @@ extension JVWorktime {
         }
     }
     
-    public var timezone: Timezone? {
+    public var timezone: JVTimezone? {
         return _timezone
     }
     

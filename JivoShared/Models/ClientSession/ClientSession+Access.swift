@@ -25,16 +25,16 @@ extension JVClientSession {    public var creationDate: Date? {
         public var lastIP: String? {
         return _lastIP.valuable
     }
-        public var history: [Page] {
+        public var history: [JVPage] {
         return _history.toArray()
     }
         public var geo: ClientSessionGeo? {
         return _geo
     }
-        public var chatStartPage: Page? {
+        public var chatStartPage: JVPage? {
         return _chatStartPage ?? _currentPage ?? _history.last
     }
-        public var currentPage: Page? {
+        public var currentPage: JVPage? {
         return _currentPage
     }
 }

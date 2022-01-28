@@ -19,7 +19,7 @@ extension JVWorktime {
             if _agentID == 0 { _agentID = c.agentID }
             
             _timezoneID = c.timezoneID
-            _timezone = context.object(Timezone.self, primaryKey: _timezoneID)
+            _timezone = context.object(JVTimezone.self, primaryKey: _timezoneID)
             
             if !_isDirty {
                 _enabled = c.enabled
@@ -64,7 +64,7 @@ extension JVWorktime {
         }
         else if let c = change as? WorktimeTimezoneChange {
             _timezoneID = c.timezoneID ?? _timezoneID
-            _timezone = context.object(Timezone.self, primaryKey: _timezoneID)
+            _timezone = context.object(JVTimezone.self, primaryKey: _timezoneID)
         }
         else if let c = change as? WorktimeToggleChange {
             _enabled = c.enable

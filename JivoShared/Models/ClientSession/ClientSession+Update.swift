@@ -15,7 +15,7 @@ extension JVClientSession {
             _creationTS = c.creationTS ?? _creationTS
             _lastIP = c.lastIP
             
-            _history.set(context.insert(of: Page.self, with: c.history))
+            _history.set(context.insert(of: JVPage.self, with: c.history))
 
             if let value = c.UTM {
                 _UTM = context.insert(of: JVClientSessionUTM.self, with: value)
@@ -26,11 +26,11 @@ extension JVClientSession {
             }
             
             if let value = c.chatStartPage {
-                _chatStartPage = context.insert(of: Page.self, with: value)
+                _chatStartPage = context.insert(of: JVPage.self, with: value)
             }
             
             if let value = c.currentPage {
-                _currentPage = context.insert(of: Page.self, with: value)
+                _currentPage = context.insert(of: JVPage.self, with: value)
             }
         }
     }

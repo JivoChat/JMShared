@@ -1,5 +1,5 @@
 //  
-//  Timezone+Update.swift
+//  JVTimezone+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Timezone {
+extension JVTimezone {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? TimezoneGeneralChange {
             let defaultTimezone = TimeZone(identifier: c.code) ?? .current

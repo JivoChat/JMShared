@@ -1,5 +1,5 @@
 //  
-//  Timezone.swift
+//  JVTimezone.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Timezone: JVBaseModel {
+public final class JVTimezone: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _identifier: String?
     @objc dynamic public var _displayGMT: String?

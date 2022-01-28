@@ -15,9 +15,9 @@ public final class JVClientSession: JVBaseModel {
     @objc dynamic public var _UTM: JVClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""
     @objc dynamic public var _geo: ClientSessionGeo?
-    @objc dynamic public var _chatStartPage: Page?
-    @objc dynamic public var _currentPage: Page?
-    public let _history = List<Page>()
+    @objc dynamic public var _chatStartPage: JVPage?
+    @objc dynamic public var _currentPage: JVPage?
+    public let _history = List<JVPage>()
 
     public override func recursiveDelete(context: IDatabaseContext) {
         performDelete(inside: context)

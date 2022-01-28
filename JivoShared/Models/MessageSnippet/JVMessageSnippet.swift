@@ -1,19 +1,20 @@
-//  
-//  Page.swift
+//
+//  JVMessageSnippet.swift
 //  JivoMobile
 //
-//  Created by Stan Potemkin on 05.09.2020.
-//  Copyright © 2020 JivoSite. All rights reserved.
+//  Created by Stan Potemkin on 12/05/2017.
+//  Copyright © 2017 JivoSite. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Page: JVBaseModel {
-    @objc dynamic public var _URL: String = ""
+public final class JVMessageSnippet: JVBaseModel {
+    @objc dynamic public var _URL: String?
     @objc dynamic public var _title: String = ""
-    @objc dynamic public var _time: String?
+    @objc dynamic public var _iconURL: String?
+    @objc dynamic public var _HTML: String = ""
     
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)
