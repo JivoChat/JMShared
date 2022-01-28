@@ -1,5 +1,5 @@
 //
-//  Agent+Access.swift
+//  JVAgent+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -47,7 +47,7 @@ public enum AgentOrderingGroup: Int {
     case online
 }
 
-extension Agent: Displayable {
+extension JVAgent: Displayable {
     public var senderType: SenderType {
         return .agent
     }

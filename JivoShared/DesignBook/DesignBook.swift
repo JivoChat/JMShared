@@ -289,7 +289,7 @@ public final class DesignBook {
                 break
                 
             case .agent:
-                guard let agent = attendee as? Agent else { return }
+                guard let agent = attendee as? JVAgent else { return }
 
                 if agent.onCall {
                     control.setActivity(agent.onCall ? .calling : nil, context: repicContext)

@@ -450,7 +450,7 @@ public final class ChatGeneralChange: BaseModelChange {
         super.init(json: json)
     }
     
-    public func copy(without me: Agent) -> ChatGeneralChange {
+    public func copy(without me: JVAgent) -> ChatGeneralChange {
         if let meAttendee = attendees.first(where: { $0.ID == me.ID }) ?? attendees.first {
             return ChatGeneralChange(
                 ID: ID,
@@ -1023,14 +1023,14 @@ public final class ChatDraftChange: BaseModelChange {
 
 public final class SdkChatAgentsUpdateChange: BaseModelChange {
     public let id: Int
-    public let agents: [Agent]
+    public let agents: [JVAgent]
     public let exclusive: Bool
     
     public override var primaryValue: Int {
         return id
     }
     
-    public init(id: Int, agents: [Agent], exclusive: Bool) {
+    public init(id: Int, agents: [JVAgent], exclusive: Bool) {
         self.id = id
         self.agents = agents
         self.exclusive = exclusive

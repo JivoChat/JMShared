@@ -92,8 +92,8 @@ public extension IDatabaseDriver {
         }
     }
 
-    public func agents(withMe: Bool) -> [Agent] {
-        var agents = [Agent]()
+    public func agents(withMe: Bool) -> [JVAgent] {
+        var agents = [JVAgent]()
         
         let predicate: NSPredicate
         if withMe {
@@ -105,7 +105,7 @@ public extension IDatabaseDriver {
         
         read { context in
             agents = context.objects(
-                Agent.self,
+                JVAgent.self,
                 options: DatabaseRequestOptions(
                     filter: predicate
                 )
@@ -115,8 +115,8 @@ public extension IDatabaseDriver {
         return agents
     }
     
-    public func agent(for agentID: Int, provideDefault: Bool) -> Agent? {
-        var agent: Agent?
+    public func agent(for agentID: Int, provideDefault: Bool) -> JVAgent? {
+        var agent: JVAgent?
         
         read { context in
             agent = context.agent(for: agentID, provideDefault: false)
@@ -332,12 +332,12 @@ public extension IDatabaseContext {
         return IDs.compactMap { self.object(MT.self, primaryKey: $0) }
     }
     
-    public func agent(for agentID: Int, provideDefault: Bool) -> Agent? {
-        if let value = object(Agent.self, primaryKey: agentID) {
+    public func agent(for agentID: Int, provideDefault: Bool) -> JVAgent? {
+        if let value = object(JVAgent.self, primaryKey: agentID) {
             return value
         }
         else if provideDefault {
-            return upsert(of: Agent.self, with: AgentGeneralChange(placeholderID: agentID))
+            return upsert(of: JVAgent.self, with: AgentGeneralChange(placeholderID: agentID))
         }
         else {
             return nil

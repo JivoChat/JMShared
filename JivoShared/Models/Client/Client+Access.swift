@@ -122,7 +122,7 @@ extension Client: Displayable {
         return max(1, _visitsNumber)
     }
     
-    public func assignedAgent() -> Agent? {
+    public func assignedAgent() -> JVAgent? {
         return _assignedAgent
     }
     

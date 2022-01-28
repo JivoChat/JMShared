@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ArchiveHitItem {    public var agents: [Agent] {
+extension ArchiveHitItem {    public var agents: [JVAgent] {
         return _agents.toArray()
     }
         public var chat: Chat? {

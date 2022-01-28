@@ -17,7 +17,7 @@ open class ArchiveHitItem: JVBaseModel {
     @objc dynamic public var _eventsNumber: Int = 0
     @objc dynamic public var _latestChatID: Int = 0
     @objc dynamic public var _chat: Chat?
-    public let _agents = List<Agent>()
+    public let _agents = List<JVAgent>()
     
     open override class func primaryKey() -> String? {
         return "_ID"

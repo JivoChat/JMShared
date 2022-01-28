@@ -13,16 +13,16 @@ public struct MessageBodyEmail {
     public let subject: String
 }
 public struct MessageBodyTransfer {
-    public let agent: Agent?
+    public let agent: JVAgent?
 }
 public struct MessageBodyInvite {
-    public let by: Agent?
+    public let by: JVAgent?
     public let comment: String?
 }
 
 public struct MessageBodyCall {
     public let callID: String
-    public let agent: Agent?
+    public let agent: JVAgent?
     public let type: MessageBodyCallType
     public let phone: String
     public let event: MessageBodyCallEvent
@@ -89,7 +89,7 @@ public enum MessageBodyCallReason: String {
 
 public struct MessageBodyTask {
     public let taskID: Int
-    public let agent: Agent?
+    public let agent: JVAgent?
     public let text: String
     public let createdAt: Date?
     public let updatedAt: Date?

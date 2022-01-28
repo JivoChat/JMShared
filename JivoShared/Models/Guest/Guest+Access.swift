@@ -10,7 +10,7 @@ import Foundation
 import JMRepicKit
 public enum GuestStatus {
     case online
-    case proactive(agent: Agent)
+    case proactive(agent: JVAgent)
     case invited
     case chatting(withMe: Bool)
     case calling(withMe: Bool)
@@ -185,7 +185,7 @@ extension Guest: Displayable {
         return _attendees.toArray()
     }
     
-    public func proactiveAgent() -> Agent? {
+    public func proactiveAgent() -> JVAgent? {
         if case .proactive = status {
             return _proactiveAgent
         }

@@ -22,7 +22,7 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _type: String = ""
     @objc open dynamic var _isMarkdown: Bool = false
     @objc open dynamic var _senderClient: Client?
-    @objc open dynamic var _senderAgent: Agent?
+    @objc open dynamic var _senderAgent: JVAgent?
     @objc open dynamic var _senderBot = Bool(false)
     @objc open dynamic var _status: String = ""
     @objc open dynamic var _reactions: Data?
@@ -37,7 +37,7 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _iconLink: String?
     @objc open dynamic var _isOffline: Bool = false
     @objc open dynamic var _isHidden: Bool = false
-    @objc open dynamic var _updatedAgent: Agent?
+    @objc open dynamic var _updatedAgent: JVAgent?
     @objc open dynamic var _updatedTimepoint: TimeInterval = 0
     @objc open dynamic var _isDeleted: Bool = false
     

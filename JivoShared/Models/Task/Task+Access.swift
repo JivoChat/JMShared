@@ -34,7 +34,7 @@ extension Task {
     public var client: Client? {
         return _client
     }
-    public var agent: Agent? {
+    public var agent: JVAgent? {
         return _agent
     }
     public var text: String? {

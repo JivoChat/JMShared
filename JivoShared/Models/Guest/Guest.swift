@@ -27,7 +27,7 @@ public final class Guest: JVBaseModel {
     @objc dynamic public var _name: String = ""
     @objc dynamic public var _phone: String = ""
     @objc dynamic public var _email: String = ""
-    @objc dynamic public var _proactiveAgent: Agent?
+    @objc dynamic public var _proactiveAgent: JVAgent?
     @objc dynamic public var _pageLink: String = ""
     @objc dynamic public var _pageTitle: String = ""
     @objc dynamic public var _startDate: Date?

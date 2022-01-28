@@ -1,5 +1,5 @@
 //
-//  Agent+Update.swift
+//  JVAgent+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Agent {
+extension JVAgent {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? AgentGeneralChange {
             if _ID == 0 { _ID = c.ID }

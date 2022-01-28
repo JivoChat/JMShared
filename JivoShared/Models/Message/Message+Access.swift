@@ -18,9 +18,9 @@ public enum MessageContent {
     case email(from: String, to: String, subject: String, message: String)
     case photo(mime: String, name: String, link: String, dataSize: Int, width: Int, height: Int)
     case file(mime: String, name: String, link: String, size: Int)
-    case transfer(from: Agent, to: Agent)
-    case join(assistant: Agent, by: Agent?)
-    case left(agent: Agent, kicker: Agent?)
+    case transfer(from: JVAgent, to: JVAgent)
+    case join(assistant: JVAgent, by: JVAgent?)
+    case left(agent: JVAgent, kicker: JVAgent?)
     case call(call: MessageBodyCall)
     case task(task: MessageBodyTask)
     case conference(conference: MessageBodyConference)
@@ -79,7 +79,7 @@ public struct MessageContentHash {
 }
 
 public struct MessageUpdateMeta {
-    let agent: Agent
+    let agent: JVAgent
     let date: Date
 }
 
@@ -367,7 +367,7 @@ public extension JVMessage {
         return _senderClient
     }
     
-    var senderAgent: Agent? {
+    var senderAgent: JVAgent? {
         if case .call(let call) = content {
             return call.agent
         }

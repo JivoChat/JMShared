@@ -13,7 +13,7 @@ public final class Task: JVBaseModel {
     @objc dynamic public var _siteID: Int = 0
     @objc dynamic public var _clientID: Int = 0
     @objc dynamic public var _client: Client?
-    @objc dynamic public var _agent: Agent?
+    @objc dynamic public var _agent: JVAgent?
     @objc dynamic public var _text: String = ""
     @objc dynamic public var _createdTimestamp: TimeInterval = 0
     @objc dynamic public var _modifiedTimestamp: TimeInterval = 0

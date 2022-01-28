@@ -13,9 +13,9 @@ import JMCodingKit
 public final class Chat: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     public let _attendees = List<ChatAttendee>()
-    public let _agents = List<Agent>()
+    public let _agents = List<JVAgent>()
     @objc dynamic public var _client: Client?
-    @objc dynamic public var _owningAgent: Agent?
+    @objc dynamic public var _owningAgent: JVAgent?
     @objc dynamic public var _lastMessage: JVMessage?
     @objc dynamic public var _lastMessageValid: Bool = true
     @objc dynamic public var _previewMessage: JVMessage?
@@ -30,13 +30,13 @@ public final class Chat: JVBaseModel {
     @objc dynamic public var _loadedEntireHistory = false
     @objc dynamic public var _unreadNumber: Int = -1
     @objc dynamic public var _transferCancelled: Bool = false
-    @objc dynamic public var _transferTo: Agent?
+    @objc dynamic public var _transferTo: JVAgent?
     @objc dynamic public var _transferAssisting: Bool = false
     @objc dynamic public var _transferDate: Date?
     @objc dynamic public var _transferComment: String?
     @objc dynamic public var _transferFailReason: String?
     @objc dynamic public var _requestCancelledBySystem: Bool = false
-    @objc dynamic public var _requestCancelledByAgent: Agent?
+    @objc dynamic public var _requestCancelledByAgent: JVAgent?
     @objc dynamic public var _terminationDate: Date?
     @objc dynamic public var _isArchived: Bool = false
     @objc dynamic public var _lastActivityTimestamp = TimeInterval(0)

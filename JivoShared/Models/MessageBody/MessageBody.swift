@@ -12,7 +12,7 @@ import JMCodingKit
 import CoreLocation
 
 public final class MessageBody: JVBaseModel {
-    @objc dynamic public var _agent: Agent?
+    @objc dynamic public var _agent: JVAgent?
     @objc dynamic public var _to: String?
     @objc dynamic public var _from: String?
     @objc dynamic public var _subject: String?

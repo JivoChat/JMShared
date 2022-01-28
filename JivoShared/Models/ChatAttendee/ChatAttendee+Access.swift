@@ -18,8 +18,8 @@ public enum ChatAttendeeNotifying: Int {
 }
 public enum ChatAttendeeRelation: Equatable {
     case invitedBySystem
-    case invitedByAgent(Agent, toAssist: Bool, comment: String?)
-    case attendee(agent: Agent?, toAssist: Bool, comment: String?)
+    case invitedByAgent(JVAgent, toAssist: Bool, comment: String?)
+    case attendee(agent: JVAgent?, toAssist: Bool, comment: String?)
     case team
         public var code: String {
         switch self {
@@ -39,7 +39,7 @@ public enum ChatAttendeeRelation: Equatable {
     }
 }
 
-extension ChatAttendee {    public var agent: Agent? {
+extension ChatAttendee {    public var agent: JVAgent? {
         return _agent
     }
         public var relation: ChatAttendeeRelation {
@@ -61,7 +61,7 @@ extension ChatAttendee {    public var agent: Agent? {
         public var comment: String? {
         return _comment
     }
-        public var invitedBy: Agent? {
+        public var invitedBy: JVAgent? {
         return _invitedBy
     }
         public var isAssistant: Bool {

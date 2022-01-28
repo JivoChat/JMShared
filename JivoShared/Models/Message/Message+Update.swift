@@ -454,7 +454,7 @@ extension JVMessage {
                         
                     case let .agent(id, displayNameUpdate):
                         let existingAgent = context.agent(for: id, provideDefault: false)
-                        let agent = existingAgent ?? { () -> Agent? in
+                        let agent = existingAgent ?? { () -> JVAgent? in
                             let defaultAgent = context.agent(for: id, provideDefault: true)
                             if case let MessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
                                 newValue.flatMap { defaultAgent?._displayName = $0 }
@@ -1191,7 +1191,7 @@ public final class MessageTextChange: BaseModelChange {
 }
 open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     
-    public let agent: Agent
+    public let agent: JVAgent
     public let chat: Chat
     public let creationDate: Date?
     public let text: String
@@ -1205,7 +1205,7 @@ open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     }
     
     public init(id: Int,
-         agent: Agent,
+         agent: JVAgent,
          chat: Chat,
          text: String,
          body: MessageBodyGeneralChange? = nil,

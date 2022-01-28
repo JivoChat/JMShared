@@ -17,7 +17,7 @@ extension ArchiveHitChatItem {
             _responseTimeout = c.responseTimeout
             _duration = c.duration
             _eventsNumber = c.eventsNumber
-            _agents.set(c.agentIDs.compactMap { context.object(Agent.self, primaryKey: $0) })
+            _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
             _chat = context.upsert(of: Chat.self, with: c.chatChange)
         }

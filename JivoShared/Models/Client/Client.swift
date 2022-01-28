@@ -27,7 +27,7 @@ public final class Client: JVBaseModel {
     @objc dynamic public var _phoneByAgent: String?
     @objc dynamic public var _comment: String?
     @objc dynamic public var _visitsNumber: Int = 0
-    @objc dynamic public var _assignedAgent: Agent?
+    @objc dynamic public var _assignedAgent: JVAgent?
     @objc dynamic public var _navigatesNumber: Int = 0
     @objc dynamic public var _activeSession: ClientSession?
     @objc dynamic public var _proactiveRule: ClientProactiveRule?
