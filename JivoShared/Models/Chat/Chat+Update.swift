@@ -31,7 +31,7 @@ extension JVChat {
             }
             
             if !c.attendees.isEmpty {
-                let attendees = context.insert(of: ChatAttendee.self, with: c.attendees)
+                let attendees = context.insert(of: JVChatAttendee.self, with: c.attendees)
                 _attendees.set(attendees.filter { $0.agent != nil })
             }
             else {
@@ -136,7 +136,7 @@ extension JVChat {
         else if let c = change as? ChatShortChange {
             if _ID == 0 { _ID = c.ID }
             
-            if let attendee = context.insert(of: ChatAttendee.self, with: c.attendee) {
+            if let attendee = context.insert(of: JVChatAttendee.self, with: c.attendee) {
                 _attendee = attendee
             }
             

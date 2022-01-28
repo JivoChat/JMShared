@@ -1,5 +1,5 @@
 //  
-//  Guest+Update.swift
+//  JVGuest+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Guest {
+extension JVGuest {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? GuestBaseChange {
             if _ID == "" { _ID = c.ID }
@@ -55,7 +55,7 @@ extension Guest {
             _startDate = Date().addingTimeInterval(-c.timestamp)
         }
         else if let c = change as? GuestUTMChange {
-            _utm = context.insert(of: ClientSessionUTM.self, with: c.utm)
+            _utm = context.insert(of: JVClientSessionUTM.self, with: c.utm)
         }
         else if let c = change as? GuestVisitsChange {
             _visitsNumber = c.number
@@ -80,7 +80,7 @@ extension Guest {
                 )
             }
             
-            _attendees.set(context.insert(of: ChatAttendee.self, with: attendees))
+            _attendees.set(context.insert(of: JVChatAttendee.self, with: attendees))
         }
         else if let c = change as? GuestWidgetVersionChange {
             _widgetVersion = c.version

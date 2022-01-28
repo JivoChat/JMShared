@@ -71,7 +71,7 @@ extension JVChat: Presentable {
         return _about?.valuable
     }
     
-    public var attendees: [ChatAttendee] {
+    public var attendees: [JVChatAttendee] {
         if _attendees.isInvalidated {
             return []
         }
@@ -80,11 +80,11 @@ extension JVChat: Presentable {
         }
     }
     
-    public var attendee: ChatAttendee? {
+    public var attendee: JVChatAttendee? {
         return _attendee
     }
     
-    public var allAttendees: [ChatAttendee] {
+    public var allAttendees: [JVChatAttendee] {
         return attendees.filter {
             if case .attendee = $0.relation {
                 return true
@@ -307,8 +307,8 @@ extension JVChat: Presentable {
         }
     }
     
-    public func activeAttendees(withMe: Bool) -> [ChatAttendee] {
-        let selfAttendee: [ChatAttendee]
+    public func activeAttendees(withMe: Bool) -> [JVChatAttendee] {
+        let selfAttendee: [JVChatAttendee]
         if withMe, let attendee = attendee, case .attendee = attendee.relation {
             selfAttendee = [attendee]
         }
@@ -325,8 +325,8 @@ extension JVChat: Presentable {
         return selfAttendee + otherAttendees
     }
     
-    public func teamAttendees(withMe: Bool) -> [ChatAttendee] {
-        let selfAttendee: [ChatAttendee]
+    public func teamAttendees(withMe: Bool) -> [JVChatAttendee] {
+        let selfAttendee: [JVChatAttendee]
         if withMe, let attendee = attendee, case .team = attendee.relation {
             selfAttendee = [attendee]
         }

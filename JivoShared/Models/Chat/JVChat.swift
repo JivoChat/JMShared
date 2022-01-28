@@ -12,7 +12,7 @@ import JMCodingKit
 
 public final class JVChat: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
-    public let _attendees = List<ChatAttendee>()
+    public let _attendees = List<JVChatAttendee>()
     public let _agents = List<JVAgent>()
     @objc dynamic public var _client: JVClient?
     @objc dynamic public var _owningAgent: JVAgent?
@@ -20,7 +20,7 @@ public final class JVChat: JVBaseModel {
     @objc dynamic public var _lastMessageValid: Bool = true
     @objc dynamic public var _previewMessage: JVMessage?
     @objc dynamic public var _activeRing: JVMessage?
-    @objc dynamic public var _attendee: ChatAttendee?
+    @objc dynamic public var _attendee: JVChatAttendee?
     @objc dynamic public var _isGroup: Bool = false
     @objc dynamic public var _isMain: Bool = false
     @objc dynamic public var _title: String?

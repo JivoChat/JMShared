@@ -1,5 +1,5 @@
 //  
-//  Guest+Access.swift
+//  JVGuest+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -16,7 +16,7 @@ public enum GuestStatus {
     case calling(withMe: Bool)
 }
 
-extension Guest: Displayable {
+extension JVGuest: Displayable {
     public var senderType: SenderType {
         return .guest
     }
@@ -165,7 +165,7 @@ extension Guest: Displayable {
         return _startDate
     }
     
-    public var UTM: ClientSessionUTM? {
+    public var UTM: JVClientSessionUTM? {
         return _utm
     }
     
@@ -181,7 +181,7 @@ extension Guest: Displayable {
         return _visible
     }
 
-    public var attendees: [ChatAttendee] {
+    public var attendees: [JVChatAttendee] {
         return _attendees.toArray()
     }
     

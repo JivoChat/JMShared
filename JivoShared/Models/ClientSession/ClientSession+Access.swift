@@ -19,7 +19,7 @@ extension JVClientSession {    public var creationDate: Date? {
             return nil
         }
     }
-        public var UTM: ClientSessionUTM? {
+        public var UTM: JVClientSessionUTM? {
         return _UTM
     }
         public var lastIP: String? {

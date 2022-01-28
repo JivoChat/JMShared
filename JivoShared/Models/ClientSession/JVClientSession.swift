@@ -12,7 +12,7 @@ import JMCodingKit
 
 public final class JVClientSession: JVBaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0
-    @objc dynamic public var _UTM: ClientSessionUTM?
+    @objc dynamic public var _UTM: JVClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""
     @objc dynamic public var _geo: ClientSessionGeo?
     @objc dynamic public var _chatStartPage: Page?

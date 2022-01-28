@@ -18,7 +18,7 @@ extension JVClientSession {
             _history.set(context.insert(of: Page.self, with: c.history))
 
             if let value = c.UTM {
-                _UTM = context.insert(of: ClientSessionUTM.self, with: value)
+                _UTM = context.insert(of: JVClientSessionUTM.self, with: value)
             }
             
             if let value = c.geo {

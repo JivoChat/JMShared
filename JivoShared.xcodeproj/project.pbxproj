@@ -50,7 +50,7 @@
 		FA71BD9B256BDEA600E96457 /* ArchiveHitChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF1256BDEA200E96457 /* ArchiveHitChatItem.swift */; };
 		FA71BD9C256BDEA600E96457 /* ArchiveHitChatItem+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF2256BDEA200E96457 /* ArchiveHitChatItem+Access.swift */; };
 		FA71BD9D256BDEA600E96457 /* ChatAttendee+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF4256BDEA300E96457 /* ChatAttendee+Access.swift */; };
-		FA71BD9E256BDEA600E96457 /* ChatAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF5256BDEA300E96457 /* ChatAttendee.swift */; };
+		FA71BD9E256BDEA600E96457 /* JVChatAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF5256BDEA300E96457 /* JVChatAttendee.swift */; };
 		FA71BD9F256BDEA600E96457 /* ChatAttendee+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF6256BDEA300E96457 /* ChatAttendee+Update.swift */; };
 		FA71BDA0256BDEA600E96457 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF8256BDEA300E96457 /* Archive.swift */; };
 		FA71BDA1256BDEA600E96457 /* Archive+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BCF9256BDEA300E96457 /* Archive+Update.swift */; };
@@ -93,11 +93,11 @@
 		FA71BDC9256BDEA600E96457 /* MessageTransfer+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2E256BDEA400E96457 /* MessageTransfer+Access.swift */; };
 		FA71BDCA256BDEA600E96457 /* JVBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD2F256BDEA400E96457 /* JVBaseModel.swift */; };
 		FA71BDCB256BDEA600E96457 /* ClientSessionUTM+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD31256BDEA400E96457 /* ClientSessionUTM+Access.swift */; };
-		FA71BDCC256BDEA600E96457 /* ClientSessionUTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD32256BDEA400E96457 /* ClientSessionUTM.swift */; };
+		FA71BDCC256BDEA600E96457 /* JVClientSessionUTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD32256BDEA400E96457 /* JVClientSessionUTM.swift */; };
 		FA71BDCD256BDEA600E96457 /* ClientSessionUTM+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD33256BDEA400E96457 /* ClientSessionUTM+Update.swift */; };
 		FA71BDCE256BDEA600E96457 /* Guest+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD35256BDEA400E96457 /* Guest+Update.swift */; };
 		FA71BDCF256BDEA600E96457 /* Guest+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD36256BDEA400E96457 /* Guest+Access.swift */; };
-		FA71BDD0256BDEA600E96457 /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD37256BDEA400E96457 /* Guest.swift */; };
+		FA71BDD0256BDEA600E96457 /* JVGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD37256BDEA400E96457 /* JVGuest.swift */; };
 		FA71BDD1256BDEA600E96457 /* JVWorktime.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD39256BDEA400E96457 /* JVWorktime.swift */; };
 		FA71BDD2256BDEA600E96457 /* Worktime+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD3A256BDEA400E96457 /* Worktime+Update.swift */; };
 		FA71BDD3256BDEA600E96457 /* Worktime+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD3B256BDEA400E96457 /* Worktime+Access.swift */; };
@@ -200,7 +200,7 @@
 		FA71BCF1256BDEA200E96457 /* ArchiveHitChatItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveHitChatItem.swift; sourceTree = "<group>"; };
 		FA71BCF2256BDEA200E96457 /* ArchiveHitChatItem+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArchiveHitChatItem+Access.swift"; sourceTree = "<group>"; };
 		FA71BCF4256BDEA300E96457 /* ChatAttendee+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatAttendee+Access.swift"; sourceTree = "<group>"; };
-		FA71BCF5256BDEA300E96457 /* ChatAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAttendee.swift; sourceTree = "<group>"; };
+		FA71BCF5256BDEA300E96457 /* JVChatAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVChatAttendee.swift; sourceTree = "<group>"; };
 		FA71BCF6256BDEA300E96457 /* ChatAttendee+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatAttendee+Update.swift"; sourceTree = "<group>"; };
 		FA71BCF8256BDEA300E96457 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		FA71BCF9256BDEA300E96457 /* Archive+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Update.swift"; sourceTree = "<group>"; };
@@ -243,11 +243,11 @@
 		FA71BD2E256BDEA400E96457 /* MessageTransfer+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageTransfer+Access.swift"; sourceTree = "<group>"; };
 		FA71BD2F256BDEA400E96457 /* JVBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVBaseModel.swift; sourceTree = "<group>"; };
 		FA71BD31256BDEA400E96457 /* ClientSessionUTM+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionUTM+Access.swift"; sourceTree = "<group>"; };
-		FA71BD32256BDEA400E96457 /* ClientSessionUTM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientSessionUTM.swift; sourceTree = "<group>"; };
+		FA71BD32256BDEA400E96457 /* JVClientSessionUTM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVClientSessionUTM.swift; sourceTree = "<group>"; };
 		FA71BD33256BDEA400E96457 /* ClientSessionUTM+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientSessionUTM+Update.swift"; sourceTree = "<group>"; };
 		FA71BD35256BDEA400E96457 /* Guest+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Guest+Update.swift"; sourceTree = "<group>"; };
 		FA71BD36256BDEA400E96457 /* Guest+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Guest+Access.swift"; sourceTree = "<group>"; };
-		FA71BD37256BDEA400E96457 /* Guest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
+		FA71BD37256BDEA400E96457 /* JVGuest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVGuest.swift; sourceTree = "<group>"; };
 		FA71BD39256BDEA400E96457 /* JVWorktime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVWorktime.swift; sourceTree = "<group>"; };
 		FA71BD3A256BDEA400E96457 /* Worktime+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Worktime+Update.swift"; sourceTree = "<group>"; };
 		FA71BD3B256BDEA400E96457 /* Worktime+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Worktime+Access.swift"; sourceTree = "<group>"; };
@@ -539,7 +539,7 @@
 			isa = PBXGroup;
 			children = (
 				FA71BCF4256BDEA300E96457 /* ChatAttendee+Access.swift */,
-				FA71BCF5256BDEA300E96457 /* ChatAttendee.swift */,
+				FA71BCF5256BDEA300E96457 /* JVChatAttendee.swift */,
 				FA71BCF6256BDEA300E96457 /* ChatAttendee+Update.swift */,
 			);
 			path = ChatAttendee;
@@ -679,7 +679,7 @@
 			isa = PBXGroup;
 			children = (
 				FA71BD31256BDEA400E96457 /* ClientSessionUTM+Access.swift */,
-				FA71BD32256BDEA400E96457 /* ClientSessionUTM.swift */,
+				FA71BD32256BDEA400E96457 /* JVClientSessionUTM.swift */,
 				FA71BD33256BDEA400E96457 /* ClientSessionUTM+Update.swift */,
 			);
 			path = ClientSessionUTM;
@@ -690,7 +690,7 @@
 			children = (
 				FA71BD35256BDEA400E96457 /* Guest+Update.swift */,
 				FA71BD36256BDEA400E96457 /* Guest+Access.swift */,
-				FA71BD37256BDEA400E96457 /* Guest.swift */,
+				FA71BD37256BDEA400E96457 /* JVGuest.swift */,
 			);
 			path = Guest;
 			sourceTree = "<group>";
@@ -968,7 +968,7 @@
 				FA71BDFB256BDEA600E96457 /* UIViewExtensions.swift in Sources */,
 				FA71BE04256BDEA600E96457 /* UIDeviceExtensions.swift in Sources */,
 				FA71BDDE256BDEA600E96457 /* MessageMedia+Access.swift in Sources */,
-				FA71BDD0256BDEA600E96457 /* Guest.swift in Sources */,
+				FA71BDD0256BDEA600E96457 /* JVGuest.swift in Sources */,
 				FA71BDC2256BDEA600E96457 /* ArchiveHitItem+Update.swift in Sources */,
 				FA71BD9B256BDEA600E96457 /* ArchiveHitChatItem.swift in Sources */,
 				FA71BDA9256BDEA600E96457 /* ClientSession+Update.swift in Sources */,
@@ -986,7 +986,7 @@
 				FA71BDB5256BDEA600E96457 /* MessageImage+Access.swift in Sources */,
 				FA71BDCA256BDEA600E96457 /* JVBaseModel.swift in Sources */,
 				FA71BD96256BDEA600E96457 /* MessageSnippet+Update.swift in Sources */,
-				FA71BD9E256BDEA600E96457 /* ChatAttendee.swift in Sources */,
+				FA71BD9E256BDEA600E96457 /* JVChatAttendee.swift in Sources */,
 				FA71BDAA256BDEA600E96457 /* JVClientSession.swift in Sources */,
 				FA71BDFC256BDEA600E96457 /* DispatchQueueExtensions.swift in Sources */,
 				FA71BDA1256BDEA600E96457 /* Archive+Update.swift in Sources */,
@@ -1057,7 +1057,7 @@
 				FA71BDAF256BDEA600E96457 /* Message+Update.swift in Sources */,
 				FA71BDBF256BDEA600E96457 /* Call+Update.swift in Sources */,
 				FA71BDF7256BDEA600E96457 /* BoolExtensions.swift in Sources */,
-				FA71BDCC256BDEA600E96457 /* ClientSessionUTM.swift in Sources */,
+				FA71BDCC256BDEA600E96457 /* JVClientSessionUTM.swift in Sources */,
 				FA71BDD8256BDEA600E96457 /* MessageBody+Update.swift in Sources */,
 				FA71BD7D256BDEA600E96457 /* DatabaseTypes.swift in Sources */,
 				FA71BD91256BDEA600E96457 /* AgentSession+Access.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ChatAttendee+Access.swift
+//  JVChatAttendee+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -39,7 +39,7 @@ public enum ChatAttendeeRelation: Equatable {
     }
 }
 
-extension ChatAttendee {    public var agent: JVAgent? {
+extension JVChatAttendee {    public var agent: JVAgent? {
         return _agent
     }
         public var relation: ChatAttendeeRelation {

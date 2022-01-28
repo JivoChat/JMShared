@@ -1,5 +1,5 @@
 //
-//  ChatAttendee.swift
+//  JVChatAttendee.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class ChatAttendee: JVBaseModel {
+public final class JVChatAttendee: JVBaseModel {
     @objc dynamic public var _agent: JVAgent?
     @objc dynamic public var _relation: String?
     @objc dynamic public var _comment: String?
