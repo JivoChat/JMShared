@@ -1,5 +1,5 @@
 //  
-//  ArchiveHitItem+Update.swift
+//  JVArchiveHitItem+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ArchiveHitItem {
+extension JVArchiveHitItem {
 }
 open class ArchiveHitItemGeneralChange: BaseModelChange {
     public let ID: String

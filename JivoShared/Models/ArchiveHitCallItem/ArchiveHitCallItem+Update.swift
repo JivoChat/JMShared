@@ -23,7 +23,7 @@ extension ArchiveHitCallItem {
             _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
             _chat = context.upsert(of: JVChat.self, with: c.chatChange)
-            _call = context.upsert(of: Call.self, with: c.callChange)
+            _call = context.upsert(of: JVCall.self, with: c.callChange)
         }
     }
     

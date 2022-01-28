@@ -1,5 +1,5 @@
 //  
-//  QuickPhrase.swift
+//  JVQuickPhrase.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class QuickPhrase: JVBaseModel {
+public final class JVQuickPhrase: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _lang: String = ""
     @objc dynamic public var _tags: String = ""

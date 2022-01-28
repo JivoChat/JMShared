@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ArchiveHitChatItem: ArchiveHitItem {
+public final class ArchiveHitChatItem: JVArchiveHitItem {
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)

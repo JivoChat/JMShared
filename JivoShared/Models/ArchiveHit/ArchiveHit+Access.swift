@@ -17,7 +17,7 @@ extension JVArchiveHit {
         return _ID
     }
     
-    public var item: ArchiveHitItem? {
+    public var item: JVArchiveHitItem? {
         return _chatItem ?? _callItem
     }
     

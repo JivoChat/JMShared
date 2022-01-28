@@ -1,5 +1,5 @@
 //  
-//  ArchiveHitItem.swift
+//  JVArchiveHitItem.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-open class ArchiveHitItem: JVBaseModel {
+open class JVArchiveHitItem: JVBaseModel {
     @objc dynamic public var _ID: String = UUID().uuidString
     @objc dynamic public var _type: String = ""
     @objc dynamic public var _responseTimeout: Int = 0

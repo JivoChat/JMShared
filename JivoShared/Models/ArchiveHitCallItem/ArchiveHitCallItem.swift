@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class ArchiveHitCallItem: ArchiveHitItem {
+public final class ArchiveHitCallItem: JVArchiveHitItem {
     @objc dynamic public var _status: String = ""
     @objc dynamic public var _cost: Float = 0
     @objc dynamic public var _costCurrency: String = ""
-    @objc dynamic public var _call: Call?
+    @objc dynamic public var _call: JVCall?
 
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)
