@@ -32,8 +32,8 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _interactiveID: String?
     @objc open dynamic var _hasRead: Bool = false
     @objc open dynamic var _text: String = ""
-    @objc open dynamic var _body: MessageBody?
-    @objc open dynamic var _media: MessageMedia?
+    @objc open dynamic var _body: JVMessageBody?
+    @objc open dynamic var _media: JVMessageMedia?
     @objc open dynamic var _iconLink: String?
     @objc open dynamic var _isOffline: Bool = false
     @objc open dynamic var _isHidden: Bool = false

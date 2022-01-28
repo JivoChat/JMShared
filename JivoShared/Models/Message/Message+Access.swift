@@ -556,7 +556,7 @@ public extension JVMessage {
         }
     }
     
-    var media: MessageMedia? {
+    var media: JVMessageMedia? {
         return _media
     }
     

@@ -1,5 +1,5 @@
 //
-//  MessageBody+Access.swift
+//  JVMessageBody+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -123,7 +123,7 @@ public enum MessageBodyTaskStatus: String {
     }
 }
 
-extension MessageBody {
+extension JVMessageBody {
     public var email: MessageBodyEmail? {
         guard let from = _from?.valuable else { return nil }
         guard let to = _to?.valuable else { return nil }

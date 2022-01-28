@@ -104,8 +104,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             
             let updatedReactions = try? PropertyListEncoder().encode(c.reactions)
             if updatedReactions != _reactions {
@@ -132,7 +132,7 @@ extension JVMessage {
             _type = "message"
             _isMarkdown = false
             _text = c.text.trimmed()
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
             if let date = c.time.parseDateUsingFullFormat() {
                 _date = date
@@ -167,8 +167,8 @@ extension JVMessage {
             _text = c.text.trimmed()
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _isOffline = c.isOffline
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
@@ -189,7 +189,7 @@ extension JVMessage {
             _isMarkdown = false
             _text = c.text.trimmed()
             _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
@@ -204,8 +204,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
             _isDeleted = c.isDeleted
@@ -262,7 +262,7 @@ extension JVMessage {
                 _text = "🖼 " + name.trimmed()
                 
                 _media = context.insert(
-                    of: MessageMedia.self,
+                    of: JVMessageMedia.self,
                     with: MessageMediaGeneralChange(
                         type: "photo",
                         mime: mime,
@@ -278,7 +278,7 @@ extension JVMessage {
                 _text = "📄 " + name.trimmed()
                 
                 _media = context.insert(
-                    of: MessageMedia.self,
+                    of: JVMessageMedia.self,
                     with: MessageMediaGeneralChange(
                         type: "document",
                         mime: mime,
@@ -369,8 +369,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updateDate?.timeIntervalSince1970 ?? 0
             _isDeleted = c.isDeleted
@@ -392,7 +392,7 @@ extension JVMessage {
             _isMarkdown = c.isMarkdown
             _text = c.text
             _senderClient = context.object(JVClient.self, primaryKey: clientID)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
@@ -439,7 +439,7 @@ extension JVMessage {
                     }
                     
                 case let .media(newValue):
-                    let media = context.insert(of: MessageMedia.self, with: newValue, validOnly: true)
+                    let media = context.insert(of: JVMessageMedia.self, with: newValue, validOnly: true)
                     if _media?._UUID != media?._UUID {
                         _media = media
                     }

@@ -104,7 +104,7 @@
 		FA71BDD4256BDEA600E96457 /* Client+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD3D256BDEA400E96457 /* Client+Update.swift */; };
 		FA71BDD5256BDEA600E96457 /* JVClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD3E256BDEA400E96457 /* JVClient.swift */; };
 		FA71BDD6256BDEA600E96457 /* Client+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD3F256BDEA400E96457 /* Client+Access.swift */; };
-		FA71BDD7256BDEA600E96457 /* MessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD41256BDEA400E96457 /* MessageBody.swift */; };
+		FA71BDD7256BDEA600E96457 /* JVMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD41256BDEA400E96457 /* JVMessageBody.swift */; };
 		FA71BDD8256BDEA600E96457 /* MessageBody+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD42256BDEA400E96457 /* MessageBody+Update.swift */; };
 		FA71BDD9256BDEA600E96457 /* MessageBody+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD43256BDEA400E96457 /* MessageBody+Access.swift */; };
 		FA71BDDA256BDEA600E96457 /* ClientCustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD45256BDEA400E96457 /* ClientCustomData.swift */; };
@@ -112,7 +112,7 @@
 		FA71BDDC256BDEA600E96457 /* ClientCustomData+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD47256BDEA400E96457 /* ClientCustomData+Access.swift */; };
 		FA71BDDD256BDEA600E96457 /* MessageMedia+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD49256BDEA400E96457 /* MessageMedia+Update.swift */; };
 		FA71BDDE256BDEA600E96457 /* MessageMedia+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4A256BDEA400E96457 /* MessageMedia+Access.swift */; };
-		FA71BDDF256BDEA600E96457 /* MessageMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4B256BDEA400E96457 /* MessageMedia.swift */; };
+		FA71BDDF256BDEA600E96457 /* JVMessageMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4B256BDEA400E96457 /* JVMessageMedia.swift */; };
 		FA71BDE0256BDEA600E96457 /* ArchiveHit+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4D256BDEA400E96457 /* ArchiveHit+Update.swift */; };
 		FA71BDE1256BDEA600E96457 /* ArchiveHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4E256BDEA400E96457 /* ArchiveHit.swift */; };
 		FA71BDE2256BDEA600E96457 /* ArchiveHit+Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD4F256BDEA400E96457 /* ArchiveHit+Access.swift */; };
@@ -254,7 +254,7 @@
 		FA71BD3D256BDEA400E96457 /* Client+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Client+Update.swift"; sourceTree = "<group>"; };
 		FA71BD3E256BDEA400E96457 /* JVClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVClient.swift; sourceTree = "<group>"; };
 		FA71BD3F256BDEA400E96457 /* Client+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Client+Access.swift"; sourceTree = "<group>"; };
-		FA71BD41256BDEA400E96457 /* MessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBody.swift; sourceTree = "<group>"; };
+		FA71BD41256BDEA400E96457 /* JVMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVMessageBody.swift; sourceTree = "<group>"; };
 		FA71BD42256BDEA400E96457 /* MessageBody+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageBody+Update.swift"; sourceTree = "<group>"; };
 		FA71BD43256BDEA400E96457 /* MessageBody+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageBody+Access.swift"; sourceTree = "<group>"; };
 		FA71BD45256BDEA400E96457 /* ClientCustomData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientCustomData.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		FA71BD47256BDEA400E96457 /* ClientCustomData+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClientCustomData+Access.swift"; sourceTree = "<group>"; };
 		FA71BD49256BDEA400E96457 /* MessageMedia+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageMedia+Update.swift"; sourceTree = "<group>"; };
 		FA71BD4A256BDEA400E96457 /* MessageMedia+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageMedia+Access.swift"; sourceTree = "<group>"; };
-		FA71BD4B256BDEA400E96457 /* MessageMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageMedia.swift; sourceTree = "<group>"; };
+		FA71BD4B256BDEA400E96457 /* JVMessageMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JVMessageMedia.swift; sourceTree = "<group>"; };
 		FA71BD4D256BDEA400E96457 /* ArchiveHit+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArchiveHit+Update.swift"; sourceTree = "<group>"; };
 		FA71BD4E256BDEA400E96457 /* ArchiveHit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveHit.swift; sourceTree = "<group>"; };
 		FA71BD4F256BDEA400E96457 /* ArchiveHit+Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArchiveHit+Access.swift"; sourceTree = "<group>"; };
@@ -718,7 +718,7 @@
 		FA71BD40256BDEA400E96457 /* MessageBody */ = {
 			isa = PBXGroup;
 			children = (
-				FA71BD41256BDEA400E96457 /* MessageBody.swift */,
+				FA71BD41256BDEA400E96457 /* JVMessageBody.swift */,
 				FA71BD42256BDEA400E96457 /* MessageBody+Update.swift */,
 				FA71BD43256BDEA400E96457 /* MessageBody+Access.swift */,
 			);
@@ -740,7 +740,7 @@
 			children = (
 				FA71BD49256BDEA400E96457 /* MessageMedia+Update.swift */,
 				FA71BD4A256BDEA400E96457 /* MessageMedia+Access.swift */,
-				FA71BD4B256BDEA400E96457 /* MessageMedia.swift */,
+				FA71BD4B256BDEA400E96457 /* JVMessageMedia.swift */,
 			);
 			path = MessageMedia;
 			sourceTree = "<group>";
@@ -957,7 +957,7 @@
 				FA71BD7E256BDEA600E96457 /* DatabaseContext.swift in Sources */,
 				FA71BDA5256BDEA600E96457 /* Chat+Update.swift in Sources */,
 				FA71BDBE256BDEA600E96457 /* Call+Access.swift in Sources */,
-				FA71BDD7256BDEA600E96457 /* MessageBody.swift in Sources */,
+				FA71BDD7256BDEA600E96457 /* JVMessageBody.swift in Sources */,
 				FA71BE01256BDEA600E96457 /* UUIDExtensions.swift in Sources */,
 				FA71BE05256BDEA600E96457 /* UIColorExtensions.swift in Sources */,
 				FA71BD8D256BDEA600E96457 /* ClientProactiveRule+Update.swift in Sources */,
@@ -1067,7 +1067,7 @@
 				FA71BD9A256BDEA600E96457 /* ArchiveHitChatItem+Update.swift in Sources */,
 				FA71BDCD256BDEA600E96457 /* ClientSessionUTM+Update.swift in Sources */,
 				FA71BDE5256BDEA600E96457 /* BroadcastUniqueTool.swift in Sources */,
-				FA71BDDF256BDEA600E96457 /* MessageMedia.swift in Sources */,
+				FA71BDDF256BDEA600E96457 /* JVMessageMedia.swift in Sources */,
 				FA401ED826FB33AE00CB8EE4 /* UIImageExtensions.swift in Sources */,
 				FA71BDCF256BDEA600E96457 /* Guest+Access.swift in Sources */,
 				FA71BDA6256BDEA600E96457 /* ClientSessionGeo.swift in Sources */,
