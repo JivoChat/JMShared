@@ -1,5 +1,5 @@
 //
-//  Message+Access.swift
+//  JVMessage+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -18,9 +18,9 @@ public enum MessageContent {
     case email(from: String, to: String, subject: String, message: String)
     case photo(mime: String, name: String, link: String, dataSize: Int, width: Int, height: Int)
     case file(mime: String, name: String, link: String, size: Int)
-    case transfer(from: Agent, to: Agent)
-    case join(assistant: Agent, by: Agent?)
-    case left(agent: Agent, kicker: Agent?)
+    case transfer(from: JVAgent, to: JVAgent)
+    case join(assistant: JVAgent, by: JVAgent?)
+    case left(agent: JVAgent, kicker: JVAgent?)
     case call(call: MessageBodyCall)
     case task(task: MessageBodyTask)
     case conference(conference: MessageBodyConference)
@@ -82,7 +82,7 @@ public struct MessageContentHash {
 }
 
 public struct MessageUpdateMeta {
-    let agent: Agent
+    let agent: JVAgent
     let date: Date
 }
 
@@ -131,7 +131,7 @@ public enum MessageType: String {
     case message = "message"
 }
 
-public extension Message {
+public extension JVMessage {
     var UUID: String {
         return _UUID
     }
@@ -152,7 +152,7 @@ public extension Message {
         return _clientID
     }
     
-    var client: Client? {
+    var client: JVClient? {
         return validate(_client)
     }
     
@@ -371,11 +371,11 @@ public extension Message {
         return senderAgent ?? senderClient ?? client
     }
     
-    var senderClient: Client? {
+    var senderClient: JVClient? {
         return _senderClient
     }
     
-    var senderAgent: Agent? {
+    var senderAgent: JVAgent? {
         if case .call(let call) = content {
             return call.agent
         }
@@ -567,7 +567,7 @@ public extension Message {
         }
     }
     
-    var media: MessageMedia? {
+    var media: JVMessageMedia? {
         return _media
     }
     
@@ -639,7 +639,7 @@ public extension Message {
         }
     }
     
-    func correspondsTo(chat: Chat) -> Bool {
+    func correspondsTo(chat: JVChat) -> Bool {
         if let client = _correspondsTo_getSelfClient() {
             let chatClient = _correspondsTo_getChatClient(chat: chat)
             return (client.ID == chatClient?.ID)
@@ -652,7 +652,7 @@ public extension Message {
     }
     
     /**
-     Some extra private methods for <func correspondsTo(chat: Chat) Bool>
+     Some extra private methods for <func correspondsTo(chat: JVChat) Bool>
      to make the stacktrace more readable for debug purpose
      */
     
@@ -660,15 +660,15 @@ public extension Message {
         return isValid ? chatID : nil
     }
     
-    private func _correspondsTo_getSelfClient() -> Client? {
+    private func _correspondsTo_getSelfClient() -> JVClient? {
         return isValid ? client : nil
     }
     
-    private func _correspondsTo_getChat(chat: Chat) -> Chat? {
+    private func _correspondsTo_getChat(chat: JVChat) -> JVChat? {
         return validate(chat)
     }
     
-    private func _correspondsTo_getChatClient(chat: Chat) -> Client? {
+    private func _correspondsTo_getChatClient(chat: JVChat) -> JVClient? {
         return chat.isValid ? validate(chat.client) : nil
     }
     

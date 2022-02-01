@@ -1,5 +1,5 @@
 //  
-//  Worktime+Update.swift
+//  JVWorktime+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Worktime {
+extension JVWorktime {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? WorktimeBaseChange, _agentID == 0 {
             _agentID = c.agentID
@@ -19,7 +19,7 @@ extension Worktime {
             if _agentID == 0 { _agentID = c.agentID }
             
             _timezoneID = c.timezoneID
-            _timezone = context.object(Timezone.self, primaryKey: _timezoneID)
+            _timezone = context.object(JVTimezone.self, primaryKey: _timezoneID)
             
             if !_isDirty {
                 _enabled = c.enabled
@@ -64,7 +64,7 @@ extension Worktime {
         }
         else if let c = change as? WorktimeTimezoneChange {
             _timezoneID = c.timezoneID ?? _timezoneID
-            _timezone = context.object(Timezone.self, primaryKey: _timezoneID)
+            _timezone = context.object(JVTimezone.self, primaryKey: _timezoneID)
         }
         else if let c = change as? WorktimeToggleChange {
             _enabled = c.enable

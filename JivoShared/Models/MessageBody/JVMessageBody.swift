@@ -1,5 +1,5 @@
 //
-//  MessageBody.swift
+//  JVMessageBody.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/03/2018.
@@ -11,8 +11,8 @@ import RealmSwift
 import JMCodingKit
 import CoreLocation
 
-public final class MessageBody: BaseModel {
-    @objc dynamic public var _agent: Agent?
+public final class JVMessageBody: JVBaseModel {
+    @objc dynamic public var _agent: JVAgent?
     @objc dynamic public var _to: String?
     @objc dynamic public var _from: String?
     @objc dynamic public var _subject: String?

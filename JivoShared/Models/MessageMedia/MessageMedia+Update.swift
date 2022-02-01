@@ -1,5 +1,5 @@
 //
-//  MessageMedia+Update.swift
+//  JVMessageMedia+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension MessageMedia {
+extension JVMessageMedia {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? MessageMediaGeneralChange {
             _type = c.type

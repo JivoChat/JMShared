@@ -7,13 +7,13 @@ PODS:
   - JFMarkdownKit (1.2.2)
   - JMCodingKit (5.0.2)
   - JMDesignKit (1.0.0)
-  - JMImageLoader (0.0.1-beta.0)
+  - JMImageLoader (0.0.3)
   - JMMarkdownKit (1.1.3):
     - JFMarkdownKit
     - JMDesignKit
     - TypedTextAttributes
   - JMOnetimeCalculator (1.0.0)
-  - JMRepicKit (1.0.2-beta.0):
+  - JMRepicKit (1.0.3):
     - JMImageLoader (~> 0.0.1-beta.0)
   - JMScalableView (1.0.0):
     - JMDesignKit
@@ -71,7 +71,7 @@ DEPENDENCIES:
   - JMDesignKit
   - JMMarkdownKit
   - JMOnetimeCalculator
-  - JMRepicKit (~> 1.0.2-beta.0)
+  - JMRepicKit (~> 1.0.3)
   - JMScalableView
   - JMTimelineKit
   - libPhoneNumber-iOS
@@ -106,13 +106,12 @@ SPEC REPOS:
     - JFMarkdownKit
     - JMCodingKit
     - JMDesignKit
+    - JMImageLoader
     - JMMarkdownKit
     - JMOnetimeCalculator
+    - JMRepicKit
     - JMScalableView
     - JMTimelineKit
-  https://github.com/jivochat/JMSpecsRepoDevelop:
-    - JMImageLoader
-    - JMRepicKit
 
 SPEC CHECKSUMS:
   DTModelStorage: 3b86a1e37496532bbd74cadc5b9310238d5ba780
@@ -120,10 +119,10 @@ SPEC CHECKSUMS:
   JFMarkdownKit: 9fbf4d7e07ddb4213f7044547497159a55ca3c73
   JMCodingKit: 5c3095ee9c606088b8d2585bfac2689ded1e991e
   JMDesignKit: a2504dd6c940691b4a479b871bc2a73a707c8a93
-  JMImageLoader: 08ffa82584a4dd0114e0c5c5422859780326d6e4
+  JMImageLoader: 4a2f3b0c3c2ce3b93b4ea4e7d0a86b8f66901dd4
   JMMarkdownKit: b47ad1429d0fa299d803560415dd264ceafcf43d
   JMOnetimeCalculator: 715be6053625fd4ecbeeccce97b68b376ce4acb3
-  JMRepicKit: 270e62e942f039da37d70c347d252fc23dc5aae9
+  JMRepicKit: ded0204803a1efa25c796b83e5d4dd0b5579ccf9
   JMScalableView: 5e46b19b98bdd4b132fd75fc3ffe14b5b18ca393
   JMTimelineKit: cb75418f9892392a6f00471d0dc043c2aaea9d7e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
@@ -142,6 +141,6 @@ SPEC CHECKSUMS:
   TypedTextAttributes: 624acbbc3bd067453d76f7408c6d6c5f0964d51b
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: d63399de80dc8f671567040abdc04b0f047e9c31
+PODFILE CHECKSUM: bffcbf59cfcea1b6ecb01bf3bda470c0482f3250
 
 COCOAPODS: 1.11.2

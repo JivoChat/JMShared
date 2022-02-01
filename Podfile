@@ -12,7 +12,7 @@ target 'JivoShared' do
   pod 'Realm'
   pod 'RealmSwift'
   pod 'JMTimelineKit'
-  pod 'JMRepicKit', '~> 1.0.2-beta.0'
+  pod 'JMRepicKit', '~> 1.0.3'
   pod 'JMMarkdownKit'
   pod 'JMOnetimeCalculator'
   pod 'JMDesignKit'

@@ -1,5 +1,5 @@
 //
-//  Agent.swift
+//  JVAgent.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 10/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
-open class Agent: BaseModel {
+open class JVAgent: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _email: String = ""
@@ -25,12 +25,12 @@ open class Agent: BaseModel {
     @objc dynamic public var _callingDestination: Int = 0
     @objc dynamic public var _callingOptions: Int = 0
     @objc dynamic public var _isWorking: Bool = true
-    @objc dynamic public var _session: AgentSession?
-    @objc dynamic public var _worktime: Worktime?
+    @objc dynamic public var _session: JVAgentSession?
+    @objc dynamic public var _worktime: JVWorktime?
     @objc dynamic public var _hasSession: Bool = false
     @objc dynamic public var _lastMessageDate: Date?
-    @objc dynamic public var _lastMessage: Message?
-    @objc dynamic public var _chat: Chat?
+    @objc dynamic public var _lastMessage: JVMessage?
+    @objc dynamic public var _chat: JVChat?
     @objc dynamic public var _orderingUnread: Bool = false
     @objc dynamic public var _orderingGroup: Int = 0
     @objc dynamic public var _orderingName: String? = nil

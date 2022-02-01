@@ -1,5 +1,5 @@
 //
-//  MessageMedia.swift
+//  JVMessageMedia.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 19/10/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MessageMedia: BaseModel {
+public final class JVMessageMedia: JVBaseModel {
     @objc dynamic public var _type: String = ""
     @objc dynamic public var _mime: String = ""
     @objc dynamic public var _thumbLink: String = ""

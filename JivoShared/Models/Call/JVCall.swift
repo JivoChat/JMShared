@@ -1,5 +1,5 @@
 //  
-//  MediaUpload.swift
+//  JVCall.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,15 +10,11 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MediaUpload: BaseModel {
-    @objc dynamic public var _ID: String = ""
-    @objc dynamic public var _filePath: String = ""
-    @objc dynamic public var _recipientType: String = ""
-    @objc dynamic public var _recipientID: Int = 0
-    @objc dynamic public var _chatID: Int = 0
-
+public final class JVCall: JVBaseModel {
+    @objc dynamic public var _ID: Int = 0
+    
     public override class func primaryKey() -> String? {
-        return "_filePath"
+        return "_ID"
     }
     
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {

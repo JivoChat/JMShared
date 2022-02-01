@@ -1,5 +1,5 @@
 //
-//  AgentSession+Update.swift
+//  JVAgentSession+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -89,7 +89,7 @@ public enum UserLicensedFeature: Int {
     }
 }
 
-extension AgentSession {
+extension JVAgentSession {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? AgentSessionGeneralChange {
             if _siteID == 0 { _siteID = c.siteID }
@@ -107,7 +107,7 @@ extension AgentSession {
         }
         else if let c = change as? AgentSessionContextChange {
             
-//            _channels.set(context.upsert(of: Channel.self, with: c.channels))
+//            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
 
             if let features = c.techConfig {
                 _globalReceived = true
@@ -137,7 +137,7 @@ extension AgentSession {
             _isWorkingHidden = c.isWorkingHidden
         }
         else if let c = change as? AgentSessionChannelsChange {
-            _channels.set(context.upsert(of: Channel.self, with: c.channels))
+            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
         }
     }
     

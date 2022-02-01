@@ -1,5 +1,5 @@
 //  
-//  QuickPhrase+Access.swift
+//  JVQuickPhrase+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension QuickPhrase {    public var ID: String {
+extension JVQuickPhrase {    public var ID: String {
         return _ID
     }
         public var lang: String {

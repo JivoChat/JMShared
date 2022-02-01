@@ -1,5 +1,5 @@
 //
-//  ClientCustomData+Update.swift
+//  JVClientCustomData+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ClientCustomData {
+extension JVClientCustomData {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ClientCustomDataGeneralChange {
             _title = c.title

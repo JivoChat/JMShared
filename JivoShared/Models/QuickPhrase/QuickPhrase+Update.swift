@@ -1,5 +1,5 @@
 //  
-//  QuickPhrase+Update.swift
+//  JVQuickPhrase+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -11,7 +11,7 @@ import JMCodingKit
 
 let QuickPhraseStorageSeparator = ","
 
-extension QuickPhrase {
+extension JVQuickPhrase {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? QuickPhraseGeneralChange {
             if _ID == "" { _ID = c.ID }

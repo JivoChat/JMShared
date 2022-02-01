@@ -1,5 +1,5 @@
 //
-//  MessageImage.swift
+//  JVMessageSnippet.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/05/2017.
@@ -10,10 +10,11 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class MessageImage: BaseModel {
-    @objc dynamic public var _fileName: String = ""
-    @objc dynamic public var _URL: String = ""
-    @objc dynamic public var _uploadTS: Int = 0
+public final class JVMessageSnippet: JVBaseModel {
+    @objc dynamic public var _URL: String?
+    @objc dynamic public var _title: String = ""
+    @objc dynamic public var _iconURL: String?
+    @objc dynamic public var _HTML: String = ""
     
     public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         super.apply(inside: context, with: change)

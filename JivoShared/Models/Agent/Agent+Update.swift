@@ -1,5 +1,5 @@
 //
-//  Agent+Update.swift
+//  JVAgent+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Agent {
+extension JVAgent {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? AgentGeneralChange {
             if _ID == 0 { _ID = c.ID }
@@ -25,16 +25,16 @@ extension Agent {
             _callingDestination = (c.callingDestination > -1 ? c.callingDestination : _callingDestination)
             _callingOptions = c.callingOptions
             _title = c.title
-            _worktime = context.upsert(of: Worktime.self, with: c.worktime)
+            _worktime = context.upsert(of: JVWorktime.self, with: c.worktime)
             _isWorking = c.isWorking ?? _isWorking
-            _session = context.upsert(of: AgentSession.self, with: c.session) ?? _session
+            _session = context.upsert(of: JVAgentSession.self, with: c.session) ?? _session
             _hasSession = (_session != nil)
             
             _orderingName = c.displayName
             adjustOrderingGroup()
         }
         else if let c = change as? AgentWorktimeChange {
-            _worktime = context.upsert(of: Worktime.self, with: c.worktimeChange)
+            _worktime = context.upsert(of: JVWorktime.self, with: c.worktimeChange)
         }
         else if let c = change as? AgentShortChange {
             if _ID == 0 { _ID = c.ID }
@@ -56,16 +56,16 @@ extension Agent {
         }
         else if let c = change as? AgentLastMessageChange {
             if let key = c.messageGlobalKey {
-                _lastMessage = context.object(Message.self, mainKey: key)
+                _lastMessage = context.object(JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                _lastMessage = context.object(Message.self, mainKey: key)
+                _lastMessage = context.object(JVMessage.self, mainKey: key)
             }
             
             _lastMessageDate = _lastMessage?.date
         }
         else if let c = change as? AgentChatChange {
-            _chat = context.object(Chat.self, primaryKey: c.chatID)
+            _chat = context.object(JVChat.self, primaryKey: c.chatID)
             _lastMessageDate = _chat?.lastMessage?.date
         }
         else if let c = change as? AgentDraftChange {

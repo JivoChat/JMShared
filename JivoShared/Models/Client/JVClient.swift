@@ -1,5 +1,5 @@
 //
-//  Client.swift
+//  JVClient.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 11/05/2017.
@@ -11,14 +11,14 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-public final class Client: BaseModel {
+public final class JVClient: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _guestID: String = ""
     @objc dynamic public var _chatID: Int = 0
     @objc dynamic public var _channelID: Int = 0
     @objc dynamic public var _channelName: String?
-    @objc dynamic public var _channel: Channel?
+    @objc dynamic public var _channel: JVChannel?
     @objc dynamic public var _displayName = String()
     @objc dynamic public var _avatarLink: String?
     @objc dynamic public var _emailByClient: String?
@@ -27,18 +27,18 @@ public final class Client: BaseModel {
     @objc dynamic public var _phoneByAgent: String?
     @objc dynamic public var _comment: String?
     @objc dynamic public var _visitsNumber: Int = 0
-    @objc dynamic public var _assignedAgent: Agent?
+    @objc dynamic public var _assignedAgent: JVAgent?
     @objc dynamic public var _navigatesNumber: Int = 0
-    @objc dynamic public var _activeSession: ClientSession?
-    @objc dynamic public var _proactiveRule: ClientProactiveRule?
+    @objc dynamic public var _activeSession: JVClientSession?
+    @objc dynamic public var _proactiveRule: JVClientProactiveRule?
     @objc dynamic public var _integration: String?
     @objc dynamic public var _integrationLink: String?
     @objc dynamic public var _isOnline: Bool = true
     @objc dynamic public var _hasStartup: Bool = true
     @objc dynamic public var _hasActiveCall: Bool = false
-    @objc dynamic public var _task: Task?
+    @objc dynamic public var _task: JVTask?
     @objc dynamic public var _isBlocked: Bool = false
-    public let _customData = List<ClientCustomData>()
+    public let _customData = List<JVClientCustomData>()
 
     public override class func primaryKey() -> String? {
         return "_ID"

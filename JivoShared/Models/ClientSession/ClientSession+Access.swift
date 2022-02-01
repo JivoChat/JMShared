@@ -1,5 +1,5 @@
 //
-//  ClientSession+Access.swift
+//  JVClientSession+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ClientSession {    public var creationDate: Date? {
+extension JVClientSession {    public var creationDate: Date? {
         if _creationTS > 0 {
             return Date(timeIntervalSince1970: TimeInterval(_creationTS))
         }
@@ -19,22 +19,22 @@ extension ClientSession {    public var creationDate: Date? {
             return nil
         }
     }
-        public var UTM: ClientSessionUTM? {
+        public var UTM: JVClientSessionUTM? {
         return _UTM
     }
         public var lastIP: String? {
         return _lastIP.valuable
     }
-        public var history: [Page] {
+        public var history: [JVPage] {
         return _history.toArray()
     }
-        public var geo: ClientSessionGeo? {
+        public var geo: JVClientSessionGeo? {
         return _geo
     }
-        public var chatStartPage: Page? {
+        public var chatStartPage: JVPage? {
         return _chatStartPage ?? _currentPage ?? _history.last
     }
-        public var currentPage: Page? {
+        public var currentPage: JVPage? {
         return _currentPage
     }
 }

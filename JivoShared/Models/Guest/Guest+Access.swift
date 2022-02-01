@@ -1,5 +1,5 @@
 //  
-//  Guest+Access.swift
+//  JVGuest+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,13 +10,13 @@ import Foundation
 import JMRepicKit
 public enum GuestStatus {
     case online
-    case proactive(agent: Agent)
+    case proactive(agent: JVAgent)
     case invited
     case chatting(withMe: Bool)
     case calling(withMe: Bool)
 }
 
-extension Guest: Displayable {
+extension JVGuest: Displayable {
     public var senderType: SenderType {
         return .guest
     }
@@ -25,7 +25,7 @@ extension Guest: Displayable {
         return _ID
     }
 
-    public var channel: Channel? {
+    public var channel: JVChannel? {
         abort()
     }
     
@@ -165,7 +165,7 @@ extension Guest: Displayable {
         return _startDate
     }
     
-    public var UTM: ClientSessionUTM? {
+    public var UTM: JVClientSessionUTM? {
         return _utm
     }
     
@@ -181,11 +181,11 @@ extension Guest: Displayable {
         return _visible
     }
 
-    public var attendees: [ChatAttendee] {
+    public var attendees: [JVChatAttendee] {
         return _attendees.toArray()
     }
     
-    public func proactiveAgent() -> Agent? {
+    public func proactiveAgent() -> JVAgent? {
         if case .proactive = status {
             return _proactiveAgent
         }

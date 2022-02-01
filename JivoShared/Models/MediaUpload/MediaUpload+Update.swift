@@ -1,5 +1,5 @@
 //  
-//  MediaUpload+Update.swift
+//  JVMediaUpload+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -57,7 +57,7 @@ public enum UploadingResult {
     case unknownError
 }
 
-extension MediaUpload {
+extension JVMediaUpload {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? MediaUploadChange {
             if _ID == "" { _ID = c.ID }

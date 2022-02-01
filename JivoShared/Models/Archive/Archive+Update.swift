@@ -1,5 +1,5 @@
 //  
-//  Archive+Update.swift
+//  JVArchive+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Archive {
+extension JVArchive {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ArchiveSliceChange {
             _total = c.total
@@ -19,13 +19,13 @@ extension Archive {
             
             let models = c.hits.filter(\.isValid)
             if c.fresh {
-                let hits = context.upsert(of: ArchiveHit.self, with: models)
+                let hits = context.upsert(of: JVArchiveHit.self, with: models)
                 _hits.set(hits)
             }
             else {
                 _hits.append(objectsIn: models.compactMap { model in
-                    guard context.object(ArchiveHit.self, primaryKey: model.ID) == nil else { return nil }
-                    return context.upsert(of: ArchiveHit.self, with: model)
+                    guard context.object(JVArchiveHit.self, primaryKey: model.ID) == nil else { return nil }
+                    return context.upsert(of: JVArchiveHit.self, with: model)
                 })
             }
             
@@ -55,7 +55,7 @@ public final class ArchiveSliceChange: BaseModelChange {
     public let hits: [ArchiveHitGeneralChange]
     
     public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: Archive.globalID())
+        return DatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
     }
         public init(fresh: Bool,
          status: Bool,
@@ -94,6 +94,6 @@ public final class ArchiveSliceChange: BaseModelChange {
 
 public final class ArchiveCleanupChange: BaseModelChange {
     public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: Archive.globalID())
+        return DatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
     }
 }

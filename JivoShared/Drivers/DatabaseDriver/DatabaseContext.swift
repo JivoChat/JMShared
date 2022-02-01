@@ -96,10 +96,10 @@ open class DatabaseContext: IDatabaseContext {
     
     public func customRemove<OT>(objects: [OT], recursive: Bool) {
         if recursive {
-            (objects as! [BaseModel]).forEach { $0.recursiveDelete(context: self) }
+            (objects as! [JVBaseModel]).forEach { $0.recursiveDelete(context: self) }
         }
         else {
-            (objects as! [BaseModel]).forEach { $0.simpleDelete(context: self) }
+            (objects as! [JVBaseModel]).forEach { $0.simpleDelete(context: self) }
         }
     }
     

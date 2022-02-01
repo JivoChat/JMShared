@@ -1,5 +1,5 @@
 //  
-//  ArchiveHitCallItem+Update.swift
+//  JVArchiveHitCallItem+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension ArchiveHitCallItem {
+extension JVArchiveHitCallItem {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? ArchiveHitCallItemGeneralChange {
             _ID = c.ID
@@ -20,10 +20,10 @@ extension ArchiveHitCallItem {
             _eventsNumber = c.eventsNumber
             _cost = c.cost
             _costCurrency = c.costCurrency
-            _agents.set(c.agentIDs.compactMap { context.object(Agent.self, primaryKey: $0) })
+            _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
-            _chat = context.upsert(of: Chat.self, with: c.chatChange?.copy(knownArchived: true))
-            _call = context.upsert(of: Call.self, with: c.callChange)
+            _chat = context.upsert(of: JVChat.self, with: c.chatChange?.copy(knownArchived: true))
+            _call = context.upsert(of: JVCall.self, with: c.callChange)
         }
     }
     

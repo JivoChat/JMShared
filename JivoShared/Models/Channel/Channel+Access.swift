@@ -1,5 +1,5 @@
 //
-//  Channel+Access.swift
+//  JVChannel+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -86,7 +86,7 @@ public enum ChannelJoint: String {
     }
 }
 
-extension Channel {
+extension JVChannel {
     public var ID: Int {
         return _ID
     }

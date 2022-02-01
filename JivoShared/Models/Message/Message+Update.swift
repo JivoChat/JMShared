@@ -1,5 +1,5 @@
 //
-//  Message+Update.swift
+//  JVMessage+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension Message {
+extension JVMessage {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         func _adjustSender(type: String, ID: Int, body: MessageBodyGeneralChange?) {
             if let body = body, let _ = body.callID {
@@ -81,7 +81,7 @@ extension Message {
             }
 
             _ = context.upsert(
-                of: Task.self,
+                of: JVTask.self,
                 with: TaskGeneralChange(
                     ID: task.taskID,
                     agentID: agentID,
@@ -104,8 +104,8 @@ extension Message {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             
             let updatedReactions = try? PropertyListEncoder().encode(c.reactions)
             if updatedReactions != _reactions {
@@ -132,7 +132,7 @@ extension Message {
             _type = "message"
             _isMarkdown = false
             _text = c.text.trimmed()
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
             if let date = c.time.parseDateUsingFullFormat() {
                 _date = date
@@ -167,8 +167,8 @@ extension Message {
             _text = c.text.trimmed()
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _isOffline = c.isOffline
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
@@ -188,8 +188,8 @@ extension Message {
             _type = "message"
             _isMarkdown = false
             _text = c.text.trimmed()
-            _senderClient = context.object(Client.self, primaryKey: c.clientID)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
@@ -204,8 +204,8 @@ extension Message {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
             _isDeleted = c.isDeleted
@@ -262,7 +262,7 @@ extension Message {
                 _text = "🖼 " + name.trimmed()
                 
                 _media = context.insert(
-                    of: MessageMedia.self,
+                    of: JVMessageMedia.self,
                     with: MessageMediaGeneralChange(
                         type: "photo",
                         mime: mime,
@@ -278,7 +278,7 @@ extension Message {
                 _text = "📄 " + name.trimmed()
                 
                 _media = context.insert(
-                    of: MessageMedia.self,
+                    of: JVMessageMedia.self,
                     with: MessageMediaGeneralChange(
                         type: "document",
                         mime: mime,
@@ -369,8 +369,8 @@ extension Message {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.trimmed()
-            _body = context.insert(of: MessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updateDate?.timeIntervalSince1970 ?? 0
             _isDeleted = c.isDeleted
@@ -391,8 +391,8 @@ extension Message {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text
-            _senderClient = context.object(Client.self, primaryKey: clientID)
-            _media = context.insert(of: MessageMedia.self, with: c.media, validOnly: true)
+            _senderClient = context.object(JVClient.self, primaryKey: clientID)
+            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
@@ -439,7 +439,7 @@ extension Message {
                     }
                     
                 case let .media(newValue):
-                    let media = context.insert(of: MessageMedia.self, with: newValue, validOnly: true)
+                    let media = context.insert(of: JVMessageMedia.self, with: newValue, validOnly: true)
                     if _media?._UUID != media?._UUID {
                         _media = media
                     }
@@ -454,7 +454,7 @@ extension Message {
                         
                     case let .agent(id, displayNameUpdate):
                         let existingAgent = context.agent(for: id, provideDefault: false)
-                        let agent = existingAgent ?? { () -> Agent? in
+                        let agent = existingAgent ?? { () -> JVAgent? in
                             let defaultAgent = context.agent(for: id, provideDefault: true)
                             if case let MessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
                                 newValue.flatMap { defaultAgent?._displayName = $0 }
@@ -1191,8 +1191,8 @@ public final class MessageTextChange: BaseModelChange {
 }
 open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     
-    public let agent: Agent
-    public let chat: Chat
+    public let agent: JVAgent
+    public let chat: JVChat
     public let creationDate: Date?
     public let text: String
     public let media: MessageMediaGeneralChange?
@@ -1205,8 +1205,8 @@ open class MessageSdkAgentChange: MessageExtendedGeneralChange {
     }
     
     public init(id: Int,
-         agent: Agent,
-         chat: Chat,
+         agent: JVAgent,
+         chat: JVChat,
          text: String,
          body: MessageBodyGeneralChange? = nil,
          media: MessageMediaGeneralChange? = nil,

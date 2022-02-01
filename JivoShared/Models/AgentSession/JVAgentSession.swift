@@ -1,5 +1,5 @@
 //
-//  AgentSession.swift
+//  JVAgentSession.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/06/2018.
@@ -11,7 +11,7 @@ import RealmSwift
 import JMCodingKit
 import AVFoundation
 
-open class AgentSession: BaseModel {
+open class JVAgentSession: JVBaseModel {
     @objc dynamic public var _sessionID: String = ""
     @objc dynamic public var _email: String = ""
     @objc dynamic public var _siteID: Int = 0
@@ -41,7 +41,7 @@ open class AgentSession: BaseModel {
     @objc dynamic public var _isWorking: Bool = true
     @objc dynamic public var _isWorkingHidden: Bool = false
 
-    public let _channels = List<Channel>()
+    public let _channels = List<JVChannel>()
     
     open override class func primaryKey() -> String? {
         return "_siteID"

@@ -1,5 +1,5 @@
 //  
-//  Worktime.swift
+//  JVWorktime.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,10 +10,10 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Worktime: BaseModel {
+public final class JVWorktime: JVBaseModel {
     @objc dynamic public var _agentID: Int = 0
     @objc dynamic public var _timezoneID: Int = 0
-    @objc dynamic public var _timezone: Timezone?
+    @objc dynamic public var _timezone: JVTimezone?
     @objc dynamic public var _enabled: Bool = false
     @objc dynamic public var _monConfig: Int64 = 0
     @objc dynamic public var _tueConfig: Int64 = 0

@@ -1,5 +1,5 @@
 //  
-//  Guest.swift
+//  JVGuest.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class Guest: BaseModel {
+public final class JVGuest: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _channelID: String = ""
     @objc dynamic public var _agentID: Int = 0
@@ -27,18 +27,18 @@ public final class Guest: BaseModel {
     @objc dynamic public var _name: String = ""
     @objc dynamic public var _phone: String = ""
     @objc dynamic public var _email: String = ""
-    @objc dynamic public var _proactiveAgent: Agent?
+    @objc dynamic public var _proactiveAgent: JVAgent?
     @objc dynamic public var _pageLink: String = ""
     @objc dynamic public var _pageTitle: String = ""
     @objc dynamic public var _startDate: Date?
-    @objc dynamic public var _utm: ClientSessionUTM?
+    @objc dynamic public var _utm: JVClientSessionUTM?
     @objc dynamic public var _visitsNumber: Int = 0
     @objc dynamic public var _navigatesNumber: Int = 0
     @objc dynamic public var _visible: Bool = false
     @objc dynamic public var _widgetVersion: String = ""
     @objc dynamic public var _disappearDate: Date?
     @objc dynamic public var _lastUpdate: Date?
-    public let _attendees = List<ChatAttendee>()
+    public let _attendees = List<JVChatAttendee>()
 
     public override class func primaryKey() -> String? {
         return nil

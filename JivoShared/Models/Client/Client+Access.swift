@@ -1,5 +1,5 @@
 //
-//  Client+Access.swift
+//  JVClient+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -42,7 +42,7 @@ public struct ClientProfile {
     }
 }
 
-extension Client: Displayable {
+extension JVClient: Displayable {
     public var senderType: SenderType {
         return .client
     }
@@ -68,7 +68,7 @@ extension Client: Displayable {
         return _channelID
     }
     
-    public var channel: Channel? {
+    public var channel: JVChannel? {
         return _channel
     }
 
@@ -122,7 +122,7 @@ extension Client: Displayable {
         return max(1, _visitsNumber)
     }
     
-    public func assignedAgent() -> Agent? {
+    public func assignedAgent() -> JVAgent? {
         return _assignedAgent
     }
     
@@ -130,18 +130,18 @@ extension Client: Displayable {
         return max(1, _navigatesNumber)
     }
     
-    public var session: ClientSession? {
+    public var session: JVClientSession? {
         switch integration {
         case .none: return _activeSession
         case .some(let joint): return joint.isStandalone ? nil : _activeSession
         }
     }
     
-    public var customData: [ClientCustomData] {
+    public var customData: [JVClientCustomData] {
         return _customData.toArray()
     }
     
-//    var proactiveRule: ClientProactiveRule? {
+//    var proactiveRule: JVClientProactiveRule? {
 //        return _proactiveRule
 //    }
     
@@ -214,7 +214,7 @@ extension Client: Displayable {
         return _hasActiveCall
     }
 
-    public var task: Task? {
+    public var task: JVTask? {
         return _task
     }
     

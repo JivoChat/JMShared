@@ -1,5 +1,5 @@
 //
-//  Chat+Access.swift
+//  JVChat+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -17,9 +17,9 @@ public enum ChatReactionPerforming {
 public enum ChatInvitationState {
     case none
     case activeBySystem
-    case activeByAgent(Agent)
+    case activeByAgent(JVAgent)
     case cancelBySystem
-    case cancelByAgent(Agent)
+    case cancelByAgent(JVAgent)
     
     public var isNone: Bool {
         if case .none = self {
@@ -32,9 +32,9 @@ public enum ChatInvitationState {
 }
 public enum ChatTransferState {
     case none
-    case requested(agent: Agent, assisting: Bool, comment: String?)
-    case completed(agent: Agent, assisting: Bool, date: Date, comment: String?)
-    case rejected(agent: Agent, assisting: Bool, reason: String)
+    case requested(agent: JVAgent, assisting: Bool, comment: String?)
+    case completed(agent: JVAgent, assisting: Bool, date: Date, comment: String?)
+    case rejected(agent: JVAgent, assisting: Bool, reason: String)
 }
 public enum ChatAttendeeAssignment {
     case assignedWithMe
@@ -42,7 +42,7 @@ public enum ChatAttendeeAssignment {
     case notPresented
 }
 
-extension Chat: Presentable {
+extension JVChat: Presentable {
     public var ID: Int {
         return _ID
     }
@@ -55,7 +55,7 @@ extension Chat: Presentable {
         return _isMain
     }
     
-    public var client: Client? {
+    public var client: JVClient? {
         return validate(_client)
     }
     
@@ -71,7 +71,7 @@ extension Chat: Presentable {
         return _about?.valuable
     }
     
-    public var attendees: [ChatAttendee] {
+    public var attendees: [JVChatAttendee] {
         if _attendees.isInvalidated {
             return []
         }
@@ -80,11 +80,11 @@ extension Chat: Presentable {
         }
     }
     
-    public var attendee: ChatAttendee? {
+    public var attendee: JVChatAttendee? {
         return _attendee
     }
     
-    public var allAttendees: [ChatAttendee] {
+    public var allAttendees: [JVChatAttendee] {
         return attendees.filter {
             if case .attendee = $0.relation {
                 return true
@@ -128,15 +128,15 @@ extension Chat: Presentable {
         }
     }
     
-    public var agents: [Agent] {
+    public var agents: [JVAgent] {
         return attendees.compactMap { $0.agent }
     }
     
-    public var lastMessage: Message? {
+    public var lastMessage: JVMessage? {
         return _lastMessage
     }
     
-    public var previewMessage: Message? {
+    public var previewMessage: JVMessage? {
         return _previewMessage ?? _lastMessage
     }
 
@@ -263,28 +263,28 @@ extension Chat: Presentable {
             clipping: .external)
     }
     
-    public func transferredFrom() -> (agent: Agent, comment: String?)? {
+    public func transferredFrom() -> (agent: JVAgent, comment: String?)? {
         guard let attendee = attendee else { return nil }
         guard case let .attendee(agent, toAssist, comment) = attendee.relation else { return nil }
         guard let a = agent, !toAssist else { return nil }
         return (a, comment)
     }
 
-    public func transferredTo() -> (agent: Agent, comment: String?)? {
+    public func transferredTo() -> (agent: JVAgent, comment: String?)? {
         guard let agent = _transferTo, !agent.isMe else { return nil }
         guard !_transferAssisting else { return nil }
         guard let _ = _transferDate else { return nil }
         return (agent, _transferComment)
     }
 
-    public func assistingFrom() -> (agent: Agent, comment: String?)? {
+    public func assistingFrom() -> (agent: JVAgent, comment: String?)? {
         guard let attendee = attendee else { return nil }
         guard case let .attendee(agent, toAssist, comment) = attendee.relation else { return nil }
         guard let a = agent, toAssist else { return nil }
         return (a, comment)
     }
 
-    public func assistingTo() -> (agent: Agent, comment: String?)? {
+    public func assistingTo() -> (agent: JVAgent, comment: String?)? {
         guard let agent = _transferTo, !agent.isMe else { return nil }
         guard _transferAssisting else { return nil }
         guard let _ = _transferDate else { return nil }
@@ -307,8 +307,8 @@ extension Chat: Presentable {
         }
     }
     
-    public func activeAttendees(withMe: Bool) -> [ChatAttendee] {
-        let selfAttendee: [ChatAttendee]
+    public func activeAttendees(withMe: Bool) -> [JVChatAttendee] {
+        let selfAttendee: [JVChatAttendee]
         if withMe, let attendee = attendee, case .attendee = attendee.relation {
             selfAttendee = [attendee]
         }
@@ -325,8 +325,8 @@ extension Chat: Presentable {
         return selfAttendee + otherAttendees
     }
     
-    public func teamAttendees(withMe: Bool) -> [ChatAttendee] {
-        let selfAttendee: [ChatAttendee]
+    public func teamAttendees(withMe: Bool) -> [JVChatAttendee] {
+        let selfAttendee: [JVChatAttendee]
         if withMe, let attendee = attendee, case .team = attendee.relation {
             selfAttendee = [attendee]
         }
@@ -401,11 +401,11 @@ extension Chat: Presentable {
         }
     }
     
-    public var owningAgent: Agent? {
+    public var owningAgent: JVAgent? {
         return _owningAgent
     }
     
-    public func hasAttendee(agent: Agent) -> Bool {
+    public func hasAttendee(agent: JVAgent) -> Bool {
         for attendee in attendees {
             guard agent.ID == attendee.agent?.ID else { continue }
             return true
@@ -414,7 +414,7 @@ extension Chat: Presentable {
         return false
     }
     
-    public func hasManagingAccess(agent: Agent) -> Bool {
+    public func hasManagingAccess(agent: JVAgent) -> Bool {
         guard isGroup && not(isMain) else { return false }
         if _owningAgent?.ID == agent.ID { return true }
         if agent.isAdmin { return true }

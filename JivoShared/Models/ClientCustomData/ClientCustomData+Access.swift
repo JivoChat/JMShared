@@ -1,5 +1,5 @@
 //
-//  ClientCustomData+Access.swift
+//  JVClientCustomData+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ClientCustomData {
+extension JVClientCustomData {
     public var title: String? {
         return _title?.valuable
     }

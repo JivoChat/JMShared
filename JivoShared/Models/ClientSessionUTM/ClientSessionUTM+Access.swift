@@ -1,5 +1,5 @@
 //
-//  ClientSessionUTM+Access.swift
+//  JVClientSessionUTM+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ClientSessionUTM {    public static func generateHumanReadable(source: String,
+extension JVClientSessionUTM {    public static func generateHumanReadable(source: String,
                                       medium: String,
                                       campaign: String,
                                       keyword: String,
@@ -84,7 +84,7 @@ extension ClientSessionUTM {    public static func generateHumanReadable(source:
         let keyword = _keyword ?? String()
         let content = _content ?? String()
         
-        return ClientSessionUTM.generateHumanReadable(
+        return JVClientSessionUTM.generateHumanReadable(
             source: source,
             medium: medium,
             campaign: campaign,

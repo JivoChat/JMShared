@@ -1,5 +1,5 @@
 //
-//  MessageSnippet+Update.swift
+//  JVMessageSnippet+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension MessageSnippet {
+extension JVMessageSnippet {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? MessageSnippetGeneralChange {
             _URL = c.URL
