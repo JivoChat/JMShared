@@ -8,17 +8,14 @@ Pod::Spec.new do |spec|
 
   spec.requires_arc = true
 
-  spec.ios.deployment_target  = '10.0'
+  spec.ios.deployment_target  = '11.0'
   spec.swift_version = "5.0"
-  spec.platform = :ios, "10.0"
 
   spec.source       = { :git => 'https://github.com/JivoChat/JMShared.git', :tag => "#{spec.version}" }
   # spec.public_header_files = "JivoShared.framework/Headers/*.h"
   spec.source_files = "JivoShared/**/*.*"
   spec.resource = "Assets.xcassets"
   # spec.vendored_frameworks = "JivoShared.framework"
-
-  spec.ios.deployment_target  = '11.0'
 
   spec.framework    = 'SystemConfiguration'
 
