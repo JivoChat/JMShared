@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'JMShared'
-  spec.version      = '4.0.0-dev.0'
+  spec.version      = '4.0.0'
   spec.license      = { :type => 'MIT', :file => "LICENSE" }
   spec.homepage     = 'https://github.com/JivoChat'
   spec.authors      = { 'Anton Karpushko' => 'karpushko@jivosite.com' }
@@ -17,6 +17,8 @@ Pod::Spec.new do |spec|
   spec.source_files = "JivoShared/**/*.*"
   spec.resource = "Assets.xcassets"
   # spec.vendored_frameworks = "JivoShared.framework"
+
+  spec.ios.deployment_target  = '11.0'
 
   spec.framework    = 'SystemConfiguration'
 
