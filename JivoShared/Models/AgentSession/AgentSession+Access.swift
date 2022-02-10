@@ -66,10 +66,6 @@ extension AgentSession {
         return _isWorkingHidden
     }
     
-    public var licenseFeatures: Int {
-        return _licenseFeatures
-    }
-    
     public func globalFeatures() -> UserTechConfig {
         return UserTechConfig(
             guestInsightEnabled: _globalGuestsInsightEnabled,
@@ -89,11 +85,6 @@ extension AgentSession {
             feedbackSdkEnabled: _globalFeedbackSdkEnabled,
             mediaServiceEnabled: _globalMediaServiceEnabled
         )
-    }
-    
-    public func hasLicenseFeature(_ feature: UserLicensedFeature) -> Bool {
-        let flag = 1 << feature.rawValue
-        return (_licenseFeatures & flag) > 0
     }
     
     public func jointType(for channelID: Int) -> ChannelJoint? {

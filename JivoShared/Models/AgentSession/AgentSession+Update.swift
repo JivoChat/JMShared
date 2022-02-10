@@ -97,7 +97,6 @@ extension AgentSession {
             _email = c.email
             _isAdmin = c.isAdmin
             _isOperator = c.isOperator
-            _licenseFeatures = c.licenseFeatures
             _isActive = true
             _voxLogin = c.voxLogin
             _voxPassword = c.voxPassword
@@ -153,7 +152,6 @@ public final class AgentSessionGeneralChange: BaseModelChange, Codable {
     public var siteID: Int
     public var isAdmin: Bool
     public var isOperator: Bool
-    public var licenseFeatures: Int
     public var voxLogin: String
     public var voxPassword: String
     public var mobileCalls: Bool
@@ -174,7 +172,6 @@ public final class AgentSessionGeneralChange: BaseModelChange, Codable {
         isAdmin = json["agent_info"]["is_admin"].boolValue
         isOperator = json["agent_info"]["is_operator"].bool ?? true
         siteID = json["agent_info"]["site_id"].intValue
-        licenseFeatures = parseFeatures(source: json["features"])
         voxLogin = json["agent_info"]["vox_name"].stringValue
         voxPassword = json["agent_info"]["vox_password"].stringValue
         mobileCalls = json["agent_info"]["calls_mobile"].boolValue
@@ -211,7 +208,7 @@ public final class AgentSessionContextChange: BaseModelChange {
             if let misc = context.has(key: "misc") {
                 techConfig = UserTechConfig(
                     guestInsightEnabled: ((misc["disable_visitors_insight"].int ?? 0) == 0),
-                    fileSizeLimit: misc["max_file_size"].intValue,
+                    fileSizeLimit: misc["max_file_size"].int ?? 10,
                     disableArchiveForRegular: ((misc["disable_archive_non_admins"].int ?? 0) > 0),
                     iosTelephonyEnabled: ((misc["enable_ios_telephony"].int ?? 1) > 0),
                     limitedCRM: ((misc["enable_crm"].int ?? 1) > 0),
@@ -349,6 +346,7 @@ public final class AgentSessionChannelsChange: BaseModelChange {
         super.init(json: json)
     }
 }
+
 public func parseFeatures(source: JsonElement) -> Int {
     func _bit(key: String, flag: UserLicensedFeature) -> Int {
         let value = source[key].boolValue ? 1 : 0
