@@ -14,6 +14,7 @@ public enum MessageMediaType {
     case sticker
     case document
     case audio
+    case voice
     case video
     case comment
     case location
@@ -34,6 +35,7 @@ extension MessageMedia {
         case "sticker": return .sticker
         case "document": return .document
         case "audio": return .audio
+        case "voice": return .voice
         case "video": return .video
         case "comment": return .comment
         case "location": return .location
