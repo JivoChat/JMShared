@@ -14,11 +14,13 @@ public enum MessageMediaType {
     case sticker
     case document
     case audio
+    case voice
     case video
     case comment
     case location
     case contact
     case conference
+    case story
     case unknown
 }
 public enum MessageMediaSizingMode {
@@ -33,11 +35,13 @@ extension JVMessageMedia {
         case "sticker": return .sticker
         case "document": return .document
         case "audio": return .audio
+        case "voice": return .voice
         case "video": return .video
         case "comment": return .comment
         case "location": return .location
         case "contact": return .contact
         case "conference": return .conference
+        case "story": return .story
         default: return .unknown
         }
     }
@@ -107,6 +111,20 @@ extension JVMessageMedia {
         else {
             return MessageBodyConference(url: nil, title: _title ?? String())
         }
+    }
+    
+    public var story: MessageBodyStory? {
+        guard type == .story else {
+            return nil
+        }
+        
+        return MessageBodyStory(
+            text: _text ?? String(),
+            fileName: _name,
+            thumb: thumbURL,
+            file: fullURL,
+            title: _title ?? String()
+        )
     }
     
     public var phone: String? {

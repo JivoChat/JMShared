@@ -20,45 +20,6 @@ public enum LocalizedMetaMode {
     case exact(String)
 }
 
-public struct LocalizedMeta {
-    public let mode: LocalizedMetaMode
-    public let args: [CVarArg]
-    public let suffix: String?
-    public let interactiveID: JMTimelineItemInteractiveID?
-    
-    private let loc: Localizer
-    
-    public init(
-        mode: LocalizedMetaMode,
-        args: [CVarArg],
-        suffix: String?,
-        interactiveID: JMTimelineItemInteractiveID?,
-        localizer: Localizer
-    ) {
-        self.mode = mode
-        self.args = args
-        self.suffix = suffix
-        self.interactiveID = interactiveID
-        self.loc = localizer
-    }
-    
-    public func localized() -> String {
-        let base: String
-        switch mode {
-        case .key(let key): base = loc[key]
-        case .format(let format): base = String(format: loc[format], arguments: args)
-        case .exact(let string): base = string
-        }
-        
-        if let suffix = suffix {
-            return base + suffix
-        }
-        else {
-            return base
-        }
-    }
-}
-
 public struct SignupCountry {
     public let code: String
     public let title: String
@@ -95,7 +56,8 @@ public struct Localizer {
     }
     
     public subscript(format key: String, _ arguments: CVarArg...) -> String {
-        return String(format: self[key], arguments: arguments)
+        let locale = LocaleProvider.activeLocale
+        return String(format: self[key], locale: locale, arguments: arguments)
     }
     
     public init(for classFromBundle: AnyClass? = nil) {

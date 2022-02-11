@@ -171,6 +171,8 @@ public enum DesignBookColorUsage {
     case orderTint
     case photoLoadingErrorStubBackground
     case photoLoadingErrorDescription
+    case mediaPlaceholderBackground
+    case quoteMark
 }
 public enum DesignBookFontWeight {
     case italics

@@ -133,7 +133,7 @@ public final class DesignBook {
             .reddishPink: UIColor(hex: 0xFF2D55),
             .orangeRed: UIColor(hex: 0xFF3B30),
             .greenLight: UIColor(hex: 0x4CD964),
-            .greenJivo: UIColor(hex: 0x00BA3B),
+            .greenJivo: UIColor(hex: 0x00BC31),
             .skyBlue: UIColor(hex: 0x5AC8FA),
             .brightBlue: UIColor(hex: 0x007AFF),
             .darkPeriwinkle: UIColor(hex: 0x5856D6),
@@ -479,6 +479,8 @@ public final class DesignBook {
         case .orderTint: return dynamicColor(light: .hex(0x8770DC), dark: .hex(0x8770DC))
         case .photoLoadingErrorStubBackground: return dynamicColor(light: .alias(.grayRegular), dark: .hex(0x333333))
         case .photoLoadingErrorDescription: return dynamicColor(light: .alias(.steel), dark: .alias(.steel))
+        case .mediaPlaceholderBackground: return dynamicColor(light: .alias(.grayLight), dark: .alias(.grayLight))
+        case .quoteMark: return dynamicColor(light: .alias(.grayDark), dark: .alias(.grayDark))
         }
     }
     

@@ -24,6 +24,7 @@ public enum MessageContent {
     case call(call: MessageBodyCall)
     case task(task: MessageBodyTask)
     case conference(conference: MessageBodyConference)
+    case story(story: MessageBodyStory)
     case line
     
     public var isEditable: Bool {
@@ -41,6 +42,7 @@ public enum MessageContent {
         case .task: return false
         case .line: return false
         case .conference: return false
+        case .story: return false
         case .bot: return false
         case .order: return false
         }
@@ -61,6 +63,7 @@ public enum MessageContent {
         case .task: return false
         case .line: return false
         case .conference: return false
+        case .story: return false
         case .bot: return false
         case .order: return false
         }
@@ -243,6 +246,11 @@ public extension JVMessage {
                 else if let conference = media.conference {
                     return .conference(
                         conference: conference
+                    )
+                }
+                else if let story = media.story {
+                    return .story(
+                        story: story
                     )
                 }
                 else {
@@ -471,6 +479,9 @@ public extension JVMessage {
              .bot,
              .order:
             return nil
+            
+        case .story:
+            return UIImage(named: "preview_ig")
 
         case .email:
             return UIImage(named: "preview_email")
@@ -629,12 +640,36 @@ public extension JVMessage {
     }
     
     func correspondsTo(chat: JVChat) -> Bool {
-        if let client = client {
-            return (client.ID == chat.client?.ID)
+        if let client = _correspondsTo_getSelfClient() {
+            let chatClient = _correspondsTo_getChatClient(chat: chat)
+            return (client.ID == chatClient?.ID)
         }
         else {
-            return (chatID == validate(chat)?.ID)
+            let selfChatId = _correspondsTo_getSelfChatId()
+            let chatId = _correspondsTo_getChat(chat: chat)?.ID
+            return (selfChatId == chatId)
         }
+    }
+    
+    /**
+     Some extra private methods for <func correspondsTo(chat: Chat) Bool>
+     to make the stacktrace more readable for debug purpose
+     */
+    
+    private func _correspondsTo_getSelfChatId() -> Int? {
+        return isValid ? chatID : nil
+    }
+    
+    private func _correspondsTo_getSelfClient() -> JVClient? {
+        return isValid ? client : nil
+    }
+    
+    private func _correspondsTo_getChat(chat: JVChat) -> JVChat? {
+        return validate(chat)
+    }
+    
+    private func _correspondsTo_getChatClient(chat: JVChat) -> JVClient? {
+        return chat.isValid ? validate(chat.client) : nil
     }
     
     func canUpgradeStatus(to newStatus: String) -> Bool {

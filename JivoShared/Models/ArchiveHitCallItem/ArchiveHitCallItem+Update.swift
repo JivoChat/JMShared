@@ -22,7 +22,7 @@ extension JVArchiveHitCallItem {
             _costCurrency = c.costCurrency
             _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
-            _chat = context.upsert(of: JVChat.self, with: c.chatChange)
+            _chat = context.upsert(of: JVChat.self, with: c.chatChange?.copy(knownArchived: true))
             _call = context.upsert(of: JVCall.self, with: c.callChange)
         }
     }
