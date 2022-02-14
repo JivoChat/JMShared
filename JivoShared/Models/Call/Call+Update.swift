@@ -40,6 +40,7 @@ public final class CallLiveChange: BaseModelChange {
     public let chatID: Int
     public let type: MessageBodyCallType
     public let clientID: Int
+    public let channelId: Int?
     public let event: MessageBodyCallEvent
     public let clientConnected: Bool
     public let reason: String?
@@ -51,6 +52,7 @@ public final class CallLiveChange: BaseModelChange {
         chatID = json["chat_id"].intValue
         type = MessageBodyCallType(rawValue: json["type"].stringValue) ?? .unknown
         clientID = json["client_id"].intValue
+        channelId = json["widget_id"].int
         event = MessageBodyCallEvent(rawValue: json["status"].stringValue) ?? .unknown
         clientConnected = json["client_connected"].boolValue
         reason = json["reason"].string
