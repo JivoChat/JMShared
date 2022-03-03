@@ -222,9 +222,9 @@ public final class AgentSessionContextChange: BaseModelChange {
                     commentsEnabled: ((misc["enable_comments"].int ?? 1) > 0),
                     reactionsEnabled: ((misc["enable_reactions"].int ?? 1) > 0),
                     businessChatEnabled: ((misc["enable_imessage"].int ?? 1) > 0),
-                    billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 1) > 0 && ((misc["is_operator_model_enabled"].int ?? 1) > 0)),
+                    billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 0) > 0 && ((context["is_operator_model_enabled"].bool ?? true) == true)),
                     standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
-                    feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0),
+                    feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 0) > 0),
                     mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 0) > 0)
                 )
                 
