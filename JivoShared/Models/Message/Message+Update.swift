@@ -489,6 +489,11 @@ extension JVMessage {
                 }
             }
         }
+        else if let c = change as? SDKMessageOfflineChange {
+            if ID == 0 { _ID = c.id }
+            _date = c.date
+            _text = c.message
+        }
     }
     
     public func performDelete(inside context: IDatabaseContext) {
@@ -1387,6 +1392,26 @@ open class SdkMessageAtomChange: BaseModelChange {
         self.id = id
         self.localId = localId
         self.updates = updates
+        
+        super.init()
+    }
+    
+    required public init(json: JsonElement) {
+        fatalError("init(json:) has not been implemented")
+    }
+}
+
+final class SDKMessageOfflineChange: BaseModelChange {
+    let id = JVMessage.Identifiers.offlineMessage
+    let date = Date()
+    let message: String
+    
+    public override var primaryValue: Int {
+        abort()
+    }
+    
+    init(message: String) {
+        self.message = message
         
         super.init()
     }

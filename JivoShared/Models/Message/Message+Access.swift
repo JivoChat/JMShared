@@ -132,6 +132,12 @@ public enum MessageType: String {
 }
 
 public extension JVMessage {
+    struct Identifiers {
+        static let offlineMessage = -1
+    }
+}
+
+public extension JVMessage {
     var UUID: String {
         return _UUID
     }
