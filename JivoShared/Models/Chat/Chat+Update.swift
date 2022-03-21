@@ -32,6 +32,7 @@ extension Chat {
             
             if c.knownArchived {
                 _isArchived = true
+                _loadedPartialHistory = false
             }
             else if !c.attendees.isEmpty {
                 let attendees = context.insert(of: ChatAttendee.self, with: c.attendees)
