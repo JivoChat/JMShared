@@ -490,7 +490,7 @@ extension JVMessage {
             }
         }
         else if let c = change as? SDKMessageOfflineChange {
-            if ID == 0 { _ID = c.id }
+            _localID = c.localId
             _date = c.date
             _text = c.message
         }
@@ -1401,8 +1401,8 @@ open class SdkMessageAtomChange: BaseModelChange {
     }
 }
 
-final class SDKMessageOfflineChange: BaseModelChange {
-    let id = JVMessage.Identifiers.offlineMessage
+public class SDKMessageOfflineChange: BaseModelChange {
+    let localId = SDKMessageOfflineChange.id
     let date = Date()
     let message: String
     
@@ -1410,7 +1410,11 @@ final class SDKMessageOfflineChange: BaseModelChange {
         abort()
     }
     
-    init(message: String) {
+    open override var stringKey: DatabaseContextMainKey<String>? {
+        return DatabaseContextMainKey<String>(key: "_localID", value: localId)
+    }
+    
+    public init(message: String) {
         self.message = message
         
         super.init()
@@ -1419,6 +1423,10 @@ final class SDKMessageOfflineChange: BaseModelChange {
     required public init(json: JsonElement) {
         fatalError("init(json:) has not been implemented")
     }
+}
+
+public extension SDKMessageOfflineChange {
+    static let id = "OFFLINE_MESSAGE"
 }
 
 fileprivate func validateMessage(senderType: String, type: String) -> Bool {
