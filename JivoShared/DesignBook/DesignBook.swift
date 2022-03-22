@@ -52,7 +52,7 @@ public final class DesignBook {
     }
     
     public class func screenSize() -> DesignBookScreenSize {
-        let idiom = UI_USER_INTERFACE_IDIOM()
+        let idiom = UIDevice.current.userInterfaceIdiom
         let scale = UIScreen.main.nativeScale
         let height = UIScreen.main.nativeBounds.height / scale
         
