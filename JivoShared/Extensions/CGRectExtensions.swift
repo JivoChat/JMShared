@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension CGRect {
-    public func reduceBy(insets: UIEdgeInsets) -> CGRect {
+    func reduceBy(insets: UIEdgeInsets) -> CGRect {
         return CGRect(
             x: origin.x + insets.left,
             y: origin.y + insets.top,
@@ -19,11 +19,11 @@ public extension CGRect {
         )
     }
     
-    public func containerSize() -> CGSize {
+    func containerSize() -> CGSize {
         return CGSize(width: width, height: .infinity)
     }
     
-    public func divide(by axis: NSLayoutConstraint.Axis) -> (slice: CGRect, remainder: CGRect) {
+    func divide(by axis: NSLayoutConstraint.Axis) -> (slice: CGRect, remainder: CGRect) {
         switch axis {
         case .horizontal: return divided(atDistance: height * 0.5, from: .minYEdge)
         case .vertical: return divided(atDistance: width * 0.5, from: .minXEdge)
@@ -31,7 +31,7 @@ public extension CGRect {
         }
     }
     
-    public func divide(by axis: NSLayoutConstraint.Axis, number: Int) -> [CGRect] {
+    func divide(by axis: NSLayoutConstraint.Axis, number: Int) -> [CGRect] {
         switch axis {
         case .horizontal:
             let base = divided(atDistance: height / CGFloat(number), from: .minYEdge).slice
@@ -53,7 +53,7 @@ public extension CGRect {
         }
     }
     
-    public func divide(percent: CGFloat, from edge: CGRectEdge) -> (slice: CGRect, remainder: CGRect) {
+    func divide(percent: CGFloat, from edge: CGRectEdge) -> (slice: CGRect, remainder: CGRect) {
         let distance: CGFloat
         switch edge {
         case .minXEdge, .maxXEdge: distance = width * percent
@@ -63,11 +63,11 @@ public extension CGRect {
         return divided(atDistance: distance, from: edge)
     }
     
-    public func center() -> CGPoint {
+    func center() -> CGPoint {
         return CGPoint(x: midX, y: midY)
     }
     
-    public func bounds() -> CGRect {
+    func bounds() -> CGRect {
         return CGRect(origin: .zero, size: size)
     }
 }

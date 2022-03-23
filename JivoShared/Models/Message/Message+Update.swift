@@ -402,7 +402,7 @@ extension JVMessage {
             if _ID == 0 { _ID = c.id }
             _status = c.status?.rawValue ?? ""
             if let date = c.date {
-                _date = c.date
+                _date = date
             }
         }
         else if let c = change as? SdkMessageAtomChange {

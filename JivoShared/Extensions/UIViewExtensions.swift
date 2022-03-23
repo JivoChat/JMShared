@@ -14,12 +14,12 @@ public extension UIView {
         case bottomFlexible
         case bottomCentered
     }
-    public static func ofHeight(_ height: CGFloat) -> UIView {
+    static func ofHeight(_ height: CGFloat) -> UIView {
         let view = UIView()
         view.frame.size.height = height
         return view
     }
-        public var safeInsets: UIEdgeInsets {
+    var safeInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return safeAreaInsets
         }
@@ -27,30 +27,30 @@ public extension UIView {
             return .zero
         }
     }
-        public var maximumCornerRadius: CGFloat {
+    var maximumCornerRadius: CGFloat {
         return min(bounds.width, bounds.height) * 0.5
     }
     
-    public func isAttached() -> Bool {
+    func isAttached() -> Bool {
         return (window != nil)
     }
     
-    public func size(for width: CGFloat) -> CGSize {
+    func size(for width: CGFloat) -> CGSize {
         let containerSize = CGSize(width: width, height: .infinity)
         let result = sizeThatFits(containerSize)
         return result
     }
     
-    public func height(for width: CGFloat) -> CGFloat {
+    func height(for width: CGFloat) -> CGFloat {
         return size(for: width).height
     }
     
-    public func sizedToFit() -> UIView {
+    func sizedToFit() -> UIView {
         sizeToFit()
         return self
     }
     
-    public func pin(view: UIView, mode: PinMode) {
+    func pin(view: UIView, mode: PinMode) {
         switch mode {
         case .bottomFlexible:
             let height = view.bounds.height
@@ -88,12 +88,12 @@ public extension UIView {
         addSubview(view)
     }
     
-    public func applyFrame(_ frame: CGRect) {
+    func applyFrame(_ frame: CGRect) {
         guard transform == .identity else { return }
         self.frame = frame
     }
     
-    public func calculateInsets(downto subview: UIView?) -> UIEdgeInsets {
+    func calculateInsets(downto subview: UIView?) -> UIEdgeInsets {
         guard let subview = subview else { return .zero }
         
         return UIEdgeInsets(
@@ -104,7 +104,7 @@ public extension UIView {
         )
     }
 
-    public func forceLayout() {
+    func forceLayout() {
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -114,7 +114,7 @@ public extension UIView {
         case parent
     }
     
-    public func flash(color: UIColor, radius: CGFloat, extendBy: CGVector, anchor: FlashAnchor) {
+    func flash(color: UIColor, radius: CGFloat, extendBy: CGVector, anchor: FlashAnchor) {
         let flasher = UIView()
         flasher.backgroundColor = color
         flasher.frame = bounds.insetBy(dx: -extendBy.dx, dy: -extendBy.dy)

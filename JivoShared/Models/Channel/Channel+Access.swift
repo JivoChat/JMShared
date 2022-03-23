@@ -104,7 +104,7 @@ extension JVChannel {
     }
     
     public var name: String {
-        return siteURL?.absoluteString ?? _siteURL ?? String()
+        return siteURL?.absoluteString ?? _siteURL 
     }
     
     public var guestsNumber: Int {

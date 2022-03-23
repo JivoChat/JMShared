@@ -16,7 +16,7 @@ public enum DatabaseDriverWriting {
     case backgroundThread
 }
 
-public protocol IDatabaseDriver: class {    
+public protocol IDatabaseDriver: AnyObject {
     func parallel() -> IDatabaseDriver
     func refresh() -> IDatabaseDriver
 
@@ -199,7 +199,7 @@ open class DatabaseDriver: IDatabaseDriver {
     }
     
     public func removeAll() {
-        context.performTransaction { ctx in
+        _ = context.performTransaction { ctx in
             ctx.removeAll()
         }
     }

@@ -9,15 +9,15 @@
 import Foundation
 
 public extension Int {
-    public var valuable: Int? {
+    var valuable: Int? {
         return (self == 0 ? nil : self)
     }
 
-    public func hasBit(_ flag: Int) -> Bool {
+    func hasBit(_ flag: Int) -> Bool {
         return ((self & flag) > 0)
     }
 
-    public func toString() -> String {
+    func toString() -> String {
         return "\(self)"
     }
 }

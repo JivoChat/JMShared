@@ -9,7 +9,7 @@
 import Foundation
 
 public extension UUID {
-    public var shortString: String {
+    var shortString: String {
         return String(uuidString.lowercased().prefix(6))
     }
 }

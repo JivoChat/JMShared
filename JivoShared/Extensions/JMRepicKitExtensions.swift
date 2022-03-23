@@ -13,7 +13,7 @@ public enum JMRepicActivity {
 }
 
 public extension JMRepicConfig {
-    public static func standard(height: CGFloat = 75, context: JMRepicView.VisualContext = .regular) -> JMRepicConfig {
+    static func standard(height: CGFloat = 75, context: JMRepicView.VisualContext = .regular) -> JMRepicConfig {
         return JMRepicConfig(
             side: height,
             borderWidth: 0,
@@ -39,7 +39,7 @@ public extension JMRepicConfig {
         )
     }
     
-    public static func overlay(height: CGFloat = 75) -> JMRepicConfig {
+    static func overlay(height: CGFloat = 75) -> JMRepicConfig {
         return JMRepicConfig(
             side: height,
             borderWidth: 0,
@@ -104,7 +104,7 @@ public extension JMRepicView {
         }
     }
         
-    public func setSleeping(icon: UIImage?, context: VisualContext) {
+    func setSleeping(icon: UIImage?, context: VisualContext) {
         if let _ = icon {
             setIndicator(
                 fillColor: .clear,
@@ -121,7 +121,7 @@ public extension JMRepicView {
         }
     }
     
-    public func setActivity(_ activity: JMRepicActivity?, context: JMRepicView.VisualContext) {
+    func setActivity(_ activity: JMRepicActivity?, context: JMRepicView.VisualContext) {
         switch activity {
         case .calling?:
             setIndicator(
@@ -155,7 +155,7 @@ public extension JMRepicView {
 }
 
 fileprivate extension JMRepicIndicatorConfig {
-    public static func statusIndicatorConfig(indicatorScale: CGFloat, context: JMRepicView.VisualContext) -> JMRepicIndicatorConfig {
+    static func statusIndicatorConfig(indicatorScale: CGFloat, context: JMRepicView.VisualContext) -> JMRepicIndicatorConfig {
         return JMRepicIndicatorConfig(
             sideProvider: { $0 * indicatorScale },
             borderWidthProvider: { _ in 0 },
@@ -165,7 +165,7 @@ fileprivate extension JMRepicIndicatorConfig {
         )
     }
     
-    public static func activityIndicatorConfig(context: JMRepicView.VisualContext) -> JMRepicIndicatorConfig {
+    static func activityIndicatorConfig(context: JMRepicView.VisualContext) -> JMRepicIndicatorConfig {
         return JMRepicIndicatorConfig(
             sideProvider: { max(16, $0 * 0.3) },
             borderWidthProvider: { max(2, $0 * 0.035) },
@@ -177,7 +177,7 @@ fileprivate extension JMRepicIndicatorConfig {
 }
 
 fileprivate extension JMRepicView.VisualContext {
-    public var resolvedColor: UIColor {
+    var resolvedColor: UIColor {
         switch self {
         case .regular: return DesignBook.shared.color(usage: .primaryBackground)
         case .navigation: return DesignBook.shared.color(usage: .navigatorBackground)

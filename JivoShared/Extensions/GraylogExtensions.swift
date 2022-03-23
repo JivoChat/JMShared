@@ -18,28 +18,28 @@ fileprivate var cachedRecentRestResponse = String()
 fileprivate var cachedRecentPayload: GraylogPayload?
 
 public extension Graylog {
-    public static func linkTo(_ link: String) {
+    static func linkTo(_ link: String) {
         guard let url = URL(string: link) else { return }
         setURL(url)
     }
     
-    public static func setAgentID(_ agentID: Int?) {
+    static func setAgentID(_ agentID: Int?) {
         cachedAgentID = agentID
     }
     
-    public static func setRecentLivePacket(_ packet: String) {
+    static func setRecentLivePacket(_ packet: String) {
         cachedRecentLivePacket = packet
     }
     
-    public static func setRecentRestRequest(_ request: String) {
+    static func setRecentRestRequest(_ request: String) {
         cachedRecentRestRequest = request
     }
     
-    public static func setRecentRestResponse(_ response: String) {
+    static func setRecentRestResponse(_ response: String) {
         cachedRecentRestResponse = response
     }
     
-    public static func buildPayload(brief: String, details: String?, file: String, line: Int, includeCaches: Bool) -> GraylogPayload {
+    static func buildPayload(brief: String, details: String?, file: String, line: Int, includeCaches: Bool) -> GraylogPayload {
         let values: [JsonElement?] = [
             JsonElement(key: "short_message", value: brief),
             JsonElement(key: "full_message", value: details),
@@ -59,11 +59,11 @@ public extension Graylog {
         return merged.ordictValue.compactMapValues({ $0.string }).unOrderedMap
     }
     
-    public static func wrapRecentPayloadIntoException(exception: NSException) -> GraylogPayload {
+    static func wrapRecentPayloadIntoException(exception: NSException) -> GraylogPayload {
         return cachedRecentPayload ?? buildPayload(brief: "standalone-exception", details: nil, file: #file, line: #line, includeCaches: true)
     }
     
-    public static func send(brief: String, details: String, file: String, line: Int, includeCaches: Bool) {
+    static func send(brief: String, details: String, file: String, line: Int, includeCaches: Bool) {
         cachedRecentPayload = buildPayload(
             brief: brief,
             details: details,
@@ -76,7 +76,7 @@ public extension Graylog {
         }
     }
     
-    public static func send(payload: GraylogPayload) {
+    static func send(payload: GraylogPayload) {
         Graylog.log(payload)
     }
 }

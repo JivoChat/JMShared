@@ -14,7 +14,7 @@ fileprivate let calculateContainer = NSTextContainer()
 fileprivate let calculateManager = NSLayoutManager()
 
 public extension UITextView {
-    public func calculateSize(for width: CGFloat, numberOfLines: Int?, exclusionPaths: [UIBezierPath] = []) -> CGSize {
+    func calculateSize(for width: CGFloat, numberOfLines: Int?, exclusionPaths: [UIBezierPath] = []) -> CGSize {
         calculateContainer.size = CGSize(width: width, height: .infinity)
         calculateContainer.exclusionPaths = exclusionPaths
         calculateContainer.lineBreakMode = textContainer.lineBreakMode
@@ -36,7 +36,7 @@ public extension UITextView {
         return rect.size
     }
     
-    public func calculateContentOffset(for maxHeight: CGFloat) -> CGFloat? {
+    func calculateContentOffset(for maxHeight: CGFloat) -> CGFloat? {
         guard selectedRange.location == text.count else { return nil }
         guard let font = font else { return nil }
         

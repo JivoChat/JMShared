@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension UIColor {
-    public static var auto: UIColor {
+    static var auto: UIColor {
         if #available(iOS 13.0, *) {
             return label
         }
@@ -19,7 +19,7 @@ public extension UIColor {
         }
     }
     
-    public static var dynamicLink: UIColor? {
+    static var dynamicLink: UIColor? {
         if #available(iOS 13.0, *) {
             return link
         }
@@ -44,17 +44,19 @@ public extension UIColor {
         }
     }
     
-    public func withAlpha(_ alpha: CGFloat) -> UIColor {
+    func withAlpha(_ alpha: CGFloat) -> UIColor {
         return withAlphaComponent(alpha)
     }
-        public var isLight: Bool {
+    
+    var isLight: Bool {
         var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0)
         getRed(&r, green: &g, blue: &b, alpha: nil)
         
         let brightness = (r * 299.0 + g * 587.0 + b * 114.0) / 1000.0
         return (brightness > 0.5)
     }
-        public var resolveToLight: UIColor {
+    
+    var resolveToLight: UIColor {
         if #available(iOS 13.0, *) {
             return resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
         }

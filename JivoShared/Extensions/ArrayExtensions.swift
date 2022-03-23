@@ -10,33 +10,33 @@ import Foundation
 import UIKit
 
 public extension Array {
-    public var hasElements: Bool {
+    var hasElements: Bool {
         return !isEmpty
     }
     
-    public var hasOneElement: Bool {
+    var hasOneElement: Bool {
         return (count == 1)
     }
 }
 
 public extension Sequence where Iterator.Element: OptionalType {
-    public func flatten() -> [Iterator.Element.Wrapped] {
+    func flatten() -> [Iterator.Element.Wrapped] {
         return compactMap { $0.optional }
     }
 }
 
 public extension Array where Element: JVBaseModel {
-    public func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
         forEach { $0.apply(inside: context, with: change) }
     }
 }
 
 public extension Array where Element == String {
-    public func stringOrEmpty(at index: Int) -> String {
+    func stringOrEmpty(at index: Int) -> String {
         return (index < count ? self[index] : String())
     }
     
-    public func markupMasked(_ isMasked: Bool) -> [Element] {
+    func markupMasked(_ isMasked: Bool) -> [Element] {
         if isMasked {
             return self
         }
@@ -50,7 +50,7 @@ public extension Array where Element == String {
 }
 
 public extension Array where Element: Equatable {
-    public func unique() -> [Element] {
+    func unique() -> [Element] {
         var uniqueValues = [Element]()
         
         forEach { item in
@@ -61,7 +61,7 @@ public extension Array where Element: Equatable {
         return uniqueValues
     }
     
-    public func doesNotContain(_ element: Element) -> Bool {
+    func doesNotContain(_ element: Element) -> Bool {
         return !contains(element)
     }
     
@@ -76,7 +76,7 @@ public extension Array where Element: Equatable {
 }
 
 public extension Array where Element == Int {
-    public func stringify() -> [String] {
+    func stringify() -> [String] {
         return map { String("\($0)") }
     }
 }

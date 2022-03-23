@@ -16,7 +16,7 @@ public enum URLCommand {
 }
 
 public extension URL {
-    public static func generateAvatarURL(ID: UInt64) -> (image: UIImage?, color: UIColor?) {
+    static func generateAvatarURL(ID: UInt64) -> (image: UIImage?, color: UIColor?) {
         let names = [
             "airplane", "apple", "ball", "bug" /*bee*/,
             "bug", "cat", "cloud", "coffee",
@@ -44,66 +44,66 @@ public extension URL {
         )
     }
 
-    public static func privacy() -> URL? {
+    static func privacy() -> URL? {
         return URL(string: UIApplication.openSettingsURLString)
     }
     
-    public static func welcome() -> URL? {
+    static func welcome() -> URL? {
         let link = loc["Menu.VisitWeb.URL"]
         return URL(string: link)
     }
     
-    public static func recoverPassword(email: String, lang: String) -> URL? {
+    static func recoverPassword(email: String, lang: String) -> URL? {
         return URL(string: "https://admin.jivosite.com")?.build(
             "/auth/forgot-password",
             query: ["email": email, "lang": lang]
         )
     }
     
-    public static func mailto(mail: String) -> URL? {
+    static func mailto(mail: String) -> URL? {
         return URL(string: "mailto:\(mail)")
     }
     
-    public static func call(phone: String, countryCode: String?) -> URL? {
+    static func call(phone: String, countryCode: String?) -> URL? {
         let badSymbols = NSCharacterSet(charactersIn: "+0123456789").inverted
         let goodPhone = phone.stringByRemovingSymbols(of: badSymbols)
         let goodCountryCode = countryCode ?? String()
         return URL(string: "tel:\(goodPhone)?\(goodCountryCode)")
     }
     
-    public static func location(coordinate: CLLocationCoordinate2D) -> URL? {
+    static func location(coordinate: CLLocationCoordinate2D) -> URL? {
         return URL(string: "http://maps.apple.com/maps")?.build(
             query: ["saddr": "\(coordinate.latitude),\(coordinate.longitude)"]
         )
     }
     
-    public static func review(applicationID: Int) -> URL? {
+    static func review(applicationID: Int) -> URL? {
         return URL(string: "itms-apps://itunes.apple.com/app/id\(applicationID)")?.build(
             query: ["action": "write-review"]
         )
     }
     
-    public static func notificationAck(host: String, siteID: Int, agentID: Int, pushID: String) -> URL? {
+    static func notificationAck(host: String, siteID: Int, agentID: Int, pushID: String) -> URL? {
         return URL(string: "https://\(host)/push/delivery/\(siteID)/\(agentID)/\(pushID)")?.build(
             query: ["platform": "ios"]
         )
     }
     
-    public static func customerAckEndpoint() -> URL? {
+    static func customerAckEndpoint() -> URL? {
         return URL(string: "https://track.customer.io/push/events")
     }
     
-    public static func license() -> URL? {
+    static func license() -> URL? {
         let link = loc["License.PricingURL"]
         return URL(string: link)
     }
     
-    public static func commandAddContact(phone: String, name: String) -> URL? {
+    static func commandAddContact(phone: String, name: String) -> URL? {
         return URL(string: "internal://add-contact")?
             .build(query: ["phone": phone, "name": name])
     }
 
-    public static func widgetSumulator(siteLink: String, channelID: String, codeHost: String?, lang: String) -> URL? {
+    static func widgetSumulator(siteLink: String, channelID: String, codeHost: String?, lang: String) -> URL? {
         return URL(string: "https://app.jivosite.com/simulate_widget.html")?.build(
             query: [
                 "site": siteLink,
@@ -114,12 +114,12 @@ public extension URL {
         )
     }
 
-    public static func privacyPolicy() -> URL? {
+    static func privacyPolicy() -> URL? {
         let link = loc["Signup.PrivacyPolicy.Link"]
         return URL(string: link)
     }
     
-    public static func feedback(session: String, lang: LocaleLang, siteID: Int, agentID: Int, name: String, app: String, design: String) -> URL? {
+    static func feedback(session: String, lang: LocaleLang, siteID: Int, agentID: Int, name: String, app: String, design: String) -> URL? {
         /*
          ru: jivosite.ru
          en: jivochat.com
@@ -162,7 +162,7 @@ public extension URL {
 //        return URL(string: "https://twemoji.maxcdn.com/2/72x72/\(slice).png")
 //    }
 
-    public func parseCommand() -> URLCommand? {
+    func parseCommand() -> URLCommand? {
         if let host = host {
             var params = [String: String]()
             if let components = URLComponents(url: self, resolvingAgainstBaseURL: false) {
@@ -184,34 +184,34 @@ public extension URL {
         }
     }
 
-    public func fileSize() -> Int64? {
+    func fileSize() -> Int64? {
         guard isFileURL else { return nil }
         guard let attributes = try? FileManager.default.attributesOfItem(atPath: path) else { return nil }
         guard let size = attributes[.size] as? NSNumber else { return nil }
         return size.int64Value
     }
     
-    public var debugQuerylessFull: String {
+    var debugQuerylessFull: String {
         guard var c = URLComponents(url: self, resolvingAgainstBaseURL: false) else { return String() }
         c.queryItems = nil
         return c.url?.absoluteString ?? absoluteString
     }
     
-    public var debugQuerylessCompact: String {
+    var debugQuerylessCompact: String {
         return path
     }
     
-    public var debugFull: String {
+    var debugFull: String {
         guard let c = URLComponents(url: self, resolvingAgainstBaseURL: false) else { return String() }
         let queries: [String] = (c.queryItems ?? []).map({ item in "\t&\(item.name)=\(item.value ?? String())\n" })
         return "\(debugQuerylessFull)?\n\(queries.joined())"
     }
     
-    public var debugCompact: String {
+    var debugCompact: String {
         return debugQuerylessCompact
     }
     
-    public var utmHumanReadable: String? {
+    var utmHumanReadable: String? {
         guard
             let components = URLComponents(url: self, resolvingAgainstBaseURL: false),
             let queryItems = components.queryItems,
@@ -232,17 +232,17 @@ public extension URL {
         )
     }
     
-    public func unarchive<T: Codable>(type: T.Type) -> T? {
+    func unarchive<T: Codable>(type: T.Type) -> T? {
         let filePath = path
         return try? handle({ NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? T })
     }
     
-    public func normalized() -> URL {
+    func normalized() -> URL {
         guard URLComponents(url: self, resolvingAgainstBaseURL: false)?.scheme == nil else { return self }
         return URL(string: "http://" + absoluteString) ?? self
     }
     
-    public func excludedFromBackup() -> URL {
+    func excludedFromBackup() -> URL {
         var duplicate = self
         
         var values = URLResourceValues()
@@ -254,7 +254,7 @@ public extension URL {
 }
 
 public extension URLRequest {
-    public var debugFull: String {
+    var debugFull: String {
         guard let url = url else { return String() }
         guard let c = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return String() }
 
@@ -264,14 +264,14 @@ public extension URLRequest {
         return "\(url.debugQuerylessFull)?\n\(queries.joined())\n\(body)"
     }
 
-    public var debugCompact: String {
+    var debugCompact: String {
         guard let url = url else { return String() }
         return url.debugCompact
     }
 }
 
 public extension URLResponse {
-    public var debugFull: String {
+    var debugFull: String {
         guard let url = url else { return String() }
 
         if let http = self as? HTTPURLResponse {
@@ -282,7 +282,7 @@ public extension URLResponse {
         }
     }
 
-    public var debugCompact: String {
+    var debugCompact: String {
         guard let url = url else { return String() }
         
         if let http = self as? HTTPURLResponse {
@@ -295,14 +295,14 @@ public extension URLResponse {
 }
 
 public extension Array where Element == URLQueryItem {
-    public func value(forName name: String) -> String? {
+    func value(forName name: String) -> String? {
         guard let item = first(where: { $0.name == name }) else { return nil }
         return item.value
     }
 }
 
 public extension LocaleLang {
-    public var developmentPrefix: String {
+    var developmentPrefix: String {
         switch self {
         case .en: return "en"
         case .ru: return "ru"
@@ -312,14 +312,14 @@ public extension LocaleLang {
         }
     }
     
-    public var productionHost: String {
+    var productionHost: String {
         switch self {
         case .ru: return "jivosite.\(productionDomain)"
         default: return "jivochat.\(productionDomain)"
         }
     }
     
-    public var productionDomain: String {
+    var productionDomain: String {
         switch self {
         case .en: return "com"
         case .ru: return "ru"
@@ -329,7 +329,7 @@ public extension LocaleLang {
         }
     }
     
-    public var feedbackEmail: String {
+    var feedbackEmail: String {
         switch self {
         case .tr: return "bilgi@\(productionHost)"
         default: return "info@\(productionHost)"

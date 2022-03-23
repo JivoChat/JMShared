@@ -40,7 +40,7 @@ public final class ModelRef<Value: JVBaseModel> {
             return object
         }
         else if behavior.contains(.strong) {
-            databaseDriver?.refresh()
+            _ = databaseDriver?.refresh()
             return databaseDriver?.object(Value.self, mainKey: mainKey)
         }
         else {

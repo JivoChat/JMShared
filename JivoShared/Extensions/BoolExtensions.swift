@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Bool {
-    public func inverted() -> Bool {
+    func inverted() -> Bool {
         return !self
     }
 }

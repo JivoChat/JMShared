@@ -9,10 +9,10 @@
 import Foundation
 
 public extension DispatchQueue {
-    public static var onceExecutingLock = NSLock()
-    public static var onceExecutedTokens = Set<UUID>()
+    static var onceExecutingLock = NSLock()
+    static var onceExecutedTokens = Set<UUID>()
 
-    public class func globalOnce(token: UUID, block: () -> Void) {
+    class func globalOnce(token: UUID, block: () -> Void) {
         onceExecutingLock.lock()
         defer { onceExecutingLock.unlock() }
 
@@ -22,7 +22,7 @@ public extension DispatchQueue {
         block()
     }
 
-    public func delayed(seconds: TimeInterval, block: @escaping () -> Void) {
+    func delayed(seconds: TimeInterval, block: @escaping () -> Void) {
         asyncAfter(
             deadline: .now() + seconds,
             execute: block

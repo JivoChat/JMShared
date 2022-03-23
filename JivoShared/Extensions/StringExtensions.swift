@@ -15,15 +15,15 @@ public extension String {
         case email
         case phone
     }
-        public init(_ value: String?) {
+    init(_ value: String?) {
         self = value ?? String()
     }
     
-    public var valuable: String? {
+    var valuable: String? {
         return isEmpty ? nil : self
     }
     
-    public var fileExtension: String? {
+    var fileExtension: String? {
         if let ext = split(separator: ".").last {
             return String(ext)
         }
@@ -32,27 +32,27 @@ public extension String {
         }
     }
     
-    public func appendingPathComponent(_ component: String) -> String {
+    func appendingPathComponent(_ component: String) -> String {
         return NSString(string: self).appendingPathComponent(component)
     }
     
-    public func escape() -> String? {
+    func escape() -> String? {
         return addingPercentEncoding(withAllowedCharacters: .alphanumerics)
     }
     
-    public func unescape() -> String? {
+    func unescape() -> String? {
         return removingPercentEncoding
     }
 
-    public func fromHTML() -> String {
+    func fromHTML() -> String {
         return NSString(string: self).replacingOccurrences(of: "&nbsp;", with: "\u{00a0}")
     }
 
-    public func unbreakable() -> String {
+    func unbreakable() -> String {
         return (self as NSString).replacingOccurrences(of: " ", with: " ")
     }
 
-    public func substringFrom(index: Int) -> String {
+    func substringFrom(index: Int) -> String {
         if count < index {
             return self
         }
@@ -62,7 +62,7 @@ public extension String {
         }
     }
 
-    public func substringTo(index: Int) -> String {
+    func substringTo(index: Int) -> String {
         if count <= index {
             return self
         }
@@ -72,27 +72,27 @@ public extension String {
         }
     }
     
-    public func stringByRemovingSymbols(of set: CharacterSet) -> String {
+    func stringByRemovingSymbols(of set: CharacterSet) -> String {
         return components(separatedBy: set).joined()
     }
     
-    public func stringByRemoving(_ strings: [String]) -> String {
+    func stringByRemoving(_ strings: [String]) -> String {
         return strings.reduce(self) { result, string in
             return result.replacingOccurrences(of: string, with: "")
         }
     }
     
-    public func trimmed(charset: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
+    func trimmed(charset: CharacterSet = CharacterSet.whitespacesAndNewlines) -> String {
         return trimmingCharacters(in: charset)
     }
     
-    public func trimmedZeros() -> String {
+    func trimmedZeros() -> String {
         let zeroCharset = CharacterSet(charactersIn: "\u{0000}")
         let charset = CharacterSet.whitespacesAndNewlines.union(zeroCharset)
         return trimmed(charset: charset)
     }
     
-    public func parseDateUsingFullFormat() -> Date? {
+    func parseDateUsingFullFormat() -> Date? {
         let dateParser = DateFormatter()
         dateParser.locale = locale()
         dateParser.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -106,7 +106,7 @@ public extension String {
         }
     }
     
-    public func search(_ mode: SearchingMode, query: String) -> Bool {
+    func search(_ mode: SearchingMode, query: String) -> Bool {
         switch mode {
         case .plain: return lowercased().contains(query.lowercased())
         case .email: return lowercased().contains(query.lowercased())
@@ -114,19 +114,19 @@ public extension String {
         }
     }
     
-    public func toInt() -> Int {
+    func toInt() -> Int {
         return (self as NSString).integerValue
     }
 
-    public func toHexInt() -> UInt64? {
+    func toHexInt() -> UInt64? {
         return valuable.flatMap({ UInt64($0, radix: 16) })
     }
     
-    public func toDouble() -> Double {
+    func toDouble() -> Double {
         return (self as NSString).doubleValue
     }
     
-    public func toBool() -> Bool {
+    func toBool() -> Bool {
         switch self {
         case "true", "1": return true
         case "false", "0": return false
@@ -134,18 +134,18 @@ public extension String {
         }
     }
     
-    public func extractingPhoneSymbols() -> String {
+    func extractingPhoneSymbols() -> String {
         let charset = CharacterSet(charactersIn: "+(0123456789)-")
         return components(separatedBy: charset.inverted).joined()
     }
     
-    public func clipBy(_ limit: Int?) -> String {
+    func clipBy(_ limit: Int?) -> String {
         guard let limit = limit else { return self }
         guard count >= limit else { return self }
         return substringTo(index: limit) + "…"
     }
     
-    public func plain() -> String {
+    func plain() -> String {
         var result = self
         result = result.replacingOccurrences(of: "\r\n", with: " ")
         result = result.replacingOccurrences(of: "\r", with: " ")
@@ -153,37 +153,37 @@ public extension String {
         return result
     }
     
-    public func oneEmojiString() -> String? {
+    func oneEmojiString() -> String? {
         let clearString = trimmed()
         return clearString.hasEmojiOnly ? clearString : nil
     }
     
-    public func containsSymbols(from characterSet: CharacterSet) -> Bool {
+    func containsSymbols(from characterSet: CharacterSet) -> Bool {
         return components(separatedBy: characterSet).count > 1
     }
     
-    public func contains(only symbols: CharacterSet) -> Bool {
+    func contains(only symbols: CharacterSet) -> Bool {
         let slices = (self as NSString).components(separatedBy: symbols)
         return (slices.filter(\.isEmpty).count == unicodeScalars.count + 1)
     }
 
-    public func styledWith(lineHeight: CGFloat? = nil, foregroundColor: UIColor? = nil) -> NSAttributedString {
+    func styledWith(lineHeight: CGFloat? = nil, foregroundColor: UIColor? = nil) -> NSAttributedString {
         var attributes = TextAttributes()
         if let value = lineHeight { attributes = attributes.minimumLineHeight(value).maximumLineHeight(value) }
         if let value = foregroundColor { attributes = attributes.foregroundColor(value) }
         return NSAttributedString(string: self, attributes: attributes)
     }
 
-    public func convertToNonBreakable() -> String {
+    func convertToNonBreakable() -> String {
         // replace regular space with non-break space
         return replacingOccurrences(of: " ", with: " ")
     }
 
-    public func quoted() -> String {
+    func quoted() -> String {
         return "\"\(self)\""
     }
     
-    public func convertToEmojis() -> String {
+    func convertToEmojis() -> String {
         return String(
             String.UnicodeScalarView(
                 split(separator: "-")
@@ -193,7 +193,7 @@ public extension String {
         )
     }
     
-    public var hasEmojiOnly: Bool {
+    var hasEmojiOnly: Bool {
         guard let firstScalar = unicodeScalars.first else {
             return false
         }
@@ -249,7 +249,7 @@ public extension String.StringInterpolation {
 }
 
 fileprivate extension UnicodeScalar {
-    public var isEmoji: Bool {
+    var isEmoji: Bool {
         switch value {
         case 0x1F600...0x1F64F: return true // Emoticons
         case 0x1F300...0x1F5FF: return true // Misc Symbols and Pictographs

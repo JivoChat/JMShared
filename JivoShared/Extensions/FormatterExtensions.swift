@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Formatter {
-    public func format(_ obj: Any?) -> String {
+    func format(_ obj: Any?) -> String {
         return string(for: obj) ?? String(describing: obj)
     }
 }

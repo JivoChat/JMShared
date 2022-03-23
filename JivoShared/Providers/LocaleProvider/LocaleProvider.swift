@@ -20,7 +20,7 @@ public enum LocaleLang: String {
     }
 }
 
-public protocol ILocaleProvider: class {
+public protocol ILocaleProvider: AnyObject {
     var availableLocales: [Locale] { get }
     var activeLocale: Locale { get set }
     var activeLang: LocaleLang { get }

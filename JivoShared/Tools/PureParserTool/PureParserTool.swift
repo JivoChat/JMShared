@@ -9,7 +9,7 @@
 import Foundation
 import PureParser
 
-public protocol IPureParserTool: class {
+public protocol IPureParserTool: AnyObject {
     func assign(variable name: String, value: String?)
     func activate(alias: String, _ rule: Bool)
     func execute(_ formula: String, collapseSpaces: Bool) -> String

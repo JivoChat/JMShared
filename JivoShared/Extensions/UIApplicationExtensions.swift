@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension UIApplication {
-    public var isActive: Bool {
+    var isActive: Bool {
         switch applicationState {
         case .active: return true
         case .inactive: return false
@@ -19,20 +19,20 @@ public extension UIApplication {
         }
     }
     
-    public func openLocalizedURL(for key: String) {
+    func openLocalizedURL(for key: String) {
         let link = loc[key]
         guard let url = URL(string: link) else { return }
         open(url, options: [:], completionHandler: nil)
     }
     
-    public func discardCachedLaunchScreen() {
+    func discardCachedLaunchScreen() {
         let path = NSHomeDirectory() + "/Library/SplashBoard"
         try? FileManager.default.removeItem(atPath: path)
     }
 }
 
 public extension UIApplication.State {
-    public var description: String {
+    var description: String {
         switch self {
         case .active: return "active"
         case .background: return "background"

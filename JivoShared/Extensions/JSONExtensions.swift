@@ -11,7 +11,7 @@ import JMCodingKit
 
 public extension JsonElement {
     
-    public init<T>(key: String, value: T?) {
+    init<T>(key: String, value: T?) {
         if let value = value {
             self.init([key: value])
         } else {
@@ -19,32 +19,32 @@ public extension JsonElement {
         }
     }
 
-    public var status: JsonElement {
+    var status: JsonElement {
         return self
     }
     
-    public func has(key: String) -> JsonElement? {
+    func has(key: String) -> JsonElement? {
         let value = self[key]
         return value.exists(withValue: false) ? value : nil
     }
 
-    public var stringToStringMap: [String: String]? {
+    var stringToStringMap: [String: String]? {
         return ordict?.unOrderedMap.compactMapValues { $0.string }
     }
 
-    public var stringArray: [String] {
+    var stringArray: [String] {
         return arrayValue.compactMap { $0.string }
     }
 
-    public var intArray: [Int]? {
+    var intArray: [Int]? {
         return array?.compactMap { $0.number?.intValue }
     }
 
-    public var valuable: String? {
+    var valuable: String? {
         return stringValue.valuable
     }
     
-    public func map<T>(_ block: (JsonElement) -> T) -> T? {
+    func map<T>(_ block: (JsonElement) -> T) -> T? {
         if exists(withValue: true) {
             return block(self)
         }
@@ -53,7 +53,7 @@ public extension JsonElement {
         }
     }
     
-    public func parse<T: BaseModelChange>(force: Bool = false) -> T? {
+    func parse<T: BaseModelChange>(force: Bool = false) -> T? {
         if exists(withValue: true) {
             let change = T(json: self)
             return (change.isValid || force ? change : nil)
@@ -63,7 +63,7 @@ public extension JsonElement {
         }
     }
     
-    public func parseList<T: BaseModelChange>() -> [T]? {
+    func parseList<T: BaseModelChange>() -> [T]? {
         return array?.map { T(json: $0) }
     }
 }
