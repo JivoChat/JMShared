@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIDevice {
     public var isPhone: Bool {
-        if UI_USER_INTERFACE_IDIOM() == .phone {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             return true
         }
         else {
