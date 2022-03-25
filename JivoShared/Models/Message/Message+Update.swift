@@ -493,6 +493,7 @@ extension JVMessage {
             _localID = c.localId
             _date = c.date
             _text = c.message
+            _senderAgent = c.sender
         }
     }
     
@@ -1405,6 +1406,8 @@ public class SDKMessageOfflineChange: BaseModelChange {
     let localId = SDKMessageOfflineChange.id
     let date = Date()
     let message: String
+    
+    let sender = JVAgent()
     
     public override var primaryValue: Int {
         abort()
