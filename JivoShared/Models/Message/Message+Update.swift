@@ -290,7 +290,7 @@ extension JVMessage {
                     )
                 )
                 
-            case .proactive, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
+            case .proactive, .offline, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
             }
             
@@ -492,8 +492,11 @@ extension JVMessage {
         else if let c = change as? SDKMessageOfflineChange {
             _localID = c.localId
             _date = c.date
-            _text = c.message
-            _senderAgent = c.sender
+            _type = c.type
+            
+            if case let .offline(text) = c.content {
+                _text = text
+            }
         }
     }
     
@@ -585,7 +588,8 @@ public final class MessageGeneralChange: MessageExtendedGeneralChange {
     public override var primaryValue: Int {
         abort()
     }
-        public init(ID: Int,
+    
+    public init(ID: Int,
          clientID: Int,
          chatID: Int,
          type: String,
@@ -1405,9 +1409,9 @@ open class SdkMessageAtomChange: BaseModelChange {
 public class SDKMessageOfflineChange: BaseModelChange {
     let localId = SDKMessageOfflineChange.id
     let date = Date()
-    let message: String
+    let type = "offline"
     
-    let sender = JVAgent()
+    let content: MessageContent
     
     public override var primaryValue: Int {
         abort()
@@ -1418,7 +1422,7 @@ public class SDKMessageOfflineChange: BaseModelChange {
     }
     
     public init(message: String) {
-        self.message = message
+        content = .offline(message: message)
         
         super.init()
     }

@@ -47,7 +47,7 @@ open class JVMessage: JVBaseModel {
         self.localizer = localizer
     }
     
-    required public override init() {
+    required public init() {
         self.localizer = loc
     }
     

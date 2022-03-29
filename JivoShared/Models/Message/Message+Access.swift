@@ -11,6 +11,7 @@ import JMRepicKit
 
 public enum MessageContent {
     case proactive(message: String)
+    case offline(message: String)
     case text(message: String)
     case comment(message: String)
     case bot(message: String, buttons: [String], markdown: Bool)
@@ -30,6 +31,7 @@ public enum MessageContent {
     public var isEditable: Bool {
         switch self {
         case .proactive: return false
+        case .offline: return false
         case .text: return true
         case .comment: return true
         case .email: return false
@@ -51,6 +53,7 @@ public enum MessageContent {
     public var isDeletable: Bool {
         switch self {
         case .proactive: return false
+        case .offline: return true
         case .text: return true
         case .comment: return true
         case .email: return false
@@ -218,6 +221,11 @@ public extension JVMessage {
         switch type {
         case "proactive":
             return .proactive(
+                message: _text
+            )
+            
+        case "offline":
+            return .offline(
                 message: _text
             )
             
@@ -474,6 +482,7 @@ public extension JVMessage {
     func iconContent() -> UIImage? {
         switch content {
         case .proactive,
+             .offline,
              .text,
              .comment,
              .transfer,
