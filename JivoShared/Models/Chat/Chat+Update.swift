@@ -32,6 +32,7 @@ extension JVChat {
             
             if c.knownArchived {
                 _isArchived = true
+                _loadedPartialHistory = false
             }
             else if !c.attendees.isEmpty {
                 let attendees = context.insert(of: JVChatAttendee.self, with: c.attendees)
