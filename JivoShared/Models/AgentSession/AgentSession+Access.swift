@@ -92,12 +92,13 @@ extension JVAgentSession {
         return channel?.jointType
     }
     
-    public func testableChannels(lang: LocaleLang, codeHost: String?) -> [(channel: JVChannel, url: URL)] {
+    public func testableChannels(domain: String, lang: LocaleLang, codeHost: String?) -> [(channel: JVChannel, url: URL)] {
         return channels.compactMap { channel in
             guard
                 channel.isTestable,
                 let link = channel.name.valuable,
                 let url = URL.widgetSumulator(
+                    domain: domain,
                     siteLink: link,
                     channelID: channel.publicID,
                     codeHost: codeHost?.split(separator: ".").first.flatMap(String.init),

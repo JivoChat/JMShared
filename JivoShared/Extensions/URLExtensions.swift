@@ -53,8 +53,8 @@ public extension URL {
         return URL(string: link)
     }
     
-    public static func recoverPassword(email: String, lang: String) -> URL? {
-        return URL(string: "https://admin.jivosite.com")?.build(
+    public static func recoverPassword(domain: String, email: String, lang: String) -> URL? {
+        return URL(string: "https://admin.\(domain)")?.build(
             "/auth/forgot-password",
             query: ["email": email, "lang": lang]
         )
@@ -103,8 +103,8 @@ public extension URL {
             .build(query: ["phone": phone, "name": name])
     }
 
-    public static func widgetSumulator(siteLink: String, channelID: String, codeHost: String?, lang: String) -> URL? {
-        return URL(string: "https://app.jivosite.com/simulate_widget.html")?.build(
+    public static func widgetSumulator(domain: String, siteLink: String, channelID: String, codeHost: String?, lang: String) -> URL? {
+        return URL(string: "https://app.\(domain)/simulate_widget.html")?.build(
             query: [
                 "site": siteLink,
                 "widget_id": channelID,
@@ -119,7 +119,7 @@ public extension URL {
         return URL(string: link)
     }
     
-    public static func feedback(session: String, lang: LocaleLang, siteID: Int, agentID: Int, name: String, app: String, design: String) -> URL? {
+    public static func feedback(domain: String, session: String, lang: LocaleLang, siteID: Int, agentID: Int, name: String, app: String, design: String) -> URL? {
         /*
          ru: jivosite.ru
          en: jivochat.com
@@ -147,7 +147,7 @@ public extension URL {
         
         let endpoint: String // = "https://ip.yandex.ru/"/.
         #if ENV_DEBUG
-        endpoint = "https://\(lang.developmentPrefix).site.dev.jivosite.com/feedback"
+        endpoint = "https://\(lang.developmentPrefix).site.dev.\(domain)/feedback"
         #else
         endpoint = "https://\(lang.productionHost)/feedback"
         #endif
