@@ -101,7 +101,7 @@ extension JVAgentSession {
                     domain: domain,
                     siteLink: link,
                     channelID: channel.publicID,
-                    codeHost: codeHost?.split(separator: ".").first.flatMap(String.init),
+                    codeHost: codeHost,
                     lang: lang.rawValue)
             else { return nil }
             
