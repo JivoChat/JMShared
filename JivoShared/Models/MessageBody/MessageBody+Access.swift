@@ -24,7 +24,7 @@ public struct MessageBodyCall {
     public let callID: String
     public let agent: JVAgent?
     public let type: MessageBodyCallType
-    public let phone: String
+    public let phone: String?
     public let event: MessageBodyCallEvent
     public let endCallSide: MessageBodyCallEndCallSide?
     public let reason: MessageBodyCallReason?
@@ -160,7 +160,6 @@ extension JVMessageBody {
     
     public var call: MessageBodyCall? {
         guard let event = _event?.valuable else { return nil }
-        guard let phone = _phone?.valuable else { return nil }
         guard let callID = _callID?.valuable else { return nil }
         guard let type = _type?.valuable else { return nil }
         
@@ -168,7 +167,7 @@ extension JVMessageBody {
             callID: callID,
             agent: _agent,
             type: MessageBodyCallType(rawValue: type) ?? .unknown,
-            phone: phone,
+            phone: _phone?.valuable,
             event: MessageBodyCallEvent(rawValue: event) ?? .unknown,
             endCallSide: _endCallSide?.valuable.flatMap(MessageBodyCallEndCallSide.init),
             reason: _reason?.valuable.flatMap(MessageBodyCallReason.init),
