@@ -120,6 +120,9 @@ public final class DesignBook {
             .darkBackground: UIColor(hex: 0x1C1B17),
             .white: UIColor.white,
             .black: UIColor.black,
+            .accentGreen: UIColor(hex: 0x18C139),
+            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGraphite: UIColor(hex: 0x445669),
             .background: UIColor(hex: 0xF7F9FC),
             .stillBackground: UIColor(hex: 0xF7F7F7),
             .silverLight: UIColor(hex: 0xD1D1D6),
@@ -150,6 +153,9 @@ public final class DesignBook {
         .dark: [
             .white: UIColor.white,
             .black: UIColor.black,
+            .accentGreen: UIColor(hex: 0x18C139),
+            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGraphite: UIColor(hex: 0x445669),
             .orangeRed: UIColor(hex: 0xFF3B30),
             .greenJivo: UIColor(hex: 0x008A0B),
             .sunflowerYellow: UIColor(hex: 0xFFCC00),
@@ -362,6 +368,9 @@ public final class DesignBook {
         case .white: return UIColor.white
         case .black: return UIColor.black
         case .clear: return UIColor.clear
+        case .accentGreen: return dynamicColor(light: .alias(.accentGreen), dark: .alias(.accentGreen))
+        case .accentBlue: return dynamicColor(light: .alias(.accentBlue), dark: .alias(.accentBlue))
+        case .accentGraphite: return dynamicColor(light: .alias(.accentGraphite), dark: .alias(.accentGraphite))
         // backgrounds
         case .statusBarBackground: return dynamicColor(light: .alias(.silverRegular), dark: .hex(0x151515))
         case .statusBarFailureBackground: return dynamicColor(light: .alias(.orangeRed), dark: .alias(.orangeRed))

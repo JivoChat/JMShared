@@ -22,6 +22,9 @@ public enum DesignBookColorAlias {
     case darkBackground
     case white
     case black
+    case accentGreen
+    case accentBlue
+    case accentGraphite
     case background
     case stillBackground
     case silverLight
@@ -54,6 +57,9 @@ public enum DesignBookColorUsage {
     case white
     case black
     case clear
+    case accentGreen
+    case accentBlue
+    case accentGraphite
     // backgrounds
     case statusBarBackground
     case statusBarFailureBackground
