@@ -306,7 +306,11 @@ extension JVChat {
             if c.exclusive {
                 _agents.set(c.agents)
             } else {
-                _agents.append(objectsIn: c.agents)
+                c.agents.forEach { agent in
+                    if !_agents.contains(where: { $0.ID == agent.ID }) {
+                        _agents.append(agent)
+                    }
+                }
             }
         }
         else {

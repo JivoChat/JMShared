@@ -290,7 +290,7 @@ extension JVMessage {
                     )
                 )
                 
-            case .proactive, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
+            case .proactive, .offline, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
             }
             
@@ -489,6 +489,15 @@ extension JVMessage {
                 }
             }
         }
+        else if let c = change as? SDKMessageOfflineChange {
+            _localID = c.localId
+            _date = c.date
+            _type = c.type
+            
+            if case let .offline(text) = c.content {
+                _text = text
+            }
+        }
     }
     
     public func performDelete(inside context: IDatabaseContext) {
@@ -579,7 +588,8 @@ public final class MessageGeneralChange: MessageExtendedGeneralChange {
     public override var primaryValue: Int {
         abort()
     }
-        public init(ID: Int,
+    
+    public init(ID: Int,
          clientID: Int,
          chatID: Int,
          type: String,
@@ -1394,6 +1404,36 @@ open class SdkMessageAtomChange: BaseModelChange {
     required public init(json: JsonElement) {
         fatalError("init(json:) has not been implemented")
     }
+}
+
+public class SDKMessageOfflineChange: BaseModelChange {
+    let localId = SDKMessageOfflineChange.id
+    let date = Date()
+    let type = "offline"
+    
+    let content: MessageContent
+    
+    public override var primaryValue: Int {
+        abort()
+    }
+    
+    open override var stringKey: DatabaseContextMainKey<String>? {
+        return DatabaseContextMainKey<String>(key: "_localID", value: localId)
+    }
+    
+    public init(message: String) {
+        content = .offline(message: message)
+        
+        super.init()
+    }
+    
+    required public init(json: JsonElement) {
+        fatalError("init(json:) has not been implemented")
+    }
+}
+
+public extension SDKMessageOfflineChange {
+    static let id = "OFFLINE_MESSAGE"
 }
 
 fileprivate func validateMessage(senderType: String, type: String) -> Bool {
