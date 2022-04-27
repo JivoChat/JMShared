@@ -68,7 +68,7 @@ public final class MessageBodyGeneralChange: BaseModelChange {
 
         let callAgentID = call["agent_id"].int
         event = call["status"].string
-        phone = (call["phone"].string ?? json["client_phone"].string).flatMap { "+" + $0 }
+        phone = (call["phone"].string ?? json["client_phone"].string)?.valuable.flatMap { "+" + $0 }
         email = call["email"].string ?? json["client_email"].string
         endCallSide = call["end_call_side"].string
         callID = call["call_id"].string
@@ -110,7 +110,6 @@ public final class MessageBodyGeneralChange: BaseModelChange {
     public var isValidCall: Bool {
         guard let _ = callID else { return false }
         guard let _ = type else { return false }
-        guard let _ = phone else { return false }
         return true
     }
 }
