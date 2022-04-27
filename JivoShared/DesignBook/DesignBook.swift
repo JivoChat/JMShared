@@ -469,7 +469,7 @@ public final class DesignBook {
         // elements
         case .clientBackground: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
         case .clientForeground: return dynamicColor(light: .alias(.white), dark: .alias(.white))
-        case .clientLinkForeground: return dynamicColor(light: .hex(0x2222FF), dark: .hex(0x0000A0))
+        case .clientLinkForeground: return dynamicColor(light: .alias(.white), dark: .alias(.white))
         case .clientIdentityForeground: return dynamicColor(light: .native(.white), dark: .alias(.white))
         case .clientTime: return dynamicColor(light: .alias(.white), dark: .alias(.white))
         case .clientCheckmark: return dynamicColor(light: .alias(.white), dark: .alias(.white))
