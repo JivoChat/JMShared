@@ -2,7 +2,7 @@
 //  Mappable.swift
 //  JivoShared
 //
-//  Created by macbook on 05.03.2021.
+//  Created by Anton Karpushko on 05.03.2021.
 //
 
 import Foundation
