@@ -2,7 +2,7 @@
 //  JMShared.swift
 //  JivoShared
 //
-//  Created by macbook on 22.09.2021.
+//  Created by Anton Karpushko on 22.09.2021.
 //
 
 import Foundation

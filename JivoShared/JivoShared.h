@@ -2,7 +2,7 @@
 //  JivoShared.h
 //  JivoShared
 //
-//  Created by macbook on 02.11.2020.
+//  Created by Anton Karpushko on 02.11.2020.
 //
 
 #import <Foundation/Foundation.h>
