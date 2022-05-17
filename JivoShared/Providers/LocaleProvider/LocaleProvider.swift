@@ -97,12 +97,12 @@ public final class LocaleProvider: ILocaleProvider {
     }
 
     public var isPossibleRussia: Bool {
-        let parts = Locale.current.identifier.split(separator: "_").map { $0.lowercased() }
+        let parts = Locale.current.identifier.components(separatedBy: .punctuationCharacters).map { $0.lowercased() }
         return isActiveRussia || parts.contains("ru")
     }
 
     public var isPossibleGlobal: Bool {
-        let parts = Locale.current.identifier.split(separator: "_").map { $0.lowercased() }
+        let parts = Locale.current.identifier.components(separatedBy: .punctuationCharacters).map { $0.lowercased() }
         return parts.contains("ua") || not(isPossibleRussia)
     }
 

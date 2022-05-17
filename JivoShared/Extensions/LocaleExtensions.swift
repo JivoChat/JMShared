@@ -10,12 +10,12 @@ import Foundation
 
 public extension Locale {
     var langID: String? {
-        let parts = identifier.components(separatedBy: "_")
+        let parts = identifier.components(separatedBy: .punctuationCharacters)
         return parts.first
     }
     
     var countryID: String? {
-        let parts = identifier.components(separatedBy: "_")
+        let parts = identifier.components(separatedBy: .punctuationCharacters)
         if parts.count > 1 {
             return parts.last
         }
