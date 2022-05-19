@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'JMShared'
-  spec.version      = '4.3.9'
+  spec.version      = '4.3.10'
   spec.license      = { :type => 'MIT', :file => "LICENSE" }
   spec.homepage     = 'https://github.com/JivoChat'
   spec.authors      = { 'Anton Karpushko' => 'karpushko@jivosite.com' }

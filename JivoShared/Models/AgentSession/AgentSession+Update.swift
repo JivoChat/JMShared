@@ -222,7 +222,7 @@ public final class AgentSessionContextChange: BaseModelChange {
                     billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 0) > 0 && ((context["is_operator_model_enabled"].bool ?? true) == true)),
                     standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
                     feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0 && (misc["disable_feedback_sdk_ios"].int ?? 0) < 1),
-                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 0) > 0)
+                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 1) > 0 && (misc["disable_media_service_uploading"].int ?? 0) < 1)
                 )
                 
                 currency = misc["currency"].string
