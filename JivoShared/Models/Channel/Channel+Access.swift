@@ -84,8 +84,29 @@ public enum ChannelJoint: String {
         case .salute: return false
         case .abc: return true
         case .ig: return true
-        case .drom: return true
+        case .drom: return false
         case .unknown: return false
+        }
+    }
+    
+    public var isContiguous: Bool {
+        switch self {
+        case .fb: return true
+        case .vk: return true
+        case .ok: return true
+        case .tg: return true
+        case .vb: return true
+        case .wa: return true
+        case .email: return true
+        case .sdk: return true
+        case .ya: return false
+        case .webhook: return true
+        case .tel: return true
+        case .salute: return true
+        case .abc: return true
+        case .ig: return true
+        case .drom: return false
+        case .unknown: return true
         }
     }
 }
