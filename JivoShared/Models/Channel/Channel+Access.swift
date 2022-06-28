@@ -24,6 +24,7 @@ public enum ChannelJoint: String {
     case abc = "im"
     case ig = "ig"
     case drom = "drom"
+    case ali = "ali"
     case unknown
     
     public var localizedChannelTitle: String? {
@@ -43,6 +44,7 @@ public enum ChannelJoint: String {
         case .abc: return loc["Channel.Title.iMessage"]
         case .ig: return loc["Client.Integration.Instagram"]
         case .drom: return loc["Client.Integration.Drom"]
+        case .ali: return loc["Client.Integration.Aliexpress"]
         case .unknown: return nil
         }
     }
@@ -64,6 +66,7 @@ public enum ChannelJoint: String {
         case .abc: return loc["Channel.Title.iMessage"]
         case .ig: return loc["Client.Integration.Instagram"]
         case .drom: return loc["Channel.Title.Drom"]
+        case .ali: return loc["Channel.Title.Aliexpress"]
         case .unknown: return nil
         }
     }
@@ -85,6 +88,7 @@ public enum ChannelJoint: String {
         case .abc: return true
         case .ig: return true
         case .drom: return false
+        case .ali: return false
         case .unknown: return false
         }
     }
@@ -106,6 +110,7 @@ public enum ChannelJoint: String {
         case .abc: return true
         case .ig: return true
         case .drom: return false
+        case .ali: return false
         case .unknown: return true
         }
     }
@@ -174,6 +179,7 @@ extension JVChannel {
         case .abc: return UIImage(named: "preview_abc")
         case .ig: return UIImage(named: "preview_ig")
         case .drom: return UIImage(named: "preview_drom")
+        case .ali: return UIImage(named: "preview_ecomm")
         case .unknown: return UIImage(named: "preview_chat")
         }
     }
