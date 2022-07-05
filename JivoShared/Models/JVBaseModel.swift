@@ -81,6 +81,7 @@ public enum SenderType: String {
     case agent = "agent"
     case guest = "visitor"
     case teamchat = "teamchat"
+    case department = "department"
 }
 
 public struct Sender: Equatable {

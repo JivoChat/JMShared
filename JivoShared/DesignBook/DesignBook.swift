@@ -326,6 +326,9 @@ public final class DesignBook {
                 
             case .teamchat:
                 break
+                
+            case .department:
+                break
             }
         }
     }
