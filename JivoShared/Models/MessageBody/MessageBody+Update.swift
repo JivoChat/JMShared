@@ -13,6 +13,7 @@ extension JVMessageBody {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let c = change as? MessageBodyGeneralChange {
             _agent = c.agentID.flatMap { $0 > 0 ? context.agent(for: $0, provideDefault: true) : nil }
+            _department = c.departmentID.flatMap { $0 > 0 ? context.department(for: $0) : nil }
             _to = c.to
             _from = c.from
             _subject = c.subject
@@ -61,8 +62,9 @@ public final class MessageBodyGeneralChange: BaseModelChange {
     public let taskStatus: String?
     public let buttons: String?
     public let orderID: String?
+    public let departmentID: Int?
 
-    required public init( json: JsonElement) {
+    required public init(json: JsonElement) {
         let call = json.has(key: "call") ?? json
         let task = json.has(key: "reminder") ?? json
 
@@ -92,6 +94,7 @@ public final class MessageBodyGeneralChange: BaseModelChange {
 
         let defaultAgentID = json["agent"].int ?? json["by_agent"].int
         agentID = callAgentID ?? taskAgentID ?? defaultAgentID
+        departmentID = json["group"].int
 
         let defaultText = json["text"].string
         text = taskText ?? defaultText

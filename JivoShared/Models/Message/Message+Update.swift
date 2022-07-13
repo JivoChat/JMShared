@@ -290,7 +290,7 @@ extension JVMessage {
                     )
                 )
                 
-            case .proactive, .offline, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
+            case .proactive, .offline, .transfer, .transferDepartment, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
             }
             

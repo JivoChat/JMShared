@@ -123,6 +123,7 @@ extension JVChat {
             _icon = c.icon?.valuable?.convertToEmojis() ?? _icon
 
             _transferTo = nil
+            _transferToDepartment = nil
             _transferDate = nil
             _transferFailReason = nil
             
@@ -237,7 +238,8 @@ extension JVChat {
             }
         }
         else if let c = change as? ChatTransferRequestChange {
-            _transferTo = context.agent(for: c.agentID, provideDefault: true)
+            _transferTo = c.agentID.flatMap { context.agent(for: $0, provideDefault: true) }
+            _transferToDepartment = c.departmentID.flatMap { context.department(for: $0) }
             _transferAssisting = c.assisting
             _transferDate = nil
             _transferComment = c.comment
@@ -262,14 +264,22 @@ extension JVChat {
                         : loc["Chat.System.Transfer.Failed.Unknown"]
                 }
             }
+            else if let department = _transferToDepartment {
+                _transferTo = nil
+                _transferToDepartment = nil
+                _transferDate = nil
+                _transferFailReason = nil
+            }
             else {
                 _transferTo = nil
+                _transferToDepartment = nil
                 _transferDate = nil
                 _transferFailReason = nil
             }
         }
         else if change is ChatTransferCancelChange {
             _transferTo = nil
+            _transferToDepartment = nil
             _transferDate = nil
             _transferFailReason = nil
         }
@@ -832,16 +842,19 @@ public final class ChatResetUnreadChange: BaseModelChange {
 
 public final class ChatTransferRequestChange: BaseModelChange {
     public let ID: Int
-    public let agentID: Int
+    public let agentID: Int?
+    public let departmentID: Int?
     public let assisting: Bool
     public let comment: String?
     
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, agentID: Int, assisting: Bool, comment: String?) {
+    
+    public init(ID: Int, agentID: Int?, departmentID: Int?, assisting: Bool, comment: String?) {
         self.ID = ID
         self.agentID = agentID
+        self.departmentID = departmentID
         self.assisting = assisting
         self.comment = comment
         super.init()

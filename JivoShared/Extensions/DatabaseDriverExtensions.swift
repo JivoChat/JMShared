@@ -344,6 +344,15 @@ public extension IDatabaseContext {
         }
     }
     
+    func department(for departmentID: Int) -> JVDepartment? {
+        if let value = object(JVDepartment.self, primaryKey: departmentID) {
+            return value
+        }
+        else {
+            return nil
+        }
+    }
+    
     func client(for clientID: Int, needsDefault: Bool) -> JVClient? {
         if let value = object(JVClient.self, primaryKey: clientID) {
             return value

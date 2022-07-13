@@ -35,6 +35,9 @@ public enum ChatTransferState {
     case requested(agent: JVAgent, assisting: Bool, comment: String?)
     case completed(agent: JVAgent, assisting: Bool, date: Date, comment: String?)
     case rejected(agent: JVAgent, assisting: Bool, reason: String)
+    case requestedDepartment(department: JVDepartment, comment: String?)
+    case completedDepartment(department: JVDepartment, date: Date, comment: String?)
+    case rejectedDepartment(department: JVDepartment, reason: String)
 }
 public enum ChatAttendeeAssignment {
     case assignedWithMe
@@ -214,6 +217,27 @@ extension JVChat: Presentable {
                 )
             }
         }
+        else if let department = _transferToDepartment {
+            if let date = _transferDate {
+                return .completedDepartment(
+                    department: department,
+                    date: date,
+                    comment: _transferComment
+                )
+            }
+            else if let reason = _transferFailReason {
+                return .rejectedDepartment(
+                    department: department,
+                    reason: reason
+                )
+            }
+            else {
+                return .requestedDepartment(
+                    department: department,
+                    comment: _transferComment
+                )
+            }
+        }
         else {
             return .none
         }
@@ -275,6 +299,14 @@ extension JVChat: Presentable {
         guard !_transferAssisting else { return nil }
         guard let _ = _transferDate else { return nil }
         return (agent, _transferComment)
+    }
+
+    public func transferredToDepartment() -> (department: JVDepartment, agent: JVAgent, comment: String?)? {
+        guard let department = _transferToDepartment else { return nil }
+        guard let agent = _transferTo, !agent.isMe else { return nil }
+        guard !_transferAssisting else { return nil }
+        guard let _ = _transferDate else { return nil }
+        return (department, agent, _transferComment)
     }
 
     public func assistingFrom() -> (agent: JVAgent, comment: String?)? {

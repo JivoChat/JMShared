@@ -13,6 +13,7 @@ import CoreLocation
 
 public final class JVMessageBody: JVBaseModel {
     @objc dynamic public var _agent: JVAgent?
+    @objc dynamic public var _department: JVDepartment?
     @objc dynamic public var _to: String?
     @objc dynamic public var _from: String?
     @objc dynamic public var _subject: String?

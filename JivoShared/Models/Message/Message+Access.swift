@@ -20,6 +20,7 @@ public enum MessageContent {
     case photo(mime: String, name: String, link: String, dataSize: Int, width: Int, height: Int)
     case file(mime: String, name: String, link: String, size: Int)
     case transfer(from: JVAgent, to: JVAgent)
+    case transferDepartment(from: JVAgent, department: JVDepartment, to: JVAgent)
     case join(assistant: JVAgent, by: JVAgent?)
     case left(agent: JVAgent, kicker: JVAgent?)
     case call(call: MessageBodyCall)
@@ -38,6 +39,7 @@ public enum MessageContent {
         case .photo: return false
         case .file: return false
         case .transfer: return false
+        case .transferDepartment: return false
         case .join: return false
         case .left: return false
         case .call: return false
@@ -60,6 +62,7 @@ public enum MessageContent {
         case .photo: return true
         case .file: return true
         case .transfer: return false
+        case .transferDepartment: return false
         case .join: return false
         case .left: return false
         case .call: return false
@@ -293,7 +296,14 @@ public extension JVMessage {
             }
             
         case "transfer":
-            if let transferFrom = _senderAgent, let transferTo = _body?.transfer?.agent {
+            if let transferFrom = _senderAgent, let department = _body?.transfer?.department, let transferTo = _body?.transfer?.agent {
+                return .transferDepartment(
+                    from: transferFrom,
+                    department: department,
+                    to: transferTo
+                )
+            }
+            else if let transferFrom = _senderAgent, let transferTo = _body?.transfer?.agent {
                 return .transfer(
                     from: transferFrom,
                     to: transferTo
@@ -486,6 +496,7 @@ public extension JVMessage {
              .text,
              .comment,
              .transfer,
+             .transferDepartment,
              .join,
              .left,
              .photo,
