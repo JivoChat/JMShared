@@ -23,18 +23,18 @@ extension JVClientCustomData {
     
     public var URL: URL? {
         if let link = _link?.valuable {
-            return Foundation.URL(string: normalizedLink(link))
+            if URLComponents(string: link)?.scheme == nil {
+                return Foundation.URL(string: "https://" + link)
+            }
+            else {
+                return Foundation.URL(string: link)
+            }
         }
-        else if let link = content.valuable {
-            return Foundation.URL(string: normalizedLink(link))
+        else if let content = _content.valuable, content.contains("://") {
+            return Foundation.URL(string: content)
         }
         else {
             return nil
         }
-    }
-    
-    private func normalizedLink(_ link: String) -> String {
-        guard URLComponents(string: link)?.scheme == nil else { return link }
-        return "http://" + link
     }
 }
