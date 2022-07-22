@@ -258,17 +258,21 @@ extension JVChat {
                         ? loc[format: "Chat.System.Assist.Failed.RejectByAgent", name]
                         : loc[format: "Chat.System.Transfer.Failed.RejectByAgent", name]
 
-                case .unknown:
+                case .rejectByDepartment, .unknown:
                     _transferFailReason = c.assisting
                         ? loc["Chat.System.Assist.Failed.Unknown"]
                         : loc["Chat.System.Transfer.Failed.Unknown"]
                 }
             }
             else if let department = _transferToDepartment {
-                _transferTo = nil
-                _transferToDepartment = nil
-                _transferDate = nil
-                _transferFailReason = nil
+                switch c.reason {
+                case .rejectByDepartment:
+                    let name = department.displayName(kind: .original)
+                    _transferFailReason = loc[format: "Chat.System.Transfer.Failed.RejectByDepartment", name]
+
+                case .rejectByAgent, .unknown:
+                    _transferFailReason = loc["Chat.System.Transfer.Failed.Unknown"]
+                }
             }
             else {
                 _transferTo = nil
@@ -885,6 +889,7 @@ public final class ChatTransferCompleteChange: BaseModelChange {
 public final class ChatTransferRejectChange: BaseModelChange {
     public enum Reason: String {
         case rejectByAgent = "target_agent_reject"
+        case rejectByDepartment = "target_group_reject"
         case unknown
     }
     
