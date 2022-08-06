@@ -28,6 +28,7 @@ extension JVMessage {
                 _senderAgent = _body?.call?.agent.flatMap { context.agent(for: $0.ID, provideDefault: true) }
             case "bot":
                 _senderBot = true
+                _senderBott = context.bot(for: ID, provideDefault: true)
             case _ where _clientID > 0:
                 _senderClient = context.client(for: _clientID, needsDefault: false)
             default:

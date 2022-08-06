@@ -412,6 +412,10 @@ public extension JVMessage {
         return _senderBot
     }
     
+    var senderBott: JVBot? {
+        return _senderBott
+    }
+    
     func relativeSenderDisplayName() -> String? {
         if senderBot {
             return "bot"

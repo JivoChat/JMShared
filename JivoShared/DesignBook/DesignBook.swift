@@ -303,6 +303,9 @@ public final class DesignBook {
                 else {
                     control.setStatus(agent.state, worktimeEnabled: agent.isWorktimeEnabled, context: repicContext, scale: indicatorScale ?? 0.25)
                 }
+                
+            case .bot:
+                break
 
             case .client:
                 guard let client = attendee as? JVClient else { return }

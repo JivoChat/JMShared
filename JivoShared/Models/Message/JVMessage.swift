@@ -24,6 +24,7 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _senderClient: JVClient?
     @objc open dynamic var _senderAgent: JVAgent?
     @objc open dynamic var _senderBot = Bool(false)
+    @objc open dynamic var _senderBott: JVBot?
     @objc open dynamic var _status: String = ""
     @objc open dynamic var _reactions: Data?
     @objc open dynamic var _isIncoming: Bool = true

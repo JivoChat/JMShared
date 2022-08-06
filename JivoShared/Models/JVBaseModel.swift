@@ -79,6 +79,7 @@ public enum SenderType: String {
     case `self`
     case client = "client"
     case agent = "agent"
+    case bot = "bot"
     case guest = "visitor"
     case teamchat = "teamchat"
     case department = "department"
