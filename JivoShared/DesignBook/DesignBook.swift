@@ -120,8 +120,8 @@ public final class DesignBook {
             .darkBackground: UIColor(hex: 0x1C1B17),
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x18C139),
-            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGreen: UIColor(hex: 0x12A730),
+            .accentBlue: UIColor(hex: 0x086BCD),
             .accentGraphite: UIColor(hex: 0x445669),
             .background: UIColor(hex: 0xF7F9FC),
             .stillBackground: UIColor(hex: 0xF7F7F7),
@@ -153,8 +153,8 @@ public final class DesignBook {
         .dark: [
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x18C139),
-            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGreen: UIColor(hex: 0x12A730),
+            .accentBlue: UIColor(hex: 0x086BCD),
             .accentGraphite: UIColor(hex: 0x445669),
             .orangeRed: UIColor(hex: 0xFF3B30),
             .greenJivo: UIColor(hex: 0x008A0B),
@@ -457,6 +457,7 @@ public final class DesignBook {
         case .checkmarkOnBackground: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.steel))
         case .checkmarkOffBackground: return dynamicColor(light: .alias(.grayDark), dark: .alias(.steel))
         case .attentiveTint: return dynamicColor(light: .alias(.orangeRed), dark: .alias(.orangeRed))
+        case .performableTint: return dynamicColor(light: .hex(0x086BCD), dark: .hex(0x086BCD))
         case .performingTint: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
         case .performedTint: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.white))
         case .accessoryTint: return dynamicColor(light: .alias(.steel), dark: .native(.gray))

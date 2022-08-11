@@ -103,12 +103,12 @@ extension JVAgentSession {
             _allowMobileCalls = c.mobileCalls
             _isWorking = c.workingState
             
-//            debug("{worktime} session-change-apply is-working[\(_isWorking)]")
+            //            debug("{worktime} session-change-apply is-working[\(_isWorking)]")
         }
         else if let c = change as? AgentSessionContextChange {
             
-//            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
-
+            //            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
+            
             if let features = c.techConfig {
                 _globalReceived = true
                 _globalGuestsInsightEnabled = features.guestInsightEnabled
@@ -138,6 +138,23 @@ extension JVAgentSession {
         }
         else if let c = change as? AgentSessionChannelsChange {
             _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
+        }
+        else if let c = change as? AgentSessionChannelUpdateChange {
+            let oldChannels = Array(_channels.filter { $0.ID != c.channel.ID })
+            
+            if let newChannel = context.upsert(of: JVChannel.self, with: c.channel) {
+                _channels.set(oldChannels + [newChannel])
+            }
+            else {
+                _channels.set(oldChannels)
+            }
+        }
+        else if let c = change as? AgentSessionChannelRemoveChange {
+            let oldChannels = Array(_channels.filter { $0.ID == c.channelId })
+            let needChannels = Array(_channels.filter { $0.ID != c.channelId })
+            
+            _channels.set(needChannels)
+            context.customRemove(objects: oldChannels, recursive: true)
         }
     }
     
@@ -336,6 +353,7 @@ public final class AgentSessionWorktimeChange: BaseModelChange {
 
 public final class AgentSessionChannelsChange: BaseModelChange {
     public let channels: [ChannelGeneralChange]
+    
     public init(channels: [ChannelGeneralChange]) {
         self.channels = channels
         super.init()
@@ -343,6 +361,34 @@ public final class AgentSessionChannelsChange: BaseModelChange {
     
     required public init( json: JsonElement) {
         channels = []
+        super.init(json: json)
+    }
+}
+
+public final class AgentSessionChannelUpdateChange: BaseModelChange {
+    public let channel: ChannelGeneralChange
+    
+    public init(channel: ChannelGeneralChange) {
+        self.channel = channel
+        super.init()
+    }
+    
+    required public init( json: JsonElement) {
+        preconditionFailure()
+        super.init(json: json)
+    }
+}
+
+public final class AgentSessionChannelRemoveChange: BaseModelChange {
+    public let channelId: Int
+    
+    public init(channelId: Int) {
+        self.channelId = channelId
+        super.init()
+    }
+    
+    required public init( json: JsonElement) {
+        preconditionFailure()
         super.init(json: json)
     }
 }

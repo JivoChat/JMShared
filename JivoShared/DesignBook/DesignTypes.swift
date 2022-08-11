@@ -140,6 +140,7 @@ public enum DesignBookColorUsage {
     case checkmarkOnBackground
     case checkmarkOffBackground
     case attentiveTint
+    case performableTint
     case performingTint
     case performedTint
     case accessoryTint

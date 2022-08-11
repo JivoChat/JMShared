@@ -457,6 +457,9 @@ public extension JVMessage {
             else if let details = _body?.order?.text {
                 return details
             }
+            else if let text = _body?.text?.valuable {
+                return text
+            }
 
             return String()
         }
