@@ -94,6 +94,10 @@ public final class DesignBook {
         return systemIcon("chevron.left", orStandard: "nav_back", pointSize: pointSize)
     }
     
+    public class func dismissIcon(pointSize: CGFloat? = nil) -> UIImage? {
+        return systemIcon("xmark", orStandard: "nav_dismiss", pointSize: pointSize)
+    }
+    
     public class func checkIcon() -> UIImage? {
         return systemIcon("checkmark", orStandard: "cell_check")
     }
