@@ -349,6 +349,30 @@ public final class DesignBook {
             maximumSizes: nil)
     }
     
+    public func entypoFont(ofSize size: CGFloat) -> UIFont? {
+        let name = "fontello_entypo"
+        ensureFontLoaded(fontName: name, fileName: name)
+        return UIFont(name: name, size: size)
+    }
+    
+    private func ensureFontLoaded(fontName: String, fileName: String) {
+        guard UIFont.fontNames(forFamilyName: fontName).isEmpty,
+              let url = Bundle(for: DesignBook.self).url(forResource: fileName, withExtension: "ttf"),
+              let data = try? Data(contentsOf: url),
+              let provider = CGDataProvider(data: data as CFData),
+              let font = CGFont(provider)
+        else {
+            return
+        }
+        
+        var error: Unmanaged<CFError>?
+        if !CTFontManagerRegisterGraphicsFont(font, &error) {
+            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
+            let nsError = error!.takeUnretainedValue() as AnyObject as! NSError
+            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+        }
+    }
+    
 //    func generateComplexAvatarView(height: CGFloat) -> AvatarView {
 //        let config = JMRepicConfig(
 //            interBorderWidth: 1,

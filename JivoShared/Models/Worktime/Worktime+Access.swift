@@ -55,13 +55,7 @@ public enum WorktimeDay: String, CaseIterable {
     
     public static var today: WorktimeDay {
         let component = locale().calendar.component(.weekday, from: Date())
-        return convert(component) { index in
-            switch index {
-            case 1: return .sunday
-            case 2...7: return WorktimeDay.fromIndex(index - 2)
-            default: return .monday
-            }
-        }
+        return WorktimeDay.fromIndex(component - 1)
     }
     
     public static func fromIndex(_ index: Int) -> WorktimeDay {
