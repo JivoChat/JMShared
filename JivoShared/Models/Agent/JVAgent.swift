@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
+
 open class JVAgent: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""

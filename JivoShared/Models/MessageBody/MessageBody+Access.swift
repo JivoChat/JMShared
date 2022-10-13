@@ -7,14 +7,18 @@
 //
 
 import Foundation
+
 public struct MessageBodyEmail {
     public let from: String
     public let to: String
     public let subject: String
 }
+
 public struct MessageBodyTransfer {
     public let agent: JVAgent?
+    public let department: JVDepartment?
 }
+
 public struct MessageBodyInvite {
     public let by: JVAgent?
     public let comment: String?
@@ -144,10 +148,14 @@ extension JVMessageBody {
     }
     
     public var transfer: MessageBodyTransfer? {
-        guard let agent = _agent else { return nil }
+        guard _agent != nil || _department != nil
+        else {
+            return nil
+        }
         
         return MessageBodyTransfer(
-            agent: agent
+            agent: _agent,
+            department: _department
         )
     }
     

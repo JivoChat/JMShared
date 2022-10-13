@@ -52,12 +52,18 @@ public struct Localizer {
             result = NSLocalizedString(key, comment: "")
         }
 
-        return result.replacingOccurrences(of: "%s", with: "%@")
+        return result
+    }
+    
+    public subscript(key key: String, lang: String? = nil) -> String {
+        return self[key, lang]
+            .replacingOccurrences(of: "%s", with: "%@")
+            .replacingOccurrences(of: "$s", with: "$@")
     }
     
     public subscript(format key: String, _ arguments: CVarArg...) -> String {
         let locale = LocaleProvider.activeLocale
-        return String(format: self[key], locale: locale, arguments: arguments)
+        return String(format: self[key: key], locale: locale, arguments: arguments)
     }
     
     public init(for classFromBundle: AnyClass? = nil) {

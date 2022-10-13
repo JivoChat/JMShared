@@ -27,6 +27,7 @@ public protocol ILocaleProvider: AnyObject {
     var activeRegion: SignupCountry { get }
     var isActiveRussia: Bool { get }
     var isPossibleRussia: Bool { get }
+    var isPossibleGlobal: Bool { get }
     func obtainCountries() -> [SignupCountry]
 }
 
@@ -96,8 +97,13 @@ public final class LocaleProvider: ILocaleProvider {
     }
 
     public var isPossibleRussia: Bool {
-        let parts = Locale.current.identifier.split(separator: "_").map { $0.lowercased() }
+        let parts = Locale.current.identifier.components(separatedBy: .punctuationCharacters).map { $0.lowercased() }
         return isActiveRussia || parts.contains("ru")
+    }
+
+    public var isPossibleGlobal: Bool {
+        let parts = Locale.current.identifier.components(separatedBy: .punctuationCharacters).map { $0.lowercased() }
+        return parts.contains("ua") || not(isPossibleRussia)
     }
 
     public func obtainCountries() -> [SignupCountry] {

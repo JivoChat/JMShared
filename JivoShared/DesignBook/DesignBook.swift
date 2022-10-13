@@ -94,6 +94,10 @@ public final class DesignBook {
         return systemIcon("chevron.left", orStandard: "nav_back", pointSize: pointSize)
     }
     
+    public class func dismissIcon(pointSize: CGFloat? = nil) -> UIImage? {
+        return systemIcon("xmark", orStandard: "nav_dismiss", pointSize: pointSize)
+    }
+    
     public class func checkIcon() -> UIImage? {
         return systemIcon("checkmark", orStandard: "cell_check")
     }
@@ -120,8 +124,8 @@ public final class DesignBook {
             .darkBackground: UIColor(hex: 0x1C1B17),
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x18C139),
-            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGreen: UIColor(hex: 0x12A730),
+            .accentBlue: UIColor(hex: 0x086BCD),
             .accentGraphite: UIColor(hex: 0x445669),
             .background: UIColor(hex: 0xF7F9FC),
             .stillBackground: UIColor(hex: 0xF7F7F7),
@@ -153,8 +157,8 @@ public final class DesignBook {
         .dark: [
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x18C139),
-            .accentBlue: UIColor(hex: 0x0B82F7),
+            .accentGreen: UIColor(hex: 0x12A730),
+            .accentBlue: UIColor(hex: 0x086BCD),
             .accentGraphite: UIColor(hex: 0x445669),
             .orangeRed: UIColor(hex: 0xFF3B30),
             .greenJivo: UIColor(hex: 0x008A0B),
@@ -303,6 +307,9 @@ public final class DesignBook {
                 else {
                     control.setStatus(agent.state, worktimeEnabled: agent.isWorktimeEnabled, context: repicContext, scale: indicatorScale ?? 0.25)
                 }
+                
+            case .bot:
+                break
 
             case .client:
                 guard let client = attendee as? JVClient else { return }
@@ -326,6 +333,9 @@ public final class DesignBook {
                 
             case .teamchat:
                 break
+                
+            case .department:
+                break
             }
         }
     }
@@ -337,6 +347,30 @@ public final class DesignBook {
             category: .body,
             defaultSizes: DesignBookFontSize(compact: fontSize, regular: fontSize),
             maximumSizes: nil)
+    }
+    
+    public func entypoFont(ofSize size: CGFloat) -> UIFont? {
+        let name = "fontello_entypo"
+        ensureFontLoaded(fontName: name, fileName: name)
+        return UIFont(name: name, size: size)
+    }
+    
+    private func ensureFontLoaded(fontName: String, fileName: String) {
+        guard UIFont.fontNames(forFamilyName: fontName).isEmpty,
+              let url = Bundle(for: DesignBook.self).url(forResource: fileName, withExtension: "ttf"),
+              let data = try? Data(contentsOf: url),
+              let provider = CGDataProvider(data: data as CFData),
+              let font = CGFont(provider)
+        else {
+            return
+        }
+        
+        var error: Unmanaged<CFError>?
+        if !CTFontManagerRegisterGraphicsFont(font, &error) {
+            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
+            let nsError = error!.takeUnretainedValue() as AnyObject as! NSError
+            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+        }
     }
     
 //    func generateComplexAvatarView(height: CGFloat) -> AvatarView {
@@ -451,6 +485,7 @@ public final class DesignBook {
         case .checkmarkOnBackground: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.steel))
         case .checkmarkOffBackground: return dynamicColor(light: .alias(.grayDark), dark: .alias(.steel))
         case .attentiveTint: return dynamicColor(light: .alias(.orangeRed), dark: .alias(.orangeRed))
+        case .performableTint: return dynamicColor(light: .hex(0x086BCD), dark: .hex(0x086BCD))
         case .performingTint: return dynamicColor(light: .alias(.greenJivo), dark: .alias(.greenJivo))
         case .performedTint: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.white))
         case .accessoryTint: return dynamicColor(light: .alias(.steel), dark: .native(.gray))

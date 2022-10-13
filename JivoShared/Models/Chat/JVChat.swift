@@ -31,6 +31,7 @@ public final class JVChat: JVBaseModel {
     @objc dynamic public var _unreadNumber: Int = -1
     @objc dynamic public var _transferCancelled: Bool = false
     @objc dynamic public var _transferTo: JVAgent?
+    @objc dynamic public var _transferToDepartment: JVDepartment?
     @objc dynamic public var _transferAssisting: Bool = false
     @objc dynamic public var _transferDate: Date?
     @objc dynamic public var _transferComment: String?

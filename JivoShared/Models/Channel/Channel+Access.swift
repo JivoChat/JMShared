@@ -23,6 +23,8 @@ public enum ChannelJoint: String {
     case salute = "sb"
     case abc = "im"
     case ig = "ig"
+    case drom = "drom"
+    case ali = "ali"
     case unknown
     
     public var localizedChannelTitle: String? {
@@ -41,6 +43,8 @@ public enum ChannelJoint: String {
         case .salute: return loc["Client.Integration.Salute"]
         case .abc: return loc["Channel.Title.iMessage"]
         case .ig: return loc["Client.Integration.Instagram"]
+        case .drom: return loc["Client.Integration.Drom"]
+        case .ali: return loc["Client.Integration.Aliexpress"]
         case .unknown: return nil
         }
     }
@@ -61,6 +65,8 @@ public enum ChannelJoint: String {
         case .salute: return loc["Client.Integration.Salute"]
         case .abc: return loc["Channel.Title.iMessage"]
         case .ig: return loc["Client.Integration.Instagram"]
+        case .drom: return loc["Channel.Title.Drom"]
+        case .ali: return loc["Channel.Title.Aliexpress"]
         case .unknown: return nil
         }
     }
@@ -81,7 +87,31 @@ public enum ChannelJoint: String {
         case .salute: return false
         case .abc: return true
         case .ig: return true
+        case .drom: return false
+        case .ali: return false
         case .unknown: return false
+        }
+    }
+    
+    public var isContiguous: Bool {
+        switch self {
+        case .fb: return true
+        case .vk: return true
+        case .ok: return true
+        case .tg: return true
+        case .vb: return true
+        case .wa: return true
+        case .email: return true
+        case .sdk: return true
+        case .ya: return false
+        case .webhook: return true
+        case .tel: return true
+        case .salute: return true
+        case .abc: return true
+        case .ig: return true
+        case .drom: return false
+        case .ali: return false
+        case .unknown: return true
         }
     }
 }
@@ -148,6 +178,8 @@ extension JVChannel {
         case .salute: return UIImage(named: "preview_chat")
         case .abc: return UIImage(named: "preview_abc")
         case .ig: return UIImage(named: "preview_ig")
+        case .drom: return UIImage(named: "preview_drom")
+        case .ali: return UIImage(named: "preview_ecomm")
         case .unknown: return UIImage(named: "preview_chat")
         }
     }

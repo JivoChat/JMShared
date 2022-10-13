@@ -149,7 +149,6 @@
 		FA71BE03256BDEA600E96457 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD74256BDEA500E96457 /* UIApplicationExtensions.swift */; };
 		FA71BE04256BDEA600E96457 /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD75256BDEA500E96457 /* UIDeviceExtensions.swift */; };
 		FA71BE05256BDEA600E96457 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71BD76256BDEA500E96457 /* UIColorExtensions.swift */; };
-		FA9C152A25559E7A00B705CD /* universal-framework.sh in Resources */ = {isa = PBXBuildFile; fileRef = FA9C152925559E7A00B705CD /* universal-framework.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,7 +300,6 @@
 		FA71BD74256BDEA500E96457 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
 		FA71BD75256BDEA500E96457 /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		FA71BD76256BDEA500E96457 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
-		FA9C152925559E7A00B705CD /* universal-framework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "universal-framework.sh"; sourceTree = "<group>"; };
 		FA9C15A22555A36200B705CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -366,7 +364,6 @@
 				FA401EE126FB528D00CB8EE4 /* JMShared.swift */,
 				FA03797E25504BF7005D5D30 /* JivoShared.h */,
 				FA03797F25504BF7005D5D30 /* Info.plist */,
-				FA9C152925559E7A00B705CD /* universal-framework.sh */,
 			);
 			path = JivoShared;
 			sourceTree = "<group>";
@@ -896,7 +893,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA620EC426289929003CD741 /* Assets.xcassets in Resources */,
-				FA9C152A25559E7A00B705CD /* universal-framework.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

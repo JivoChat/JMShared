@@ -131,6 +131,22 @@ public extension IDatabaseDriver {
         return agent
     }
     
+    func bot(for botID: Int, provideDefault: Bool) -> JVBot? {
+        var bot: JVBot?
+        
+        read { context in
+            bot = context.bot(for: botID, provideDefault: false)
+        }
+        
+        if bot == nil, provideDefault {
+            readwrite { context in
+                bot = context.bot(for: botID, provideDefault: true)
+            }
+        }
+        
+        return bot
+    }
+    
     func chat(for clientID: Int, evenArchived: Bool) -> JVChat? {
         var chat: JVChat?
         
@@ -338,6 +354,27 @@ public extension IDatabaseContext {
         }
         else if provideDefault {
             return upsert(of: JVAgent.self, with: AgentGeneralChange(placeholderID: agentID))
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func bot(for botID: Int, provideDefault: Bool) -> JVBot? {
+        if let value = object(JVBot.self, primaryKey: botID) {
+            return value
+        }
+        else if provideDefault {
+            return upsert(of: JVBot.self, with: BotGeneralChange(placeholderID: botID))
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func department(for departmentID: Int) -> JVDepartment? {
+        if let value = object(JVDepartment.self, primaryKey: departmentID) {
+            return value
         }
         else {
             return nil

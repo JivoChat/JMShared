@@ -28,6 +28,7 @@ extension JVMessage {
                 _senderAgent = _body?.call?.agent.flatMap { context.agent(for: $0.ID, provideDefault: true) }
             case "bot":
                 _senderBot = true
+                _senderBott = context.bot(for: ID, provideDefault: true)
             case _ where _clientID > 0:
                 _senderClient = context.client(for: _clientID, needsDefault: false)
             default:
@@ -290,7 +291,7 @@ extension JVMessage {
                     )
                 )
                 
-            case .proactive, .offline, .transfer, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
+            case .proactive, .offline, .transfer, .transferDepartment, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
             }
             
