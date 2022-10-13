@@ -36,6 +36,24 @@ extension JVMessage {
             }
         }
         
+        func _adjustBotMeta(text: String) {
+            guard text.contains("⦀")
+            else {
+                return
+            }
+            
+            let slices = text.split(separator: "⦀")
+            _text = slices.first.flatMap(String.init)?.trimmed() ?? String()
+            
+            if _body == nil {
+                _body = context.insert(of: JVMessageBody.self, with: MessageBodyGeneralChange(json: JsonElement()))
+            }
+            
+            _body?._buttons = slices.dropFirst()
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .joined(separator: "\n")
+        }
+        
         func _adjustIncomingState(clientID: Int?) {
             if let _ = clientID ?? context.clientID(for: _chatID) {
                 let value = (_senderClient.hasValue || _senderAgent?.isMe == false)
@@ -120,6 +138,7 @@ extension JVMessage {
             _isDeleted = c.isDeleted
 
             _adjustSender(type: c.senderType, ID: c.senderID, body: c.body)
+            _adjustBotMeta(text: c.text)
             _adjustIncomingState(clientID: c.clientID)
             _adjustStatus(status: c.status)
             _adjustHidden()
@@ -144,12 +163,14 @@ extension JVMessage {
             
             if let senderType = c.senderType.valuable {
                 _adjustSender(type: senderType, ID: c.senderID, body: nil)
+                _adjustBotMeta(text: c.text)
                 _adjustIncomingState(clientID: nil)
                 _adjustStatus(status: MessageStatus.delivered.rawValue)
                 _adjustHidden()
             }
             else if let clientID = c.clientID {
                 _adjustSender(type: "client", ID: clientID, body: nil)
+                _adjustBotMeta(text: c.text)
                 _adjustIncomingState(clientID: clientID)
                 _adjustStatus(status: MessageStatus.delivered.rawValue)
                 _adjustHidden()
@@ -176,6 +197,7 @@ extension JVMessage {
             _isDeleted = c.isDeleted
 
             _adjustSender(type: c.senderType, ID: c.senderID, body: c.body)
+            _adjustBotMeta(text: c.text)
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
             _adjustHidden()
@@ -192,6 +214,7 @@ extension JVMessage {
             _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
+            _adjustBotMeta(text: c.text)
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
             _adjustHidden()
@@ -212,6 +235,7 @@ extension JVMessage {
             _isDeleted = c.isDeleted
 
             _adjustSender(type: c.senderType, ID: c.senderID, body: c.body)
+            _adjustBotMeta(text: c.text)
             _adjustIncomingState(clientID: nil)
             _adjustTask(task: _body?.task)
             _adjustStatus(status: MessageStatus.delivered.rawValue)
@@ -423,7 +447,8 @@ extension JVMessage {
                     if _text != newValue {
                         _text = newValue
                     }
-                    
+                    _adjustBotMeta(text: newValue)
+
                 case let .date(newValue):
                     if _date != newValue {
                         _date = newValue
@@ -462,6 +487,8 @@ extension JVMessage {
                             }
                             return defaultAgent
                         }()
+                        
+                        _senderBot = (id < 0)
                         
                         if _senderAgent?._UUID != agent?._UUID {
                             _senderAgent = agent
