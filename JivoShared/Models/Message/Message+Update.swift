@@ -1418,7 +1418,14 @@ open class SdkMessageAtomChange: BaseModelChange {
         guard localId != String() else {
             throw SdkMessageAtomChangeInitError.localIdIsEmptyString
         }
-        self.init(id: 0, localId: localId, updates: updates)
+        
+        if localId.contains(".") {
+            let globalId = localId.components(separatedBy: ".").first ?? localId
+            self.init(id: globalId.toInt(), localId: String(), updates: updates)
+        }
+        else {
+            self.init(id: 0, localId: localId, updates: updates)
+        }
     }
     
     private init(id: Int, localId: String, updates: [MessagePropertyUpdate]) {

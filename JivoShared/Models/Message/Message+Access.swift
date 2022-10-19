@@ -215,12 +215,6 @@ public extension JVMessage {
     }
     
     var content: MessageContent {
-        if senderBot {
-            let caption = _body?.text?.valuable ?? text
-            let buttons = _body?.buttons ?? []
-            return .bot(message: caption, buttons: buttons, markdown: _isMarkdown)
-        }
-        
         switch type {
         case "proactive":
             return .proactive(
@@ -288,6 +282,10 @@ public extension JVMessage {
                 return .task(
                     task: task
                 )
+            }
+            else if senderBot, let buttons = _body?.buttons, !buttons.isEmpty {
+                let caption = _body?.text?.valuable ?? text
+                return .bot(message: caption, buttons: buttons, markdown: _isMarkdown)
             }
             else {
                 return .text(
