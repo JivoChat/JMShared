@@ -18,6 +18,7 @@ open class JVAgentSession: JVBaseModel {
     @objc dynamic public var _isAdmin: Bool = false
     @objc dynamic public var _isOperator: Bool = true
     @objc dynamic public var _globalReceived: Bool = false
+    @objc dynamic public var _globalPricelistId: Int = 0
     @objc dynamic public var _globalGuestsInsightEnabled: Bool = true
     @objc dynamic public var _globalFileSizeLimit: Int = 0
     @objc dynamic public var _globalDisableArchiveForRegular: Bool = false

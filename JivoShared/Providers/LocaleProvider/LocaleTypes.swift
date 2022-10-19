@@ -28,35 +28,41 @@ public struct SignupCountry {
 public struct Localizer {
     private var classFromBundle: AnyClass?
     
-    public subscript(_ key: String, lang: String? = nil) -> String {
-        let result: String
-
-        if let lang = lang {
-            let bundle = LocaleProvider.obtainBundle(lang: lang)
-            result = bundle.localizedString(forKey: key, value: nil, table: nil)
-        }
-        else if let bundle = classFromBundle.flatMap({
-            LocaleProvider.obtainBundle(for: $0, lang: LocaleProvider.activeLocale?.langID ?? Locale.current.langID ?? "")
-        })
-        ?? LocaleProvider.activeBundle {
-            let value = bundle.localizedString(forKey: key, value: nil, table: nil)
-            if value == key {
-                let bundle = LocaleProvider.baseLocaleBundle
-                result = bundle?.localizedString(forKey: key, value: nil, table: nil) ?? value
+    public subscript(_ keys: String..., lang lang: String? = nil) -> String {
+        var result = String()
+        
+        for key in keys {
+            if let lang = lang {
+                let bundle = LocaleProvider.obtainBundle(lang: lang)
+                result = bundle.localizedString(forKey: key, value: nil, table: nil)
+            }
+            else if let bundle = classFromBundle.flatMap({
+                LocaleProvider.obtainBundle(for: $0, lang: LocaleProvider.activeLocale?.langID ?? Locale.current.langID ?? "")
+            })
+            ?? LocaleProvider.activeBundle {
+                let value = bundle.localizedString(forKey: key, value: nil, table: nil)
+                if value == key {
+                    let bundle = LocaleProvider.baseLocaleBundle
+                    result = bundle?.localizedString(forKey: key, value: nil, table: nil) ?? value
+                }
+                else {
+                    result = value
+                }
             }
             else {
-                result = value
+                result = NSLocalizedString(key, comment: "")
+            }
+            
+            if result != key {
+                break
             }
         }
-        else {
-            result = NSLocalizedString(key, comment: "")
-        }
-
+        
         return result
     }
     
     public subscript(key key: String, lang: String? = nil) -> String {
-        return self[key, lang]
+        return self[key, lang: lang]
             .replacingOccurrences(of: "%s", with: "%@")
             .replacingOccurrences(of: "$s", with: "$@")
     }

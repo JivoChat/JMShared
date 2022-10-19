@@ -11,6 +11,7 @@ import JMCodingKit
 import AVFoundation
 
 public struct UserTechConfig: Codable {
+    public var priceListId: Int? = nil
     public var guestInsightEnabled: Bool = true
     public var fileSizeLimit: Int = 10
     public var disableArchiveForRegular: Bool = false
@@ -31,6 +32,7 @@ public struct UserTechConfig: Codable {
     public init() {}
     
     public init(
+        priceListId: Int?,
         guestInsightEnabled: Bool,
         fileSizeLimit: Int,
         disableArchiveForRegular: Bool,
@@ -48,6 +50,7 @@ public struct UserTechConfig: Codable {
         feedbackSdkEnabled: Bool,
         mediaServiceEnabled: Bool
     ) {
+        self.priceListId = priceListId
         self.guestInsightEnabled = guestInsightEnabled
         self.fileSizeLimit = fileSizeLimit
         self.disableArchiveForRegular = disableArchiveForRegular
@@ -111,6 +114,7 @@ extension JVAgentSession {
             
             if let features = c.techConfig {
                 _globalReceived = true
+                _globalPricelistId = c.pricelistID ?? 0
                 _globalGuestsInsightEnabled = features.guestInsightEnabled
                 _globalFileSizeLimit = features.fileSizeLimit
                 _globalDisableArchiveForRegular = features.disableArchiveForRegular
@@ -224,6 +228,7 @@ public final class AgentSessionContextChange: BaseModelChange {
             
             if let misc = context.has(key: "misc") {
                 techConfig = UserTechConfig(
+                    priceListId: misc["pricelist_id"].int,
                     guestInsightEnabled: ((misc["disable_visitors_insight"].int ?? 0) == 0),
                     fileSizeLimit: misc["max_file_size"].int ?? 10,
                     disableArchiveForRegular: ((misc["disable_archive_non_admins"].int ?? 0) > 0),
