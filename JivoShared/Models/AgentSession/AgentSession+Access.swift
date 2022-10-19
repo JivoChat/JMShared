@@ -48,6 +48,15 @@ extension JVAgentSession {
         return channels.filter { $0.jointType == nil }
     }
     
+    public var priceListId: Int? {
+        if _globalPricelistId > 0 {
+            return _globalPricelistId
+        }
+        else {
+            return nil
+        }
+    }
+    
     public var allowMobileCalls: Bool {
         return _allowMobileCalls
     }
@@ -68,6 +77,7 @@ extension JVAgentSession {
     
     public func globalFeatures() -> UserTechConfig {
         return UserTechConfig(
+            priceListId: (_globalPricelistId > 0 ? _globalPricelistId : nil),
             guestInsightEnabled: _globalGuestsInsightEnabled,
             fileSizeLimit: _globalFileSizeLimit,
             disableArchiveForRegular: _globalDisableArchiveForRegular,
