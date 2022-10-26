@@ -82,6 +82,10 @@ extension JVGuest {
             
             _attendees.set(context.insert(of: JVChatAttendee.self, with: attendees))
         }
+        else if let c = change as? GuestBotsChange {
+            let bots = c.botsIds.compactMap { context.bot(for: $0, provideDefault: true) }
+            _bots.set(bots)
+        }
         else if let c = change as? GuestWidgetVersionChange {
             _widgetVersion = c.version
         }
@@ -116,6 +120,7 @@ public func GuestChangeParse(for item: String) -> GuestBaseChange? {
     case "navcount": return GuestNavigatesChange(arguments: args)
     case "visible": return GuestVisibleChange(arguments: args)
     case "agentids": return GuestAgentsChange(arguments: args)
+    case "botids": return GuestBotsChange(arguments: args)
     case "wversion": return GuestWidgetVersionChange(arguments: args)
     case "-": return GuestRemovalChange(arguments: args)
     default: return nil
@@ -312,6 +317,7 @@ open class GuestVisibleChange: GuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class GuestAgentsChange: GuestBaseChange {
     private static var jsonCoder = JsonCoder()
     
@@ -339,6 +345,35 @@ open class GuestAgentsChange: GuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
+open class GuestBotsChange: GuestBaseChange {
+    private static var jsonCoder = JsonCoder()
+    
+    public let botsIds: [Int]
+    
+    override init(arguments: [String]) {
+        let idsArgument = arguments.stringOrEmpty(at: 4)
+        
+        let idsSource: String
+        if idsArgument.hasPrefix("[") {
+            idsSource = idsArgument
+        }
+        else if idsArgument == "false" {
+            idsSource = "[]"
+        }
+        else {
+            idsSource = "[\(idsArgument)]"
+        }
+        
+        botsIds = GuestBotsChange.jsonCoder.decode(raw: idsSource)?.intArray ?? []
+        super.init(arguments: arguments)
+    }
+    
+    required public init(json: JsonElement) {
+        fatalError("init(json:) has not been implemented")
+    }
+}
+
 open class GuestWidgetVersionChange: GuestBaseChange {
     public let version: String
     

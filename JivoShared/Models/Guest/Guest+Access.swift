@@ -185,6 +185,10 @@ extension JVGuest: Displayable {
         return _attendees.toArray()
     }
     
+    public var bots: [JVBot] {
+        return _bots.toArray()
+    }
+    
     public func proactiveAgent() -> JVAgent? {
         if case .proactive = status {
             return _proactiveAgent

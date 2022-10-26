@@ -39,6 +39,7 @@ public final class JVGuest: JVBaseModel {
     @objc dynamic public var _disappearDate: Date?
     @objc dynamic public var _lastUpdate: Date?
     public let _attendees = List<JVChatAttendee>()
+    public let _bots = List<JVBot>()
 
     public override class func primaryKey() -> String? {
         return nil
