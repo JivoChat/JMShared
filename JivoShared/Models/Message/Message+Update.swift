@@ -42,7 +42,7 @@ extension JVMessage {
                 return
             }
             
-            let slices = text.split(separator: "⦀")
+            let slices = (String(" ") + text).split(separator: "⦀")
             _text = slices.first.flatMap(String.init)?.trimmed() ?? String()
             
             if _body == nil {
