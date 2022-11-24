@@ -57,6 +57,12 @@ public final class TaskGeneralChange: BaseModelChange, NSCoding {
     public override var primaryValue: Int {
         return ID
     }
+    
+    public override var isValid: Bool {
+        guard ID > 0 else { return false }
+        return true
+    }
+    
     public init(ID: Int,
          agentID: Int,
          agent: AgentGeneralChange?,
