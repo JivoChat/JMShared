@@ -10,13 +10,15 @@ import JMCodingKit
 extension JVCannedPhrase {
     public func performApply(inside context: IDatabaseContext, with change: BaseModelChange) {
         if let change = change as? CannedPhraseChange {
-            _message = change.message
-            _messageHashID = change.messageHashID
-            _totalScore = change.totalScore
-            _sessionScore = change.sessionScore
-            _timestamp = change.timestamp
-            _isDeleted = change.isDeleted
-            _uid = change.uid
+            if change.timestamp >= _timestamp {
+                _message = change.message
+                _messageHashID = change.messageHashID
+                _totalScore = change.totalScore
+                _sessionScore = change.sessionScore
+                _timestamp = change.timestamp
+                _isDeleted = change.isDeleted
+                _uid = change.uid
+            }
         }
     }
 }
