@@ -20,7 +20,7 @@ public protocol IDatabaseDriver: AnyObject {
     func parallel() -> IDatabaseDriver
     func refresh() -> IDatabaseDriver
 
-    func reference<OT: Object>(to object: OT?, behavior: ModelRefBehavior) -> ModelRef<OT>
+    func reference<OT: Object>(to object: OT?, behavior: JVModelRefBehavior) -> JVModelRef<OT>
     func resolve<OT: Object>(ref: ThreadSafeReference<OT>) -> OT?
     
     func read(_ block: (IDatabaseContext) -> Void)
@@ -81,8 +81,8 @@ open class DatabaseDriver: IDatabaseDriver {
         return self
     }
 
-    public func reference<OT: Object>(to object: OT?, behavior: ModelRefBehavior) -> ModelRef<OT> {
-        return ModelRef(databaseDriver: self, value: object, behavior: behavior)
+    public func reference<OT: Object>(to object: OT?, behavior: JVModelRefBehavior) -> JVModelRef<OT> {
+        return JVModelRef(databaseDriver: self, value: object, behavior: behavior)
     }
     
     public func resolve<OT: Object>(ref: ThreadSafeReference<OT>) -> OT? {

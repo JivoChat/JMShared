@@ -289,7 +289,7 @@ public final class DesignBook {
         )
     }
     
-    public func configureMetaControl(_ control: JMRepicView, for attendees: [Presentable], transparent: Bool, repicContext: JMRepicView.VisualContext, primaryScale: CGFloat?, indicatorScale: CGFloat? = nil) {
+    public func configureMetaControl(_ control: JMRepicView, for attendees: [JVPresentable], transparent: Bool, repicContext: JMRepicView.VisualContext, primaryScale: CGFloat?, indicatorScale: CGFloat? = nil) {
         let images = attendees.compactMap { $0.metaImage(providers: nil, transparent: transparent, scale: primaryScale) }
         control.configure(items: images)
         

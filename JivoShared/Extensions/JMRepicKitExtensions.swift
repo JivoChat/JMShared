@@ -65,7 +65,7 @@ public extension JMRepicView {
         case group = "grp"
     }
     
-    func setStatus(_ state: AgentState, worktimeEnabled: Bool, context: VisualContext, scale: CGFloat) {
+    func setStatus(_ state: JVAgentState, worktimeEnabled: Bool, context: VisualContext, scale: CGFloat) {
         switch state {
         case .active where worktimeEnabled:
             setIndicator(

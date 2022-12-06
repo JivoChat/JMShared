@@ -17,6 +17,8 @@ open class JVAgent: JVBaseModel {
     @objc dynamic public var _emailVerified: Bool = true
     @objc dynamic public var _phone: String = ""
     @objc dynamic public var _stateID: Int = 0
+    @objc dynamic public var _status: JVAgentRichStatus?
+    @objc dynamic public var _statusComment: String?
     @objc dynamic public var _avatarLink: String?
     @objc dynamic public var _displayName: String = ""
     @objc dynamic public var _title: String = ""
@@ -46,7 +48,7 @@ open class JVAgent: JVBaseModel {
         super.recursiveDelete(context: context)
     }
     
-    open override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    open override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

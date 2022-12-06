@@ -19,7 +19,7 @@ open class JVBaseModel: Object {
         super.init()
     }
     
-    open func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    open func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
     }
     
     open func simpleDelete(context: IDatabaseContext) {
@@ -31,7 +31,7 @@ open class JVBaseModel: Object {
     }
 }
 
-open class BaseModelChange: NSObject {
+open class JVBaseModelChange: NSObject {
     
     public let isOK: Bool
     
@@ -66,7 +66,7 @@ open class BaseModelChange: NSObject {
     }
 }
 
-public func validChange<T: BaseModelChange>(_ change: T?) -> T? {
+public func JVValidChange<T: JVBaseModelChange>(_ change: T?) -> T? {
     if let change = change, change.isValid {
         return change
     }
@@ -75,7 +75,7 @@ public func validChange<T: BaseModelChange>(_ change: T?) -> T? {
     }
 }
 
-public enum SenderType: String {
+public enum JVSenderType: String {
     case `self`
     case client = "client"
     case agent = "agent"
@@ -85,35 +85,47 @@ public enum SenderType: String {
     case department = "department"
 }
 
-public struct Sender: Equatable {
-    public let type: SenderType
+public struct JVSender: Equatable {
+    public let type: JVSenderType
     public let ID: Int
     
-    public init(type: SenderType, ID: Int) {
+    public init(type: JVSenderType, ID: Int) {
         self.type = type
         self.ID = ID
     }
 }
 
-public struct MetaProviders {
+public struct JVMetaProviders {
     public let clientProvider: (Int) -> JVClient?
 }
 
-public protocol Presentable: Validatable {
-    var senderType: SenderType { get }
-    func metaImage(providers: MetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem?
+public protocol JVPresentable: Validatable {
+    var senderType: JVSenderType { get }
+    func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem?
 }
-public enum DisplayNameKind {
+
+public enum JVDisplayNameKind {
     case original
     case short
-    case decorative
+    case decorative(Decor)
     case relative
 }
 
-public protocol Displayable: Presentable {
+public extension JVDisplayNameKind {
+    public struct Decor: OptionSet {
+        public let rawValue: Int
+        public init(rawValue: Int) { self.rawValue = rawValue }
+        
+        public static let role = Self(rawValue: 1 << 0)
+        public static let richStatus = Self(rawValue: 1 << 1)
+        public static let all = Self(rawValue: ~0)
+    }
+}
+
+public protocol JVDisplayable: JVPresentable {
     var channel: JVChannel? { get }
-    func displayName(kind: DisplayNameKind) -> String
-    var integration: ChannelJoint? { get }
+    func displayName(kind: JVDisplayNameKind) -> String
+    var integration: JVChannelJoint? { get }
     var hashedID: String { get }
     var isMe: Bool { get }
     var isAvailable: Bool { get }

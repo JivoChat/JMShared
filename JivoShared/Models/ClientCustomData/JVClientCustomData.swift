@@ -15,7 +15,7 @@ public final class JVClientCustomData: JVBaseModel {
     @objc dynamic public var _content: String = ""
     @objc dynamic public var _link: String?
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

@@ -53,7 +53,7 @@ public extension JsonElement {
         }
     }
     
-    func parse<T: BaseModelChange>(force: Bool = false) -> T? {
+    func parse<T: JVBaseModelChange>(force: Bool = false) -> T? {
         if exists(withValue: true) {
             let change = T(json: self)
             return (change.isValid || force ? change : nil)
@@ -63,7 +63,7 @@ public extension JsonElement {
         }
     }
     
-    func parseList<T: BaseModelChange>() -> [T]? {
+    func parseList<T: JVBaseModelChange>() -> [T]? {
         return array?.map { T(json: $0) }
     }
 }
