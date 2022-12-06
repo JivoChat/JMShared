@@ -16,7 +16,7 @@ public final class JVClientSessionGeo: JVBaseModel {
     @objc dynamic public var _organization: String?
     @objc dynamic public var _countryCode: String?
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

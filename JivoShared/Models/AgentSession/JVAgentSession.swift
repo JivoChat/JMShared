@@ -53,7 +53,7 @@ open class JVAgentSession: JVBaseModel {
         super.recursiveDelete(context: context)
     }
     
-    open override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    open override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

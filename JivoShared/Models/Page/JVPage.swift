@@ -15,7 +15,7 @@ public final class JVPage: JVBaseModel {
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _time: String?
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

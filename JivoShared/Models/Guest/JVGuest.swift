@@ -50,7 +50,7 @@ public final class JVGuest: JVBaseModel {
         super.recursiveDelete(context: context)
     }
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

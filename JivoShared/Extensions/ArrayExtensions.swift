@@ -26,7 +26,7 @@ public extension Sequence where Iterator.Element: OptionalType {
 }
 
 public extension Array where Element: JVBaseModel {
-    func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         forEach { $0.apply(inside: context, with: change) }
     }
 }

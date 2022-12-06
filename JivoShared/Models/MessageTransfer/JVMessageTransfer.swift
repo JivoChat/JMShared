@@ -14,7 +14,7 @@ public final class JVMessageTransfer: JVBaseModel {
     @objc dynamic public var _agentID: Int = 0
     @objc dynamic public var _comment: String?
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         
     }

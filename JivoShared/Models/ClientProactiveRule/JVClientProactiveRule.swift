@@ -14,7 +14,7 @@ public final class JVClientProactiveRule: JVBaseModel {
     @objc dynamic public var _date: Date?
     @objc dynamic public var _text: String = ""
     
-    public override func apply(inside context: IDatabaseContext, with change: BaseModelChange) {
+    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

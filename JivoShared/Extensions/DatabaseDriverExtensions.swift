@@ -13,7 +13,7 @@ public extension IDatabaseDriver {
         return subscribe(type, options: options, returnEntireCollectionOnUpdate: returnEntireCollectionOnUpdate, callback: callback)
     }
     
-    func insert<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]?) -> [OT] {
+    func insert<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]?) -> [OT] {
         var result = [OT]()
         
         readwrite { context in
@@ -23,7 +23,7 @@ public extension IDatabaseDriver {
         return result
     }
     
-    func upsert<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange) -> OT? {
+    func upsert<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange) -> OT? {
         var result: OT?
         
         readwrite { context in
@@ -33,7 +33,7 @@ public extension IDatabaseDriver {
         return result
     }
     
-    func upsert<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]) -> [OT] {
+    func upsert<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]) -> [OT] {
         var result = [OT]()
         
         readwrite { context in
@@ -43,7 +43,7 @@ public extension IDatabaseDriver {
         return result
     }
     
-    func update<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange) -> OT? {
+    func update<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange) -> OT? {
         var result: OT?
         
         readwrite { context in
@@ -53,7 +53,7 @@ public extension IDatabaseDriver {
         return result
     }
     
-    func replaceAll<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]) -> [OT] {
+    func replaceAll<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]) -> [OT] {
         var result = [OT]()
         
         readwrite { context in
@@ -170,7 +170,7 @@ public extension IDatabaseDriver {
 }
 
 public extension IDatabaseContext {
-    func find<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange?) -> OT? {
+    func find<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?) -> OT? {
         if let change = change, change.isValid {
             if let integerKey = change.integerKey {
                 return object(OT.self, mainKey: integerKey)
@@ -190,7 +190,7 @@ public extension IDatabaseContext {
         }
     }
 
-    func insert<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange?, validOnly: Bool = false) -> OT? {
+    func insert<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?, validOnly: Bool = false) -> OT? {
         guard let change = change else {
             return nil
         }
@@ -206,7 +206,7 @@ public extension IDatabaseContext {
         return obj
     }
     
-    func insert<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]?, validOnly: Bool = false) -> [OT] {
+    func insert<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]?, validOnly: Bool = false) -> [OT] {
         guard let changes = changes else {
             return []
         }
@@ -216,12 +216,12 @@ public extension IDatabaseContext {
         }
     }
     
-    func upsert<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange?, validOnly: Bool = false) -> OT? {
+    func upsert<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?, validOnly: Bool = false) -> OT? {
         let (obj, _) = upsertCallback(of: type, with: change, validOnly: validOnly)
         return obj
     }
     
-    func upsertCallback<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange?, validOnly: Bool = false) -> (OT?, Bool) {
+    func upsertCallback<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?, validOnly: Bool = false) -> (OT?, Bool) {
         var newlyAdded = false
         
         if let change = change, change.isValid {
@@ -274,7 +274,7 @@ public extension IDatabaseContext {
         }
     }
     
-    func upsert<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]?) -> [OT] {
+    func upsert<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]?) -> [OT] {
         if let changes = changes {
             return changes.compactMap { upsert(of: type, with: $0) }
         }
@@ -283,7 +283,7 @@ public extension IDatabaseContext {
         }
     }
     
-    func upsert<OT: JVBaseModel>(_ model: OT?, with change: BaseModelChange?) -> OT? {
+    func upsert<OT: JVBaseModel>(_ model: OT?, with change: JVBaseModelChange?) -> OT? {
         guard let change = change else {
             return model
         }
@@ -297,7 +297,7 @@ public extension IDatabaseContext {
         }
     }
     
-    func update<OT: JVBaseModel>(of type: OT.Type, with change: BaseModelChange?) -> OT? {
+    func update<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?) -> OT? {
         guard let change = change else {
             return nil
         }
@@ -339,7 +339,7 @@ public extension IDatabaseContext {
         return obj
     }
     
-    func replaceAll<OT: JVBaseModel>(of type: OT.Type, with changes: [BaseModelChange]) -> [OT] {
+    func replaceAll<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]) -> [OT] {
         objects(type, options: nil).forEach { $0.recursiveDelete(context: self) }
         return upsert(of: type, with: changes)
     }
@@ -353,7 +353,7 @@ public extension IDatabaseContext {
             return value
         }
         else if provideDefault {
-            return upsert(of: JVAgent.self, with: AgentGeneralChange(placeholderID: agentID))
+            return upsert(of: JVAgent.self, with: JVAgentGeneralChange(placeholderID: agentID))
         }
         else {
             return nil
@@ -365,7 +365,7 @@ public extension IDatabaseContext {
             return value
         }
         else if provideDefault {
-            return upsert(of: JVBot.self, with: BotGeneralChange(placeholderID: botID))
+            return upsert(of: JVBot.self, with: JVBotGeneralChange(placeholderID: botID))
         }
         else {
             return nil
@@ -386,7 +386,7 @@ public extension IDatabaseContext {
             return value
         }
         else if needsDefault {
-            return upsert(of: JVClient.self, with: ClientGeneralChange(clientID: clientID))
+            return upsert(of: JVClient.self, with: JVClientGeneralChange(clientID: clientID))
         }
         else {
             return nil
@@ -429,7 +429,7 @@ public extension IDatabaseContext {
         )
     }
     
-    func createMessage(with change: BaseModelChange) -> JVMessage {
+    func createMessage(with change: JVBaseModelChange) -> JVMessage {
         let message = JVMessage(localizer: localizer)
         message.apply(inside: self, with: change)
         add([message])
