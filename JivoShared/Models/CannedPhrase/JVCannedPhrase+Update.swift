@@ -9,26 +9,28 @@ import JMCodingKit
 
 extension JVCannedPhrase {
     public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
-        if let change = change as? JVCannedPhraseChange {
+        if let change = change as? JVCannedPhraseGeneralChange {
             _message = change.message
             _messageHashID = change.messageHashID
             _totalScore = change.totalScore
             _sessionScore = change.sessionScore
             _timestamp = change.timestamp
             _isDeleted = change.isDeleted
-            _uid = change.uid
+        }
+        else if let change = change as? JVCannedPhraseFlushScoreChange {
+            _totalScore += _sessionScore
+            _sessionScore = 0
         }
     }
 }
 
-public final class JVCannedPhraseChange: JVBaseModelChange {
+public final class JVCannedPhraseGeneralChange: JVBaseModelChange, Codable {
     public var messageHashID: String
     public var message: String
     public var timestamp: Int
     public var totalScore: Int
     public var sessionScore: Int
     public var isDeleted: Bool
-    public var uid: String
 
     public override var stringKey: DatabaseContextMainKey<String>? {
         return DatabaseContextMainKey(key: "_messageHashID", value: messageHashID)
@@ -41,7 +43,6 @@ public final class JVCannedPhraseChange: JVBaseModelChange {
         totalScore = json["score"].intValue
         sessionScore = 0
         isDeleted = false
-        uid = json["uid"].stringValue
         super.init(json: json)
     }
 
@@ -50,25 +51,16 @@ public final class JVCannedPhraseChange: JVBaseModelChange {
                 timestamp: Int,
                 totalScore: Int,
                 sessionScore: Int,
-                isDeleted: Bool,
-                uid: String) {
+                isDeleted: Bool) {
         self.messageHashID = messageHashID
         self.message = message
         self.timestamp = timestamp
         self.totalScore = totalScore
         self.sessionScore = sessionScore
         self.isDeleted = isDeleted
-        self.uid = uid
         super.init()
     }
+}
 
-    public func encode() -> JsonElement {
-        return JsonElement([
-            "message_hash_id": messageHashID,
-            "message": message,
-            "timestamp": timestamp,
-            "session_score": sessionScore,
-            "total_score": totalScore
-        ])
-    }
+public final class JVCannedPhraseFlushScoreChange: JVBaseModelChange {
 }

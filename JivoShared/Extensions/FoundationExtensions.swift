@@ -16,8 +16,9 @@ public func not(_ value: Bool) -> Bool {
     return !value
 }
 
-public func with<T, R>(_ value: @autoclosure () -> T, block: (T) -> R) -> R {
-    return block(value())
+public func with<T, R>(_ value: @autoclosure () -> T, block: (inout T) -> R) -> R {
+    var localValue = value()
+    return block(&localValue)
 }
 
 public func evaluate<Value>(block: () -> Value) -> Value {
