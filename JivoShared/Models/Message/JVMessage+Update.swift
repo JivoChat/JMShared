@@ -438,6 +438,8 @@ extension JVMessage {
                         _ID = newValue
                     }
                     
+                    _isMarkdown = true
+                    
                 case let .localId(newValue):
                     if _localID != newValue {
                         _localID = newValue
@@ -482,7 +484,7 @@ extension JVMessage {
                         let existingAgent = context.agent(for: id, provideDefault: false)
                         let agent = existingAgent ?? { () -> JVAgent? in
                             let defaultAgent = context.agent(for: id, provideDefault: true)
-                            if case let MessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
+                            if case let JVMessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
                                 newValue.flatMap { defaultAgent?._displayName = $0 }
                             }
                             return defaultAgent
@@ -517,7 +519,7 @@ extension JVMessage {
                 }
             }
         }
-        else if let c = change as? SDKMessageOfflineChange {
+        else if let c = change as? JVSDKMessageOfflineChange {
             _localID = c.localId
             _date = c.date
             _type = c.type
@@ -1351,7 +1353,7 @@ open class JVSdkMessageStatusChange: JVBaseModelChange {
     }
 }
 
-public enum MessagePropertyUpdate {
+public enum JVMessagePropertyUpdate {
     public enum Sender {
         public enum DisplayNameUpdatingLogic {
             case updating(with: String?)
@@ -1376,7 +1378,7 @@ public enum MessagePropertyUpdate {
     case isSendingFailed(Bool)
 }
 
-public enum SdkMessageAtomChangeInitError: LocalizedError {
+public enum JVSdkMessageAtomChangeInitError: LocalizedError {
     case idIsZero
     case localIdIsEmptyString
     
@@ -1393,7 +1395,7 @@ public enum SdkMessageAtomChangeInitError: LocalizedError {
 open class JVSdkMessageAtomChange: JVBaseModelChange {
     let id: Int
     let localId: String
-    let updates: [MessagePropertyUpdate]
+    let updates: [JVMessagePropertyUpdate]
     
     public override var primaryValue: Int {
         abort()
@@ -1407,16 +1409,16 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
         return !localId.isEmpty ? DatabaseContextMainKey(key: "_localID", value: localId) : nil
     }
     
-    public convenience init(id: Int, updates: [MessagePropertyUpdate]) throws {
+    public convenience init(id: Int, updates: [JVMessagePropertyUpdate]) throws {
         guard id != 0 else {
-            throw SdkMessageAtomChangeInitError.idIsZero
+            throw JVSdkMessageAtomChangeInitError.idIsZero
         }
         self.init(id: id, localId: String(), updates: updates)
     }
     
-    public convenience init(localId: String, updates: [MessagePropertyUpdate]) throws {
+    public convenience init(localId: String, updates: [JVMessagePropertyUpdate]) throws {
         guard localId != String() else {
-            throw SdkMessageAtomChangeInitError.localIdIsEmptyString
+            throw JVSdkMessageAtomChangeInitError.localIdIsEmptyString
         }
         
         if localId.contains(".") {
@@ -1428,7 +1430,7 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
         }
     }
     
-    private init(id: Int, localId: String, updates: [MessagePropertyUpdate]) {
+    private init(id: Int, localId: String, updates: [JVMessagePropertyUpdate]) {
         self.id = id
         self.localId = localId
         self.updates = updates
@@ -1441,8 +1443,8 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
     }
 }
 
-public class SDKMessageOfflineChange: JVBaseModelChange {
-    let localId = SDKMessageOfflineChange.id
+public class JVSDKMessageOfflineChange: JVBaseModelChange {
+    let localId = JVSDKMessageOfflineChange.id
     let date = Date()
     let type = "offline"
     
@@ -1467,7 +1469,7 @@ public class SDKMessageOfflineChange: JVBaseModelChange {
     }
 }
 
-public extension SDKMessageOfflineChange {
+public extension JVSDKMessageOfflineChange {
     static let id = "OFFLINE_MESSAGE"
 }
 
