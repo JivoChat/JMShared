@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVMessageBody {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageBodyGeneralChange {
             _agent = c.agentID.flatMap { $0 > 0 ? context.agent(for: $0, provideDefault: true) : nil }
             _department = c.departmentID.flatMap { $0 > 0 ? context.department(for: $0) : nil }
@@ -70,7 +70,7 @@ public final class JVMessageBodyGeneralChange: JVBaseModelChange {
 
         let callAgentID = call["agent_id"].int
         event = call["status"].string
-        phone = (call["phone"].string ?? json["client_phone"].string)?.valuable.flatMap { "+" + $0 }
+        phone = (call["phone"].string ?? json["client_phone"].string)?.jv_valuable.flatMap { "+" + $0 }
         email = call["email"].string ?? json["client_email"].string
         endCallSide = call["end_call_side"].string
         callID = call["call_id"].string
@@ -110,6 +110,7 @@ public final class JVMessageBodyGeneralChange: JVBaseModelChange {
 
         super.init(json: json)
     }
+    
     public var isValidCall: Bool {
         guard let _ = callID else { return false }
         guard let _ = type else { return false }

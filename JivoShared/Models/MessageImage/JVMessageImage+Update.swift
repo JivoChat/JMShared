@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVMessageImage {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageImageGeneralChange {
             _fileName = c.fileName
             _URL = c.URL

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    public convenience init?(color: UIColor?, size: CGSize? = nil) {
+    public convenience init?(jv_color color: UIColor?, size: CGSize? = nil) {
         guard let color = color else { return nil }
         let renderingSize = size ?? CGSize(width: 3, height: 3)
         
@@ -33,7 +33,7 @@ extension UIImage {
         }
     }
     
-    public func rounded() -> UIImage? {
+    public func jv_rounded() -> UIImage? {
         let layer = CALayer()
         layer.frame = CGRect(origin: .zero, size: size)
         layer.contents = cgImage

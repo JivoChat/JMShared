@@ -19,7 +19,7 @@ extension JVDepartment: JVDisplayable {
     }
     
     public var icon: String {
-        return _icon.convertToEmojis()
+        return _icon.jv_convertToEmojis()
     }
     
     public var brief: String {
@@ -34,7 +34,7 @@ extension JVDepartment: JVDisplayable {
         return _agentsIds
             .split(separator: ",")
             .filter { !$0.isEmpty }
-            .map { String($0).toInt() }
+            .map { String($0).jv_toInt() }
     }
     
     public var channel: JVChannel? {
@@ -67,8 +67,8 @@ extension JVDepartment: JVDisplayable {
     
     public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
         return JMRepicItem(
-            backgroundColor: DesignBook.shared.color(usage: .contentBackground),
-            source: .caption(icon, DesignBook.shared.baseEmojiFont(scale: nil)),
+            backgroundColor: JVDesign.shared.color(usage: .contentBackground),
+            source: .caption(icon, JVDesign.shared.baseEmojiFont(scale: nil)),
             scale: 1.0,
             clipping: .external
         )

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension UIDevice {
-    var isPhone: Bool {
+    var jv_isPhone: Bool {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return true
         }
@@ -19,7 +19,7 @@ public extension UIDevice {
         }
     }
     
-    var modelID: String {
+    var jv_modelID: String {
         var systemInfo = utsname()
         uname(&systemInfo)
 
@@ -37,7 +37,7 @@ public extension UIDevice {
         }
     }
     
-    var isSimulator: Bool {
-        return (modelID == "Simulator")
+    var jv_isSimulator: Bool {
+        return (jv_modelID == "Simulator")
     }
 }

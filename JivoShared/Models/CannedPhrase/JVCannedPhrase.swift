@@ -16,7 +16,7 @@ public final class JVCannedPhrase: JVBaseModel {
     @objc dynamic public var _isDeleted: Bool = false
     @objc dynamic public var _uid: String = ""
     
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVPage {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVPageGeneralChange {
             _URL = c.URL
             _title = c.title

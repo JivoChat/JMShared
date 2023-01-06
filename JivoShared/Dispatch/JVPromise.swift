@@ -1,5 +1,5 @@
 //
-//  Promise.swift
+//  JVPromise.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 31.10.2020.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-public final class Promise<Value> {
+public final class JVPromise<Value> {
     private let queue: DispatchQueue
     private var block: ((Value) -> Void)?
     
     private let thread = Thread.current
     private let uid = UUID()
     
-    public init(queue: DispatchQueue = .main, evaluate block: (Promise<Value>) -> Void) {
+    public init(queue: DispatchQueue = .main, evaluate block: (JVPromise<Value>) -> Void) {
         self.queue = queue
         block(self)
     }

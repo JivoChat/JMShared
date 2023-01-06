@@ -8,7 +8,7 @@
 import JMCodingKit
 
 extension JVCannedPhrase {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let change = change as? JVCannedPhraseGeneralChange {
             _message = change.message
             _messageHashID = change.messageHashID
@@ -32,8 +32,8 @@ public final class JVCannedPhraseGeneralChange: JVBaseModelChange, Codable {
     public var sessionScore: Int
     public var isDeleted: Bool
 
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_messageHashID", value: messageHashID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_messageHashID", value: messageHashID)
     }
     
     public required init(json: JsonElement) {

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 public enum JVChannelJoint: String {
     case fb = "fb"
     case vk = "vk"

@@ -10,16 +10,16 @@ import Foundation
 import JMCodingKit
 
 extension JVBot {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVBotGeneralChange {
             if _id == 0 { _id = c.id }
-            _avatarLink = c.avatarLink?.valuable
+            _avatarLink = c.avatarLink?.jv_valuable
             _displayName = c.displayName ?? String()
             _title = c.title ?? String()
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
+    public func performDelete(inside context: JVIDatabaseContext) {
     }
 }
 

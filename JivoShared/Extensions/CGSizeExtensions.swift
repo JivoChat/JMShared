@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension CGSize {
-    static func sizeThatCovers(sizes: [CGSize]) -> CGSize {
+    static func jv_sizeThatCovers(sizes: [CGSize]) -> CGSize {
         var maxWidth = CGFloat(0)
         var maxHeight = CGFloat(0)
         
@@ -22,7 +22,7 @@ public extension CGSize {
         return CGSize(width: maxWidth, height: maxHeight)
     }
     
-    func extendedBy(insets: UIEdgeInsets) -> CGSize {
+    func jv_extendedBy(insets: UIEdgeInsets) -> CGSize {
         return CGSize(
             width: insets.left + width + insets.right,
             height: insets.top + height + insets.bottom

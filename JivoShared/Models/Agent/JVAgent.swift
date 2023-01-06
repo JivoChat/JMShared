@@ -43,12 +43,12 @@ open class JVAgent: JVBaseModel {
         return "_ID"
     }
     
-    open override func recursiveDelete(context: IDatabaseContext) {
+    open override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)
         super.recursiveDelete(context: context)
     }
     
-    open override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    open override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

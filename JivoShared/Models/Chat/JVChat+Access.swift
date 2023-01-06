@@ -8,12 +8,14 @@
 
 import Foundation
 import JMRepicKit
+
 public enum JVChatReactionPerforming {
     case accept
     case decline
     case spam
     case close
 }
+
 public enum JVChatInvitationState {
     case none
     case activeBySystem
@@ -30,6 +32,7 @@ public enum JVChatInvitationState {
         }
     }
 }
+
 public enum JVChatTransferState {
     case none
     case requested(agent: JVAgent, assisting: Bool, comment: String?)
@@ -39,6 +42,7 @@ public enum JVChatTransferState {
     case completedDepartment(department: JVDepartment, date: Date, comment: String?)
     case rejectedDepartment(department: JVDepartment, reason: String)
 }
+
 public enum JVChatAttendeeAssignment {
     case assignedWithMe
     case assignedToAnother
@@ -59,7 +63,7 @@ extension JVChat: JVPresentable {
     }
     
     public var client: JVClient? {
-        return validate(_client)
+        return jv_validate(_client)
     }
     
     public var hasClient: Bool {
@@ -71,7 +75,7 @@ extension JVChat: JVPresentable {
     }
     
     public var about: String? {
-        return _about?.valuable
+        return _about?.jv_valuable
     }
     
     public var attendees: [JVChatAttendee] {
@@ -79,7 +83,7 @@ extension JVChat: JVPresentable {
             return []
         }
         else {
-            return _attendees.toArray()
+            return _attendees.jv_toArray()
         }
     }
     
@@ -256,11 +260,11 @@ extension JVChat: JVPresentable {
     }
     
     public var department: String? {
-        return _department?.valuable
+        return _department?.jv_valuable
     }
     
     public var draft: String? {
-        return _draft?.valuable
+        return _draft?.jv_valuable
     }
     
     public var notifying: JVChatAttendeeNotifying? {
@@ -278,11 +282,11 @@ extension JVChat: JVPresentable {
     
     public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
         guard isGroup else { return nil }
-        guard let code = _icon?.valuable else { return nil }
+        guard let code = _icon?.jv_valuable else { return nil }
         
         return JMRepicItem(
-            backgroundColor: DesignBook.shared.color(usage: .contentBackground),
-            source: JMRepicItemSource.caption(code, DesignBook.shared.baseEmojiFont(scale: scale)),
+            backgroundColor: JVDesign.shared.color(usage: .contentBackground),
+            source: JMRepicItemSource.caption(code, JVDesign.shared.baseEmojiFont(scale: scale)),
             scale: scale ?? 0.55,
             clipping: .external)
     }
@@ -447,7 +451,7 @@ extension JVChat: JVPresentable {
     }
     
     public func hasManagingAccess(agent: JVAgent) -> Bool {
-        guard isGroup && not(isMain) else { return false }
+        guard isGroup && !(isMain) else { return false }
         if _owningAgent?.ID == agent.ID { return true }
         if agent.isAdmin { return true }
         return false

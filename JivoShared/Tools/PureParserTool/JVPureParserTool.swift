@@ -1,5 +1,5 @@
 //
-//  PureParserTool.swift
+//  JVPureParserTool.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 01.12.2019.
@@ -9,15 +9,17 @@
 import Foundation
 import PureParser
 
-public protocol IPureParserTool: AnyObject {
+public protocol JVIPureParserTool: AnyObject {
     func assign(variable name: String, value: String?)
     func activate(alias: String, _ rule: Bool)
     func execute(_ formula: String, collapseSpaces: Bool) -> String
 }
-public final class PureParserTool: IPureParserTool {
+
+public final class JVPureParserTool: JVIPureParserTool {
     private let parser = PureParser()
     
-    public init() {}
+    public init() {
+    }
     
     public func assign(variable name: String, value: String?) {
         parser.assign(variable: name, value: value)

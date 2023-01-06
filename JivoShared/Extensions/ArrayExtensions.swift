@@ -10,33 +10,33 @@ import Foundation
 import UIKit
 
 public extension Array {
-    var hasElements: Bool {
+    var jv_hasElements: Bool {
         return !isEmpty
     }
     
-    var hasOneElement: Bool {
+    var jv_hasOneElement: Bool {
         return (count == 1)
     }
 }
 
-public extension Sequence where Iterator.Element: OptionalType {
-    func flatten() -> [Iterator.Element.Wrapped] {
-        return compactMap { $0.optional }
+public extension Sequence where Iterator.Element: JVOptionalType {
+    func jv_flatten() -> [Iterator.Element.Wrapped] {
+        return compactMap { $0.jv_optional }
     }
 }
 
 public extension Array where Element: JVBaseModel {
-    func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         forEach { $0.apply(inside: context, with: change) }
     }
 }
 
 public extension Array where Element == String {
-    func stringOrEmpty(at index: Int) -> String {
+    func jv_stringOrEmpty(at index: Int) -> String {
         return (index < count ? self[index] : String())
     }
     
-    func markupMasked(_ isMasked: Bool) -> [Element] {
+    func jv_markupMasked(_ isMasked: Bool) -> [Element] {
         if isMasked {
             return self
         }
@@ -50,7 +50,7 @@ public extension Array where Element == String {
 }
 
 public extension Array where Element: Equatable {
-    func unique() -> [Element] {
+    func jv_unique() -> [Element] {
         var uniqueValues = [Element]()
         
         forEach { item in
@@ -61,11 +61,11 @@ public extension Array where Element: Equatable {
         return uniqueValues
     }
     
-    func doesNotContain(_ element: Element) -> Bool {
+    func jv_doesNotContain(_ element: Element) -> Bool {
         return !contains(element)
     }
     
-    mutating func toggle(_ element: Element) {
+    mutating func jv_toggle(_ element: Element) {
         if let index = firstIndex(of: element) {
             remove(at: index)
         }
@@ -76,10 +76,11 @@ public extension Array where Element: Equatable {
 }
 
 public extension Array where Element == Int {
-    func stringify() -> [String] {
+    func jv_stringify() -> [String] {
         return map { String("\($0)") }
     }
 }
+
 public func <<= <Element> (lhs: inout Array<Element>, rhs: Element) {
     lhs.append(rhs)
 }

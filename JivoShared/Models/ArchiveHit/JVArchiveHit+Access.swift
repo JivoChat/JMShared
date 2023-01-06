@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public enum JVArchiveHitSort {
     case byTime
     case byScore

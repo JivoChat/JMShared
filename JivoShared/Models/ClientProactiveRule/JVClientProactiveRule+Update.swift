@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVClientProactiveRule {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientProactiveRuleGeneralChange {
             _agent = context.agent(for: c.agentID, provideDefault: true)
             _date = c.date
@@ -26,7 +26,7 @@ public final class JVClientProactiveRuleGeneralChange: JVBaseModelChange {
     
     required public init( json: JsonElement) {
         agentID = json["agent_id"].intValue
-        date = json["time"].string?.parseDateUsingFullFormat() ?? Date(timeIntervalSince1970: 0)
+        date = json["time"].string?.jv_parseDateUsingFullFormat() ?? Date(timeIntervalSince1970: 0)
         text = json["invitation_text"].stringValue
         super.init(json: json)
     }

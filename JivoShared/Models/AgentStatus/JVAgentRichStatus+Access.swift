@@ -17,7 +17,7 @@ extension JVAgentRichStatus {
     }
     
     public var emoji: String {
-        return _emoji.convertToEmojis()
+        return _emoji.jv_convertToEmojis()
     }
     
     public var position: Int {

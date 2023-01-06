@@ -10,16 +10,18 @@ import Foundation
 import UIKit
 
 public extension UIView {
-    enum PinMode {
+    enum JVPinMode {
         case bottomFlexible
         case bottomCentered
     }
-    static func ofHeight(_ height: CGFloat) -> UIView {
+    
+    static func jv_ofHeight(_ height: CGFloat) -> UIView {
         let view = UIView()
         view.frame.size.height = height
         return view
     }
-    var safeInsets: UIEdgeInsets {
+    
+    var jv_safeInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return safeAreaInsets
         }
@@ -27,30 +29,31 @@ public extension UIView {
             return .zero
         }
     }
-    var maximumCornerRadius: CGFloat {
+    
+    var jv_maximumCornerRadius: CGFloat {
         return min(bounds.width, bounds.height) * 0.5
     }
     
-    func isAttached() -> Bool {
+    func jv_isAttached() -> Bool {
         return (window != nil)
     }
     
-    func size(for width: CGFloat) -> CGSize {
+    func jv_size(for width: CGFloat) -> CGSize {
         let containerSize = CGSize(width: width, height: .infinity)
         let result = sizeThatFits(containerSize)
         return result
     }
     
-    func height(for width: CGFloat) -> CGFloat {
-        return size(for: width).height
+    func jv_height(for width: CGFloat) -> CGFloat {
+        return jv_size(for: width).height
     }
     
-    func sizedToFit() -> UIView {
+    func jv_sizedToFit() -> UIView {
         sizeToFit()
         return self
     }
     
-    func pin(view: UIView, mode: PinMode) {
+    func jv_pin(view: UIView, mode: JVPinMode) {
         switch mode {
         case .bottomFlexible:
             let height = view.bounds.height
@@ -88,12 +91,12 @@ public extension UIView {
         addSubview(view)
     }
     
-    func applyFrame(_ frame: CGRect) {
+    func jv_applyFrame(_ frame: CGRect) {
         guard transform == .identity else { return }
         self.frame = frame
     }
     
-    func calculateInsets(downto subview: UIView?) -> UIEdgeInsets {
+    func jv_calculateInsets(downto subview: UIView?) -> UIEdgeInsets {
         guard let subview = subview else { return .zero }
         
         return UIEdgeInsets(
@@ -104,17 +107,17 @@ public extension UIView {
         )
     }
 
-    func forceLayout() {
+    func jv_forceLayout() {
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    enum FlashAnchor {
+    enum JVFlashAnchor {
         case local
         case parent
     }
     
-    func flash(color: UIColor, radius: CGFloat, extendBy: CGVector, anchor: FlashAnchor) {
+    func jv_flash(color: UIColor, radius: CGFloat, extendBy: CGVector, anchor: JVFlashAnchor) {
         let flasher = UIView()
         flasher.backgroundColor = color
         flasher.frame = bounds.insetBy(dx: -extendBy.dx, dy: -extendBy.dy)

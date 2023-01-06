@@ -8,17 +8,18 @@
 
 import Foundation
 
-extension JVClientSessionUTM {    public static func generateHumanReadable(source: String,
+extension JVClientSessionUTM {
+    public static func generateHumanReadable(source: String,
                                       medium: String,
                                       campaign: String,
                                       keyword: String,
                                       content: String) -> String? {
-        let parser = PureParserTool()
+        let parser = JVPureParserTool()
         
         if campaign.contains("organic") {
             // let socials = ["vk.com", "vkontakte.", "fb.com", "facebook."]
             // if socials.contains(where: source.contains)
-            parser.assign(variable: "organicRef", value: source.valuable)
+            parser.assign(variable: "organicRef", value: source.jv_valuable)
             parser.activate(alias: "search", source.isEmpty)
             parser.assign(variable: "keyword", value: decodePercentage(keyword))
         }
@@ -56,11 +57,11 @@ extension JVClientSessionUTM {    public static func generateHumanReadable(sourc
         let trimmedResult = result.trimmingCharacters(in: trimmingKit)
         guard !trimmedResult.isEmpty else { return nil }
         
-        return trimmedResult.substringTo(index: 0).uppercased() + trimmedResult.substringFrom(index: 1).lowercased()
+        return trimmedResult.jv_substringTo(index: 0).uppercased() + trimmedResult.jv_substringFrom(index: 1).lowercased()
     }
     
     private static func decodePercentage(_ input: String) -> String? {
-        guard var output = input.valuable else { return nil }
+        guard var output = input.jv_valuable else { return nil }
         
         while (true) {
             if let decoded = output.removingPercentEncoding {
@@ -74,10 +75,11 @@ extension JVClientSessionUTM {    public static func generateHumanReadable(sourc
         
         return output
     }
-        public var humanReadable: String? {
+    
+    public var humanReadable: String? {
         guard
-            let source = _source?.valuable,
-            let campaign = _campaign?.valuable
+            let source = _source?.jv_valuable,
+            let campaign = _campaign?.jv_valuable
             else { return nil }
         
         let medium = _medium ?? String()

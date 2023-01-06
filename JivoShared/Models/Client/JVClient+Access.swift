@@ -8,20 +8,24 @@
 
 import Foundation
 import JMRepicKit
+
 public enum JVClientStatus {
     case none
     case alive
     case online
 }
+
 public enum JVClientTypingStatus {
     case active(input: String?)
     case inactive
 }
+
 public enum JVClientDetailsUpdateError: Error {
     case missing
     case invalid
     case tooLong
 }
+
 public struct JVClientProfile {
     public let emailByClient: String?
     public let emailByAgent: String?
@@ -94,13 +98,13 @@ extension JVClient: JVDisplayable {
     public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
         let url = _avatarLink.flatMap(URL.init)
         
-        if let avatarID = String(_guestID.dropLast(3)).toHexInt() {
-            let c = URL.generateAvatarURL(ID: avatarID)
+        if let avatarID = String(_guestID.dropLast(3)).jv_toHexInt() {
+            let c = URL.jv_generateAvatarURL(ID: avatarID)
             let image = JMRepicItemSource.avatar(URL: url, image: c.image, color: c.color, transparent: transparent)
             return JMRepicItem(backgroundColor: nil, source: image, scale: scale ?? 1.0, clipping: .dual)
         }
         else {
-            let c = URL.generateAvatarURL(ID: UInt64(_ID))
+            let c = URL.jv_generateAvatarURL(ID: UInt64(_ID))
             let image = JMRepicItemSource.avatar(URL: url, image: c.image, color: c.color, transparent: transparent)
             return JMRepicItem(backgroundColor: nil, source: image, scale: scale ?? 1.0, clipping: .dual)
         }
@@ -138,7 +142,7 @@ extension JVClient: JVDisplayable {
     }
     
     public var customData: [JVClientCustomData] {
-        return _customData.toArray()
+        return _customData.jv_toArray()
     }
     
 //    var proactiveRule: JVClientProactiveRule? {
@@ -180,7 +184,7 @@ extension JVClient: JVDisplayable {
         if let joint = channel?.jointType {
             return joint
         }
-        else if let integration = _integration?.valuable {
+        else if let integration = _integration?.jv_valuable {
             return JVChannelJoint(rawValue: integration)
         }
         else {

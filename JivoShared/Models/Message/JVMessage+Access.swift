@@ -165,7 +165,7 @@ public extension JVMessage {
     }
     
     var client: JVClient? {
-        return validate(_client)
+        return jv_validate(_client)
     }
     
     var chatID: Int {
@@ -188,7 +188,7 @@ public extension JVMessage {
     }
     
     var type: String {
-        guard not(isDeleted) else {
+        guard !(isDeleted) else {
             return "message"
         }
         
@@ -284,7 +284,7 @@ public extension JVMessage {
                 )
             }
             else if senderBot, let buttons = _body?.buttons, !buttons.isEmpty {
-                let caption = _body?.text?.valuable ?? text
+                let caption = _body?.text?.jv_valuable ?? text
                 return .bot(message: caption, buttons: buttons, markdown: _isMarkdown)
             }
             else {
@@ -418,7 +418,7 @@ public extension JVMessage {
         if senderBot {
             return "bot"
         }
-        else if let sender = sender, sender.isValid {
+        else if let sender = sender, sender.jv_isValid {
             return isSystemLike ? nil : sender.displayName(kind: .relative)
         }
         else {
@@ -431,7 +431,7 @@ public extension JVMessage {
     }
     
     var text: String {
-        guard not(isDeleted) else {
+        guard !(isDeleted) else {
             return localizer["Message.Deleted"]
         }
         
@@ -446,7 +446,7 @@ public extension JVMessage {
             return String()
         }
         else {
-            if let text = _text.valuable {
+            if let text = _text.jv_valuable {
                 return text
             }
             else if let subject = _body?.email?.subject {
@@ -455,7 +455,7 @@ public extension JVMessage {
             else if let details = _body?.order?.text {
                 return details
             }
-            else if let text = _body?.text?.valuable {
+            else if let text = _body?.text?.jv_valuable {
                 return text
             }
 
@@ -551,7 +551,7 @@ public extension JVMessage {
             break
         }
 
-        guard let link = _iconLink?.valuable else { return nil }
+        guard let link = _iconLink?.jv_valuable else { return nil }
         return URL(string: link).flatMap(JMRepicItemSource.remote).flatMap {
             JMRepicItem(backgroundColor: nil, source: $0, scale: 1.0, clipping: .dual)
         }
@@ -570,7 +570,7 @@ public extension JVMessage {
         if direction != .outgoing {
             return .none
         }
-        else if _ID == 0, _localID.valuable != nil {
+        else if _ID == 0, _localID.jv_valuable != nil {
             return _sendingFailed ? .failed : .sending
         }
         else if let status = status {
@@ -615,7 +615,7 @@ public extension JVMessage {
     }
     
     var iconURL: URL? {
-        if let link = _iconLink?.valuable {
+        if let link = _iconLink?.jv_valuable {
             return URL(string: link)
         }
         else {
@@ -655,7 +655,7 @@ public extension JVMessage {
     }
     
     var hasIdentity: Bool {
-        return (ID > 0 || not(localID.isEmpty))
+        return (ID > 0 || !(localID.isEmpty))
     }
     
     func obtainObjectToCopy() -> Any? {
@@ -688,19 +688,19 @@ public extension JVMessage {
      */
     
     private func _correspondsTo_getSelfChatId() -> Int? {
-        return isValid ? chatID : nil
+        return jv_isValid ? chatID : nil
     }
     
     private func _correspondsTo_getSelfClient() -> JVClient? {
-        return isValid ? client : nil
+        return jv_isValid ? client : nil
     }
     
     private func _correspondsTo_getChat(chat: JVChat) -> JVChat? {
-        return validate(chat)
+        return jv_validate(chat)
     }
     
     private func _correspondsTo_getChatClient(chat: JVChat) -> JVClient? {
-        return chat.isValid ? validate(chat.client) : nil
+        return chat.jv_isValid ? jv_validate(chat.client) : nil
     }
     
     func canUpgradeStatus(to newStatus: String) -> Bool {

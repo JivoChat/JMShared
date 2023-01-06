@@ -10,10 +10,10 @@ import Foundation
 import JMCodingKit
 
 extension JVClient {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientGeneralChange {
             if _ID == 0 { _ID = c.ID }
-            _guestID = c.guestID.valuable ?? _guestID
+            _guestID = c.guestID.jv_valuable ?? _guestID
             _chatID = c.chatID ?? _chatID
             _channelID = c.channelID
             _channelName = c.channelName ?? _channelName
@@ -24,7 +24,7 @@ extension JVClient {
             _visitsNumber = c.visitsNumber ?? _visitsNumber
             _navigatesNumber = c.navigatesNumber ?? _navigatesNumber
             _activeSession = context.upsert(_activeSession, with: c.activeSession)
-            _isOnline = c.connectionLost?.inverted() ?? _isOnline
+            _isOnline = c.connectionLost?.jv_inverted() ?? _isOnline
             _hasStartup = c.hasStartup
             _isBlocked = c.isBlocked
             
@@ -52,7 +52,7 @@ extension JVClient {
             case .some(let agentID): _assignedAgent = context.agent(for: agentID, provideDefault: true)
             }
             
-            if let integration = c.integration ?? _integration?.valuable {
+            if let integration = c.integration ?? _integration?.jv_valuable {
                 _integration = integration
                 _integrationLink = c.socialLinks[integration]
             }
@@ -64,7 +64,7 @@ extension JVClient {
             _task = context.upsert(of: JVTask.self, with: c.task) ?? _task
             
             if let customData = c.customData {
-                _customData.set(context.insert(of: JVClientCustomData.self, with: customData))
+                _customData.jv_set(context.insert(of: JVClientCustomData.self, with: customData))
             }
         }
         else if let c = change as? JVClientGuestChange {
@@ -110,9 +110,9 @@ extension JVClient {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _customData.toArray(), recursive: true)
-        context.customRemove(objects: [_activeSession, _proactiveRule, _task].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _customData.jv_toArray(), recursive: true)
+        context.customRemove(objects: [_activeSession, _proactiveRule, _task].jv_flatten(), recursive: true)
     }
 }
 
@@ -149,7 +149,8 @@ public final class JVClientGeneralChange: JVBaseModelChange {
         guard ID > 0 else { return false }
         return true
     }
-        public init(clientID: Int) {
+    
+    public init(clientID: Int) {
         ID = clientID
         guestID = String()
         chatID = nil
@@ -264,6 +265,7 @@ public final class JVClientTypingChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
+    
     public init(ID: Int, chatID: Int, input: String?) {
         self.ID = ID
         self.chatID = chatID
@@ -279,7 +281,7 @@ public final class JVClientTypingChange: JVBaseModelChange {
             input = (typing > 0 ? json["new_val"].stringValue : nil)
         }
         else {
-            input = json["new_val"].stringValue.valuable
+            input = json["new_val"].stringValue.jv_valuable
         }
 
         super.init(json: json)
@@ -316,7 +318,8 @@ public final class JVClientGuestChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, guestID: String) {
+    
+    public init(ID: Int, guestID: String) {
         self.ID = ID
         self.guestID = guestID
         super.init()
@@ -399,7 +402,8 @@ public final class JVClientShortChange: JVBaseModelChange, NSCoding {
 public final class JVClientHistoryChange: JVBaseModelChange {
     private(set) public var messages = [JVMessageGeneralChange]()
     private(set) public var loadedEntirely: Bool = false
-        public init(json: JsonElement, loadedEntirely: Bool) {
+    
+    public init(json: JsonElement, loadedEntirely: Bool) {
         super.init(json: json)
         self.loadedEntirely = loadedEntirely
         messages = json["messages"].parseList() ?? []
@@ -417,7 +421,8 @@ public final class JVClientOnlineChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, isOnline: Bool) {
+    
+    public init(ID: Int, isOnline: Bool) {
         self.ID = ID
         self.isOnline = isOnline
         super.init()
@@ -448,7 +453,8 @@ public final class JVClientHasActiveCallChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, hasCall: Bool) {
+    
+    public init(ID: Int, hasCall: Bool) {
         self.ID = ID
         self.hasCall = hasCall
         super.init()
@@ -466,6 +472,7 @@ public final class JVClientTaskChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
+    
     public init(ID: Int, taskID: Int) {
         self.ID = ID
         self.taskID = taskID
@@ -484,6 +491,7 @@ public final class JVClientBlockingChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
+    
     public init(ID: Int, blocking: Bool) {
         self.ID = ID
         self.blocking = blocking
@@ -502,6 +510,7 @@ public final class JVClientAssignedAgentChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
+    
     public init(ID: Int, agentID: Int?) {
         self.ID = ID
         self.agentID = agentID

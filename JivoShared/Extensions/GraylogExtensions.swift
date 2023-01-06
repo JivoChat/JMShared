@@ -18,35 +18,35 @@ fileprivate var cachedRecentRestResponse = String()
 fileprivate var cachedRecentPayload: GraylogPayload?
 
 public extension Graylog {
-    static func linkTo(_ link: String) {
+    static func jv_linkTo(_ link: String) {
         guard let url = URL(string: link) else { return }
         setURL(url)
     }
     
-    static func setAgentID(_ agentID: Int?) {
+    static func jv_setAgentID(_ agentID: Int?) {
         cachedAgentID = agentID
     }
     
-    static func setRecentLivePacket(_ packet: String) {
+    static func jv_setRecentLivePacket(_ packet: String) {
         cachedRecentLivePacket = packet
     }
     
-    static func setRecentRestRequest(_ request: String) {
+    static func jv_setRecentRestRequest(_ request: String) {
         cachedRecentRestRequest = request
     }
     
-    static func setRecentRestResponse(_ response: String) {
+    static func jv_setRecentRestResponse(_ response: String) {
         cachedRecentRestResponse = response
     }
     
-    static func buildPayload(brief: String, details: String?, file: String, line: Int, includeCaches: Bool) -> GraylogPayload {
+    static func jv_buildPayload(brief: String, details: String?, file: String, line: Int, includeCaches: Bool) -> GraylogPayload {
         let values: [JsonElement?] = [
             JsonElement(key: "short_message", value: brief),
             JsonElement(key: "full_message", value: details),
             JsonElement(key: "_system_platform", value: "ios"),
             JsonElement(key: "_system_version", value: UIDevice.current.systemVersion),
-            JsonElement(key: "_app_version", value: Bundle.main.version),
-            JsonElement(key: "_app_full_version", value: Bundle.main.versionWithBuild),
+            JsonElement(key: "_app_version", value: Bundle.main.jv_version),
+            JsonElement(key: "_app_full_version", value: Bundle.main.jv_versionWithBuild),
             JsonElement(key: "_agent_id", value: cachedAgentID.flatMap { "\($0)" }),
             JsonElement(key: "_code_location", value: "\(URL(fileURLWithPath: file).lastPathComponent):\(line)"),
             includeCaches ? JsonElement(key: "_recent_live_packet", value: cachedRecentLivePacket) : nil,
@@ -55,16 +55,16 @@ public extension Graylog {
         ]
         
         var merged = JsonElement()
-        values.flatten().forEach { merged = merged.merged(with: $0) }
+        values.jv_flatten().forEach { merged = merged.merged(with: $0) }
         return merged.ordictValue.compactMapValues({ $0.string }).unOrderedMap
     }
     
-    static func wrapRecentPayloadIntoException(exception: NSException) -> GraylogPayload {
-        return cachedRecentPayload ?? buildPayload(brief: "standalone-exception", details: nil, file: #file, line: #line, includeCaches: true)
+    static func jv_wrapRecentPayloadIntoException(exception: NSException) -> GraylogPayload {
+        return cachedRecentPayload ?? jv_buildPayload(brief: "standalone-exception", details: nil, file: #file, line: #line, includeCaches: true)
     }
     
-    static func send(brief: String, details: String, file: String, line: Int, includeCaches: Bool) {
-        cachedRecentPayload = buildPayload(
+    static func jv_send(brief: String, details: String, file: String, line: Int, includeCaches: Bool) {
+        cachedRecentPayload = jv_buildPayload(
             brief: brief,
             details: details,
             file: file,
@@ -76,7 +76,7 @@ public extension Graylog {
         }
     }
     
-    static func send(payload: GraylogPayload) {
+    static func jv_send(payload: GraylogPayload) {
         Graylog.log(payload)
     }
 }

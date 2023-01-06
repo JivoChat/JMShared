@@ -23,7 +23,7 @@ public final class JVChannel: JVBaseModel {
         return "_ID"
     }
     
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

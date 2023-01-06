@@ -10,12 +10,12 @@ import Foundation
 import JMCodingKit
 
 extension JVGuest {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVGuestBaseChange {
             if _ID == "" { _ID = c.ID }
             if _agentID == 0 { _agentID = abs(c.agentID ?? _agentID) }
             if _startDate == nil { _startDate = Date() }
-            if not(c.siteID.isEmpty) { _channelID = c.siteID }
+            if !(c.siteID.isEmpty) { _channelID = c.siteID }
         }
         
         if !(change is JVGuestRemovalChange) {
@@ -80,11 +80,11 @@ extension JVGuest {
                 )
             }
             
-            _attendees.set(context.insert(of: JVChatAttendee.self, with: attendees))
+            _attendees.jv_set(context.insert(of: JVChatAttendee.self, with: attendees))
         }
         else if let c = change as? JVGuestBotsChange {
             let bots = c.botsIds.compactMap { context.bot(for: $0, provideDefault: true) }
-            _bots.set(bots)
+            _bots.jv_set(bots)
         }
         else if let c = change as? JVGuestWidgetVersionChange {
             _widgetVersion = c.version
@@ -97,12 +97,13 @@ extension JVGuest {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _attendees.toArray(), recursive: true)
-        context.customRemove(objects: [_utm].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _attendees.jv_toArray(), recursive: true)
+        context.customRemove(objects: [_utm].jv_flatten(), recursive: true)
     }
 }
-public func GuestChangeParse(for item: String) -> JVGuestBaseChange? {
+
+public func JVGuestChangeParse(for item: String) -> JVGuestBaseChange? {
     let args = item.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
     guard args.count >= 4 else { return nil }
     
@@ -126,24 +127,27 @@ public func GuestChangeParse(for item: String) -> JVGuestBaseChange? {
     default: return nil
     }
 }
+
 open class JVGuestBaseChange: JVBaseModelChange {
     public let ID: String
     public let siteID: String
     public let agentID: Int?
     
-    open override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    open override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
-        public init(ID: String) {
+    
+    public init(ID: String) {
         self.ID = ID
         self.siteID = String()
         self.agentID = nil
         super.init()
     }
-        public init(arguments: [String]) {
-        ID = arguments.stringOrEmpty(at: 0)
-        siteID = arguments.stringOrEmpty(at: 1)
-        agentID = arguments.stringOrEmpty(at: 2).toInt()
+    
+    public init(arguments: [String]) {
+        ID = arguments.jv_stringOrEmpty(at: 0)
+        siteID = arguments.jv_stringOrEmpty(at: 1)
+        agentID = arguments.jv_stringOrEmpty(at: 2).jv_toInt()
         super.init()
     }
     
@@ -157,6 +161,7 @@ open class JVGuestBaseChange: JVBaseModelChange {
         return true
     }
 }
+
 open class JVGuestGeneralChange: JVGuestBaseChange {
     public let sourceIP: String
     public let sourcePort: Int
@@ -168,14 +173,14 @@ open class JVGuestGeneralChange: JVGuestBaseChange {
     public let organization: String
     
     override init(arguments: [String]) {
-        sourceIP = arguments.stringOrEmpty(at: 4)
-        sourcePort = arguments.stringOrEmpty(at: 5).toInt()
-        regionCode = arguments.stringOrEmpty(at: 6).toInt()
-        countryCode = arguments.stringOrEmpty(at: 7)
-        countryName = arguments.stringOrEmpty(at: 8)
-        regionName = arguments.stringOrEmpty(at: 9)
-        cityName = arguments.stringOrEmpty(at: 10)
-        organization = arguments.stringOrEmpty(at: 13)
+        sourceIP = arguments.jv_stringOrEmpty(at: 4)
+        sourcePort = arguments.jv_stringOrEmpty(at: 5).jv_toInt()
+        regionCode = arguments.jv_stringOrEmpty(at: 6).jv_toInt()
+        countryCode = arguments.jv_stringOrEmpty(at: 7)
+        countryName = arguments.jv_stringOrEmpty(at: 8)
+        regionName = arguments.jv_stringOrEmpty(at: 9)
+        cityName = arguments.jv_stringOrEmpty(at: 10)
+        organization = arguments.jv_stringOrEmpty(at: 13)
         super.init(arguments: arguments)
     }
     
@@ -183,11 +188,12 @@ open class JVGuestGeneralChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestClientChange: JVGuestBaseChange {
     public let clientID: Int
 
     override init(arguments: [String]) {
-        clientID = arguments.stringOrEmpty(at: 4).toInt()
+        clientID = arguments.jv_stringOrEmpty(at: 4).jv_toInt()
         super.init(arguments: arguments)
     }
 
@@ -195,11 +201,12 @@ open class JVGuestClientChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestStatusChange: JVGuestBaseChange {
     public let status: String
     
     override init(arguments: [String]) {
-        status = arguments.stringOrEmpty(at: 4)
+        status = arguments.jv_stringOrEmpty(at: 4)
         super.init(arguments: arguments)
     }
     
@@ -207,11 +214,12 @@ open class JVGuestStatusChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestProactiveChange: JVGuestBaseChange {
     public let proactiveAgentID: Int
     
     override init(arguments: [String]) {
-        proactiveAgentID = arguments.stringOrEmpty(at: 4).toInt()
+        proactiveAgentID = arguments.jv_stringOrEmpty(at: 4).jv_toInt()
         super.init(arguments: arguments)
     }
     
@@ -219,11 +227,12 @@ open class JVGuestProactiveChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestNameChange: JVGuestBaseChange {
     public let name: String
     
     override init(arguments: [String]) {
-        name = arguments.stringOrEmpty(at: 4)
+        name = arguments.jv_stringOrEmpty(at: 4)
         super.init(arguments: arguments)
     }
     
@@ -231,11 +240,12 @@ open class JVGuestNameChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestPageLinkChange: JVGuestBaseChange {
     public let link: String
     
     override init(arguments: [String]) {
-        link = arguments.stringOrEmpty(at: 4)
+        link = arguments.jv_stringOrEmpty(at: 4)
         super.init(arguments: arguments)
     }
     
@@ -243,11 +253,12 @@ open class JVGuestPageLinkChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestPageTitleChange: JVGuestBaseChange {
     public let title: String
     
     override init(arguments: [String]) {
-        title = arguments.stringOrEmpty(at: 4)
+        title = arguments.jv_stringOrEmpty(at: 4)
         super.init(arguments: arguments)
     }
     
@@ -255,11 +266,12 @@ open class JVGuestPageTitleChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestStartTimeChange: JVGuestBaseChange {
     public let timestamp: TimeInterval
     
     override init(arguments: [String]) {
-        timestamp = TimeInterval(arguments.stringOrEmpty(at: 4).toInt())
+        timestamp = TimeInterval(arguments.jv_stringOrEmpty(at: 4).jv_toInt())
         super.init(arguments: arguments)
     }
     
@@ -267,13 +279,14 @@ open class JVGuestStartTimeChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class GuestUTMChange: JVGuestBaseChange {
     private static var jsonCoder = JsonCoder()
     
     public let utm: JVClientSessionUTMGeneralChange?
     
     override init(arguments: [String]) {
-        utm = GuestUTMChange.jsonCoder.decode(raw: arguments.stringOrEmpty(at: 4))?.parse()
+        utm = GuestUTMChange.jsonCoder.decode(raw: arguments.jv_stringOrEmpty(at: 4))?.parse()
         super.init(arguments: arguments)
     }
     
@@ -281,11 +294,12 @@ open class GuestUTMChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestVisitsChange: JVGuestBaseChange {
     public let number: Int
     
     override init(arguments: [String]) {
-        number = arguments.stringOrEmpty(at: 4).toInt()
+        number = arguments.jv_stringOrEmpty(at: 4).jv_toInt()
         super.init(arguments: arguments)
     }
     
@@ -293,11 +307,12 @@ open class JVGuestVisitsChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestNavigatesChange: JVGuestBaseChange {
     public let number: Int
     
     override init(arguments: [String]) {
-        number = arguments.stringOrEmpty(at: 4).toInt()
+        number = arguments.jv_stringOrEmpty(at: 4).jv_toInt()
         super.init(arguments: arguments)
     }
     
@@ -305,11 +320,12 @@ open class JVGuestNavigatesChange: JVGuestBaseChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVGuestVisibleChange: JVGuestBaseChange {
     public let value: Bool
     
     override init(arguments: [String]) {
-        value = arguments.stringOrEmpty(at: 4).toBool()
+        value = arguments.jv_stringOrEmpty(at: 4).jv_toBool()
         super.init(arguments: arguments)
     }
     
@@ -324,7 +340,7 @@ open class JVGuestAgentsChange: JVGuestBaseChange {
     public let agentIDs: [Int]
     
     override init(arguments: [String]) {
-        let idsArgument = arguments.stringOrEmpty(at: 4)
+        let idsArgument = arguments.jv_stringOrEmpty(at: 4)
         
         let idsSource: String
         if idsArgument.hasPrefix("[") {
@@ -352,7 +368,7 @@ open class JVGuestBotsChange: JVGuestBaseChange {
     public let botsIds: [Int]
     
     override init(arguments: [String]) {
-        let idsArgument = arguments.stringOrEmpty(at: 4)
+        let idsArgument = arguments.jv_stringOrEmpty(at: 4)
         
         let idsSource: String
         if idsArgument.hasPrefix("[") {
@@ -378,7 +394,7 @@ open class JVGuestWidgetVersionChange: JVGuestBaseChange {
     public let version: String
     
     override init(arguments: [String]) {
-        version = arguments.stringOrEmpty(at: 4)
+        version = arguments.jv_stringOrEmpty(at: 4)
         super.init(arguments: arguments)
     }
     
@@ -389,6 +405,7 @@ open class JVGuestWidgetVersionChange: JVGuestBaseChange {
 
 public final class JVGuestUpdateChange: JVGuestBaseChange {
 }
+
 open class JVGuestRemovalChange: JVGuestBaseChange {
     override init(arguments: [String]) {
         super.init(arguments: arguments)

@@ -10,11 +10,11 @@ import Foundation
 
 extension JVClientCustomData {
     public var title: String? {
-        return _title?.valuable
+        return _title?.jv_valuable
     }
     
     public var key: String? {
-        return _key?.valuable
+        return _key?.jv_valuable
     }
     
     public var content: String {
@@ -22,7 +22,7 @@ extension JVClientCustomData {
     }
     
     public var URL: URL? {
-        if let link = _link?.valuable {
+        if let link = _link?.jv_valuable {
             if URLComponents(string: link)?.scheme == nil {
                 return Foundation.URL(string: "https://" + link)
             }
@@ -30,7 +30,7 @@ extension JVClientCustomData {
                 return Foundation.URL(string: link)
             }
         }
-        else if let content = _content.valuable, content.contains("://") {
+        else if let content = _content.jv_valuable, content.contains("://") {
             return Foundation.URL(string: content)
         }
         else {

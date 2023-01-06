@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+
 public enum JVMessageMediaType {
     case photo
     case sticker
@@ -23,6 +24,7 @@ public enum JVMessageMediaType {
     case story
     case unknown
 }
+
 public enum JVMessageMediaSizingMode {
     case original
     case cropped
@@ -75,11 +77,11 @@ extension JVMessageMedia {
     }
     
     public var emoji: String? {
-        return _emoji.valuable
+        return _emoji.jv_valuable
     }
     
     public var name: String? {
-        return _name.valuable
+        return _name.jv_valuable
     }
     
     public var dataSize: Int {
@@ -104,7 +106,7 @@ extension JVMessageMedia {
             return nil
         }
         
-        if let link = _link, not(link.isEmpty) {
+        if let link = _link, !(link.isEmpty) {
             let url = URL(string: link)
             return JVMessageBodyConference(url: url, title: _title ?? String())
         }
@@ -128,11 +130,11 @@ extension JVMessageMedia {
     }
     
     public var phone: String? {
-        return _phone.valuable
+        return _phone.jv_valuable
     }
     
     public var text: String? {
-        return _text?.valuable
+        return _text?.jv_valuable
     }
     
     public var originalSize: CGSize {

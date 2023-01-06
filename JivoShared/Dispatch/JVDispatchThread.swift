@@ -1,5 +1,5 @@
 //
-//  DispatchThread.swift
+//  JVDispatchThread.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 28.10.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMShared
 
-public final class DispatchThread: NSObject {
+public final class JVDispatchThread: NSObject {
     private var thread: Thread?
     
     public init(caption: String) {

@@ -8,7 +8,8 @@
 
 import Foundation
 
-public typealias BroadcastObserverID = UUID
-public enum BroadcastNullableValue {
+public typealias JVBroadcastObserverID = UUID
+
+public enum JVBroadcastNullableValue {
     case null
 }

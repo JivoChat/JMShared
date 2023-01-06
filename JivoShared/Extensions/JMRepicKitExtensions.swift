@@ -46,7 +46,7 @@ public extension JMRepicConfig {
             borderColor: .clear,
             itemConfig: JMRepicItemConfig(
                 borderWidthProvider: { $0 * 0.05 },
-                borderColor: DesignBook.shared.color(usage: .primaryBackground)
+                borderColor: JVDesign.shared.color(usage: .primaryBackground)
             ),
             layoutMap: [
                 .max: [
@@ -125,21 +125,21 @@ public extension JMRepicView {
         switch activity {
         case .calling?:
             setIndicator(
-                fillColor: DesignBook.shared.color(usage: .activityCall),
+                fillColor: JVDesign.shared.color(usage: .activityCall),
                 icon: UIImage(named: "activity_oncall")?.withRenderingMode(.alwaysTemplate),
                 config: .activityIndicatorConfig(context: context)
             )
 
         case .taskActive?:
             setIndicator(
-                fillColor: DesignBook.shared.color(usage: .activityActiveTask),
+                fillColor: JVDesign.shared.color(usage: .activityActiveTask),
                 icon: UIImage(named: "activity_reminder")?.withRenderingMode(.alwaysTemplate),
                 config: .activityIndicatorConfig(context: context)
             )
             
         case .taskFired?:
             setIndicator(
-                fillColor: DesignBook.shared.color(usage: .activityFiredTask),
+                fillColor: JVDesign.shared.color(usage: .activityFiredTask),
                 icon: UIImage(named: "activity_reminder")?.withRenderingMode(.alwaysTemplate),
                 config: .activityIndicatorConfig(context: context)
             )
@@ -161,7 +161,7 @@ fileprivate extension JMRepicIndicatorConfig {
             borderWidthProvider: { _ in 0 },
             borderColor: context.resolvedColor,
             contentMarginProvider: { _ in 0 },
-            contentTintColor: DesignBook.shared.color(usage: .primaryForeground)
+            contentTintColor: JVDesign.shared.color(usage: .primaryForeground)
         )
     }
     
@@ -171,7 +171,7 @@ fileprivate extension JMRepicIndicatorConfig {
             borderWidthProvider: { max(2, $0 * 0.035) },
             borderColor: context.resolvedColor,
             contentMarginProvider: { $0 * 0.031 },
-            contentTintColor: DesignBook.shared.color(usage: .white)
+            contentTintColor: JVDesign.shared.color(usage: .white)
         )
     }
 }
@@ -179,9 +179,9 @@ fileprivate extension JMRepicIndicatorConfig {
 fileprivate extension JMRepicView.VisualContext {
     var resolvedColor: UIColor {
         switch self {
-        case .regular: return DesignBook.shared.color(usage: .primaryBackground)
-        case .navigation: return DesignBook.shared.color(usage: .navigatorBackground)
-        case .group: return DesignBook.shared.color(usage: .groupingBackground)
+        case .regular: return JVDesign.shared.color(usage: .primaryBackground)
+        case .navigation: return JVDesign.shared.color(usage: .navigatorBackground)
+        case .group: return JVDesign.shared.color(usage: .groupingBackground)
         }
     }
 }

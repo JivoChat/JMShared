@@ -8,8 +8,8 @@
 
 import Foundation
 
-public extension IDatabaseDriver {
-    func subscribe<OT>(_ type: OT.Type, options: DatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool = true, callback: @escaping ([OT]) -> Void) -> DatabaseListener {
+public extension JVIDatabaseDriver {
+    func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool = true, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener {
         return subscribe(type, options: options, returnEntireCollectionOnUpdate: returnEntireCollectionOnUpdate, callback: callback)
     }
     
@@ -106,7 +106,7 @@ public extension IDatabaseDriver {
         read { context in
             agents = context.objects(
                 JVAgent.self,
-                options: DatabaseRequestOptions(
+                options: JVDatabaseRequestOptions(
                     filter: predicate
                 )
             )
@@ -169,7 +169,7 @@ public extension IDatabaseDriver {
     }
 }
 
-public extension IDatabaseContext {
+public extension JVIDatabaseContext {
     func find<OT: JVBaseModel>(of type: OT.Type, with change: JVBaseModelChange?) -> OT? {
         if let change = change, change.isValid {
             if let integerKey = change.integerKey {
@@ -332,7 +332,7 @@ public extension IDatabaseContext {
             obj = nil
         }
         
-        if let obj = obj, obj.isValid {
+        if let obj = obj, obj.jv_isValid {
             obj.apply(inside: self, with: change)
         }
         
@@ -407,7 +407,7 @@ public extension IDatabaseContext {
     }
     
     func messageWithUUID(_ UUID: String) -> JVMessage? {
-        return object(JVMessage.self, mainKey: DatabaseContextMainKey(key: "_UUID", value: UUID))
+        return object(JVMessage.self, mainKey: JVDatabaseContextMainKey(key: "_UUID", value: UUID))
     }
     
     func chatsWithClient(_ client: JVClient, includeArchived: Bool) -> [JVChat] {
@@ -421,7 +421,7 @@ public extension IDatabaseContext {
 
         return objects(
             JVChat.self,
-            options: DatabaseRequestOptions(
+            options: JVDatabaseRequestOptions(
                 filter: predicate,
                 sortBy: [],
                 notificationName: nil
@@ -440,15 +440,15 @@ public extension IDatabaseContext {
         guard let callID = callID else { return nil }
 
         let filter = NSPredicate(format: "_body._callID == %@", callID)
-        let options = DatabaseRequestOptions(filter: filter)
+        let options = JVDatabaseRequestOptions(filter: filter)
         return objects(JVMessage.self, options: options).last
     }
     
     func removeChat(_ chat: JVChat, cleanup: Bool) {
-        if cleanup, let client = chat.client, client.isValid {
+        if cleanup, let client = chat.client, client.jv_isValid {
             let messages = objects(
                 JVMessage.self,
-                options: DatabaseRequestOptions(
+                options: JVDatabaseRequestOptions(
                     filter: NSPredicate(format: "_clientID == %d", client.ID),
                     sortBy: []
                 )
@@ -465,7 +465,7 @@ public extension IDatabaseContext {
 
         let messages = objects(
             JVMessage.self,
-            options: DatabaseRequestOptions(
+            options: JVDatabaseRequestOptions(
                 filter: NSPredicate(format: "_UUID in %@", uuids)
             )
         )

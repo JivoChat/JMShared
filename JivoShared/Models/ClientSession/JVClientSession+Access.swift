@@ -8,7 +8,8 @@
 
 import Foundation
 
-extension JVClientSession {    public var creationDate: Date? {
+extension JVClientSession {
+    public var creationDate: Date? {
         if _creationTS > 0 {
             return Date(timeIntervalSince1970: TimeInterval(_creationTS))
         }
@@ -19,22 +20,28 @@ extension JVClientSession {    public var creationDate: Date? {
             return nil
         }
     }
-        public var UTM: JVClientSessionUTM? {
+    
+    public var UTM: JVClientSessionUTM? {
         return _UTM
     }
-        public var lastIP: String? {
-        return _lastIP.valuable
+    
+    public var lastIP: String? {
+        return _lastIP.jv_valuable
     }
-        public var history: [JVPage] {
-        return _history.toArray()
+    
+    public var history: [JVPage] {
+        return _history.jv_toArray()
     }
-        public var geo: JVClientSessionGeo? {
+    
+    public var geo: JVClientSessionGeo? {
         return _geo
     }
-        public var chatStartPage: JVPage? {
+    
+    public var chatStartPage: JVPage? {
         return _chatStartPage ?? _currentPage ?? _history.last
     }
-        public var currentPage: JVPage? {
+    
+    public var currentPage: JVPage? {
         return _currentPage
     }
 }

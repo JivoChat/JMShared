@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVClientSessionGeo {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientSessionGeoGeneralChange {
             _country = c.country
             _region = c.region

@@ -9,13 +9,13 @@
 import Foundation
 import RealmSwift
 
-public protocol OptionalType {
+public protocol JVOptionalType {
     associatedtype Wrapped
-    var optional: Wrapped? { get }
+    var jv_optional: Wrapped? { get }
 }
 
 public extension Optional {
-    var hasValue: Bool {
+    var jv_hasValue: Bool {
         if let _ = self {
             return true
         }
@@ -25,19 +25,19 @@ public extension Optional {
     }
 }
 
-extension Optional: OptionalType {
-    public var optional: Wrapped? {
+extension Optional: JVOptionalType {
+    public var jv_optional: Wrapped? {
         return self
     }
 
-    mutating func readAndReset() -> Wrapped? {
+    mutating func jv_readAndReset() -> Wrapped? {
         defer { self = nil }
         return self
     }
 }
 
 public extension Optional where Wrapped: Object {
-    func ifValid() -> Wrapped? {
-        return self?.ifValid()
+    func jv_ifValid() -> Wrapped? {
+        return self?.jv_ifValid()
     }
 }

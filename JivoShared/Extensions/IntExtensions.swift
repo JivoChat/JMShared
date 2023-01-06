@@ -9,17 +9,15 @@
 import Foundation
 
 public extension Int {
-    var valuable: Int? {
+    var jv_valuable: Int? {
         return (self == 0 ? nil : self)
     }
 
-    func hasBit(_ flag: Int) -> Bool {
+    func jv_hasBit(_ flag: Int) -> Bool {
         return ((self & flag) > 0)
     }
 
-    func toString() -> String {
+    func jv_toString() -> String {
         return "\(self)"
     }
 }
-
-extension Int: Mappable {}

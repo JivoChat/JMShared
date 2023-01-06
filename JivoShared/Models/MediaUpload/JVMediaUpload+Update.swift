@@ -58,7 +58,7 @@ public enum JVMediaUploadingResult {
 }
 
 extension JVMediaUpload {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMediaUploadChange {
             if _ID == "" { _ID = c.ID }
             _filePath = c.filePath ?? String()
@@ -78,6 +78,7 @@ public final class JVMediaUploadChange: JVBaseModelChange {
     public let height: Int
     public let sessionID: String
     public let completion: (JVMediaUploadingResult) -> Void
+    
     public init(ID: String,
                 chatID: Int?,
                 filePath: String?,

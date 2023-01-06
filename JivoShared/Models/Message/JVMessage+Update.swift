@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVMessage {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         func _adjustSender(type: String, ID: Int, body: JVMessageBodyGeneralChange?) {
             if let body = body, let _ = body.callID {
                 _senderAgent = body.agentID.flatMap { context.agent(for: $0, provideDefault: true) }
@@ -43,7 +43,7 @@ extension JVMessage {
             }
             
             let slices = (String(" ") + text).split(separator: "⦀")
-            _text = slices.first.flatMap(String.init)?.trimmed() ?? String()
+            _text = slices.first.flatMap(String.init)?.jv_trimmed() ?? String()
             
             if _body == nil {
                 _body = context.insert(of: JVMessageBody.self, with: JVMessageBodyGeneralChange(json: JsonElement()))
@@ -56,7 +56,7 @@ extension JVMessage {
         
         func _adjustIncomingState(clientID: Int?) {
             if let _ = clientID ?? context.clientID(for: _chatID) {
-                let value = (_senderClient.hasValue || _senderAgent?.isMe == false)
+                let value = (_senderClient.jv_hasValue || _senderAgent?.isMe == false)
                 _isIncoming = value
             }
             else {
@@ -122,7 +122,7 @@ extension JVMessage {
             _chatID = c.chatID
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             
@@ -151,17 +151,17 @@ extension JVMessage {
             _chatID = c.chatID
             _type = "message"
             _isMarkdown = false
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
-            if let date = c.time.parseDateUsingFullFormat() {
+            if let date = c.time.jv_parseDateUsingFullFormat() {
                 _date = date
             }
             else {
                 _date = Date()
             }
             
-            if let senderType = c.senderType.valuable {
+            if let senderType = c.senderType.jv_valuable {
                 _adjustSender(type: senderType, ID: c.senderID, body: nil)
                 _adjustBotMeta(text: c.text)
                 _adjustIncomingState(clientID: nil)
@@ -186,7 +186,7 @@ extension JVMessage {
             _client = context.client(for: _clientID, needsDefault: false)
             _date = Date(timeIntervalSince1970: TimeInterval(c.creationTS))
             _chatID = c.chatID
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _type = c.type
             _isMarkdown = c.isMarkdown
             _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
@@ -210,7 +210,7 @@ extension JVMessage {
             _chatID = c.chatID
             _type = "message"
             _isMarkdown = false
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
@@ -227,7 +227,7 @@ extension JVMessage {
             _chatID = c.chatID
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
@@ -254,7 +254,7 @@ extension JVMessage {
             _chatID = c.chatID
             _date = Date(timeIntervalSince1970: c.creationTS)
             _orderingIndex = 1
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _type = "system"
             _isMarkdown = false
             _interactiveID = c.interactiveID
@@ -275,16 +275,16 @@ extension JVMessage {
             
             switch c.contents {
             case .text(let text):
-                _text = text.trimmed()
+                _text = text.jv_trimmed()
                 
             case .comment(let text):
-                _text = text.trimmed()
+                _text = text.jv_trimmed()
                 
             case .email:
                 abort()
                 
             case .photo(let mime, let name, let link, let dataSize, let width, let height):
-                _text = "🖼 " + name.trimmed()
+                _text = "🖼 " + name.jv_trimmed()
                 
                 _media = context.insert(
                     of: JVMessageMedia.self,
@@ -300,7 +300,7 @@ extension JVMessage {
                 )
                 
             case .file(let mime, let name, let link, let size):
-                _text = "📄 " + name.trimmed()
+                _text = "📄 " + name.jv_trimmed()
                 
                 _media = context.insert(
                     of: JVMessageMedia.self,
@@ -330,8 +330,8 @@ extension JVMessage {
             _hasRead = c.hasRead
         }
         else if let c = change as? JVMessageTextChange {
-            if text != c.text.trimmed() {
-                _text = c.text.trimmed()
+            if text != c.text.jv_trimmed() {
+                _text = c.text.jv_trimmed()
             }
         }
         else if let c = change as? JVMessageReactionChange {
@@ -393,7 +393,7 @@ extension JVMessage {
             _chatID = c.chat.ID
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _text = c.text.trimmed()
+            _text = c.text.jv_trimmed()
             _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
@@ -530,20 +530,22 @@ extension JVMessage {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: [_body, _media].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: [_body, _media].jv_flatten(), recursive: true)
     }
 }
+
 open class JVMessageBaseGeneralChange: JVBaseModelChange, Comparable {
     public let ID: Int
     public let creationTS: TimeInterval
     public let body: JVMessageBodyGeneralChange?
     public let isOffline: Bool
     
-    open override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    open override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
-        public init(ID: Int, creationTS: TimeInterval, body: JVMessageBodyGeneralChange?) {
+    
+    public init(ID: Int, creationTS: TimeInterval, body: JVMessageBodyGeneralChange?) {
         self.ID = ID
         self.creationTS = creationTS
         self.body = body
@@ -563,6 +565,7 @@ open class JVMessageBaseGeneralChange: JVBaseModelChange, Comparable {
         abort()
     }
 }
+
 open class JVMessageExtendedGeneralChange: JVMessageBaseGeneralChange {
     public let type: String
     public let isMarkdown: Bool
@@ -595,7 +598,7 @@ open class JVMessageExtendedGeneralChange: JVMessageBaseGeneralChange {
     }
     
     open override var isValid: Bool {
-        if type == "call", not(body?.isValidCall == true) {
+        if type == "call", !(body?.isValidCall == true) {
             return false
         }
         
@@ -738,15 +741,16 @@ public final class JVMessageShortChange: JVBaseModelChange {
         abort()
     }
     
-    public override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
     
     public override var isValid: Bool {
         guard ID > 0 else { return false }
         return true
     }
-        public init(ID: Int,
+    
+    public init(ID: Int,
          clientID: Int?,
          chatID: Int,
          senderType: String,
@@ -807,7 +811,8 @@ public final class JVMessageLocalChange: JVMessageExtendedGeneralChange {
     public override var primaryValue: Int {
         abort()
     }
-        public init(ID: Int,
+    
+    public init(ID: Int,
          clientID: Int?,
          chatID: Int,
          type: String,
@@ -938,10 +943,11 @@ public final class JVMessageFromClientChange: JVBaseModelChange {
         abort()
     }
     
-    public override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
-        public init(ID: Int, channelID: Int, clientID: Int, chatID: Int, text: String, media: JVMessageMediaGeneralChange?) {
+    
+    public init(ID: Int, channelID: Int, clientID: Int, chatID: Int, text: String, media: JVMessageMediaGeneralChange?) {
         self.ID = ID
         self.channelID = channelID
         self.clientID = clientID
@@ -987,7 +993,8 @@ public final class JVMessageFromAgentChange: JVMessageExtendedGeneralChange {
     public override var primaryValue: Int {
         abort()
     }
-        public init(ID: Int,
+    
+    public init(ID: Int,
          creationTS: TimeInterval,
          clientID: Int?,
          type: String,
@@ -1054,6 +1061,7 @@ public final class JVMessageFromAgentChange: JVMessageExtendedGeneralChange {
             isDeleted: isDeleted)
     }
 }
+
 public final class JVMessageStateChange: JVBaseModelChange {
     public let localID: String?
     public let globalID: Int
@@ -1066,18 +1074,18 @@ public final class JVMessageStateChange: JVBaseModelChange {
         abort()
     }
     
-    public override var integerKey: DatabaseContextMainKey<Int>? {
+    public override var integerKey: JVDatabaseContextMainKey<Int>? {
         if globalID > 0 {
-            return DatabaseContextMainKey(key: "_ID", value: globalID)
+            return JVDatabaseContextMainKey(key: "_ID", value: globalID)
         }
         else {
             return nil
         }
     }
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
         if let localID = localID {
-            return DatabaseContextMainKey(key: "_localID", value: localID)
+            return JVDatabaseContextMainKey(key: "_localID", value: localID)
         }
         else {
             return nil
@@ -1103,6 +1111,7 @@ public final class JVMessageStateChange: JVBaseModelChange {
         super.init(json: json)
     }
 }
+
 public final class JVMessageGeneralSystemChange: JVMessageBaseGeneralChange {
     public let clientID: Int?
     public let chatID: Int
@@ -1137,8 +1146,8 @@ public final class JVMessageSendingChange: JVBaseModelChange {
         abort()
     }
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_localID", value: localID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_localID", value: localID)
     }
     
     public init(localID: String, sendingDate: TimeInterval?, sendingFailed: Bool?) {
@@ -1161,10 +1170,11 @@ public final class JVMessageReadChange: JVBaseModelChange {
         abort()
     }
     
-    public override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
-        public init(ID: Int, hasRead: Bool) {
+    
+    public init(ID: Int, hasRead: Bool) {
         self.ID = ID
         self.hasRead = hasRead
         super.init()
@@ -1184,7 +1194,7 @@ public final class JVMessageReactionChange: JVBaseModelChange {
     public let deleted: Bool
     
     public override var isValid: Bool {
-        guard let _ = emoji.valuable else { return false }
+        guard let _ = emoji.jv_valuable else { return false }
         return true
     }
 
@@ -1192,14 +1202,14 @@ public final class JVMessageReactionChange: JVBaseModelChange {
         abort()
     }
     
-    public override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey(key: "_ID", value: messageID)
+    public override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: messageID)
     }
     
     required public init(json: JsonElement) {
         chatID = json["chat_id"].intValue
         messageID = json["to_msg_id"].intValue
-        emoji = json["icon"].string?.convertToEmojis() ?? String()
+        emoji = json["icon"].string?.jv_convertToEmojis() ?? String()
         fromKind = json["from"].stringValue
         fromID = json["from_id"].intValue
         deleted = json["deleted"].boolValue
@@ -1215,8 +1225,8 @@ public final class JVMessageTextChange: JVBaseModelChange {
         abort()
     }
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_UUID", value: UUID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_UUID", value: UUID)
     }
     
     public init(UUID: String, text: String) {
@@ -1229,8 +1239,8 @@ public final class JVMessageTextChange: JVBaseModelChange {
         fatalError("init(json:) has not been implemented")
     }
 }
+
 open class JVMessageSdkAgentChange: JVMessageExtendedGeneralChange {
-    
     public let agent: JVAgent
     public let chat: JVChat
     public let creationDate: Date?
@@ -1280,8 +1290,8 @@ open class JVMessageSdkAgentChange: JVMessageExtendedGeneralChange {
         abort()
     }
 }
+
 open class JVMessageSdkClientChange: JVMessageExtendedGeneralChange {
-    
     public let id: Int
     public let localId: String
     public let channelId: Int
@@ -1320,22 +1330,22 @@ open class JVMessageSdkClientChange: JVMessageExtendedGeneralChange {
         abort()
     }
 }
+
 open class JVSdkMessageStatusChange: JVBaseModelChange {
-    
     public let id: Int
     public let localId: String
     public let status: JVMessageStatus?
     public let date: Date?
     
-    open override var integerKey: DatabaseContextMainKey<Int>? {
+    open override var integerKey: JVDatabaseContextMainKey<Int>? {
         return id != 0 && localId.isEmpty
-            ? DatabaseContextMainKey(key: "_ID", value: id)
+            ? JVDatabaseContextMainKey(key: "_ID", value: id)
             : nil
     }
     
-    open override var stringKey: DatabaseContextMainKey<String>? {
-        return not(localId.isEmpty)
-            ? DatabaseContextMainKey(key: "_localID", value: localId)
+    open override var stringKey: JVDatabaseContextMainKey<String>? {
+        return !(localId.isEmpty)
+            ? JVDatabaseContextMainKey(key: "_localID", value: localId)
             : nil
     }
     
@@ -1401,12 +1411,12 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
         abort()
     }
     
-    open override var integerKey: DatabaseContextMainKey<Int>? {
-        return id != 0 && localId.isEmpty ? DatabaseContextMainKey(key: "_ID", value: id) : nil
+    open override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return id != 0 && localId.isEmpty ? JVDatabaseContextMainKey(key: "_ID", value: id) : nil
     }
     
-    open override var stringKey: DatabaseContextMainKey<String>? {
-        return !localId.isEmpty ? DatabaseContextMainKey(key: "_localID", value: localId) : nil
+    open override var stringKey: JVDatabaseContextMainKey<String>? {
+        return !localId.isEmpty ? JVDatabaseContextMainKey(key: "_localID", value: localId) : nil
     }
     
     public convenience init(id: Int, updates: [JVMessagePropertyUpdate]) throws {
@@ -1423,7 +1433,7 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
         
         if localId.contains(".") {
             let globalId = localId.components(separatedBy: ".").first ?? localId
-            self.init(id: globalId.toInt(), localId: String(), updates: updates)
+            self.init(id: globalId.jv_toInt(), localId: String(), updates: updates)
         }
         else {
             self.init(id: 0, localId: localId, updates: updates)
@@ -1454,8 +1464,8 @@ public class JVSDKMessageOfflineChange: JVBaseModelChange {
         abort()
     }
     
-    open override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey<String>(key: "_localID", value: localId)
+    open override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey<String>(key: "_localID", value: localId)
     }
     
     public init(message: String) {
@@ -1490,7 +1500,7 @@ fileprivate func validateMessage(senderType: String, type: String) -> Bool {
 fileprivate func parseReactions(_ root: JsonElement) -> [JVMessageReaction] {
     return root.ordictValue.compactMap { (emocode, reactors) in
         JVMessageReaction(
-            emoji: emocode.convertToEmojis(),
+            emoji: emocode.jv_convertToEmojis(),
             reactors: reactors.arrayValue.compactMap { item in
                 guard let subjectKind = item["type"].string else { return nil }
                 guard let subjectID = item["id"].int else { return nil }
@@ -1498,6 +1508,7 @@ fileprivate func parseReactions(_ root: JsonElement) -> [JVMessageReaction] {
             })
     }
 }
+
 public func ==(lhs: JVMessageBaseGeneralChange, rhs: JVMessageBaseGeneralChange) -> Bool {
     if lhs.ID > 0, rhs.ID > 0 {
         return (lhs.ID == rhs.ID && lhs.creationTS == rhs.creationTS)

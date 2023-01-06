@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVChannel {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChannelGeneralChange {
             if _ID == 0 { _ID = c.ID }
             _publicID = c.publicID
@@ -18,7 +18,7 @@ extension JVChannel {
             _siteURL = c.siteURL
             _guestsNumber = c.guestsNumber
             _jointType = c.jointType ?? ""
-            _agentIDs = "," + c.agentIDs.stringify().joined(separator: ",") + ","
+            _agentIDs = "," + c.agentIDs.jv_stringify().joined(separator: ",") + ","
         }
     }
 }

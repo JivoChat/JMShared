@@ -19,12 +19,12 @@ public final class JVClientSession: JVBaseModel {
     @objc dynamic public var _currentPage: JVPage?
     public let _history = List<JVPage>()
 
-    public override func recursiveDelete(context: IDatabaseContext) {
+    public override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)
         super.recursiveDelete(context: context)
     }
     
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

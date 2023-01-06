@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVMessageTransfer {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageTransferGeneralChange {
             _agentID = c.agentID
             _comment = c.comment

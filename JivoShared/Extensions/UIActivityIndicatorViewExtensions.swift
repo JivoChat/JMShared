@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 extension UIActivityIndicatorView {
-    public func started() -> UIActivityIndicatorView {
+    public func jv_started() -> UIActivityIndicatorView {
         startAnimating()
         return self
     }
 }
 
 extension UIActivityIndicatorView.Style {
-    public static var auto: UIActivityIndicatorView.Style {
+    public static var jv_auto: UIActivityIndicatorView.Style {
         if #available(iOS 13.0, *) {
             return .medium
         }

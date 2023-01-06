@@ -1,5 +1,5 @@
 //
-//  BroadcastObserver.swift
+//  JVBroadcastObserver.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 14/09/2018.
@@ -7,10 +7,13 @@
 //
 
 import Foundation
-public final class BroadcastObserver<VT> {
-    public let ID: BroadcastObserverID
-    private weak var broadcastTool: BroadcastTool<VT>?
-        public init(ID: BroadcastObserverID, broadcastTool: BroadcastTool<VT>) {
+
+public final class JVBroadcastObserver<VT> {
+    public let ID: JVBroadcastObserverID
+    
+    private weak var broadcastTool: JVBroadcastTool<VT>?
+    
+    public init(ID: JVBroadcastObserverID, broadcastTool: JVBroadcastTool<VT>) {
         self.ID = ID
         self.broadcastTool = broadcastTool
     }

@@ -9,20 +9,21 @@
 import Foundation
 import RealmSwift
 
-public protocol Validatable {
-    var isValid: Bool { get }
+public protocol JVValidatable {
+    var jv_isValid: Bool { get }
 }
 
-extension Object: Validatable {
-    public var isValid: Bool {
+extension Object: JVValidatable {
+    public var jv_isValid: Bool {
         return !isInvalidated
     }
     
-    public func ifValid<T>() -> T? {
-        return isValid ? self as? T : nil
+    public func jv_ifValid<T>() -> T? {
+        return jv_isValid ? self as? T : nil
     }
 }
-public func validate<T: Validatable>(_ object: T?) -> T? {
+
+public func jv_validate<T: JVValidatable>(_ object: T?) -> T? {
     guard let object = object else { return nil }
-    return object.isValid ? object : nil
+    return object.jv_isValid ? object : nil
 }

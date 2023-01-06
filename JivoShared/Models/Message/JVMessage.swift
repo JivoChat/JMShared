@@ -42,9 +42,9 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _updatedTimepoint: TimeInterval = 0
     @objc open dynamic var _isDeleted: Bool = false
     
-    internal let localizer: Localizer
+    internal let localizer: JVLocalizer
     
-    public init(localizer: Localizer) {
+    public init(localizer: JVLocalizer) {
         self.localizer = localizer
     }
     
@@ -56,12 +56,12 @@ open class JVMessage: JVBaseModel {
         return nil
     }
     
-    open override func recursiveDelete(context: IDatabaseContext) {
+    open override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)
         super.recursiveDelete(context: context)
     }
     
-    open override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    open override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

@@ -16,12 +16,12 @@ public final class JVArchiveHitCallItem: JVArchiveHitItem {
     @objc dynamic public var _costCurrency: String = ""
     @objc dynamic public var _call: JVCall?
 
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }
     
-    public override func recursiveDelete(context: IDatabaseContext) {
+    public override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)
         super.recursiveDelete(context: context)
     }

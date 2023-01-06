@@ -9,9 +9,7 @@
 import Foundation
 
 public extension Bool {
-    func inverted() -> Bool {
+    func jv_inverted() -> Bool {
         return !self
     }
 }
-
-extension Bool: Mappable {}

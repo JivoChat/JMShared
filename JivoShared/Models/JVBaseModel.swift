@@ -12,27 +12,25 @@ import JMCodingKit
 import JMRepicKit
 
 open class JVBaseModel: Object {
-    
     @objc dynamic public var _UUID: String = Foundation.UUID().uuidString.lowercased()
     
     required public override init() {
         super.init()
     }
     
-    open func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    open func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
     }
     
-    open func simpleDelete(context: IDatabaseContext) {
+    open func simpleDelete(context: JVIDatabaseContext) {
         _ = context.simpleRemove(objects: [self])
     }
 
-    open func recursiveDelete(context: IDatabaseContext) {
+    open func recursiveDelete(context: JVIDatabaseContext) {
         simpleDelete(context: context)
     }
 }
 
 open class JVBaseModelChange: NSObject {
-    
     public let isOK: Bool
     
     override public init() {
@@ -57,11 +55,11 @@ open class JVBaseModelChange: NSObject {
         abort()
     }
     
-    open var integerKey: DatabaseContextMainKey<Int>? {
+    open var integerKey: JVDatabaseContextMainKey<Int>? {
         return nil
     }
     
-    open var stringKey: DatabaseContextMainKey<String>? {
+    open var stringKey: JVDatabaseContextMainKey<String>? {
         return nil
     }
 }
@@ -99,7 +97,7 @@ public struct JVMetaProviders {
     public let clientProvider: (Int) -> JVClient?
 }
 
-public protocol JVPresentable: Validatable {
+public protocol JVPresentable: JVValidatable {
     var senderType: JVSenderType { get }
     func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem?
 }

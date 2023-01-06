@@ -8,19 +8,24 @@
 
 import Foundation
 
-extension JVClientSessionGeo {    public var country: String? {
-        return _country?.valuable
+extension JVClientSessionGeo {
+    public var country: String? {
+        return _country?.jv_valuable
     }
-        public var region: String? {
-        return _region?.valuable
+    
+    public var region: String? {
+        return _region?.jv_valuable
     }
-        public var city: String? {
-        return _city?.valuable
+    
+    public var city: String? {
+        return _city?.jv_valuable
     }
-        public var organization: String? {
-        return _organization?.valuable
+    
+    public var organization: String? {
+        return _organization?.jv_valuable
     }
-        public var countryCode: String? {
-        return _countryCode?.valuable?.lowercased()
+    
+    public var countryCode: String? {
+        return _countryCode?.jv_valuable?.lowercased()
     }
 }

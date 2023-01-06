@@ -1,5 +1,5 @@
 //
-//  DatabaseListener.swift
+//  JVDatabaseListener.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 15/09/2018.
@@ -7,10 +7,11 @@
 //
 
 import Foundation
-public final class DatabaseListener {
-    private let token: DatabaseSubscriberToken
-    private weak var databaseDriver: IDatabaseDriver!
-        public init(token: DatabaseSubscriberToken, databaseDriver: IDatabaseDriver) {
+
+public final class JVDatabaseListener {
+    private let token: JVDatabaseSubscriberToken
+    private weak var databaseDriver: JVIDatabaseDriver!
+        public init(token: JVDatabaseSubscriberToken, databaseDriver: JVIDatabaseDriver) {
         self.token = token
         self.databaseDriver = databaseDriver
     }

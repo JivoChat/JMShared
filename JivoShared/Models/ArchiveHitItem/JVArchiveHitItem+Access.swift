@@ -8,13 +8,16 @@
 
 import Foundation
 
-extension JVArchiveHitItem {    public var agents: [JVAgent] {
-        return _agents.toArray()
+extension JVArchiveHitItem {
+    public var agents: [JVAgent] {
+        return _agents.jv_toArray()
     }
-        public var chat: JVChat? {
+    
+    public var chat: JVChat? {
         return _chat
     }
-        public var duration: TimeInterval {
+    
+    public var duration: TimeInterval {
         return TimeInterval(_duration)
     }
 }

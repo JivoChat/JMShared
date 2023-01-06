@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVDepartment {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVDepartmentGeneralChange {
             if _ID == 0 { _ID = c.id }
             _name = c.name
@@ -31,7 +31,7 @@ extension JVDepartment {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
+    public func performDelete(inside context: JVIDatabaseContext) {
     }
 }
 
