@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'JMShared'
-  spec.version      = '5.0.0'
+  spec.version      = '6.0.0'
   spec.license      = { :type => 'MIT', :file => "LICENSE" }
   spec.homepage     = 'https://github.com/JivoChat'
   spec.authors      = { 'Anton Karpushko' => 'karpushko@jivosite.com' }
@@ -37,7 +37,6 @@ Pod::Spec.new do |spec|
 
   spec.exclude_files = [
     'JivoShared/Info.plist',
-    'JivoShared/Tools/BroadcastTool/BroadcastToolUnit.swift',
-    'JivoShared/Tools/PureParserTool/PureParserToolUnit.swift'
+    '**/*Unit.swift'
   ]
 end

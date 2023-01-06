@@ -1,5 +1,5 @@
 //
-//  DesignBook.swift
+//  JVDesign.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04/05/2017.
@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 import JMRepicKit
 
-fileprivate var sharedInstance: DesignBook!
+fileprivate var sharedInstance: JVDesign!
 fileprivate let dynamicFontEnabled = true
-fileprivate let usingForcedStyle: DesignBookStyle? = nil
+fileprivate let usingForcedStyle: JVDesignBrightness? = nil
 fileprivate var initialStatusBarHeight = CGFloat.zero
 
-public final class DesignBook {
-    public static var shared: DesignBook {
+public final class JVDesign {
+    public static var shared: JVDesign {
         return sharedInstance
     }
     
     private let window: UIWindow
     private var lastWindowTraits: UITraitCollection
-    private var styleObservable = BroadcastTool<DesignBookStyle>()
+    private var styleObservable = JVBroadcastTool<JVDesignBrightness>()
     
     public init(window: UIWindow) {
         self.window = window
@@ -32,11 +32,11 @@ public final class DesignBook {
         sharedInstance = self
     }
     
-    public func addObserver(block: @escaping (DesignBookStyle) -> Void) -> BroadcastObserver<DesignBookStyle> {
+    public func addObserver(block: @escaping (JVDesignBrightness) -> Void) -> JVBroadcastObserver<JVDesignBrightness> {
         return styleObservable.addObserver(block)
     }
     
-    public func removeObserver(observer: BroadcastObserver<DesignBookStyle>) {
+    public func removeObserver(observer: JVBroadcastObserver<JVDesignBrightness>) {
         styleObservable.removeObserver(observer)
     }
 
@@ -51,7 +51,7 @@ public final class DesignBook {
         lastWindowTraits = window.traitCollection
     }
     
-    public class func screenSize() -> DesignBookScreenSize {
+    public class func screenSize() -> JVDesignScreen {
         let idiom = UIDevice.current.userInterfaceIdiom
         let scale = UIScreen.main.nativeScale
         let height = UIScreen.main.nativeBounds.height / scale
@@ -86,7 +86,7 @@ public final class DesignBook {
             }
         }
         else {
-            return UIImage(named: name, in: Bundle(for: DesignBook.self), compatibleWith: nil)
+            return UIImage(named: name, in: Bundle(for: JVDesign.self), compatibleWith: nil)
         }
     }
 
@@ -110,7 +110,7 @@ public final class DesignBook {
         return systemIcon("ellipsis", orStandard: "dots")
     }
     
-    public let layout = DesignBookLayout(
+    public let layout = JVDesignLayout(
         sideMargin: 32,
         controlMargin: 15,
         controlBigRadius: 8,
@@ -119,90 +119,90 @@ public final class DesignBook {
         defaultMediaRatio: 0.6
     )
     
-    private let colors: [DesignBookStyle: [DesignBookColorAlias: UIColor]] = [
+    private let colors: [JVDesignBrightness: [JVDesignColorAlias: UIColor]] = [
         .light: [
-            .darkBackground: UIColor(hex: 0x1C1B17),
+            .darkBackground: UIColor(jv_hex: 0x1C1B17),
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x12A730),
-            .accentBlue: UIColor(hex: 0x086BCD),
-            .accentGraphite: UIColor(hex: 0x445669),
-            .background: UIColor(hex: 0xF7F9FC),
-            .stillBackground: UIColor(hex: 0xF7F7F7),
-            .silverLight: UIColor(hex: 0xD1D1D6),
-            .silverRegular: UIColor(hex: 0xC7C7CC),
-            .steel: UIColor(hex: 0x8E8E93),
-            .grayLight: UIColor(hex: 0xEFEFF4),
-            .grayRegular: UIColor(hex: 0xE9EBF0),
-            .grayDark: UIColor(hex: 0xE5E5EA),
-            .tangerine: UIColor(hex: 0xFF9500),
-            .sunflowerYellow: UIColor(hex: 0xFFCC00),
-            .reddishPink: UIColor(hex: 0xFF2D55),
-            .orangeRed: UIColor(hex: 0xFF3B30),
-            .greenLight: UIColor(hex: 0x4CD964),
-            .greenJivo: UIColor(hex: 0x00BC31),
-            .skyBlue: UIColor(hex: 0x5AC8FA),
-            .brightBlue: UIColor(hex: 0x007AFF),
-            .darkPeriwinkle: UIColor(hex: 0x5856D6),
-            .seashell: UIColor(hex: 0xF1F0F0),
-            .alto: UIColor(hex: 0xDEDEDE),
-            .unknown1: UIColor(hex: 0xB7B7BC),
-            .unknown2: UIColor(hex: 0x59595E),
-            .unknown3: UIColor(hex: 0x009627),
-            .unknown4: UIColor(hex: 0xFAFAFB),
-            .unknown5: UIColor(hex: 0xA4B4BC),
-            .color_ff2f0e: UIColor(hex: 0xFF2F0E),
-            .color_00bc31: UIColor(hex: 0x00BC31)
+            .accentGreen: UIColor(jv_hex: 0x12A730),
+            .accentBlue: UIColor(jv_hex: 0x086BCD),
+            .accentGraphite: UIColor(jv_hex: 0x445669),
+            .background: UIColor(jv_hex: 0xF7F9FC),
+            .stillBackground: UIColor(jv_hex: 0xF7F7F7),
+            .silverLight: UIColor(jv_hex: 0xD1D1D6),
+            .silverRegular: UIColor(jv_hex: 0xC7C7CC),
+            .steel: UIColor(jv_hex: 0x8E8E93),
+            .grayLight: UIColor(jv_hex: 0xEFEFF4),
+            .grayRegular: UIColor(jv_hex: 0xE9EBF0),
+            .grayDark: UIColor(jv_hex: 0xE5E5EA),
+            .tangerine: UIColor(jv_hex: 0xFF9500),
+            .sunflowerYellow: UIColor(jv_hex: 0xFFCC00),
+            .reddishPink: UIColor(jv_hex: 0xFF2D55),
+            .orangeRed: UIColor(jv_hex: 0xFF3B30),
+            .greenLight: UIColor(jv_hex: 0x4CD964),
+            .greenJivo: UIColor(jv_hex: 0x00BC31),
+            .skyBlue: UIColor(jv_hex: 0x5AC8FA),
+            .brightBlue: UIColor(jv_hex: 0x007AFF),
+            .darkPeriwinkle: UIColor(jv_hex: 0x5856D6),
+            .seashell: UIColor(jv_hex: 0xF1F0F0),
+            .alto: UIColor(jv_hex: 0xDEDEDE),
+            .unknown1: UIColor(jv_hex: 0xB7B7BC),
+            .unknown2: UIColor(jv_hex: 0x59595E),
+            .unknown3: UIColor(jv_hex: 0x009627),
+            .unknown4: UIColor(jv_hex: 0xFAFAFB),
+            .unknown5: UIColor(jv_hex: 0xA4B4BC),
+            .color_ff2f0e: UIColor(jv_hex: 0xFF2F0E),
+            .color_00bc31: UIColor(jv_hex: 0x00BC31)
         ],
         .dark: [
             .white: UIColor.white,
             .black: UIColor.black,
-            .accentGreen: UIColor(hex: 0x12A730),
-            .accentBlue: UIColor(hex: 0x086BCD),
-            .accentGraphite: UIColor(hex: 0x445669),
-            .orangeRed: UIColor(hex: 0xFF3B30),
-            .greenJivo: UIColor(hex: 0x008A0B),
-            .sunflowerYellow: UIColor(hex: 0xFFCC00),
-            .silverRegular: UIColor(hex: 0xC7C7CC),
-            .grayDark: UIColor(hex: 0xE5E5EA),
-            .greenLight: UIColor(hex: 0x4CD964),
-            .reddishPink: UIColor(hex: 0xFF2D55),
-            .steel: UIColor(hex: 0x8E8E93),
+            .accentGreen: UIColor(jv_hex: 0x12A730),
+            .accentBlue: UIColor(jv_hex: 0x086BCD),
+            .accentGraphite: UIColor(jv_hex: 0x445669),
+            .orangeRed: UIColor(jv_hex: 0xFF3B30),
+            .greenJivo: UIColor(jv_hex: 0x008A0B),
+            .sunflowerYellow: UIColor(jv_hex: 0xFFCC00),
+            .silverRegular: UIColor(jv_hex: 0xC7C7CC),
+            .grayDark: UIColor(jv_hex: 0xE5E5EA),
+            .greenLight: UIColor(jv_hex: 0x4CD964),
+            .reddishPink: UIColor(jv_hex: 0xFF2D55),
+            .steel: UIColor(jv_hex: 0x8E8E93),
             
-            .darkBackground: UIColor(hex: 0x1C1B17),
-            .background: UIColor(hex: 0xF7F9FC),
-            .stillBackground: UIColor(hex: 0xF7F7F7),
-            .silverLight: UIColor(hex: 0xD1D1D6),
-            .grayRegular: UIColor(hex: 0xE9EBF0),
-            .tangerine: UIColor(hex: 0xFF9500),
-            .skyBlue: UIColor(hex: 0x5AC8FA),
-            .brightBlue: UIColor(hex: 0x307AFF),
-            .darkPeriwinkle: UIColor(hex: 0x5856D6),
-            .unknown1: UIColor(hex: 0xC7C7CC),
-            .unknown2: UIColor(hex: 0x59595E),
-            .unknown3: UIColor(hex: 0x009627),
-            .unknown4: UIColor(hex: 0xFAFAFB),
-            .unknown5: UIColor(hex: 0xA4B4BC),
-            .color_ff2f0e: UIColor(hex: 0xFF2F0E),
-            .color_00bc31: UIColor(hex: 0x00BC31)
+            .darkBackground: UIColor(jv_hex: 0x1C1B17),
+            .background: UIColor(jv_hex: 0xF7F9FC),
+            .stillBackground: UIColor(jv_hex: 0xF7F7F7),
+            .silverLight: UIColor(jv_hex: 0xD1D1D6),
+            .grayRegular: UIColor(jv_hex: 0xE9EBF0),
+            .tangerine: UIColor(jv_hex: 0xFF9500),
+            .skyBlue: UIColor(jv_hex: 0x5AC8FA),
+            .brightBlue: UIColor(jv_hex: 0x307AFF),
+            .darkPeriwinkle: UIColor(jv_hex: 0x5856D6),
+            .unknown1: UIColor(jv_hex: 0xC7C7CC),
+            .unknown2: UIColor(jv_hex: 0x59595E),
+            .unknown3: UIColor(jv_hex: 0x009627),
+            .unknown4: UIColor(jv_hex: 0xFAFAFB),
+            .unknown5: UIColor(jv_hex: 0xA4B4BC),
+            .color_ff2f0e: UIColor(jv_hex: 0xFF2F0E),
+            .color_00bc31: UIColor(jv_hex: 0x00BC31)
         ]
     ]
     
     public func currentLogo() -> UIImage? {
-        switch locale().langID ?? "en" {
+        switch JVActiveLocale().jv_langID ?? "en" {
         case "ru": return UIImage(named: "logo_ru")
         default: return UIImage(named: "logo_int")
         }
     }
     
     public func currentMiniLogo() -> UIImage? {
-        switch locale().langID ?? "en" {
+        switch JVActiveLocale().jv_langID ?? "en" {
         case "ru": return UIImage(named: "mini-logo-ru")
         default: return UIImage(named: "mini-logo-int")
         }
     }
     
-    public func color(_ color: DesignBookColor, style: DesignBookStyle = .light) -> UIColor {
+    public func color(_ color: JVDesignColor, style: JVDesignBrightness = .light) -> UIColor {
         switch color {
         case .native(let value): return value
         case .hex(let hex): return obtainColor(byHex: hex)
@@ -215,16 +215,16 @@ public final class DesignBook {
         return color(.hex(hex))
     }
     
-    public func color(alias: DesignBookColorAlias) -> UIColor {
+    public func color(alias: JVDesignColorAlias) -> UIColor {
         return color(.alias(alias))
     }
     
-    public func color(usage: DesignBookColorUsage) -> UIColor {
+    public func color(usage: JVDesignColorUsage) -> UIColor {
         return color(.usage(usage))
     }
     
-    public func font(weight: DesignBookFontWeight, category: UIFont.TextStyle, defaultSizes: DesignBookFontSize, maximumSizes: DesignBookFontSize?) -> UIFont {
-        let defaultFont: UIFont = convert(weight) { value in
+    public func font(weight: JVDesignFontWeight, category: UIFont.TextStyle, defaultSizes: JVDesignFontSize, maximumSizes: JVDesignFontSize?) -> UIFont {
+        let defaultFont: UIFont = jv_convert(weight) { value in
             let defaultSize = extractFontSize(defaultSizes)
             switch value {
             case .italics: return UIFont.italicSystemFont(ofSize: defaultSize)
@@ -293,7 +293,7 @@ public final class DesignBook {
         let images = attendees.compactMap { $0.metaImage(providers: nil, transparent: transparent, scale: primaryScale) }
         control.configure(items: images)
         
-        if let attendee = attendees.first, attendee.isValid {
+        if let attendee = attendees.first, attendee.jv_isValid {
             switch attendee.senderType {
             case .`self`:
                 break
@@ -342,10 +342,10 @@ public final class DesignBook {
     
     public func baseEmojiFont(scale: CGFloat?) -> UIFont {
         let fontSize = CGFloat(24 * (scale ?? 1))
-        return DesignBook.shared.font(
+        return JVDesign.shared.font(
             weight: .regular,
             category: .body,
-            defaultSizes: DesignBookFontSize(compact: fontSize, regular: fontSize),
+            defaultSizes: JVDesignFontSize(compact: fontSize, regular: fontSize),
             maximumSizes: nil)
     }
     
@@ -357,7 +357,7 @@ public final class DesignBook {
     
     private func ensureFontLoaded(fontName: String, fileName: String) {
         guard UIFont.fontNames(forFamilyName: fontName).isEmpty,
-              let url = Bundle(for: DesignBook.self).url(forResource: fileName, withExtension: "ttf"),
+              let url = Bundle(for: JVDesign.self).url(forResource: fileName, withExtension: "ttf"),
               let data = try? Data(contentsOf: url),
               let provider = CGDataProvider(data: data as CFData),
               let font = CGFont(provider)
@@ -376,7 +376,7 @@ public final class DesignBook {
 //    func generateComplexAvatarView(height: CGFloat) -> AvatarView {
 //        let config = JMRepicConfig(
 //            interBorderWidth: 1,
-//            interBorderColor: DesignBook.shared.color(usage: .primaryBackground),
+//            interBorderColor: JVDesign.shared.color(usage: .primaryBackground),
 //            outerBorderWidth: 0,
 //            outerBorderColor: .clear,
 //            totalHeight: height
@@ -386,17 +386,17 @@ public final class DesignBook {
 //    }
     
     private func obtainColor(byHex hex: Int) -> UIColor {
-        return UIColor(hex: hex)
+        return UIColor(jv_hex: hex)
     }
     
-    private func obtainColor(forStyle style: DesignBookStyle, withAlias alias: DesignBookColorAlias) -> UIColor {
+    private func obtainColor(forStyle style: JVDesignBrightness, withAlias alias: JVDesignColorAlias) -> UIColor {
         switch style {
         case .light: return colors[style]?[alias] ?? .black
         case .dark: return colors[style]?[alias] ?? .white
         }
     }
     
-    private func obtainColor(forUsage usage: DesignBookColorUsage) -> UIColor {
+    private func obtainColor(forUsage usage: JVDesignColorUsage) -> UIColor {
         switch usage {
         // global
         case .white: return UIColor.white
@@ -422,12 +422,12 @@ public final class DesignBook {
         case .oppositeBackground: return dynamicColor(light: .alias(.black), dark: .alias(.white))
         case .attentiveLightBackground: return dynamicColor(light: .hex(0xEF9937), dark: .hex(0xEF9937))
         case .attentiveDarkBackground: return dynamicColor(light: .alias(.tangerine), dark: .alias(.tangerine))
-        case .flashingBackground: return DesignBook.shared.color(usage: .warnTint).withAlpha(0.2)
+        case .flashingBackground: return JVDesign.shared.color(usage: .warnTint).jv_withAlpha(0.2)
         case .chattingBackground: return dynamicColor(light: .hex(0xF7F9FC), dark: .hex(0x101010))
         case .placeholderBackground: return dynamicColor(light: .hex(0xF1F1F2), dark: .hex(0x202020))
         // shadows
-        case .dimmingShadow: return dynamicColor(light: .native(UIColor.black.withAlpha(0.56)), dark: .native(UIColor.white.withAlpha(0.25)))
-        case .lightDimmingShadow: return dynamicColor(light: .native(UIColor.black.withAlpha(0.26)), dark: .native(UIColor.white.withAlpha(0.1)))
+        case .dimmingShadow: return dynamicColor(light: .native(UIColor.black.jv_withAlpha(0.56)), dark: .native(UIColor.white.jv_withAlpha(0.25)))
+        case .lightDimmingShadow: return dynamicColor(light: .native(UIColor.black.jv_withAlpha(0.26)), dark: .native(UIColor.white.jv_withAlpha(0.1)))
         case .focusingShadow: return dynamicColor(light: .hex(0x404040), dark: .alias(.white))
         // foregrounds
         case .statusHatForeground: return dynamicColor(light: .alias(.white), dark: .alias(.black))
@@ -437,7 +437,7 @@ public final class DesignBook {
         case .headingForeground: return dynamicColor(light: .alias(.brightBlue), dark: .hex(0x0080FF))
         case .highlightForeground: return dynamicColor(light: .alias(.brightBlue), dark: .native(.white))
         case .warningForeground: return dynamicColor(light: .alias(.orangeRed), dark: .alias(.orangeRed))
-        case .identityDetectionForeground: return UIColor.dynamicLink ?? dynamicColor(light: .native(.black), dark: .alias(.white))
+        case .identityDetectionForeground: return UIColor.jv_dynamicLink ?? dynamicColor(light: .native(.black), dark: .alias(.white))
         case .linkDetectionForeground: return dynamicColor(light: .alias(.brightBlue), dark: .alias(.brightBlue))
         case .overpaintForeground: return dynamicColor(light: .alias(.grayLight), dark: .alias(.grayLight))
         case .oppositeForeground: return dynamicColor(light: .alias(.white), dark: .alias(.black))
@@ -528,7 +528,7 @@ public final class DesignBook {
         }
     }
     
-    private func adjustedFontWeight(_ weight: DesignBookFontWeight) -> UIFont.Weight {
+    private func adjustedFontWeight(_ weight: JVDesignFontWeight) -> UIFont.Weight {
         if UIAccessibility.isBoldTextEnabled {
             switch weight {
             case .italics: return .regular
@@ -553,7 +553,7 @@ public final class DesignBook {
         }
     }
     
-    private func extractFontSize(_ value: DesignBookFontSize) -> CGFloat {
+    private func extractFontSize(_ value: JVDesignFontSize) -> CGFloat {
         let horizontalSizeClass = Thread.isMainThread
             ? window.traitCollection.horizontalSizeClass
             : lastWindowTraits.horizontalSizeClass
@@ -566,31 +566,31 @@ public final class DesignBook {
         }
     }
     
-    private func dynamicColor(light lightColor: DesignBookColor, dark darkColor: DesignBookColor) -> UIColor {
+    private func dynamicColor(light lightColor: JVDesignColor, dark darkColor: JVDesignColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { traits in
                 let style = traits.toDesignStyle
-                let color: DesignBookColor = convert(style) { value in
+                let color: JVDesignColor = jv_convert(style) { value in
                     switch value {
                     case .light: return lightColor
                     case .dark: return darkColor
                     }
                 }
                 
-                return DesignBook.shared.color(color, style: style)
+                return JVDesign.shared.color(color, style: style)
             }
         }
         else {
             switch usingForcedStyle ?? .light {
-            case .light: return DesignBook.shared.color(lightColor, style: .light)
-            case .dark: return DesignBook.shared.color(darkColor, style: .dark)
+            case .light: return JVDesign.shared.color(lightColor, style: .light)
+            case .dark: return JVDesign.shared.color(darkColor, style: .dark)
             }
         }
     }
 }
 
 extension UITraitCollection {
-    public var toDesignStyle: DesignBookStyle {
+    public var toDesignStyle: JVDesignBrightness {
         if #available(iOS 12.0, *) {
             switch userInterfaceStyle {
             case .light: return .light

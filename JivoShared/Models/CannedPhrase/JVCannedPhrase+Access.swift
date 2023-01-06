@@ -36,27 +36,4 @@ extension JVCannedPhrase {
     public var uid: String {
         return _uid
     }
-    
-    public func export() -> JVCannedPhraseChange {
-        return JVCannedPhraseChange(
-            messageHashID: _messageHashID,
-            message: _message,
-            timestamp: _timestamp,
-            totalScore: _totalScore,
-            sessionScore: _sessionScore,
-            isDeleted: _isDeleted,
-            uid: _uid
-        )
-    }
-    
-    public func encode() -> JsonElement {
-        return JsonElement(
-            [
-                "message_hash_id": _messageHashID,
-                "message": _message,
-                "session_score": _sessionScore,
-                "total_score": _totalScore
-            ]
-        )
-    }
 }

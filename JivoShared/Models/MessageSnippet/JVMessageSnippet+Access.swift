@@ -8,7 +8,8 @@
 
 import Foundation
 
-extension JVMessageSnippet {    public var URL: URL? {
+extension JVMessageSnippet {
+    public var URL: URL? {
         if let link = _URL, let url = NSURL(string: link) {
             return url as URL
         }
@@ -16,10 +17,12 @@ extension JVMessageSnippet {    public var URL: URL? {
             return nil
         }
     }
-        public var title: String {
+    
+    public var title: String {
         return _title
     }
-        public var iconURL: URL? {
+    
+    public var iconURL: URL? {
         if let link = _iconURL, let url = NSURL(string: link) {
             return url as URL
         }
@@ -27,7 +30,8 @@ extension JVMessageSnippet {    public var URL: URL? {
             return nil
         }
     }
-        public var HTML: String {
+    
+    public var HTML: String {
         return _HTML
     }
 }

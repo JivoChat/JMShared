@@ -8,17 +8,20 @@
 
 import Foundation
 import UIKit
-public enum DesignBookStyle {
+
+public enum JVDesignBrightness {
     case light
     case dark
 }
-public enum DesignBookColor {
+
+public enum JVDesignColor {
     case native(UIColor)
     case hex(Int)
-    case alias(DesignBookColorAlias)
-    case usage(DesignBookColorUsage)
+    case alias(JVDesignColorAlias)
+    case usage(JVDesignColorUsage)
 }
-public enum DesignBookColorAlias {
+
+public enum JVDesignColorAlias {
     case darkBackground
     case white
     case black
@@ -52,7 +55,8 @@ public enum DesignBookColorAlias {
     case color_ff2f0e
     case color_00bc31
 }
-public enum DesignBookColorUsage {
+
+public enum JVDesignColorUsage {
     // global
     case white
     case black
@@ -181,7 +185,8 @@ public enum DesignBookColorUsage {
     case mediaPlaceholderBackground
     case quoteMark
 }
-public enum DesignBookFontWeight {
+
+public enum JVDesignFontWeight {
     case italics
     case light
     case regular
@@ -190,7 +195,8 @@ public enum DesignBookFontWeight {
     case bold
     case heavy
 }
-public struct DesignBookFontSize {
+
+public struct JVDesignFontSize {
     public let compact: CGFloat
     public let regular: CGFloat
     
@@ -199,7 +205,8 @@ public struct DesignBookFontSize {
         self.regular = regular
     }
 }
-public struct DesignBookLayout {
+
+public struct JVDesignLayout {
     public let sideMargin: CGFloat
     public let controlMargin: CGFloat
     public let controlBigRadius: CGFloat
@@ -223,13 +230,14 @@ public struct DesignBookLayout {
         self.defaultMediaRatio = defaultMediaRatio
     }
 }
-public enum DesignBookScreenSize: Int, Comparable {
+
+public enum JVDesignScreen: Int, Comparable {
     case small
     case standard
     case large
     case extraLarge
     
-    public static func < (lhs: DesignBookScreenSize, rhs: DesignBookScreenSize) -> Bool {
+    public static func < (lhs: JVDesignScreen, rhs: JVDesignScreen) -> Bool {
         guard lhs.rawValue < rhs.rawValue else { return false }
         return true
     }

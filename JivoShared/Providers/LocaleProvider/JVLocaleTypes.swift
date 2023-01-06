@@ -9,23 +9,20 @@
 import Foundation
 import JMTimelineKit
 
-public let loc = Localizer()
+public let jv_loc = JVLocalizer()
+internal let loc = jv_loc
 
 public extension Notification.Name {
-    static let localeChanged = Notification.Name("LocaleChanged")
+    static let jvLocaleDidChange = Notification.Name("LocaleDidChange")
 }
-public enum LocalizedMetaMode {
+
+public enum JVLocalizedMetaMode {
     case key(String)
     case format(String)
     case exact(String)
 }
 
-public struct SignupCountry {
-    public let code: String
-    public let title: String
-}
-
-public struct Localizer {
+public struct JVLocalizer {
     private var classFromBundle: AnyClass?
     
     public subscript(_ keys: String..., lang lang: String? = nil) -> String {
@@ -33,16 +30,16 @@ public struct Localizer {
         
         for key in keys {
             if let lang = lang {
-                let bundle = LocaleProvider.obtainBundle(lang: lang)
+                let bundle = JVLocaleProvider.obtainBundle(lang: lang)
                 result = bundle.localizedString(forKey: key, value: nil, table: nil)
             }
             else if let bundle = classFromBundle.flatMap({
-                LocaleProvider.obtainBundle(for: $0, lang: LocaleProvider.activeLocale?.langID ?? Locale.current.langID ?? "")
+                JVLocaleProvider.obtainBundle(for: $0, lang: JVLocaleProvider.activeLocale?.jv_langID ?? Locale.current.jv_langID ?? "")
             })
-            ?? LocaleProvider.activeBundle {
+            ?? JVLocaleProvider.activeBundle {
                 let value = bundle.localizedString(forKey: key, value: nil, table: nil)
                 if value == key {
-                    let bundle = LocaleProvider.baseLocaleBundle
+                    let bundle = JVLocaleProvider.baseLocaleBundle
                     result = bundle?.localizedString(forKey: key, value: nil, table: nil) ?? value
                 }
                 else {
@@ -68,7 +65,7 @@ public struct Localizer {
     }
     
     public subscript(format key: String, _ arguments: CVarArg...) -> String {
-        let locale = LocaleProvider.activeLocale
+        let locale = JVLocaleProvider.activeLocale
         return String(format: self[key: key], locale: locale, arguments: arguments)
     }
     
@@ -76,6 +73,7 @@ public struct Localizer {
         self.classFromBundle = classFromBundle
     }
 }
-public func locale() -> Locale {
-    return LocaleProvider.activeLocale
+
+public func JVActiveLocale() -> Locale {
+    return JVLocaleProvider.activeLocale
 }

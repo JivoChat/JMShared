@@ -47,6 +47,7 @@ public struct JVMessageBodyCall {
         return (event == .error)
     }
 }
+
 public struct JVMessageBodyOrder {
     public let orderID: String
     public let email: String?
@@ -54,6 +55,7 @@ public struct JVMessageBodyOrder {
     public let subject: String
     public let text: String
 }
+
 public enum JVMessageBodyCallType: String {
     case callback = "callback"
     case incoming = "incoming"
@@ -69,10 +71,12 @@ public enum JVMessageBodyCallType: String {
         }
     }
 }
+
 public enum JVMessageBodyCallEndCallSide: String {
     case from = "from"
     case to = "to"
 }
+
 public enum JVMessageBodyCallEvent: String {
     case start = "start"
     case agentConnecting = "agent_connecting"
@@ -84,6 +88,7 @@ public enum JVMessageBodyCallEvent: String {
     case end = "end"
     case unknown
 }
+
 public enum JVMessageBodyCallReason: String {
     case isBusy = "is_busy"
     case allBusy = "all_busy"
@@ -137,8 +142,8 @@ public enum JVMessageBodyTaskStatus: String {
 
 extension JVMessageBody {
     public var email: JVMessageBodyEmail? {
-        guard let from = _from?.valuable else { return nil }
-        guard let to = _to?.valuable else { return nil }
+        guard let from = _from?.jv_valuable else { return nil }
+        guard let to = _to?.jv_valuable else { return nil }
 
         return JVMessageBodyEmail(
             from: from,
@@ -167,19 +172,19 @@ extension JVMessageBody {
     }
     
     public var call: JVMessageBodyCall? {
-        guard let event = _event?.valuable else { return nil }
-        guard let callID = _callID?.valuable else { return nil }
-        guard let type = _type?.valuable else { return nil }
+        guard let event = _event?.jv_valuable else { return nil }
+        guard let callID = _callID?.jv_valuable else { return nil }
+        guard let type = _type?.jv_valuable else { return nil }
         
         return JVMessageBodyCall(
             callID: callID,
             agent: _agent,
             type: JVMessageBodyCallType(rawValue: type) ?? .unknown,
-            phone: _phone?.valuable,
+            phone: _phone?.jv_valuable,
             event: JVMessageBodyCallEvent(rawValue: event) ?? .unknown,
-            endCallSide: _endCallSide?.valuable.flatMap(JVMessageBodyCallEndCallSide.init),
-            reason: _reason?.valuable.flatMap(JVMessageBodyCallReason.init),
-            recordLink: _recordLink?.valuable
+            endCallSide: _endCallSide?.jv_valuable.flatMap(JVMessageBodyCallEndCallSide.init),
+            reason: _reason?.jv_valuable.flatMap(JVMessageBodyCallReason.init),
+            recordLink: _recordLink?.jv_valuable
         )
     }
 
@@ -207,14 +212,14 @@ extension JVMessageBody {
     }
     
     public var buttons: [String] {
-        return _buttons?.valuable?.components(separatedBy: "\n") ?? []
+        return _buttons?.jv_valuable?.components(separatedBy: "\n") ?? []
     }
     
     public var order: JVMessageBodyOrder? {
         guard
-            let orderID = _orderID?.valuable,
-            let subject = _subject?.valuable,
-            let text = _text?.valuable
+            let orderID = _orderID?.jv_valuable,
+            let subject = _subject?.jv_valuable,
+            let text = _text?.jv_valuable
         else { return nil }
         
         return JVMessageBodyOrder(

@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVChat {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChatGeneralChange {
             if _ID == 0 { _ID = c.ID }
             
@@ -25,7 +25,7 @@ extension JVChat {
                     _loadedPartialHistory = true
                 }
             }
-            else if not(c.isGroup == true) {
+            else if !(c.isGroup == true) {
                 _loadedPartialHistory = false
                 _loadedEntireHistory = false
             }
@@ -36,7 +36,7 @@ extension JVChat {
             }
             else if !c.attendees.isEmpty {
                 let attendees = context.insert(of: JVChatAttendee.self, with: c.attendees)
-                _attendees.set(attendees.filter { $0.agent != nil })
+                _attendees.jv_set(attendees.filter { $0.agent != nil })
             }
             else {
                 _isArchived = true
@@ -62,7 +62,7 @@ extension JVChat {
                 )
             }
             else {
-                if not(c.isGroup == true && c.lastMessage == nil) {
+                if !(c.isGroup == true && c.lastMessage == nil) {
                     updateLastMessageIfNeeded(context: context, change: c.lastMessage)
                 }
 
@@ -92,7 +92,7 @@ extension JVChat {
             
             if c.attendees.isEmpty {
                 _attendee = nil
-                _attendees.set([])
+                _attendees.jv_set([])
                 
                 _requestCancelledBySystem = false
                 _requestCancelledByAgent = nil
@@ -120,7 +120,7 @@ extension JVChat {
             
             _title = c.title
             _about = c.about ?? _about
-            _icon = c.icon?.valuable?.convertToEmojis() ?? _icon
+            _icon = c.icon?.jv_valuable?.jv_convertToEmojis() ?? _icon
 
             _transferTo = nil
             _transferToDepartment = nil
@@ -128,7 +128,7 @@ extension JVChat {
             _transferFailReason = nil
             
             _lastActivityTimestamp = (c.lastActivityTimestamp) ?? (_lastMessage?.date.timeIntervalSince1970) ?? 0
-            if let notif = notifying, not(notif == .nothing) {
+            if let notif = notifying, !(notif == .nothing) {
                 _orderingBlock = 1
             }
             else {
@@ -153,7 +153,7 @@ extension JVChat {
             _unreadNumber = -1
             
             _lastActivityTimestamp = Date().timeIntervalSince1970
-            if let notif = notifying, not(notif == .nothing) {
+            if let notif = notifying, !(notif == .nothing) {
                 _orderingBlock = 1
             }
             else {
@@ -166,7 +166,7 @@ extension JVChat {
             
             _title = c.title
             _about = c.about ?? _about
-            _icon = c.icon?.valuable?.convertToEmojis() ?? _icon
+            _icon = c.icon?.jv_valuable?.jv_convertToEmojis() ?? _icon
             _isArchived = c.isArchived
         }
         else if let c = change as? JVChatLastMessageChange {
@@ -181,7 +181,7 @@ extension JVChat {
                 wantedMessage = nil
             }
             
-            if let cm = _lastMessage, let wm = wantedMessage, cm.isValid, wm.date < cm.date {
+            if let cm = _lastMessage, let wm = wantedMessage, cm.jv_isValid, wm.date < cm.date {
                 // do nothing
             }
             else if let wm = wantedMessage {
@@ -319,7 +319,7 @@ extension JVChat {
         }
         else if let c = change as? JVSdkChatAgentsUpdateChange {
             if c.exclusive {
-                _agents.set(c.agents)
+                _agents.jv_set(c.agents)
             } else {
                 c.agents.forEach { agent in
                     if !_agents.contains(where: { $0.ID == agent.ID }) {
@@ -333,11 +333,11 @@ extension JVChat {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _attendees.toArray(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _attendees.jv_toArray(), recursive: true)
     }
     
-    private func updateLastMessageIfNeeded(context: IDatabaseContext, change: JVMessageLocalChange?) {
+    private func updateLastMessageIfNeeded(context: JVIDatabaseContext, change: JVMessageLocalChange?) {
         guard let message = _lastMessage else {
             _lastMessage = context.upsert(of: JVMessage.self, with: change)
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change?.creationTS ?? 0))
@@ -446,7 +446,7 @@ public final class JVChatGeneralChange: JVBaseModelChange {
         isGroup = json["is_group"].bool
         isMain = json["is_main"].bool
         title = json["title"].string
-        about = json["description"].string?.valuable
+        about = json["description"].string?.jv_valuable
         icon = json["icon"].string
         receivedMessageID = 0
         unreadNumber = json["count_unread"].int
@@ -726,18 +726,18 @@ public final class JVChatLastMessageChange: JVBaseModelChange {
         return chatID
     }
     
-    public var messageGlobalKey: DatabaseContextMainKey<Int>? {
+    public var messageGlobalKey: JVDatabaseContextMainKey<Int>? {
         if let messageID = messageID {
-            return DatabaseContextMainKey(key: "_ID", value: messageID)
+            return JVDatabaseContextMainKey(key: "_ID", value: messageID)
         }
         else {
             return nil
         }
     }
     
-    public var messageLocalKey: DatabaseContextMainKey<String>? {
+    public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return DatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
         }
         else {
             return nil
@@ -765,18 +765,18 @@ public final class JVChatPreviewMessageChange: JVBaseModelChange {
         return chatID
     }
 
-    public var messageGlobalKey: DatabaseContextMainKey<Int>? {
+    public var messageGlobalKey: JVDatabaseContextMainKey<Int>? {
         if let messageID = messageID {
-            return DatabaseContextMainKey(key: "_ID", value: messageID)
+            return JVDatabaseContextMainKey(key: "_ID", value: messageID)
         }
         else {
             return nil
         }
     }
 
-    public var messageLocalKey: DatabaseContextMainKey<String>? {
+    public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return DatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
         }
         else {
             return nil
@@ -818,7 +818,8 @@ public final class JVChatIncrementUnreadChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int) {
+    
+    public init(ID: Int) {
         self.ID = ID
         super.init()
     }
@@ -834,7 +835,8 @@ public final class JVChatResetUnreadChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int) {
+    
+    public init(ID: Int) {
         self.ID = ID
         super.init()
     }
@@ -915,7 +917,8 @@ public final class JVChatTransferCancelChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int) {
+    
+    public init(ID: Int) {
         self.ID = ID
         super.init()
     }
@@ -936,7 +939,8 @@ public final class JVChatFinishedChange: JVBaseModelChange {
         self.ID = json["chat_id"].intValue
         super.init(json: json)
     }
-        public init(ID: Int) {
+    
+    public init(ID: Int) {
         self.ID = ID
         super.init()
     }
@@ -967,7 +971,8 @@ public final class JVChatRequestCancelChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int) {
+    
+    public init(ID: Int) {
         self.ID = ID
         super.init()
     }
@@ -1011,7 +1016,7 @@ public final class JVChatAcceptFailChange: JVBaseModelChange {
     required public init( json: JsonElement) {
         ID = json["chat_id"].intValue
         clientID = json["client_id"].intValue
-        acceptedAgentID = json["accepted_agent_id"].intValue.valuable
+        acceptedAgentID = json["accepted_agent_id"].intValue.jv_valuable
         reason = Reason(rawValue: json["reason"].stringValue) ?? .unknown
         super.init(json: json)
     }

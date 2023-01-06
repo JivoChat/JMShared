@@ -9,12 +9,12 @@
 import Foundation
 
 public extension Locale {
-    var langID: String? {
+    var jv_langID: String? {
         let parts = identifier.components(separatedBy: .punctuationCharacters)
         return parts.first
     }
     
-    var countryID: String? {
+    var jv_countryID: String? {
         let parts = identifier.components(separatedBy: .punctuationCharacters)
         if parts.count > 1 {
             return parts.last
@@ -24,7 +24,7 @@ public extension Locale {
         }
     }
     
-    var nativeTitle: String {
+    var jv_nativeTitle: String {
         if let name = (self as NSLocale).displayName(forKey: .languageCode, value: identifier) {
             return name.capitalized
         }

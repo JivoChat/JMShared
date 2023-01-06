@@ -8,13 +8,16 @@
 
 import Foundation
 
-extension JVMessageImage {    public var fileName: String {
+extension JVMessageImage {
+    public var fileName: String {
         return _fileName
     }
-        public var URL: URL {
+    
+    public var URL: URL {
         return NSURL(string: _URL)! as URL
     }
-        public var uploadDate: Date {
+    
+    public var uploadDate: Date {
         return Date(timeIntervalSince1970: TimeInterval(_uploadTS))
     }
 }

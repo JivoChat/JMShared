@@ -28,7 +28,7 @@ public final class JVMessageMedia: JVBaseModel {
     @objc dynamic public var _link: String?
     @objc dynamic public var _text: String?
 
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

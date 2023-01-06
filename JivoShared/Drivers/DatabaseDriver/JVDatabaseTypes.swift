@@ -8,9 +8,9 @@
 
 import Foundation
 
-public typealias DatabaseSubscriberToken = UUID
+public typealias JVDatabaseSubscriberToken = UUID
 
-public struct DatabaseResponseSort {
+public struct JVDatabaseResponseSort {
     public let keyPath: String
     public let ascending: Bool
     
@@ -20,12 +20,12 @@ public struct DatabaseResponseSort {
     }
 }
 
-public struct DatabaseRequestOptions {
+public struct JVDatabaseRequestOptions {
     public let filter: NSPredicate?
-    public let sortBy: [DatabaseResponseSort]
+    public let sortBy: [JVDatabaseResponseSort]
     public let notificationName: Notification.Name?
     
-    public init(filter: NSPredicate? = nil, sortBy: [DatabaseResponseSort] = [], notificationName: Notification.Name? = nil) {
+    public init(filter: NSPredicate? = nil, sortBy: [JVDatabaseResponseSort] = [], notificationName: Notification.Name? = nil) {
         self.filter = filter
         self.sortBy = sortBy
         self.notificationName = notificationName

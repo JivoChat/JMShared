@@ -7,17 +7,18 @@
 //
 
 import Foundation
-public final class BroadcastUniqueTool<VT: Equatable>: BroadcastTool<VT> {
+
+public final class JVBroadcastUniqueTool<VT: Equatable>: JVBroadcastTool<VT> {
     private(set) public var cachedValue: VT?
     
-    public func broadcast(_ value: VT, tag: BroadcastToolTag? = nil, force: Bool) {
+    public func broadcast(_ value: VT, tag: JVBroadcastToolTag? = nil, force: Bool) {
         guard value != cachedValue || force else { return }
         cachedValue = value
         
         super.broadcast(value, tag: tag)
     }
     
-    public override func broadcast(_ value: VT, tag: BroadcastToolTag? = nil) {
+    public override func broadcast(_ value: VT, tag: JVBroadcastToolTag? = nil) {
         broadcast(value, tag: tag, force: false)
     }
 }

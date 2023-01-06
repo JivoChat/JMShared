@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension UIColor {
-    static var auto: UIColor {
+    static var jv_auto: UIColor {
         if #available(iOS 13.0, *) {
             return label
         }
@@ -19,7 +19,7 @@ public extension UIColor {
         }
     }
     
-    static var dynamicLink: UIColor? {
+    static var jv_dynamicLink: UIColor? {
         if #available(iOS 13.0, *) {
             return link
         }
@@ -28,27 +28,27 @@ public extension UIColor {
         }
     }
     
-    convenience init(hex: Int) {
+    convenience init(jv_hex hex: Int) {
         let r = CGFloat((hex & 0xFF0000) >> 16) / 255.0
         let g = CGFloat((hex & 0x00FF00) >> 8) / 255.0
         let b = CGFloat((hex & 0x0000FF) >> 0) / 255.0
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
     
-    convenience init(hex: String) {
+    convenience init(jv_hex hex: String) {
         if let code = Int(hex, radix: 16) {
-            self.init(hex: code)
+            self.init(jv_hex: code)
         }
         else {
             self.init(white: 0, alpha: 1.0)
         }
     }
     
-    func withAlpha(_ alpha: CGFloat) -> UIColor {
+    func jv_withAlpha(_ alpha: CGFloat) -> UIColor {
         return withAlphaComponent(alpha)
     }
     
-    var isLight: Bool {
+    var jv_isLight: Bool {
         var r = CGFloat(0), g = CGFloat(0), b = CGFloat(0)
         getRed(&r, green: &g, blue: &b, alpha: nil)
         
@@ -56,7 +56,7 @@ public extension UIColor {
         return (brightness > 0.5)
     }
     
-    var resolveToLight: UIColor {
+    var jv_resolveToLight: UIColor {
         if #available(iOS 13.0, *) {
             return resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
         }

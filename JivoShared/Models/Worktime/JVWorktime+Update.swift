@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVWorktime {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVWorktimeBaseChange, _agentID == 0 {
             _agentID = c.agentID
         }
@@ -129,6 +129,7 @@ extension JVWorktime {
         }
     }
 }
+
 open class JVWorktimeBaseChange: JVBaseModelChange {
     public var agentID: Int
         public init(agentID: Int) {
@@ -212,7 +213,8 @@ public final class JVWorktimeTimezoneChange: JVWorktimeBaseChange {
     public override var primaryValue: Int {
         return agentID
     }
-        public init(agentID: Int, timezoneID: Int?) {
+    
+    public init(agentID: Int, timezoneID: Int?) {
         self.timezoneID = timezoneID
         super.init(agentID: agentID)
     }
@@ -228,7 +230,8 @@ public final class JVWorktimeToggleChange: JVWorktimeBaseChange {
     public override var primaryValue: Int {
         return agentID
     }
-        public init(agentID: Int, enable: Bool) {
+    
+    public init(agentID: Int, enable: Bool) {
         self.enable = enable
         super.init(agentID: agentID)
     }
@@ -245,7 +248,8 @@ public final class JVWorktimeDayChange: JVWorktimeBaseChange {
     public override var primaryValue: Int {
         return agentID
     }
-        public init(agentID: Int, day: JVWorktimeDay, config: JVWorktimeDayConfig) {
+    
+    public init(agentID: Int, day: JVWorktimeDay, config: JVWorktimeDayConfig) {
         self.day = day
         self.config = config
         super.init(agentID: agentID)
@@ -262,7 +266,8 @@ public final class JVWorktimeDirtyChange: JVWorktimeBaseChange {
     public override var primaryValue: Int {
         return agentID
     }
-        public init(agentID: Int, isDirty: Bool) {
+    
+    public init(agentID: Int, isDirty: Bool) {
         self.isDirty = isDirty
         super.init(agentID: agentID)
     }

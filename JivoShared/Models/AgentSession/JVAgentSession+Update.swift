@@ -29,7 +29,8 @@ public struct JVAgentTechConfig: Codable {
     public var feedbackSdkEnabled: Bool = true
     public var mediaServiceEnabled: Bool = true
 
-    public init() {}
+    public init() {
+    }
     
     public init(
         priceListId: Int?,
@@ -75,6 +76,7 @@ public struct JVAgentTechConfig: Codable {
         return enabled
     }
 }
+
 public enum JVAgentLicensedFeature: Int {
     case blacklist
     case geoip
@@ -93,7 +95,7 @@ public enum JVAgentLicensedFeature: Int {
 }
 
 extension JVAgentSession {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentSessionGeneralChange {
             if _siteID == 0 { _siteID = c.siteID }
             _sessionID = c.sessionID
@@ -141,29 +143,29 @@ extension JVAgentSession {
             _isWorkingHidden = c.isWorkingHidden
         }
         else if let c = change as? JVAgentSessionChannelsChange {
-            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
+            _channels.jv_set(context.upsert(of: JVChannel.self, with: c.channels))
         }
         else if let c = change as? JVAgentSessionChannelUpdateChange {
             let oldChannels = Array(_channels.filter { $0.ID != c.channel.ID })
             
             if let newChannel = context.upsert(of: JVChannel.self, with: c.channel) {
-                _channels.set(oldChannels + [newChannel])
+                _channels.jv_set(oldChannels + [newChannel])
             }
             else {
-                _channels.set(oldChannels)
+                _channels.jv_set(oldChannels)
             }
         }
         else if let c = change as? JVAgentSessionChannelRemoveChange {
             let oldChannels = Array(_channels.filter { $0.ID == c.channelId })
             let needChannels = Array(_channels.filter { $0.ID != c.channelId })
             
-            _channels.set(needChannels)
+            _channels.jv_set(needChannels)
             context.customRemove(objects: oldChannels, recursive: true)
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _channels.toArray(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _channels.jv_toArray(), recursive: true)
     }
 }
 
@@ -183,7 +185,7 @@ public final class JVAgentSessionGeneralChange: JVBaseModelChange, Codable {
     }
     
     public override var isValid: Bool {
-        guard let _ = sessionID.valuable else { return false }
+        guard let _ = sessionID.jv_valuable else { return false }
         return true
     }
     
@@ -283,7 +285,8 @@ public final class JVAgentSessionBoxesChange: JVBaseModelChange {
         chats = json["chats"].parseList() ?? []
         super.init(json: json)
     }
-        public init(source: JsonElement, chats: [JVChatGeneralChange]) {
+    
+    public init(source: JsonElement, chats: [JVChatGeneralChange]) {
         self.source = source
         self.chats = chats
         super.init()
@@ -294,7 +297,7 @@ public final class JVAgentSessionBoxesChange: JVBaseModelChange {
     }
 
     public var teamChats: [JVChatGeneralChange] {
-        return chats.filter { not($0.isGroup == true) && $0.client == nil }
+        return chats.filter { !($0.isGroup == true) && $0.client == nil }
     }
     
     public var groupChats: [JVChatGeneralChange] {
@@ -327,7 +330,8 @@ public final class JVAgentSessionActivityChange: JVBaseModelChange {
 
 public final class JVAgentSessionMobileCallsChange: JVBaseModelChange {
     public let enabled: Bool
-        public init(enabled: Bool) {
+    
+    public init(enabled: Bool) {
         self.enabled = enabled
         super.init()
     }
@@ -341,7 +345,8 @@ public final class JVAgentSessionWorktimeChange: JVBaseModelChange {
     public let agentID: Int?
     public let isWorking: Bool?
     public let isWorkingHidden: Bool
-        public init(isWorking: Bool?, isWorkingHidden: Bool) {
+    
+    public init(isWorking: Bool?, isWorkingHidden: Bool) {
         self.agentID = nil
         self.isWorking = isWorking
         self.isWorkingHidden = isWorkingHidden

@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVTimezone {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVTimezoneGeneralChange {
             let defaultTimezone = TimeZone(identifier: c.code) ?? .current
             let gmtOffset = TimeZone(identifier: c.code)?.secondsFromGMT() ?? 0
@@ -46,8 +46,8 @@ extension JVTimezone {
             let regionRange = match.range(at: 5)
 
             let isPositive = ((name as NSString).substring(with: signRange) == "+")
-            let hour = (name as NSString).substring(with: hourRange).toInt()
-            let minute = (name as NSString).substring(with: minuteRange).toInt()
+            let hour = (name as NSString).substring(with: hourRange).jv_toInt()
+            let minute = (name as NSString).substring(with: minuteRange).jv_toInt()
             
             return (
                 gmt: (name as NSString).substring(with: gmtRange),

@@ -8,6 +8,7 @@
 
 import Foundation
 import JMRepicKit
+
 public enum JVGuestStatus {
     case online
     case proactive(agent: JVAgent)
@@ -71,27 +72,27 @@ extension JVGuest: JVDisplayable {
     }
 
     public var countryCode: String? {
-        return _countryCode.valuable?.lowercased()
+        return _countryCode.jv_valuable?.lowercased()
     }
     
     public var countryName: String? {
-        return _countryName.valuable
+        return _countryName.jv_valuable
     }
     
     public var regionName: String? {
-        return _regionName.valuable
+        return _regionName.jv_valuable
     }
     
     public var cityName: String? {
-        return _cityName.valuable
+        return _cityName.jv_valuable
     }
     
     public var organization: String? {
-        return _organization.valuable
+        return _organization.jv_valuable
     }
     
     public var lastIP: String? {
-        return _sourceIP.valuable
+        return _sourceIP.jv_valuable
     }
     
     public func displayName(kind: JVDisplayNameKind) -> String {
@@ -112,14 +113,14 @@ extension JVGuest: JVDisplayable {
     }
 
     public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
-        guard isValid else { return nil }
+        guard jv_isValid else { return nil }
         
         if _clientID > 0, let client = providers?.clientProvider(_clientID) {
             let item = client.metaImage(providers: providers, transparent: false, scale: scale)
             return item
         }
-        else if let avatarID = String(_ID.dropLast(3)).toHexInt() {
-            let c = URL.generateAvatarURL(ID: avatarID)
+        else if let avatarID = String(_ID.dropLast(3)).jv_toHexInt() {
+            let c = URL.jv_generateAvatarURL(ID: avatarID)
             let image = JMRepicItemSource.avatar(URL: nil, image: c.image, color: c.color, transparent: transparent)
             return JMRepicItem(backgroundColor: nil, source: image, scale: scale ?? 1.0, clipping: .dual)
         }
@@ -129,11 +130,11 @@ extension JVGuest: JVDisplayable {
     }
     
     public var phone: String? {
-        return _phone.valuable
+        return _phone.jv_valuable
     }
     
     public var email: String? {
-        return _email.valuable
+        return _email.jv_valuable
     }
     
     public var integration: JVChannelJoint? {
@@ -158,7 +159,7 @@ extension JVGuest: JVDisplayable {
     }
     
     public var pageTitle: String {
-        return _pageTitle.valuable ?? _pageLink
+        return _pageTitle.jv_valuable ?? _pageLink
     }
     
     public var startDate: Date? {
@@ -182,11 +183,11 @@ extension JVGuest: JVDisplayable {
     }
 
     public var attendees: [JVChatAttendee] {
-        return _attendees.toArray()
+        return _attendees.jv_toArray()
     }
     
     public var bots: [JVBot] {
-        return _bots.toArray()
+        return _bots.jv_toArray()
     }
     
     public func proactiveAgent() -> JVAgent? {

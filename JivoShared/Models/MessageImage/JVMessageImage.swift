@@ -15,7 +15,7 @@ public final class JVMessageImage: JVBaseModel {
     @objc dynamic public var _URL: String = ""
     @objc dynamic public var _uploadTS: Int = 0
     
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }

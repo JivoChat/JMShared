@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public enum JVChatAttendeeNotifying: Int {
     case nothing = 0
     case everything = 1
@@ -16,6 +17,7 @@ public enum JVChatAttendeeNotifying: Int {
         return [.everything, .nothing, .mentions]
     }
 }
+
 public enum JVChatAttendeeRelation: Equatable {
     case invitedBySystem
     case invitedByAgent(JVAgent, toAssist: Bool, comment: String?)
@@ -39,10 +41,12 @@ public enum JVChatAttendeeRelation: Equatable {
     }
 }
 
-extension JVChatAttendee {    public var agent: JVAgent? {
+extension JVChatAttendee {
+    public var agent: JVAgent? {
         return _agent
     }
-        public var relation: JVChatAttendeeRelation {
+    
+    public var relation: JVChatAttendeeRelation {
         if _relation == "invited" {
             if let agent = _invitedBy {
                 return .invitedByAgent(agent, toAssist: _toAssist, comment: _comment)
@@ -58,16 +62,20 @@ extension JVChatAttendee {    public var agent: JVAgent? {
             return .team
         }
     }
-        public var comment: String? {
+    
+    public var comment: String? {
         return _comment
     }
-        public var invitedBy: JVAgent? {
+    
+    public var invitedBy: JVAgent? {
         return _invitedBy
     }
-        public var isAssistant: Bool {
+    
+    public var isAssistant: Bool {
         return _toAssist
     }
-        public var receivedMessageID: Int? {
+    
+    public var receivedMessageID: Int? {
         if _receivedMessageID > 0 {
             return _receivedMessageID
         }
@@ -75,7 +83,8 @@ extension JVChatAttendee {    public var agent: JVAgent? {
             return nil
         }
     }
-        public var unreadNumber: Int? {
+    
+    public var unreadNumber: Int? {
         if _unreadNumber > 0 {
             return _unreadNumber
         }
@@ -83,7 +92,8 @@ extension JVChatAttendee {    public var agent: JVAgent? {
             return nil
         }
     }
-        public var notifying: JVChatAttendeeNotifying? {
+    
+    public var notifying: JVChatAttendeeNotifying? {
         return JVChatAttendeeNotifying(rawValue: _notifications)
     }
     

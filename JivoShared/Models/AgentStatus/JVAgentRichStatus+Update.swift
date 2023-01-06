@@ -9,7 +9,7 @@ import Foundation
 import JMCodingKit
 
 extension JVAgentRichStatus {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentRichStatusGeneralChange {
             if _statusID == 0 { _statusID = c.statusID }
             _title = c.title

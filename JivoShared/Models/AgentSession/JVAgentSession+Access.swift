@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public enum JVAgentSessionWorkingState {
     case soon(JVWorktimeDayMeta?)
     case active
@@ -62,8 +63,8 @@ extension JVAgentSession {
     }
     
     public var voxCredentials: (login: String, password: String)? {
-        guard let login = _voxLogin.valuable else { return nil }
-        guard let password = _voxPassword.valuable else { return nil }
+        guard let login = _voxLogin.jv_valuable else { return nil }
+        guard let password = _voxPassword.jv_valuable else { return nil }
         return (login: login, password: password)
     }
     
@@ -102,12 +103,12 @@ extension JVAgentSession {
         return channel?.jointType
     }
     
-    public func testableChannels(domain: String, lang: LocaleLang, codeHost: String?) -> [(channel: JVChannel, url: URL)] {
+    public func testableChannels(domain: String, lang: JVLocaleLang, codeHost: String?) -> [(channel: JVChannel, url: URL)] {
         return channels.compactMap { channel in
             guard
                 channel.isTestable,
-                let link = channel.name.valuable,
-                let url = URL.widgetSumulator(
+                let link = channel.name.jv_valuable,
+                let url = URL.jv_widgetSumulator(
                     domain: domain,
                     siteLink: link,
                     channelID: channel.publicID,
@@ -137,8 +138,8 @@ extension JVAgentSession {
             return isWorking ? .active : .hidden
         }
         
-        let hour = locale().calendar.component(.hour, from: Date())
-        let minute = locale().calendar.component(.minute, from: Date())
+        let hour = JVActiveLocale().calendar.component(.hour, from: Date())
+        let minute = JVActiveLocale().calendar.component(.minute, from: Date())
         let nowHash = _hash(hour, minute)
         let startHash = _hash(dayConfig.startHour, dayConfig.startMinute)
         let expiringHash = _hash(dayConfig.endHour, dayConfig.endMinute) - 30

@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVArchive {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveSliceChange {
             _total = c.total
             _archiveTotal = c.archiveTotal
@@ -20,7 +20,7 @@ extension JVArchive {
             let models = c.hits.filter(\.isValid)
             if c.fresh {
                 let hits = context.upsert(of: JVArchiveHit.self, with: models)
-                _hits.set(hits)
+                _hits.jv_set(hits)
             }
             else {
                 _hits.append(objectsIn: models.compactMap { model in
@@ -40,8 +40,8 @@ extension JVArchive {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _hits.toArray(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _hits.jv_toArray(), recursive: true)
     }
 }
 
@@ -54,10 +54,11 @@ public final class JVArchiveSliceChange: JVBaseModelChange {
     public let lastID: String?
     public let hits: [JVArchiveHitGeneralChange]
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
     }
-        public init(fresh: Bool,
+    
+    public init(fresh: Bool,
          status: Bool,
          total: Int,
          archiveTotal: Int,
@@ -93,7 +94,7 @@ public final class JVArchiveSliceChange: JVBaseModelChange {
 }
 
 public final class JVArchiveCleanupChange: JVBaseModelChange {
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
     }
 }

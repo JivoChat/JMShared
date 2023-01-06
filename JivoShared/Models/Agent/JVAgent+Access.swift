@@ -73,7 +73,7 @@ extension JVAgent: JVDisplayable {
     }
     
     public var phone: String? {
-        return _phone.valuable
+        return _phone.jv_valuable
     }
     
     public var isMe: Bool {
@@ -81,7 +81,7 @@ extension JVAgent: JVDisplayable {
     }
     
     public var notMe: Bool {
-        return not(isMe)
+        return !isMe
     }
     
     public var state: JVAgentState {
@@ -104,8 +104,8 @@ extension JVAgent: JVDisplayable {
     public var stateColor: UIColor? {
         switch state {
         case .none: return nil
-        case .active: return DesignBook.shared.color(usage: .onlineTint)
-        case .away: return DesignBook.shared.color(usage: .awayTint)
+        case .active: return JVDesign.shared.color(usage: .onlineTint)
+        case .away: return JVDesign.shared.color(usage: .awayTint)
         }
     }
     
@@ -126,7 +126,7 @@ extension JVAgent: JVDisplayable {
     
     public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
         let url = _avatarLink.flatMap(URL.init)
-        let icon = UIImage(named: "avatar_agent", in: Bundle.jmShared, compatibleWith: nil)
+        let icon = UIImage(named: "avatar_agent", in: .jv_shared, compatibleWith: nil)
         let image = JMRepicItemSource.avatar(URL: url, image: icon, color: nil, transparent: transparent)
         return JMRepicItem(backgroundColor: nil, source: image, scale: scale ?? 1.0, clipping: .dual)
     }
@@ -174,11 +174,11 @@ extension JVAgent: JVDisplayable {
     }
 
     public var draft: String? {
-        return _draft?.valuable
+        return _draft?.jv_valuable
     }
     
     public func availableForChatInvite(operatorsOnly: Bool) -> Bool {
-        if operatorsOnly, not(isOperator) {
+        if operatorsOnly, !isOperator {
             return false
         }
         
@@ -190,7 +190,7 @@ extension JVAgent: JVDisplayable {
     }
 
     public func availableForChatTransfer(operatorsOnly: Bool) -> Bool {
-        if operatorsOnly, not(isOperator) {
+        if operatorsOnly, !(isOperator) {
             return false
         }
         
@@ -211,10 +211,10 @@ extension JVAgent: JVDisplayable {
         }
 
         switch state {
-        case .none where callingDestination.isExternal: return _callingOptions.hasBit(JVAgentCallingOptions.supportsOffline.rawValue)
+        case .none where callingDestination.isExternal: return _callingOptions.jv_hasBit(JVAgentCallingOptions.supportsOffline.rawValue)
         case .none: return false
         case .active: return true
-        case .away: return _callingOptions.hasBit(JVAgentCallingOptions.supportsAway.rawValue)
+        case .away: return _callingOptions.jv_hasBit(JVAgentCallingOptions.supportsAway.rawValue)
         }
     }
 
@@ -247,7 +247,7 @@ extension JVAgent: JVDisplayable {
     }
 
     public var onCall: Bool {
-        return _callingOptions.hasBit(1 << JVAgentCallingOptions.onCall.rawValue)
+        return _callingOptions.jv_hasBit(1 << JVAgentCallingOptions.onCall.rawValue)
     }
     
     public var worktime: JVWorktime? {
@@ -271,6 +271,6 @@ extension JVAgent: JVDisplayable {
     }
     
     public var isExisting: Bool {
-        return not(_email.isEmpty)
+        return !(_email.isEmpty)
     }
 }

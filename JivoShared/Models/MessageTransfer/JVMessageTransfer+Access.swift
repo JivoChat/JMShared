@@ -8,10 +8,12 @@
 
 import Foundation
 
-extension JVMessageTransfer {    public var agentID: Int {
+extension JVMessageTransfer {
+    public var agentID: Int {
         return _agentID
     }
-        public var comment: String? {
+    
+    public var comment: String? {
         return _comment
     }
 }

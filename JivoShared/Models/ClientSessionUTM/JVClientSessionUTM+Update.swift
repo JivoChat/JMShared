@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVClientSessionUTM {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientSessionUTMGeneralChange {
             _source = c.source
             _keyword = c.keyword
@@ -30,7 +30,7 @@ public final class JVClientSessionUTMGeneralChange: JVBaseModelChange {
     
     public override var isValid: Bool {
         let components = [source, keyword, campaign, medium, content]
-        if components.contains(where: { $0.hasValue }) {
+        if components.contains(where: { $0.jv_hasValue }) {
             return true
         }
         else {
@@ -39,11 +39,11 @@ public final class JVClientSessionUTMGeneralChange: JVBaseModelChange {
     }
     
     required public init( json: JsonElement) {
-        source = json["source"].valuable?.unescape()
-        keyword = json["keyword"].valuable?.unescape()
-        campaign = json["campaign"].valuable?.unescape()
-        medium = json["medium"].valuable?.unescape()
-        content = json["content"].valuable?.unescape()
+        source = json["source"].valuable?.jv_unescape()
+        keyword = json["keyword"].valuable?.jv_unescape()
+        campaign = json["campaign"].valuable?.jv_unescape()
+        medium = json["medium"].valuable?.jv_unescape()
+        content = json["content"].valuable?.jv_unescape()
         super.init(json: json)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVArchiveHit {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveHitGeneralChange {
             if _ID == "" { _ID = c.ID }
             _score = c.score
@@ -20,8 +20,8 @@ extension JVArchiveHit {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: [_chatItem, _callItem].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: [_chatItem, _callItem].jv_flatten(), recursive: true)
     }
 }
 
@@ -31,8 +31,8 @@ public final class JVArchiveHitGeneralChange: JVBaseModelChange {
     public let chatItem: JVArchiveHitChatItemGeneralChange?
     public let callItem: JVArchiveHitCallItemGeneralChange?
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
     
     public override var isValid: Bool {
@@ -40,7 +40,8 @@ public final class JVArchiveHitGeneralChange: JVBaseModelChange {
         if let _ = callItem { return true }
         return false
     }
-        public init(ID: String,
+    
+    public init(ID: String,
          score: Float,
          chatItem: JVArchiveHitChatItemGeneralChange?,
          callItem: JVArchiveHitCallItemGeneralChange?) {

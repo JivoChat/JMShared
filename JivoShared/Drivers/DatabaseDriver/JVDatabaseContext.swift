@@ -1,5 +1,5 @@
 //
-//  DatabaseContext.swift
+//  JVDatabaseContext.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 03/05/2017.
@@ -11,9 +11,9 @@ import RealmSwift
 import JMTimelineKit
 
 fileprivate var exceptionHandler: (Error) -> Void = { _ in }
-public func DatabaseContextSetExceptionHandler(_ handler: @escaping (Error) -> Void) { exceptionHandler = handler }
+public func JVDatabaseContextSetExceptionHandler(_ handler: @escaping (Error) -> Void) { exceptionHandler = handler }
 
-public struct DatabaseContextMainKey<VT> {
+public struct JVDatabaseContextMainKey<VT> {
     public let key: String
     public let value: VT
     
@@ -23,19 +23,19 @@ public struct DatabaseContextMainKey<VT> {
     }
 }
 
-public protocol IDatabaseContext {
+public protocol JVIDatabaseContext {
     var timelineCache: JMTimelineCache { get }
     var hasChanges: Bool { get }
-    var localizer: Localizer { get }
+    var localizer: JVLocalizer { get }
     
-    func performTransaction<Value>(actions: (DatabaseContext) -> Value) -> Value
+    func performTransaction<Value>(actions: (JVDatabaseContext) -> Value) -> Value
     
     func createObject<OT>(_ type: OT.Type) -> OT
     func add<OT>(_ objects: [OT])
     
-    func objects<OT>(_ type: OT.Type, options: DatabaseRequestOptions?) -> [OT]
+    func objects<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?) -> [OT]
     func object<OT, VT>(_ type: OT.Type, primaryKey: VT) -> OT?
-    func object<OT, VT>(_ type: OT.Type, mainKey: DatabaseContextMainKey<VT>) -> OT?
+    func object<OT, VT>(_ type: OT.Type, mainKey: JVDatabaseContextMainKey<VT>) -> OT?
     
     func simpleRemove<OT>(objects: [OT]) -> Bool
     func customRemove<OT>(objects: [OT], recursive: Bool)
@@ -45,16 +45,16 @@ public protocol IDatabaseContext {
     func valueForKey(_ key: Int) -> Int?
 }
 
-open class DatabaseContext: IDatabaseContext {
+open class JVDatabaseContext: JVIDatabaseContext {
     public let realm: Realm
     public let timelineCache: JMTimelineCache
-    public var localizer: Localizer
+    public var localizer: JVLocalizer
     
     private var hasAddedObjects = false
     
     private var values = [Int: Int]()
     
-    public init(realm: Realm, timelineCache: JMTimelineCache, localizer: Localizer) {
+    public init(realm: Realm, timelineCache: JMTimelineCache, localizer: JVLocalizer) {
         self.realm = realm
         self.timelineCache = timelineCache
         self.localizer = localizer
@@ -74,7 +74,7 @@ open class DatabaseContext: IDatabaseContext {
         realm.add(objects as! [Object])
     }
     
-    public func objects<OT>(_ type: OT.Type, options: DatabaseRequestOptions?) -> [OT] {
+    public func objects<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?) -> [OT] {
         let objects = getObjects(type as! Object.Type, options: options)
         return Array(objects) as! [OT]
     }
@@ -83,7 +83,7 @@ open class DatabaseContext: IDatabaseContext {
         return realm.object(ofType: type as! Object.Type, forPrimaryKey: primaryKey) as? OT
     }
     
-    public func object<OT, VT>(_ type: OT.Type, mainKey: DatabaseContextMainKey<VT>) -> OT? {
+    public func object<OT, VT>(_ type: OT.Type, mainKey: JVDatabaseContextMainKey<VT>) -> OT? {
         let key = mainKey.key
         let value = mainKey.value
         return realm.objects(type as! Object.Type).filter("\(key) == %@", value).first as? OT
@@ -116,7 +116,7 @@ open class DatabaseContext: IDatabaseContext {
         return values[key]
     }
     
-    public func performTransaction<Value>(actions: (DatabaseContext) -> Value) -> Value {
+    public func performTransaction<Value>(actions: (JVDatabaseContext) -> Value) -> Value {
         if realm.isInWriteTransaction {
             return actions(self)
         }
@@ -151,7 +151,7 @@ open class DatabaseContext: IDatabaseContext {
 //        hasAddedObjects = false
 //    }
     
-    internal func getObjects<OT: Object>(_ type: OT.Type, options: DatabaseRequestOptions?) -> Results<OT> {
+    internal func getObjects<OT: Object>(_ type: OT.Type, options: JVDatabaseRequestOptions?) -> Results<OT> {
         var objects = realm.objects(type)
         
         if let filter = options?.filter {

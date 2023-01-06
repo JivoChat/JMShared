@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import JMCodingKit
+
 open class JVArchiveHitItem: JVBaseModel {
     @objc dynamic public var _ID: String = UUID().uuidString
     @objc dynamic public var _type: String = ""

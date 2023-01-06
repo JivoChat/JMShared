@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVChatAttendee {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChatAttendeeGeneralChange {
             _agent = context.agent(for: c.ID, provideDefault: true)
             _relation = c.relation
@@ -52,7 +52,8 @@ public final class JVChatAttendeeGeneralChange: JVBaseModelChange, NSCoding {
     private let codableReceivedKey = "received"
     private let codableUnreadKey = "unread"
     private let codableNotificationsKey = "notifications"
-        public init(ID: Int,
+    
+    public init(ID: Int,
          relation: String?,
          comment: String?,
          invitedBy: Int?,
@@ -139,7 +140,8 @@ public final class JVChatAttendeeAcceptChange: JVBaseModelChange {
 public final class JVChatAttendeeResetUnreadChange: JVBaseModelChange {
     public let ID: Int
     public let messageID: Int
-        public init(ID: Int, messageID: Int) {
+    
+    public init(ID: Int, messageID: Int) {
         self.ID = ID
         self.messageID = messageID
         super.init()
@@ -153,7 +155,8 @@ public final class JVChatAttendeeResetUnreadChange: JVBaseModelChange {
 public final class JVChatAttendeeNotificationsChange: JVBaseModelChange {
     public let ID: Int
     public let notifications: Int
-        public init(ID: Int, notifications: Int) {
+    
+    public init(ID: Int, notifications: Int) {
         self.ID = ID
         self.notifications = notifications
         super.init()

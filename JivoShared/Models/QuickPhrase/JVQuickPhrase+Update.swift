@@ -12,7 +12,7 @@ import JMCodingKit
 let QuickPhraseStorageSeparator = ","
 
 extension JVQuickPhrase {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVQuickPhraseGeneralChange {
             if _ID == "" { _ID = c.ID }
             _lang = c.lang
@@ -28,17 +28,19 @@ public final class JVQuickPhraseGeneralChange: JVBaseModelChange {
     public let tags: [String]
     public let text: String
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
+    
     public init(lang language: String, json: JsonElement) {
-        ID = json["id"].string?.valuable ?? UUID().uuidString.lowercased()
+        ID = json["id"].string?.jv_valuable ?? UUID().uuidString.lowercased()
         lang = language
-        tags = with(json["tags"]) { $0.string.flatMap({[$0]}) ?? $0.stringArray }
+        tags = jv_with(json["tags"]) { $0.string.flatMap({[$0]}) ?? $0.stringArray }
         text = json["text"].stringValue
         super.init(json: json)
     }
-        public init(ID: String,
+    
+    public init(ID: String,
          lang: String,
          tag: String,
          text: String) {
@@ -70,6 +72,7 @@ public final class JVQuickPhraseGeneralChange: JVBaseModelChange {
             ]
         )
     }
+    
     public static func ==(lhs: JVQuickPhraseGeneralChange, rhs: JVQuickPhraseGeneralChange) -> Bool {
         guard lhs.ID == rhs.ID else { return false }
         return true

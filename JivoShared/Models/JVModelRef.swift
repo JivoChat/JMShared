@@ -16,11 +16,11 @@ public struct JVModelRefBehavior: OptionSet {
 }
 
 public final class JVModelRef<Value: JVBaseModel> {
-    private weak var databaseDriver: IDatabaseDriver?
+    private weak var databaseDriver: JVIDatabaseDriver?
     private let uuid: String?
     private let behavior: JVModelRefBehavior
     
-    public init(databaseDriver: IDatabaseDriver, value: Value?, behavior: JVModelRefBehavior) {
+    public init(databaseDriver: JVIDatabaseDriver, value: Value?, behavior: JVModelRefBehavior) {
         self.databaseDriver = databaseDriver
         self.uuid = value?._UUID
         self.behavior = behavior
@@ -35,7 +35,7 @@ public final class JVModelRef<Value: JVBaseModel> {
             return nil
         }
         
-        let mainKey = DatabaseContextMainKey(key: "_UUID", value: uuid)
+        let mainKey = JVDatabaseContextMainKey(key: "_UUID", value: uuid)
         if let object = databaseDriver?.object(Value.self, mainKey: mainKey) {
             return object
         }

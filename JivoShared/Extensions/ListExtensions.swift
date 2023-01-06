@@ -11,18 +11,18 @@ import RealmSwift
 import JMCodingKit
 
 public extension List {
-    func toArray() -> [Element] {
+    func jv_toArray() -> [Element] {
         return Array(self)
     }
     
-    func set(_ items: [Element]) {
+    func jv_set(_ items: [Element]) {
         removeAll()
         append(objectsIn: items)
     }
 }
 
 public extension List where Element: JVBaseModel {
-    func insertAbsent(_ items: [Element]) {
+    func jv_insertAbsent(_ items: [Element]) {
         guard let primaryKey = Element.primaryKey() else { return }
         
         let currentIDs = map { item in

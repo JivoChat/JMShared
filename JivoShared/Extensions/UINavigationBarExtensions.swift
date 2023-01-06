@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension UINavigationBar {
-    func setShadowEnabled(_ enabled: Bool) {
+    func jv_setShadowEnabled(_ enabled: Bool) {
         if enabled {
             setBackgroundImage(nil, for: .default)
             shadowImage = nil
@@ -27,7 +27,7 @@ public extension UINavigationBar {
 }
 
 public extension UINavigationItem {
-    var largeDisplayMode: LargeTitleDisplayMode {
+    var jv_largeDisplayMode: LargeTitleDisplayMode {
         get {
             if #available(iOS 11.0, *) {
                 return largeTitleDisplayMode

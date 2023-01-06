@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVMessageMedia {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageMediaGeneralChange {
             _type = c.type
             _mime = c.mime ?? ""
@@ -28,8 +28,8 @@ extension JVMessageMedia {
             _link = c.link
             _text = c.text
 
-            let name = (c.title.valuable ?? c.name).trimmedZeros()
-            if let performer = c.performer?.trimmedZeros() {
+            let name = (c.title.jv_valuable ?? c.name).jv_trimmedZeros()
+            if let performer = c.performer?.jv_trimmedZeros() {
                 _name = "\(performer) - \(name)"
             }
             else {
@@ -62,7 +62,8 @@ public final class JVMessageMediaGeneralChange: JVBaseModelChange {
         guard type != "error" else { return false }
         return true
     }
-        public init(type: String, mime: String, name: String, link: String, size: Int, width: Int, height: Int) {
+    
+    public init(type: String, mime: String, name: String, link: String, size: Int, width: Int, height: Int) {
         self.type = type
         self.mime = mime
         self.thumbLink = nil
@@ -89,15 +90,15 @@ public final class JVMessageMediaGeneralChange: JVBaseModelChange {
         thumbLink = json["thumb"].stringValue
         fullLink = json["file"].stringValue
         emoji = json["emoji"].string
-        name = json["file_name"].string?.valuable ?? json["name"].stringValue
+        name = json["file_name"].string?.jv_valuable ?? json["name"].stringValue
         title = json["title"].stringValue
         performer = json["performer"].string
         size = json["file_size"].intValue
         width = json["width"].intValue
         height = json["height"].intValue
         duration = json["duration"].intValue
-        latitude = json["latitude"].double ?? json["latitude"].string?.toDouble()
-        longitude = json["longitude"].double ?? json["longitude"].string?.toDouble()
+        latitude = json["latitude"].double ?? json["latitude"].string?.jv_toDouble()
+        longitude = json["longitude"].double ?? json["longitude"].string?.jv_toDouble()
         phone = json["phone"].string
         link = json["url"].string
         text = json["text"].string

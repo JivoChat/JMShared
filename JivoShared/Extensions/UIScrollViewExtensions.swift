@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 public extension UIScrollView {
-    var isActivelyInteracting: Bool {
+    var jv_isActivelyInteracting: Bool {
         return (isTracking || isDragging || isDecelerating)
     }
     
-    func scrollToTop(duration: TimeInterval, force: Bool = false) {
+    func jv_scrollToTop(duration: TimeInterval, force: Bool = false) {
         UIView.animate(
             withDuration: duration,
             animations: { [unowned self] in
@@ -28,7 +28,7 @@ public extension UIScrollView {
         )
     }
     
-    func scrollToBottom(duration: TimeInterval) {
+    func jv_scrollToBottom(duration: TimeInterval) {
         UIView.animate(
             withDuration: duration,
             animations: { [unowned self] in
@@ -42,7 +42,7 @@ public extension UIScrollView {
         )
     }
     
-    func scrollToActive(frame: CGRect) {
+    func jv_scrollToActive(frame: CGRect) {
         let topActiveY = contentOffset.y + contentInset.top
         let bottomActiveY = contentOffset.y + bounds.height - contentInset.bottom
         
@@ -54,7 +54,7 @@ public extension UIScrollView {
         contentOffset.y = positionY
     }
     
-    func hideExtraSubviewsIfNeeded() {
+    func jv_hideExtraSubviewsIfNeeded() {
         if #available(iOS 13.2, *) {
             return
         }

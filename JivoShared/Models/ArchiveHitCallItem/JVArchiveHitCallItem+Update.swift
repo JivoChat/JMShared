@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVArchiveHitCallItem {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveHitCallItemGeneralChange {
             _ID = c.ID
             _type = c.type
@@ -20,15 +20,15 @@ extension JVArchiveHitCallItem {
             _eventsNumber = c.eventsNumber
             _cost = c.cost
             _costCurrency = c.costCurrency
-            _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
+            _agents.jv_set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
             _chat = context.upsert(of: JVChat.self, with: c.chatChange?.copy(knownArchived: true))
             _call = context.upsert(of: JVCall.self, with: c.callChange)
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: [_chat].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: [_chat].jv_flatten(), recursive: true)
     }
 }
 
@@ -38,7 +38,8 @@ public final class JVArchiveHitCallItemGeneralChange: JVArchiveHitItemGeneralCha
     public let cost: Float
     public let costCurrency: String
     public let callChange: JVCallGeneralChange?
-        public init(ID: String,
+    
+    public init(ID: String,
          responseTimeout: Int,
          duration: Int,
          eventsNumber: Int,
@@ -67,8 +68,8 @@ public final class JVArchiveHitCallItemGeneralChange: JVArchiveHitItemGeneralCha
         )
     }
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
     
     required public init( json: JsonElement) {

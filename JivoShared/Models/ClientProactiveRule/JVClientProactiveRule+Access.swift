@@ -8,13 +8,16 @@
 
 import Foundation
 
-extension JVClientProactiveRule {    public var agent: JVAgent? {
+extension JVClientProactiveRule {
+    public var agent: JVAgent? {
         return _agent
     }
-        public var date: Date {
+    
+    public var date: Date {
         return _date!
     }
-        public var text: String {
+    
+    public var text: String {
         return _text
     }
 }

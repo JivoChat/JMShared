@@ -9,15 +9,19 @@
 import Foundation
 
 public extension Bundle {
-    var ID: String? {
+    static var jv_shared: Bundle {
+        return Bundle(for: JMShared.self)
+    }
+    
+    var jv_ID: String? {
         return infoDictionary?["CFBundleIdentifier"] as? String
     }
     
-    var name: String? {
+    var jv_name: String? {
         return (infoDictionary?["CFBundleDisplayName"] ?? infoDictionary?["CFBundleName"]) as? String
     }
     
-    var version: String {
+    var jv_version: String {
         if let value = infoDictionary?["CFBundleShortVersionString"] as? String {
             return value
         }
@@ -26,7 +30,7 @@ public extension Bundle {
         }
     }
     
-    var build: String {
+    var jv_build: String {
         if let value = infoDictionary?["CFBundleVersion"] as? String {
             return value
         }
@@ -35,13 +39,7 @@ public extension Bundle {
         }
     }
     
-    var versionWithBuild: String {
-        return "\(version) (\(build))"
-    }
-}
-
-public extension Bundle {
-    static var jmShared: Bundle {
-        return Bundle(for: JMShared.self)
+    var jv_versionWithBuild: String {
+        return "\(jv_version) (\(jv_build))"
     }
 }

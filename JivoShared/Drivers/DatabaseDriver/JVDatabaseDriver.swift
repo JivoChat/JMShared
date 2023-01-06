@@ -1,5 +1,5 @@
 //
-//  DatabaseDriver.swift
+//  JVDatabaseDriver.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 03/05/2017.
@@ -11,55 +11,55 @@ import RealmSwift
 import CoreData
 import JMTimelineKit
 
-public enum DatabaseDriverWriting {
+public enum JVDatabaseDriverWriting {
     case anyThread
     case backgroundThread
 }
 
-public protocol IDatabaseDriver: AnyObject {
-    func parallel() -> IDatabaseDriver
-    func refresh() -> IDatabaseDriver
+public protocol JVIDatabaseDriver: AnyObject {
+    func parallel() -> JVIDatabaseDriver
+    func refresh() -> JVIDatabaseDriver
 
     func reference<OT: Object>(to object: OT?, behavior: JVModelRefBehavior) -> JVModelRef<OT>
     func resolve<OT: Object>(ref: ThreadSafeReference<OT>) -> OT?
     
-    func read(_ block: (IDatabaseContext) -> Void)
-    func readwrite(_ block: (IDatabaseContext) -> Void)
+    func read(_ block: (JVIDatabaseContext) -> Void)
+    func readwrite(_ block: (JVIDatabaseContext) -> Void)
 
-    func objects<OT>(_ type: OT.Type, options: DatabaseRequestOptions?) -> [OT]
+    func objects<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?) -> [OT]
     func object<OT, VT>(_ type: OT.Type, primaryKey: VT) -> OT?
-    func object<OT, VT>(_ type: OT.Type, mainKey: DatabaseContextMainKey<VT>) -> OT?
+    func object<OT, VT>(_ type: OT.Type, mainKey: JVDatabaseContextMainKey<VT>) -> OT?
     
-    func subscribe<OT>(_ type: OT.Type, options: DatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> DatabaseListener
-    func subscribe<OT>(object: OT, callback: @escaping (OT?) -> Void) -> DatabaseListener
-    func unsubscribe(_ token: DatabaseSubscriberToken)
+    func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener
+    func subscribe<OT>(object: OT, callback: @escaping (OT?) -> Void) -> JVDatabaseListener
+    func unsubscribe(_ token: JVDatabaseSubscriberToken)
     
     func simpleRemove<OT>(objects: [OT]) -> Bool
     func customRemove<OT>(objects: [OT], recursive: Bool)
     func removeAll()
 }
 
-fileprivate struct DatabaseToken {
+fileprivate struct JVDatabaseToken {
     public let realmToken: NotificationToken
     public let notificationToken: NSObjectProtocol?
 }
 
-open class DatabaseDriver: IDatabaseDriver {
-    private let writing: DatabaseDriverWriting
+open class JVDatabaseDriver: JVIDatabaseDriver {
+    private let writing: JVDatabaseDriverWriting
     private let fileURL: URL?
     private let memoryIdentifier: String
     private let timelineCache: JMTimelineCache
 
-    private var readonlyContext: DatabaseContext?
-    private var readwriteContext: DatabaseContext?
-    private var tokens = [DatabaseSubscriberToken: DatabaseToken]()
+    private var readonlyContext: JVDatabaseContext?
+    private var readwriteContext: JVDatabaseContext?
+    private var tokens = [JVDatabaseSubscriberToken: JVDatabaseToken]()
     
     private var recentThread: Thread?
     private var recentRunLoop: RunLoop?
     
-    public let localizer: Localizer
+    public let localizer: JVLocalizer
     
-    public init(writing: DatabaseDriverWriting, fileURL: URL?, memoryIdentifier: String, timelineCache: JMTimelineCache, localizer: Localizer) {
+    public init(writing: JVDatabaseDriverWriting, fileURL: URL?, memoryIdentifier: String, timelineCache: JMTimelineCache, localizer: JVLocalizer) {
         self.writing = writing
         self.fileURL = fileURL
         self.memoryIdentifier = memoryIdentifier
@@ -67,8 +67,8 @@ open class DatabaseDriver: IDatabaseDriver {
         self.localizer = localizer
     }
     
-    public func parallel() -> IDatabaseDriver {
-        return DatabaseDriver(
+    public func parallel() -> JVIDatabaseDriver {
+        return JVDatabaseDriver(
             writing: writing,
             fileURL: fileURL,
             memoryIdentifier: memoryIdentifier,
@@ -76,7 +76,7 @@ open class DatabaseDriver: IDatabaseDriver {
             localizer: localizer)
     }
     
-    public func refresh() -> IDatabaseDriver {
+    public func refresh() -> JVIDatabaseDriver {
         context.realm.refresh()
         return self
     }
@@ -89,11 +89,11 @@ open class DatabaseDriver: IDatabaseDriver {
         return context.realm.resolve(ref)
     }
     
-    public func read(_ block: (IDatabaseContext) -> Void) {
+    public func read(_ block: (JVIDatabaseContext) -> Void) {
         block(context)
     }
     
-    public func readwrite(_ block: (IDatabaseContext) -> Void) {
+    public func readwrite(_ block: (JVIDatabaseContext) -> Void) {
         switch writing {
         case .backgroundThread where Thread.isMainThread:
             assertionFailure("Please use background thread for modifications")
@@ -108,7 +108,7 @@ open class DatabaseDriver: IDatabaseDriver {
         }
     }
     
-    public func objects<OT>(_ type: OT.Type, options: DatabaseRequestOptions?) -> [OT] {
+    public func objects<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?) -> [OT] {
         return context.objects(type, options: options)
     }
     
@@ -116,11 +116,11 @@ open class DatabaseDriver: IDatabaseDriver {
         return context.object(type, primaryKey: primaryKey)
     }
     
-    public func object<OT, VT>(_ type: OT.Type, mainKey: DatabaseContextMainKey<VT>) -> OT? {
+    public func object<OT, VT>(_ type: OT.Type, mainKey: JVDatabaseContextMainKey<VT>) -> OT? {
         return context.object(type, mainKey: mainKey)
     }
     
-    public func subscribe<OT>(_ type: OT.Type, options: DatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> DatabaseListener {
+    public func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener {
         let objects = context.getObjects(type as! Object.Type, options: options)
         let token = objects.observe { change in
             switch change {
@@ -141,7 +141,7 @@ open class DatabaseDriver: IDatabaseDriver {
         
         let internalToken = UUID()
         
-        tokens[internalToken] = DatabaseToken(
+        tokens[internalToken] = JVDatabaseToken(
             realmToken: token,
             notificationToken: options?.notificationName.map { name in
                 NotificationCenter.default.addObserver(
@@ -153,10 +153,10 @@ open class DatabaseDriver: IDatabaseDriver {
             }
         )
         
-        return DatabaseListener(token: internalToken, databaseDriver: self)
+        return JVDatabaseListener(token: internalToken, databaseDriver: self)
     }
     
-    public func subscribe<OT>(object: OT, callback: @escaping (OT?) -> Void) -> DatabaseListener {
+    public func subscribe<OT>(object: OT, callback: @escaping (OT?) -> Void) -> JVDatabaseListener {
         let token = (object as! Object).observe { change in
             switch change {
             case .change: callback(object)
@@ -167,15 +167,15 @@ open class DatabaseDriver: IDatabaseDriver {
         
         let internalToken = UUID()
         
-        tokens[internalToken] = DatabaseToken(
+        tokens[internalToken] = JVDatabaseToken(
             realmToken: token,
             notificationToken: nil
         )
         
-        return DatabaseListener(token: internalToken, databaseDriver: self)
+        return JVDatabaseListener(token: internalToken, databaseDriver: self)
     }
     
-    public func unsubscribe(_ token: DatabaseSubscriberToken) {
+    public func unsubscribe(_ token: JVDatabaseSubscriberToken) {
         if let item = tokens[token] {
             if let observer = item.notificationToken {
                 NotificationCenter.default.removeObserver(observer)
@@ -204,7 +204,7 @@ open class DatabaseDriver: IDatabaseDriver {
         }
     }
     
-    private var context: DatabaseContext {
+    private var context: JVDatabaseContext {
         if Thread.isMainThread {
             if let object = readonlyContext {
                 return object
@@ -231,10 +231,10 @@ open class DatabaseDriver: IDatabaseDriver {
         }
     }
     
-    private func buildContext() -> DatabaseContext {
+    private func buildContext() -> JVDatabaseContext {
         let config = generateConfig()
         if let realm = try? Realm(configuration: config) {
-            return DatabaseContext(realm: realm, timelineCache: timelineCache, localizer: localizer)
+            return JVDatabaseContext(realm: realm, timelineCache: timelineCache, localizer: localizer)
         }
         else {
             abort()

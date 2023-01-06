@@ -10,31 +10,32 @@ import Foundation
 import JMCodingKit
 
 extension JVArchiveHitChatItem {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveHitChatItemGeneralChange {
             _ID = c.ID
             _type = c.type
             _responseTimeout = c.responseTimeout
             _duration = c.duration
             _eventsNumber = c.eventsNumber
-            _agents.set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
+            _agents.jv_set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
             _chat = context.upsert(of: JVChat.self, with: c.chatChange?.copy(knownArchived: true))
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: [_chat].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: [_chat].jv_flatten(), recursive: true)
     }
 }
 
 public final class JVArchiveHitChatItemGeneralChange: JVArchiveHitItemGeneralChange {
     public let type: String
     
-    public override var stringKey: DatabaseContextMainKey<String>? {
-        return DatabaseContextMainKey(key: "_ID", value: ID)
+    public override var stringKey: JVDatabaseContextMainKey<String>? {
+        return JVDatabaseContextMainKey(key: "_ID", value: ID)
     }
-        public init(ID: String,
+    
+    public init(ID: String,
          responseTimeout: Int,
          duration: Int,
          eventsNumber: Int,

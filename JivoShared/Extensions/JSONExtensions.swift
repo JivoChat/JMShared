@@ -41,7 +41,7 @@ public extension JsonElement {
     }
 
     var valuable: String? {
-        return stringValue.valuable
+        return stringValue.jv_valuable
     }
     
     func map<T>(_ block: (JsonElement) -> T) -> T? {

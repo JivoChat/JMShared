@@ -10,12 +10,12 @@ import Foundation
 import JMCodingKit
 
 extension JVClientSession {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientSessionGeneralChange {
             _creationTS = c.creationTS ?? _creationTS
             _lastIP = c.lastIP
             
-            _history.set(context.insert(of: JVPage.self, with: c.history))
+            _history.jv_set(context.insert(of: JVPage.self, with: c.history))
 
             if let value = c.UTM {
                 _UTM = context.insert(of: JVClientSessionUTM.self, with: value)
@@ -35,9 +35,9 @@ extension JVClientSession {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: _history.toArray(), recursive: true)
-        context.customRemove(objects: [_UTM, _geo, _chatStartPage, _currentPage].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: _history.jv_toArray(), recursive: true)
+        context.customRemove(objects: [_UTM, _geo, _chatStartPage, _currentPage].jv_flatten(), recursive: true)
     }
 }
 

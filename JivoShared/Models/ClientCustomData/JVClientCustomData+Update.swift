@@ -10,7 +10,7 @@ import Foundation
 import JMCodingKit
 
 extension JVClientCustomData {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientCustomDataGeneralChange {
             _title = c.title
             _key = c.key
@@ -27,10 +27,10 @@ public final class JVClientCustomDataGeneralChange: JVBaseModelChange {
     public let link: String?
     
     required public init( json: JsonElement) {
-        title = json["title"].string?.valuable
-        key = json["key"].string?.valuable
+        title = json["title"].string?.jv_valuable
+        key = json["key"].string?.jv_valuable
         content = json["content"].stringValue
-        link = json["link"].string?.valuable
+        link = json["link"].string?.jv_valuable
         super.init(json: json)
     }
 }

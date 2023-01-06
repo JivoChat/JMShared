@@ -11,6 +11,7 @@ import JMCodingKit
 
 extension JVArchiveHitItem {
 }
+
 open class JVArchiveHitItemGeneralChange: JVBaseModelChange {
     public let ID: String
     public let responseTimeout: Int
@@ -19,7 +20,8 @@ open class JVArchiveHitItemGeneralChange: JVBaseModelChange {
     public let agentIDs: [Int]
     public let latestChatID: Int
     public let chatChange: JVChatGeneralChange?
-        public init(ID: String,
+    
+    public init(ID: String,
          responseTimeout: Int,
          duration: Int,
          eventsNumber: Int,

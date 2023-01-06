@@ -10,15 +10,15 @@ import Foundation
 import SwiftyNSException
 
 public extension Data {
-    static func with(string: String, encoding: String.Encoding) -> Data? {
+    static func jv_with(string: String, encoding: String.Encoding) -> Data? {
         return string.data(using: encoding)
     }
     
-    func toHex() -> String {
+    func jv_toHex() -> String {
         return map({ String(format: "%02x", $0) }).joined()
     }
     
-    func unarchive<T: NSCoding>(type: T.Type) -> T? {
+    func jv_unarchive<T: NSCoding>(type: T.Type) -> T? {
         let contents = self
         return try? handle({ NSKeyedUnarchiver.unarchiveObject(with: contents) as? T })
     }

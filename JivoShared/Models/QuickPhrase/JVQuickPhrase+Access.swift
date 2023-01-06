@@ -8,18 +8,22 @@
 
 import Foundation
 
-extension JVQuickPhrase {    public var ID: String {
+extension JVQuickPhrase {
+    public var ID: String {
         return _ID
     }
-        public var lang: String {
+    
+    public var lang: String {
         return _lang
     }
-        public var tags: [String] {
+    
+    public var tags: [String] {
         return _tags
             .components(separatedBy: QuickPhraseStorageSeparator)
             .filter { !$0.isEmpty }
     }
-        public var text: String {
+    
+    public var text: String {
         return _text
     }
     

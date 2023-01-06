@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 public extension UICollectionView {
-    var canScroll: Bool {
+    var jv_canScroll: Bool {
         guard let _ = dataSource else { return false }
         return true
     }
 }
 
 public extension UITableView {
-    var canScroll: Bool {
+    var jv_canScroll: Bool {
         guard let _ = dataSource else { return false }
         return true
     }

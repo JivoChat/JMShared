@@ -10,16 +10,16 @@ import Foundation
 import JMCodingKit
 
 extension JVAgent {
-    public func performApply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentGeneralChange {
             if _ID == 0 { _ID = c.ID }
-            _email = c.email.valuable ?? _email
+            _email = c.email.jv_valuable ?? _email
             _emailVerified = c.emailVerified ?? _emailVerified
             _phone = c.phone ?? _phone
             _stateID = c.stateID
             _status = context.upsert(of: JVAgentRichStatus.self, with: c.status)
             _statusComment = c.statusComment
-            _avatarLink = c.avatarLink.valuable
+            _avatarLink = c.avatarLink.jv_valuable
             _displayName = c.displayName
             _isOwner = c.isOwner ?? _isOwner
             _isAdmin = c.isAdmin
@@ -94,8 +94,8 @@ extension JVAgent {
         }
     }
     
-    public func performDelete(inside context: IDatabaseContext) {
-        context.customRemove(objects: [_session, _worktime, _lastMessage, _chat].flatten(), recursive: true)
+    public func performDelete(inside context: JVIDatabaseContext) {
+        context.customRemove(objects: [_session, _worktime, _lastMessage, _chat].jv_flatten(), recursive: true)
     }
     
     private func adjustOrderingGroup() {
@@ -153,7 +153,7 @@ public final class JVAgentGeneralChange: JVBaseModelChange, Codable {
         siteID = agentInfo["site_id"].intValue
         email = agentInfo["email"].stringValue
         emailVerified = agentInfo["email_verified"].bool
-        phone = agentInfo["agent_phone"].string?.valuable
+        phone = agentInfo["agent_phone"].string?.jv_valuable
         stateID = agentInfo["agent_state_id"].intValue
         status = agentInfo["agent_status"].parse()
         statusComment = agentInfo["agent_status"]["comment"].stringValue
@@ -289,7 +289,6 @@ public final class JVAgentShortChange: JVBaseModelChange {
 }
 
 public final class JVAgentSdkChange: JVBaseModelChange {
-    
     public let id: Int
     public let avatarLink: String?
     public let displayName: String
@@ -331,23 +330,24 @@ public final class JVAgentLastMessageChange: JVBaseModelChange {
         return ID
     }
 
-    public var messageGlobalKey: DatabaseContextMainKey<Int>? {
+    public var messageGlobalKey: JVDatabaseContextMainKey<Int>? {
         if let messageID = messageID {
-            return DatabaseContextMainKey(key: "_ID", value: messageID)
+            return JVDatabaseContextMainKey(key: "_ID", value: messageID)
         }
         else {
             return nil
         }
     }
 
-    public var messageLocalKey: DatabaseContextMainKey<String>? {
+    public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return DatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
         }
         else {
             return nil
         }
     }
+    
     public init(ID: Int, messageID: Int?, messageLocalID: String?) {
         self.ID = ID
         self.messageID = messageID
@@ -367,7 +367,8 @@ public final class JVAgentChatChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, chatID: Int) {
+    
+    public init(ID: Int, chatID: Int) {
         self.ID = ID
         self.chatID = chatID
         super.init()
@@ -385,7 +386,8 @@ public final class JVAgentWorktimeChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(change: JVWorktimeBaseChange) {
+    
+    public init(change: JVWorktimeBaseChange) {
         ID = change.agentID
         worktimeChange = change
         super.init()
@@ -421,7 +423,8 @@ public final class JVAgentStateChange: JVBaseModelChange {
         
         super.init(json: json)
     }
-        public init(ID: Int, state: Int) {
+    
+    public init(ID: Int, state: Int) {
         self.ID = ID
         self.state = state
         super.init()
@@ -445,6 +448,7 @@ public final class JVAgentTypingChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
+    
     public init(ID: Int, chatID: Int, input: String?) {
         self.ID = ID
         self.chatID = chatID
@@ -460,7 +464,7 @@ public final class JVAgentTypingChange: JVBaseModelChange {
             input = (typing > 0 ? json["new_val"].stringValue : nil)
         }
         else {
-            input = json["new_val"].stringValue.valuable
+            input = json["new_val"].stringValue.jv_valuable
         }
 
         super.init(json: json)
@@ -478,7 +482,8 @@ public final class JVAgentDraftChange: JVBaseModelChange {
     public override var primaryValue: Int {
         return ID
     }
-        public init(ID: Int, draft: String?) {
+    
+    public init(ID: Int, draft: String?) {
         self.ID = ID
         self.draft = draft
         super.init()
@@ -504,8 +509,8 @@ open class SDKAgentAtomChange: JVBaseModelChange {
         abort()
     }
     
-    open override var integerKey: DatabaseContextMainKey<Int>? {
-        return DatabaseContextMainKey<Int>(key: "_ID", value: id)
+    open override var integerKey: JVDatabaseContextMainKey<Int>? {
+        return JVDatabaseContextMainKey<Int>(key: "_ID", value: id)
     }
     
     public init(id: Int, updates: [AgentPropertyUpdate]) {

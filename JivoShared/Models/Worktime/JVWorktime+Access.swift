@@ -54,7 +54,7 @@ public enum JVWorktimeDay: String, CaseIterable {
     case sunday
     
     public static var today: JVWorktimeDay {
-        let component = locale().calendar.component(.weekday, from: Date())
+        let component = JVActiveLocale().calendar.component(.weekday, from: Date())
         return JVWorktimeDay.fromIndex(component - 1)
     }
     
@@ -106,14 +106,14 @@ public struct JVWorktimeDayConfig: Equatable {
     }
     
     public var timeDescription: String {
-        let sinceMins = staticTimeFormatter.format(startMinute)
-        let tillMins = staticTimeFormatter.format(endMinute)
+        let sinceMins = staticTimeFormatter.jv_format(startMinute)
+        let tillMins = staticTimeFormatter.jv_format(endMinute)
         return "\(startHour):\(sinceMins) - \(endHour):\(tillMins)"
     }
     
     public var date: Date {
         let baseDate = Date()
-        return locale().calendar.date(
+        return JVActiveLocale().calendar.date(
             bySettingHour: endHour,
             minute: endMinute,
             second: 0,
@@ -193,7 +193,7 @@ extension JVWorktime {
     }
     
     public func unpackLocalConfig(day: JVWorktimeDay) -> JVWorktimeDayConfig {
-        let source: Int64 = convert(day) { day in
+        let source: Int64 = jv_convert(day) { day in
             switch day {
             case .monday: return _monConfig
             case .tuesday: return _tueConfig

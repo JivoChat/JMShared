@@ -1,5 +1,5 @@
 //
-//  LocaleProvider.swift
+//  JVLocaleProvider.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 08/11/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum LocaleLang: String {
+public enum JVLocaleLang: String {
     case en
     case ru
     case es
@@ -20,18 +20,23 @@ public enum LocaleLang: String {
     }
 }
 
-public protocol ILocaleProvider: AnyObject {
+public protocol JVILocaleProvider: AnyObject {
     var availableLocales: [Locale] { get }
     var activeLocale: Locale { get set }
-    var activeLang: LocaleLang { get }
-    var activeRegion: SignupCountry { get }
+    var activeLang: JVLocaleLang { get }
+    var activeRegion: JVSignupCountry { get }
     var isActiveRussia: Bool { get }
     var isPossibleRussia: Bool { get }
     var isPossibleGlobal: Bool { get }
-    func obtainCountries() -> [SignupCountry]
+    func obtainCountries() -> [JVSignupCountry]
 }
 
-public final class LocaleProvider: ILocaleProvider {
+public struct JVSignupCountry {
+    public let code: String
+    public let title: String
+}
+
+public final class JVLocaleProvider: JVILocaleProvider {
     private let containingBundle: Bundle
 
     private(set) public static var activeLocale: Locale!
@@ -50,7 +55,7 @@ public final class LocaleProvider: ILocaleProvider {
     
     public init(containingBundle: Bundle, activeLocale: Locale) {
         if let path = Bundle.main.path(forResource: "Base", ofType: "lproj") {
-            LocaleProvider.baseLocaleBundle = Bundle(path: path)
+            JVLocaleProvider.baseLocaleBundle = Bundle(path: path)
         }
         
         self.containingBundle = containingBundle
@@ -63,21 +68,21 @@ public final class LocaleProvider: ILocaleProvider {
     
     public var activeLocale: Locale {
         get {
-            return LocaleProvider.activeLocale
+            return JVLocaleProvider.activeLocale
         }
         set {
-            LocaleProvider.activeLocale = newValue
-            LocaleProvider.activeBundle = newValue.langID.flatMap({ LocaleProvider.obtainBundle(lang: $0) }) ?? LocaleProvider.baseLocaleBundle
-            NotificationCenter.default.post(name: .localeChanged, object: containingBundle)
+            JVLocaleProvider.activeLocale = newValue
+            JVLocaleProvider.activeBundle = newValue.jv_langID.flatMap({ JVLocaleProvider.obtainBundle(lang: $0) }) ?? JVLocaleProvider.baseLocaleBundle
+            NotificationCenter.default.post(name: .jvLocaleDidChange, object: containingBundle)
         }
     }
     
-    public var activeLang: LocaleLang {
-        guard let langID = activeLocale.langID else { return .en }
-        return LocaleLang(rawValue: langID) ?? .en
+    public var activeLang: JVLocaleLang {
+        guard let langID = activeLocale.jv_langID else { return .en }
+        return JVLocaleLang(rawValue: langID) ?? .en
     }
     
-    public var activeRegion: SignupCountry {
+    public var activeRegion: JVSignupCountry {
         let countries = obtainCountries()
         let code = Locale.current.regionCode
 
@@ -103,13 +108,13 @@ public final class LocaleProvider: ILocaleProvider {
 
     public var isPossibleGlobal: Bool {
         let parts = Locale.current.identifier.components(separatedBy: .punctuationCharacters).map { $0.lowercased() }
-        return parts.contains("ua") || not(isPossibleRussia)
+        return parts.contains("ua") || !(isPossibleRussia)
     }
 
-    public func obtainCountries() -> [SignupCountry] {
-        let originRegions: [SignupCountry] = Locale.isoRegionCodes.compactMap { regionCode in
+    public func obtainCountries() -> [JVSignupCountry] {
+        let originRegions: [JVSignupCountry] = Locale.isoRegionCodes.compactMap { regionCode in
             let region = Locale.current.localizedString(forRegionCode: regionCode) ?? regionCode
-            return SignupCountry(code: regionCode, title: region)
+            return JVSignupCountry(code: regionCode, title: region)
         }
 
         return originRegions.sorted { first, second in

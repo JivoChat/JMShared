@@ -11,12 +11,12 @@ import RealmSwift
 import JMCodingKit
 
 public final class JVArchiveHitChatItem: JVArchiveHitItem {
-    public override func apply(inside context: IDatabaseContext, with change: JVBaseModelChange) {
+    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)
     }
     
-    public override func recursiveDelete(context: IDatabaseContext) {
+    public override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)
         super.recursiveDelete(context: context)
     }
