@@ -94,7 +94,8 @@ extension JVAgentSession {
             billingUpdateEnabled: _globalBillingUpdateEnabled,
             standaloneTasks: _globalStandaloneTasksEnabled,
             feedbackSdkEnabled: _globalFeedbackSdkEnabled,
-            mediaServiceEnabled: _globalMediaServiceEnabled
+            mediaServiceEnabled: _globalMediaServiceEnabled,
+            voiceMessagesEnabled: _globalVoiceMessagesEnabled
         )
     }
     

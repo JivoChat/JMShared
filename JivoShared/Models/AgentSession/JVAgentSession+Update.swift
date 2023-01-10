@@ -28,7 +28,8 @@ public struct JVAgentTechConfig: Codable {
     public var standaloneTasks: Bool = true
     public var feedbackSdkEnabled: Bool = true
     public var mediaServiceEnabled: Bool = true
-
+    public var voiceMessagesEnabled: Bool = false
+    
     public init() {
     }
     
@@ -49,7 +50,8 @@ public struct JVAgentTechConfig: Codable {
         billingUpdateEnabled: Bool,
         standaloneTasks: Bool,
         feedbackSdkEnabled: Bool,
-        mediaServiceEnabled: Bool
+        mediaServiceEnabled: Bool,
+        voiceMessagesEnabled: Bool
     ) {
         self.priceListId = priceListId
         self.guestInsightEnabled = guestInsightEnabled
@@ -68,6 +70,7 @@ public struct JVAgentTechConfig: Codable {
         self.standaloneTasks = standaloneTasks
         self.feedbackSdkEnabled = feedbackSdkEnabled
         self.mediaServiceEnabled = mediaServiceEnabled
+        self.voiceMessagesEnabled = voiceMessagesEnabled
     }
     
     public var canReceiveCalls: Bool? {
@@ -133,6 +136,7 @@ extension JVAgentSession {
                 _globalStandaloneTasksEnabled = features.standaloneTasks
                 _globalFeedbackSdkEnabled = features.feedbackSdkEnabled
                 _globalMediaServiceEnabled = features.mediaServiceEnabled
+                
             }
         }
         else if let c = change as? JVAgentSessionMobileCallsChange {
@@ -246,7 +250,8 @@ public final class JVAgentSessionContextChange: JVBaseModelChange {
                     billingUpdateEnabled: ((misc["enable_new_billing"].int ?? 0) > 0 && ((context["is_operator_model_enabled"].bool ?? true) == true)),
                     standaloneTasks: ((misc["enable_reminder_without_open_chat"].int ?? 1) > 0),
                     feedbackSdkEnabled: ((misc["enable_feedback_sdk"].int ?? 1) > 0 && (misc["disable_feedback_sdk_ios"].int ?? 0) < 1),
-                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 1) > 0 && (misc["disable_media_service_uploading"].int ?? 0) < 1)
+                    mediaServiceEnabled: ((misc["enable_media_service_uploading"].int ?? 1) > 0 && (misc["disable_media_service_uploading"].int ?? 0) < 1),
+                    voiceMessagesEnabled: (misc["enable_voice_messages"].int ?? 0) > 0
                 )
                 
                 currency = misc["currency"].string
