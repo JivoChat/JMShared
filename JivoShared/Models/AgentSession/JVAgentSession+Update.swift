@@ -136,7 +136,7 @@ extension JVAgentSession {
                 _globalStandaloneTasksEnabled = features.standaloneTasks
                 _globalFeedbackSdkEnabled = features.feedbackSdkEnabled
                 _globalMediaServiceEnabled = features.mediaServiceEnabled
-                
+                _globalVoiceMessagesEnabled = features.voiceMessagesEnabled
             }
         }
         else if let c = change as? JVAgentSessionMobileCallsChange {

@@ -35,7 +35,7 @@ open class JVAgentSession: JVBaseModel {
     @objc dynamic public var _globalStandaloneTasksEnabled: Bool = true
     @objc dynamic public var _globalFeedbackSdkEnabled: Bool = true
     @objc dynamic public var _globalMediaServiceEnabled: Bool = true
-    @objc dynamic public var _globalVoiceMessagesEnabled: Bool = false
+    @objc dynamic public var _globalVoiceMessagesEnabled: Bool = true
     @objc dynamic public var _isActive: Bool = false
     @objc dynamic public var _voxLogin: String = ""
     @objc dynamic public var _voxPassword: String = ""
