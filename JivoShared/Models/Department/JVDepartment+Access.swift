@@ -9,7 +9,7 @@
 import Foundation
 import JMRepicKit
 
-extension JVDepartment: JVDisplayable {
+extension JVDepartment {
     public var ID: Int {
         return _ID
     }
@@ -63,14 +63,5 @@ extension JVDepartment: JVDisplayable {
     
     public var senderType: JVSenderType {
         return .department
-    }
-    
-    public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
-        return JMRepicItem(
-            backgroundColor: JVDesign.shared.color(usage: .contentBackground),
-            source: .caption(icon, JVDesign.shared.baseEmojiFont(scale: nil)),
-            scale: 1.0,
-            clipping: .external
-        )
     }
 }
