@@ -49,7 +49,7 @@ public enum JVChatAttendeeAssignment {
     case notPresented
 }
 
-extension JVChat: JVPresentable {
+extension JVChat {
     public var ID: Int {
         return _ID
     }
@@ -278,17 +278,6 @@ extension JVChat: JVPresentable {
     
     public var senderType: JVSenderType {
         return .teamchat
-    }
-    
-    public func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem? {
-        guard isGroup else { return nil }
-        guard let code = _icon?.jv_valuable else { return nil }
-        
-        return JMRepicItem(
-            backgroundColor: JVDesign.shared.color(usage: .contentBackground),
-            source: JMRepicItemSource.caption(code, JVDesign.shared.baseEmojiFont(scale: scale)),
-            scale: scale ?? 0.55,
-            clipping: .external)
     }
     
     public func transferredFrom() -> (agent: JVAgent, comment: String?)? {

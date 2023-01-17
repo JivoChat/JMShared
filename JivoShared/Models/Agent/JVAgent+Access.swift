@@ -101,14 +101,6 @@ extension JVAgent: JVDisplayable {
         return _session?.isWorking ?? _isWorking
     }
     
-    public var stateColor: UIColor? {
-        switch state {
-        case .none: return nil
-        case .active: return JVDesign.shared.color(usage: .onlineTint)
-        case .away: return JVDesign.shared.color(usage: .awayTint)
-        }
-    }
-    
     public var channel: JVChannel? {
         return nil
     }
