@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'JMShared'
-  spec.version      = '6.1.2'
+  spec.version      = '6.1.3'
   spec.license      = { :type => 'MIT', :file => "LICENSE" }
   spec.homepage     = 'https://github.com/JivoChat'
   spec.authors      = { 'Anton Karpushko' => 'karpushko@jivosite.com' }
@@ -9,9 +9,9 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
 
   spec.ios.deployment_target  = '11.0'
-  spec.swift_version = "5.0"
+  spec.swift_version = "5.6"
 
-  spec.source       = { :git => 'https://github.com/JivoChat/JMShared.git', :tag => "#{spec.version}" }
+  spec.source       = { :git => 'https://github.com/JivoChat/JMShared.git', :tag => "v#{spec.version}" }
   # spec.public_header_files = "JivoShared.framework/Headers/*.h"
   spec.source_files = "JivoShared/**/*.*"
   spec.resources = ["Assets.xcassets", "fontello_entypo.ttf"]
