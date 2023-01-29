@@ -120,6 +120,13 @@ public struct JVMessageBodyStory {
     public let title: String
 }
 
+public enum JVMessageBodyContactFormStatus: String {
+    case inactive = "inactive"
+    case editable = "editable"
+    case syncing = "syncing"
+    case snapshot = "snapshot"
+}
+
 public enum JVMessageBodyTaskStatus: String {
     case created = "created"
     case updated = "updated"
