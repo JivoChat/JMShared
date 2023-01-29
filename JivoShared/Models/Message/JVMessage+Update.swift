@@ -315,6 +315,9 @@ extension JVMessage {
                     )
                 )
                 
+            case .contactForm(let status):
+                _text = status.rawValue
+                
             case .proactive, .offline, .transfer, .transferDepartment, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
             }
@@ -497,7 +500,12 @@ extension JVMessage {
                         }
                     }
                     
-                case let .type(newValue):
+                case let .typeInitial(newValue):
+                    if _type == String() {
+                        _type = newValue.rawValue
+                    }
+                
+                case let .typeOverwrite(newValue):
                     if _type != newValue.rawValue {
                         _type = newValue.rawValue
                     }
@@ -1382,7 +1390,8 @@ public enum JVMessagePropertyUpdate {
     case chatId(Int)
     case media(JVMessageMediaGeneralChange)
     case sender(Sender)
-    case type(JVMessageType)
+    case typeInitial(JVMessageType)
+    case typeOverwrite(JVMessageType)
     case isHidden(Bool)
     case isIncoming(Bool)
     case isSendingFailed(Bool)
