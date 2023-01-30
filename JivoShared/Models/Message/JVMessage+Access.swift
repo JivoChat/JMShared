@@ -28,7 +28,8 @@ public enum JVMessageContent {
     case conference(conference: JVMessageBodyConference)
     case story(story: JVMessageBodyStory)
     case line
-    
+    case contactForm(status: JVMessageBodyContactFormStatus)
+
     public var isEditable: Bool {
         switch self {
         case .proactive: return false
@@ -49,6 +50,7 @@ public enum JVMessageContent {
         case .story: return false
         case .bot: return false
         case .order: return false
+        case .contactForm: return false
         }
     }
     
@@ -72,6 +74,7 @@ public enum JVMessageContent {
         case .story: return false
         case .bot: return false
         case .order: return false
+        case .contactForm: return false
         }
     }
 }
@@ -135,6 +138,7 @@ public enum JVMessageDelivery {
 
 public enum JVMessageType: String {
     case message = "message"
+    case contactForm = "contact_form"
 }
 
 public extension JVMessage {
@@ -370,6 +374,10 @@ public extension JVMessage {
                     button: localizer["Chat.Order.Call.Button"])
             }
 
+        case "contact_form":
+            let status = JVMessageBodyContactFormStatus(rawValue: rawText) ?? .inactive
+            return .contactForm(status: status)
+            
         default:
             break
 //            assertionFailure()
@@ -508,7 +516,8 @@ public extension JVMessage {
              .file,
              .line,
              .bot,
-             .order:
+             .order,
+             .contactForm:
             return nil
             
         case .story:
