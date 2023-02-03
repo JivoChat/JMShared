@@ -15,6 +15,7 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _ID: Int = 0
     @objc open dynamic var _localID: String = ""
     @objc open dynamic var _date: Date?
+    @objc open dynamic var _dateFreezed: Bool = false
     @objc open dynamic var _orderingIndex: Int = 0
     @objc open dynamic var _clientID: Int = 0
     @objc open dynamic var _client: JVClient?
@@ -33,6 +34,7 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _interactiveID: String?
     @objc open dynamic var _hasRead: Bool = false
     @objc open dynamic var _text: String = ""
+    @objc open dynamic var _details: String = ""
     @objc open dynamic var _body: JVMessageBody?
     @objc open dynamic var _media: JVMessageMedia?
     @objc open dynamic var _iconLink: String?

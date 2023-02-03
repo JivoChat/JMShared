@@ -122,6 +122,7 @@ public enum JVMessageDirection {
 }
 
 public enum JVMessageStatus: String {
+    case queued = "queued"
     case sent = "sent"
     case delivered = "delivered"
     case seen = "seen"
@@ -138,6 +139,7 @@ public enum JVMessageDelivery {
 
 public enum JVMessageType: String {
     case message = "message"
+    case system = "system"
     case contactForm = "contact_form"
 }
 
@@ -438,6 +440,10 @@ public extension JVMessage {
         return _text
     }
     
+    var rawDetails: String {
+        return _details
+    }
+    
     var text: String {
         guard !(isDeleted) else {
             return localizer["Message.Deleted"]
@@ -571,6 +577,7 @@ public extension JVMessage {
         case "sent": return JVMessageStatus.sent
         case "delivered": return JVMessageStatus.delivered
         case "seen": return JVMessageStatus.seen
+        case "queued": return JVMessageStatus.queued
         default: return nil
         }
     }
@@ -578,6 +585,9 @@ public extension JVMessage {
     var delivery: JVMessageDelivery {
         if direction != .outgoing {
             return .none
+        }
+        else if status == .queued {
+            return .status(.queued)
         }
         else if _ID == 0, _localID.jv_valuable != nil {
             return _sendingFailed ? .failed : .sending
