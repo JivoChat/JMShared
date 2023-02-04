@@ -116,7 +116,7 @@ extension JVMessage {
         
         if let c = change as? JVMessageGeneralChange {
             if _ID == 0 { _ID = c.ID }
-            _date = Date(timeIntervalSince1970: TimeInterval(c.creationTS))
+            _date = _dateFreezed ? _date : Date(timeIntervalSince1970: TimeInterval(c.creationTS))
             _clientID = c.clientID
             _client = context.client(for: _clientID, needsDefault: false)
             _chatID = c.chatID
@@ -155,10 +155,10 @@ extension JVMessage {
             _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
 
             if let date = c.time.jv_parseDateUsingFullFormat() {
-                _date = date
+                _date = _dateFreezed ? _date : date
             }
             else {
-                _date = Date()
+                _date = _dateFreezed ? _date : Date()
             }
             
             if let senderType = c.senderType.jv_valuable {
@@ -184,7 +184,7 @@ extension JVMessage {
             
             _clientID = c.clientID ?? 0
             _client = context.client(for: _clientID, needsDefault: false)
-            _date = Date(timeIntervalSince1970: TimeInterval(c.creationTS))
+            _date = _dateFreezed ? _date : Date(timeIntervalSince1970: TimeInterval(c.creationTS))
             _chatID = c.chatID
             _text = c.text.jv_trimmed()
             _type = c.type
@@ -204,7 +204,7 @@ extension JVMessage {
         }
         else if let c = change as? JVMessageFromClientChange {
             if _ID == 0 { _ID = c.ID }
-            _date = Date()
+            _date = _dateFreezed ? _date : Date()
             _clientID = c.clientID
             _client = context.client(for: _clientID, needsDefault: false)
             _chatID = c.chatID
@@ -223,7 +223,7 @@ extension JVMessage {
             if _ID == 0 { _ID = c.ID }
             _clientID = context.clientID(for: c.chatID) ?? 0
             _client = context.client(for: _clientID, needsDefault: false)
-            _date = c.date
+            _date = _dateFreezed ? _date : c.date
             _chatID = c.chatID
             _type = c.type
             _isMarkdown = c.isMarkdown
@@ -243,7 +243,7 @@ extension JVMessage {
         }
         else if let c = change as? JVMessageStateChange {
             if _ID == 0 { _ID = c.globalID }
-            _date = c.date ?? _date
+            _date = _dateFreezed ? _date : (c.date ?? _date)
             _sendingDate = 0
             _sendingFailed = false
             _adjustStatus(status: c.status ?? _status)
@@ -252,7 +252,7 @@ extension JVMessage {
             _clientID = c.clientID ?? 0
             _client = context.client(for: _clientID, needsDefault: false)
             _chatID = c.chatID
-            _date = Date(timeIntervalSince1970: c.creationTS)
+            _date = _dateFreezed ? _date : Date(timeIntervalSince1970: c.creationTS)
             _orderingIndex = 1
             _text = c.text.jv_trimmed()
             _type = "system"
@@ -264,7 +264,7 @@ extension JVMessage {
         }
         else if let c = change as? JVMessageOutgoingChange {
             _localID = c.localID
-            _date = c.date
+            _date = _dateFreezed ? _date : c.date
             _clientID = c.clientID ?? 0
             _client = context.client(for: _clientID, needsDefault: false)
             _chatID = c.chatID
@@ -392,7 +392,7 @@ extension JVMessage {
             if _ID == 0 { _ID = c.ID }
             _clientID = context.clientID(for: c.chat.ID) ?? 0
             _client = context.client(for: _clientID, needsDefault: false)
-            _date = c.creationDate
+            _date = _dateFreezed ? _date : c.creationDate
             _chatID = c.chat.ID
             _type = c.type
             _isMarkdown = c.isMarkdown
@@ -412,7 +412,7 @@ extension JVMessage {
         else if let c = change as? JVMessageSdkClientChange {
             if ID == 0 { _ID = c.id }
             if localID == "" { _localID = c.localId }
-            _date = c.date
+            _date = _dateFreezed ? _date : c.date
             _clientID = c.clientId
             _client = context.client(for: _clientID, needsDefault: false)
             _chatID = c.chatId
@@ -430,7 +430,7 @@ extension JVMessage {
             if _ID == 0 { _ID = c.id }
             _status = c.status?.rawValue ?? ""
             if let date = c.date {
-                _date = date
+                _date = _dateFreezed ? _date : date
             }
         }
         else if let c = change as? JVSdkMessageAtomChange {
@@ -454,11 +454,22 @@ extension JVMessage {
                     }
                     _adjustBotMeta(text: newValue)
 
+                case let .details(newValue):
+                    if _details != newValue {
+                        _details = newValue
+                    }
+
                 case let .date(newValue):
+                    if _date != newValue {
+                        _date = _dateFreezed ? _date : newValue
+                    }
+                    
+                case let .dateFreeze(newValue):
+                    _dateFreezed = true
                     if _date != newValue {
                         _date = newValue
                     }
-                    
+
                 case let .status(newValue):
                     if _status != newValue.rawValue {
                         _status = newValue.rawValue
@@ -524,12 +535,17 @@ extension JVMessage {
                     if _sendingFailed != newValue {
                         _sendingFailed = newValue
                     }
+                    
+                case let .orderingIndex(newValue):
+                    if _orderingIndex != newValue {
+                        _orderingIndex = newValue
+                    }
                 }
             }
         }
         else if let c = change as? JVSDKMessageOfflineChange {
             _localID = c.localId
-            _date = c.date
+            _date = _dateFreezed ? _date : c.date
             _type = c.type
             
             if case let .offline(text) = c.content {
@@ -1385,7 +1401,9 @@ public enum JVMessagePropertyUpdate {
     case id(Int)
     case localId(String)
     case text(String)
+    case details(String)
     case date(Date)
+    case dateFreeze(Date)
     case status(JVMessageStatus)
     case chatId(Int)
     case media(JVMessageMediaGeneralChange)
@@ -1395,6 +1413,7 @@ public enum JVMessagePropertyUpdate {
     case isHidden(Bool)
     case isIncoming(Bool)
     case isSendingFailed(Bool)
+    case orderingIndex(Int)
 }
 
 public enum JVSdkMessageAtomChangeInitError: LocalizedError {
