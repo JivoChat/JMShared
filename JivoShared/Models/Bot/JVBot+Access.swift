@@ -1,5 +1,5 @@
 //
-//  JVAgent+Access.swift
+//  _JVAgent+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMRepicKit
 
-extension JVBot: JVDisplayable {
+extension _JVBot: _JVDisplayable {
     public var isMe: Bool {
         return false
     }
@@ -26,7 +26,7 @@ extension JVBot: JVDisplayable {
         return _id
     }
     
-    public var channel: JVChannel? {
+    public var channel: _JVChannel? {
         return nil
     }
     

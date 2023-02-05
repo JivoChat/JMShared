@@ -1,5 +1,5 @@
 //
-//  JVAgentRichStatus.swift
+//  _JVAgentRichStatus.swift
 //  JMShared
 //
 //  Created by Yulia on 17.11.2022.
@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVAgentRichStatus: JVBaseModel {
+public final class _JVAgentRichStatus: JVBaseModel {
     @objc dynamic public var _statusID: Int = 0
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _emoji: String = ""

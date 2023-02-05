@@ -1,5 +1,5 @@
 //
-//  JVMessageTransfer+Access.swift
+//  _JVMessageTransfer+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVMessageTransfer {
+extension _JVMessageTransfer {
     public var agentID: Int {
         return _agentID
     }

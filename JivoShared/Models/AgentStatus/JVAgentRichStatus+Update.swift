@@ -1,5 +1,5 @@
 //
-//  JVAgentRichStatus+Update.swift
+//  _JVAgentRichStatus+Update.swift
 //  JMShared
 //
 //  Created by Yulia on 17.11.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVAgentRichStatus {
+extension _JVAgentRichStatus {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentRichStatusGeneralChange {
             if _statusID == 0 { _statusID = c.statusID }

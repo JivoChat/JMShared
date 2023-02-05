@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHit+Update.swift
+//  _JVArchiveHit+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,13 +9,13 @@
 import Foundation
 import JMCodingKit
 
-extension JVArchiveHit {
+extension _JVArchiveHit {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveHitGeneralChange {
             if _ID == "" { _ID = c.ID }
             _score = c.score
-            _chatItem = context.upsert(of: JVArchiveHitChatItem.self, with: c.chatItem)
-            _callItem = context.upsert(of: JVArchiveHitCallItem.self, with: c.callItem)
+            _chatItem = context.upsert(of: _JVArchiveHitChatItem.self, with: c.chatItem)
+            _callItem = context.upsert(of: _JVArchiveHitCallItem.self, with: c.callItem)
             _latestActivityTime = (_chatItem ?? _callItem)?.chat?.lastMessage?.date
         }
     }

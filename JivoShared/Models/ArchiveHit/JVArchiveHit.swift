@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHit.swift
+//  _JVArchiveHit.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVArchiveHit: JVBaseModel {
+public final class _JVArchiveHit: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _score: Float = 0
-    @objc dynamic public var _chatItem: JVArchiveHitChatItem?
-    @objc dynamic public var _callItem: JVArchiveHitCallItem?
+    @objc dynamic public var _chatItem: _JVArchiveHitChatItem?
+    @objc dynamic public var _callItem: _JVArchiveHitCallItem?
     @objc dynamic public var _latestActivityTime: Date?
 
     public override class func primaryKey() -> String? {

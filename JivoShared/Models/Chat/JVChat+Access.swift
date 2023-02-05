@@ -1,5 +1,5 @@
 //
-//  JVChat+Access.swift
+//  _JVChat+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -16,12 +16,12 @@ public enum JVChatReactionPerforming {
     case close
 }
 
-public enum JVChatInvitationState {
+public enum _JVChatInvitationState {
     case none
     case activeBySystem
-    case activeByAgent(JVAgent)
+    case activeByAgent(_JVAgent)
     case cancelBySystem
-    case cancelByAgent(JVAgent)
+    case cancelByAgent(_JVAgent)
     
     public var isNone: Bool {
         if case .none = self {
@@ -33,14 +33,14 @@ public enum JVChatInvitationState {
     }
 }
 
-public enum JVChatTransferState {
+public enum _JVChatTransferState {
     case none
-    case requested(agent: JVAgent, assisting: Bool, comment: String?)
-    case completed(agent: JVAgent, assisting: Bool, date: Date, comment: String?)
-    case rejected(agent: JVAgent, assisting: Bool, reason: String)
-    case requestedDepartment(department: JVDepartment, comment: String?)
-    case completedDepartment(department: JVDepartment, date: Date, comment: String?)
-    case rejectedDepartment(department: JVDepartment, reason: String)
+    case requested(agent: _JVAgent, assisting: Bool, comment: String?)
+    case completed(agent: _JVAgent, assisting: Bool, date: Date, comment: String?)
+    case rejected(agent: _JVAgent, assisting: Bool, reason: String)
+    case requestedDepartment(department: _JVDepartment, comment: String?)
+    case completedDepartment(department: _JVDepartment, date: Date, comment: String?)
+    case rejectedDepartment(department: _JVDepartment, reason: String)
 }
 
 public enum JVChatAttendeeAssignment {
@@ -49,7 +49,7 @@ public enum JVChatAttendeeAssignment {
     case notPresented
 }
 
-extension JVChat {
+extension _JVChat {
     public var ID: Int {
         return _ID
     }
@@ -62,7 +62,7 @@ extension JVChat {
         return _isMain
     }
     
-    public var client: JVClient? {
+    public var client: _JVClient? {
         return jv_validate(_client)
     }
     
@@ -78,7 +78,7 @@ extension JVChat {
         return _about?.jv_valuable
     }
     
-    public var attendees: [JVChatAttendee] {
+    public var attendees: [_JVChatAttendee] {
         if _attendees.isInvalidated {
             return []
         }
@@ -87,11 +87,11 @@ extension JVChat {
         }
     }
     
-    public var attendee: JVChatAttendee? {
+    public var attendee: _JVChatAttendee? {
         return _attendee
     }
     
-    public var allAttendees: [JVChatAttendee] {
+    public var allAttendees: [_JVChatAttendee] {
         return attendees.filter {
             if case .attendee = $0.relation {
                 return true
@@ -102,7 +102,7 @@ extension JVChat {
         }
     }
     
-    public var invitationState: JVChatInvitationState {
+    public var invitationState: _JVChatInvitationState {
         if _requestCancelledBySystem {
             return .cancelBySystem
         }
@@ -135,15 +135,15 @@ extension JVChat {
         }
     }
     
-    public var agents: [JVAgent] {
+    public var agents: [_JVAgent] {
         return attendees.compactMap { $0.agent }
     }
     
-    public var lastMessage: JVMessage? {
+    public var lastMessage: _JVMessage? {
         return _lastMessage
     }
     
-    public var previewMessage: JVMessage? {
+    public var previewMessage: _JVMessage? {
         return _previewMessage ?? _lastMessage
     }
 
@@ -196,7 +196,7 @@ extension JVChat {
         }
     }
     
-    public var transferState: JVChatTransferState {
+    public var transferState: _JVChatTransferState {
         if let agent = _transferTo {
             if let date = _transferDate {
                 return .completed(
@@ -280,21 +280,21 @@ extension JVChat {
         return .teamchat
     }
     
-    public func transferredFrom() -> (agent: JVAgent, comment: String?)? {
+    public func transferredFrom() -> (agent: _JVAgent, comment: String?)? {
         guard let attendee = attendee else { return nil }
         guard case let .attendee(agent, toAssist, comment) = attendee.relation else { return nil }
         guard let a = agent, !toAssist else { return nil }
         return (a, comment)
     }
 
-    public func transferredTo() -> (agent: JVAgent, comment: String?)? {
+    public func transferredTo() -> (agent: _JVAgent, comment: String?)? {
         guard let agent = _transferTo, !agent.isMe else { return nil }
         guard !_transferAssisting else { return nil }
         guard let _ = _transferDate else { return nil }
         return (agent, _transferComment)
     }
 
-    public func transferredToDepartment() -> (department: JVDepartment, agent: JVAgent, comment: String?)? {
+    public func transferredToDepartment() -> (department: _JVDepartment, agent: _JVAgent, comment: String?)? {
         guard let department = _transferToDepartment else { return nil }
         guard let agent = _transferTo, !agent.isMe else { return nil }
         guard !_transferAssisting else { return nil }
@@ -302,14 +302,14 @@ extension JVChat {
         return (department, agent, _transferComment)
     }
 
-    public func assistingFrom() -> (agent: JVAgent, comment: String?)? {
+    public func assistingFrom() -> (agent: _JVAgent, comment: String?)? {
         guard let attendee = attendee else { return nil }
         guard case let .attendee(agent, toAssist, comment) = attendee.relation else { return nil }
         guard let a = agent, toAssist else { return nil }
         return (a, comment)
     }
 
-    public func assistingTo() -> (agent: JVAgent, comment: String?)? {
+    public func assistingTo() -> (agent: _JVAgent, comment: String?)? {
         guard let agent = _transferTo, !agent.isMe else { return nil }
         guard _transferAssisting else { return nil }
         guard let _ = _transferDate else { return nil }
@@ -332,8 +332,8 @@ extension JVChat {
         }
     }
     
-    public func activeAttendees(withMe: Bool) -> [JVChatAttendee] {
-        let selfAttendee: [JVChatAttendee]
+    public func activeAttendees(withMe: Bool) -> [_JVChatAttendee] {
+        let selfAttendee: [_JVChatAttendee]
         if withMe, let attendee = attendee, case .attendee = attendee.relation {
             selfAttendee = [attendee]
         }
@@ -350,8 +350,8 @@ extension JVChat {
         return selfAttendee + otherAttendees
     }
     
-    public func teamAttendees(withMe: Bool) -> [JVChatAttendee] {
-        let selfAttendee: [JVChatAttendee]
+    public func teamAttendees(withMe: Bool) -> [_JVChatAttendee] {
+        let selfAttendee: [_JVChatAttendee]
         if withMe, let attendee = attendee, case .team = attendee.relation {
             selfAttendee = [attendee]
         }
@@ -426,11 +426,11 @@ extension JVChat {
         }
     }
     
-    public var owningAgent: JVAgent? {
+    public var owningAgent: _JVAgent? {
         return _owningAgent
     }
     
-    public func hasAttendee(agent: JVAgent) -> Bool {
+    public func hasAttendee(agent: _JVAgent) -> Bool {
         for attendee in attendees {
             guard agent.ID == attendee.agent?.ID else { continue }
             return true
@@ -439,7 +439,7 @@ extension JVChat {
         return false
     }
     
-    public func hasManagingAccess(agent: JVAgent) -> Bool {
+    public func hasManagingAccess(agent: _JVAgent) -> Bool {
         guard isGroup && !(isMain) else { return false }
         if _owningAgent?.ID == agent.ID { return true }
         if agent.isAdmin { return true }

@@ -1,5 +1,5 @@
 //  
-//  JVCall+Update.swift
+//  _JVCall+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVCall {
+extension _JVCall {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVCallGeneralChange {
             if _ID == 0 { _ID = c.ID }

@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHitChatItem+Update.swift
+//  _JVArchiveHitChatItem+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVArchiveHitChatItem {
+extension _JVArchiveHitChatItem {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveHitChatItemGeneralChange {
             _ID = c.ID
@@ -17,9 +17,9 @@ extension JVArchiveHitChatItem {
             _responseTimeout = c.responseTimeout
             _duration = c.duration
             _eventsNumber = c.eventsNumber
-            _agents.jv_set(c.agentIDs.compactMap { context.object(JVAgent.self, primaryKey: $0) })
+            _agents.jv_set(c.agentIDs.compactMap { context.object(_JVAgent.self, primaryKey: $0) })
             _latestChatID = c.latestChatID
-            _chat = context.upsert(of: JVChat.self, with: c.chatChange?.copy(knownArchived: true))
+            _chat = context.upsert(of: _JVChat.self, with: c.chatChange?.copy(knownArchived: true))
         }
     }
     

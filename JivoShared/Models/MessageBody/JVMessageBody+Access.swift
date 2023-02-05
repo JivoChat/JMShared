@@ -1,5 +1,5 @@
 //
-//  JVMessageBody+Access.swift
+//  _JVMessageBody+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,25 +8,25 @@
 
 import Foundation
 
-public struct JVMessageBodyEmail {
+public struct _JVMessageBodyEmail {
     public let from: String
     public let to: String
     public let subject: String
 }
 
-public struct JVMessageBodyTransfer {
-    public let agent: JVAgent?
-    public let department: JVDepartment?
+public struct _JVMessageBodyTransfer {
+    public let agent: _JVAgent?
+    public let department: _JVDepartment?
 }
 
-public struct JVMessageBodyInvite {
-    public let by: JVAgent?
+public struct _JVMessageBodyInvite {
+    public let by: _JVAgent?
     public let comment: String?
 }
 
-public struct JVMessageBodyCall {
+public struct _JVMessageBodyCall {
     public let callID: String
-    public let agent: JVAgent?
+    public let agent: _JVAgent?
     public let type: JVMessageBodyCallType
     public let phone: String?
     public let event: JVMessageBodyCallEvent
@@ -48,7 +48,7 @@ public struct JVMessageBodyCall {
     }
 }
 
-public struct JVMessageBodyOrder {
+public struct _JVMessageBodyOrder {
     public let orderID: String
     public let email: String?
     public let phone: String?
@@ -96,9 +96,9 @@ public enum JVMessageBodyCallReason: String {
     case unknown
 }
 
-public struct JVMessageBodyTask {
+public struct _JVMessageBodyTask {
     public let taskID: Int
-    public let agent: JVAgent?
+    public let agent: _JVAgent?
     public let text: String
     public let createdAt: Date?
     public let updatedAt: Date?
@@ -110,6 +110,11 @@ public struct JVMessageBodyTask {
 public struct JVMessageBodyConference {
     public let url: URL?
     public let title: String
+    
+    public init(url: URL?, title: String) {
+        self.url = url
+        self.title = title
+    }
 }
 
 public struct JVMessageBodyStory {
@@ -118,6 +123,21 @@ public struct JVMessageBodyStory {
     public let thumb: URL?
     public let file: URL?
     public let title: String
+    
+    public init(text: String, fileName: String, thumb: URL?, file: URL?, title: String) {
+        self.text = text
+        self.fileName = fileName
+        self.thumb = thumb
+        self.file = file
+        self.title = title
+    }
+}
+
+public enum JVMessageBodyContactFormStatus: String {
+    case inactive
+    case editable
+    case syncing
+    case snapshot
 }
 
 public enum JVMessageBodyTaskStatus: String {
@@ -140,43 +160,43 @@ public enum JVMessageBodyTaskStatus: String {
     }
 }
 
-extension JVMessageBody {
-    public var email: JVMessageBodyEmail? {
+extension _JVMessageBody {
+    public var email: _JVMessageBodyEmail? {
         guard let from = _from?.jv_valuable else { return nil }
         guard let to = _to?.jv_valuable else { return nil }
 
-        return JVMessageBodyEmail(
+        return _JVMessageBodyEmail(
             from: from,
             to: to,
             subject: _subject ?? String()
         )
     }
     
-    public var transfer: JVMessageBodyTransfer? {
+    public var transfer: _JVMessageBodyTransfer? {
         guard _agent != nil || _department != nil
         else {
             return nil
         }
         
-        return JVMessageBodyTransfer(
+        return _JVMessageBodyTransfer(
             agent: _agent,
             department: _department
         )
     }
     
-    public var invite: JVMessageBodyInvite? {
-        return JVMessageBodyInvite(
+    public var invite: _JVMessageBodyInvite? {
+        return _JVMessageBodyInvite(
             by: _agent,
             comment: _text
         )
     }
     
-    public var call: JVMessageBodyCall? {
+    public var call: _JVMessageBodyCall? {
         guard let event = _event?.jv_valuable else { return nil }
         guard let callID = _callID?.jv_valuable else { return nil }
         guard let type = _type?.jv_valuable else { return nil }
         
-        return JVMessageBodyCall(
+        return _JVMessageBodyCall(
             callID: callID,
             agent: _agent,
             type: JVMessageBodyCallType(rawValue: type) ?? .unknown,
@@ -188,14 +208,14 @@ extension JVMessageBody {
         )
     }
 
-    public var task: JVMessageBodyTask? {
+    public var task: _JVMessageBodyTask? {
         guard
             _taskID > 0,
             let agent = _agent,
             let notifyAt = _notifyAt
         else { return nil }
 
-        return JVMessageBodyTask(
+        return _JVMessageBodyTask(
             taskID: _taskID,
             agent: agent,
             text: _text ?? String(),
@@ -215,14 +235,14 @@ extension JVMessageBody {
         return _buttons?.jv_valuable?.components(separatedBy: "\n") ?? []
     }
     
-    public var order: JVMessageBodyOrder? {
+    public var order: _JVMessageBodyOrder? {
         guard
             let orderID = _orderID?.jv_valuable,
             let subject = _subject?.jv_valuable,
             let text = _text?.jv_valuable
         else { return nil }
         
-        return JVMessageBodyOrder(
+        return _JVMessageBodyOrder(
             orderID: orderID,
             email: _email,
             phone: _phone,

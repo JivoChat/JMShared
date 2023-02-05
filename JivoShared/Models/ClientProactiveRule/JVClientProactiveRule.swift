@@ -1,5 +1,5 @@
 //
-//  JVClientProactiveRule.swift
+//  _JVClientProactiveRule.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 18/07/2017.
@@ -9,8 +9,8 @@
 import Foundation
 import JMCodingKit
 
-public final class JVClientProactiveRule: JVBaseModel {
-    @objc dynamic public var _agent: JVAgent?
+public final class _JVClientProactiveRule: JVBaseModel {
+    @objc dynamic public var _agent: _JVAgent?
     @objc dynamic public var _date: Date?
     @objc dynamic public var _text: String = ""
     

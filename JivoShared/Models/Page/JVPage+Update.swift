@@ -1,5 +1,5 @@
 //  
-//  JVPage+Update.swift
+//  _JVPage+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVPage {
+extension _JVPage {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVPageGeneralChange {
             _URL = c.URL

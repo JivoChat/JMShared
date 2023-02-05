@@ -1,5 +1,5 @@
 //
-//  JVBot.swift
+//  _JVBot.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 10/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-open class JVBot: JVBaseModel {
+open class _JVBot: JVBaseModel {
     @objc dynamic public var _id: Int = 0
     @objc dynamic public var _avatarLink: String?
     @objc dynamic public var _displayName: String = ""

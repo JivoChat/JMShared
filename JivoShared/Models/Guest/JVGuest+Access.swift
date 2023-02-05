@@ -1,5 +1,5 @@
 //  
-//  JVGuest+Access.swift
+//  _JVGuest+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,15 +9,15 @@
 import Foundation
 import JMRepicKit
 
-public enum JVGuestStatus {
+public enum _JVGuestStatus {
     case online
-    case proactive(agent: JVAgent)
+    case proactive(agent: _JVAgent)
     case invited
     case chatting(withMe: Bool)
     case calling(withMe: Bool)
 }
 
-extension JVGuest: JVDisplayable {
+extension _JVGuest: _JVDisplayable {
     public var senderType: JVSenderType {
         return .guest
     }
@@ -26,7 +26,7 @@ extension JVGuest: JVDisplayable {
         return _ID
     }
 
-    public var channel: JVChannel? {
+    public var channel: _JVChannel? {
         abort()
     }
     
@@ -38,13 +38,13 @@ extension JVGuest: JVDisplayable {
         return _agentID
     }
     
-    public var status: JVGuestStatus {
+    public var status: _JVGuestStatus {
         switch _status {
         case "on_site":
             return .online
             
         case "proactive_show":
-            return _proactiveAgent.flatMap(JVGuestStatus.proactive) ?? .online
+            return _proactiveAgent.flatMap(_JVGuestStatus.proactive) ?? .online
             
         case "invite_sent":
             return .invited
@@ -166,7 +166,7 @@ extension JVGuest: JVDisplayable {
         return _startDate
     }
     
-    public var UTM: JVClientSessionUTM? {
+    public var UTM: _JVClientSessionUTM? {
         return _utm
     }
     
@@ -182,15 +182,15 @@ extension JVGuest: JVDisplayable {
         return _visible
     }
 
-    public var attendees: [JVChatAttendee] {
+    public var attendees: [_JVChatAttendee] {
         return _attendees.jv_toArray()
     }
     
-    public var bots: [JVBot] {
+    public var bots: [_JVBot] {
         return _bots.jv_toArray()
     }
     
-    public func proactiveAgent() -> JVAgent? {
+    public func proactiveAgent() -> _JVAgent? {
         if case .proactive = status {
             return _proactiveAgent
         }
@@ -213,7 +213,7 @@ extension JVGuest: JVDisplayable {
     }
 }
 
-extension JVGuestStatus {
+extension _JVGuestStatus {
     public var iconName: String {
         switch self {
         case .online: return "vi_onsite"

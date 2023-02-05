@@ -1,5 +1,5 @@
 //
-//  JVMessageTransfer+Update.swift
+//  _JVMessageTransfer+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVMessageTransfer {
+extension _JVMessageTransfer {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageTransferGeneralChange {
             _agentID = c.agentID

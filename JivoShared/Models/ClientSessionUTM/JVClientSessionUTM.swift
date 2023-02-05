@@ -1,5 +1,5 @@
 //
-//  JVClientSessionUTM.swift
+//  _JVClientSessionUTM.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class JVClientSessionUTM: JVBaseModel {
+public final class _JVClientSessionUTM: JVBaseModel {
     @objc dynamic public var _source: String?
     @objc dynamic public var _keyword: String?
     @objc dynamic public var _campaign: String?

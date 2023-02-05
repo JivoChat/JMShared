@@ -1,5 +1,5 @@
 //
-//  JVMessageMedia+Access.swift
+//  _JVMessageMedia+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -30,7 +30,7 @@ public enum JVMessageMediaSizingMode {
     case cropped
 }
 
-extension JVMessageMedia {
+extension _JVMessageMedia {
     public var type: JVMessageMediaType {
         switch _type {
         case "photo": return .photo

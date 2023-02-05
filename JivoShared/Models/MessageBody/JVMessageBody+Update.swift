@@ -1,5 +1,5 @@
 //
-//  JVMessageBody+Update.swift
+//  _JVMessageBody+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVMessageBody {
+extension _JVMessageBody {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageBodyGeneralChange {
             _agent = c.agentID.flatMap { $0 > 0 ? context.agent(for: $0, provideDefault: true) : nil }

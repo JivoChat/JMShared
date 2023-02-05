@@ -1,5 +1,5 @@
 //
-//  JVMessageImage.swift
+//  _JVMessageImage.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVMessageImage: JVBaseModel {
+public final class _JVMessageImage: JVBaseModel {
     @objc dynamic public var _fileName: String = ""
     @objc dynamic public var _URL: String = ""
     @objc dynamic public var _uploadTS: Int = 0

@@ -7,7 +7,7 @@
 
 import JMCodingKit
 
-extension JVCannedPhrase {
+extension _JVCannedPhrase {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let change = change as? JVCannedPhraseGeneralChange {
             _message = change.message

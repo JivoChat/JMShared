@@ -1,5 +1,5 @@
 //
-//  JVClientProactiveRule+Update.swift
+//  _JVClientProactiveRule+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVClientProactiveRule {
+extension _JVClientProactiveRule {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientProactiveRuleGeneralChange {
             _agent = context.agent(for: c.agentID, provideDefault: true)

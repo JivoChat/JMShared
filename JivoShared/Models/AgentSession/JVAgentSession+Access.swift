@@ -1,5 +1,5 @@
 //
-//  JVAgentSession+Access.swift
+//  _JVAgentSession+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -16,7 +16,7 @@ public enum JVAgentSessionWorkingState {
     case hidden
 }
 
-extension JVAgentSession {
+extension _JVAgentSession {
     public var sessionID: String {
         return _sessionID
     }
@@ -41,11 +41,11 @@ extension JVAgentSession {
         return _isActive
     }
     
-    public var channels: [JVChannel] {
+    public var channels: [_JVChannel] {
         return Array(_channels)
     }
     
-    public var widgetChannels: [JVChannel] {
+    public var widgetChannels: [_JVChannel] {
         return channels.filter { $0.jointType == nil }
     }
     
@@ -104,7 +104,7 @@ extension JVAgentSession {
         return channel?.jointType
     }
     
-    public func testableChannels(domain: String, lang: JVLocaleLang, codeHost: String?) -> [(channel: JVChannel, url: URL)] {
+    public func testableChannels(domain: String, lang: JVLocaleLang, codeHost: String?) -> [(channel: _JVChannel, url: URL)] {
         return channels.compactMap { channel in
             guard
                 channel.isTestable,

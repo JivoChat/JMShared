@@ -1,5 +1,5 @@
 //
-//  JVMessageImage+Access.swift
+//  _JVMessageImage+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVMessageImage {
+extension _JVMessageImage {
     public var fileName: String {
         return _fileName
     }

@@ -1,5 +1,5 @@
 //
-//  JVMessageSnippet+Access.swift
+//  _JVMessageSnippet+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVMessageSnippet {
+extension _JVMessageSnippet {
     public var URL: URL? {
         if let link = _URL, let url = NSURL(string: link) {
             return url as URL

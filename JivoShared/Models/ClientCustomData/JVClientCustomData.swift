@@ -1,5 +1,5 @@
 //
-//  JVClientCustomData.swift
+//  _JVClientCustomData.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/06/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-public final class JVClientCustomData: JVBaseModel {
+public final class _JVClientCustomData: JVBaseModel {
     @objc dynamic public var _title: String?
     @objc dynamic public var _key: String?
     @objc dynamic public var _content: String = ""

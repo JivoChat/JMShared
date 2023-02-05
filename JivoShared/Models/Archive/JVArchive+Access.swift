@@ -1,5 +1,5 @@
 //  
-//  JVArchive+Access.swift
+//  _JVArchive+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVArchive {
+extension _JVArchive {
     public var latest: Double? {
         return (_latest == 0 ? nil : _latest)
     }
@@ -25,7 +25,7 @@ extension JVArchive {
         return _archiveTotal
     }
     
-    public var hits: [JVArchiveHit] {
+    public var hits: [_JVArchiveHit] {
         return Array(_hits)
     }
     
@@ -33,7 +33,7 @@ extension JVArchive {
         return _isCleanedUp
     }
     
-    public func sortedHits(by sort: JVArchiveHitSort) -> [JVArchiveHit] {
+    public func sortedHits(by sort: JVArchiveHitSort) -> [_JVArchiveHit] {
         switch sort {
         case .byTime:
             return Array(_hits.sorted(byKeyPath: "_latestActivityTime", ascending: false))

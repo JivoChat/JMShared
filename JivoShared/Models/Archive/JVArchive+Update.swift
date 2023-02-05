@@ -1,5 +1,5 @@
 //  
-//  JVArchive+Update.swift
+//  _JVArchive+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVArchive {
+extension _JVArchive {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVArchiveSliceChange {
             _total = c.total
@@ -19,13 +19,13 @@ extension JVArchive {
             
             let models = c.hits.filter(\.isValid)
             if c.fresh {
-                let hits = context.upsert(of: JVArchiveHit.self, with: models)
+                let hits = context.upsert(of: _JVArchiveHit.self, with: models)
                 _hits.jv_set(hits)
             }
             else {
                 _hits.append(objectsIn: models.compactMap { model in
-                    guard context.object(JVArchiveHit.self, primaryKey: model.ID) == nil else { return nil }
-                    return context.upsert(of: JVArchiveHit.self, with: model)
+                    guard context.object(_JVArchiveHit.self, primaryKey: model.ID) == nil else { return nil }
+                    return context.upsert(of: _JVArchiveHit.self, with: model)
                 })
             }
             
@@ -55,7 +55,7 @@ public final class JVArchiveSliceChange: JVBaseModelChange {
     public let hits: [JVArchiveHitGeneralChange]
     
     public override var stringKey: JVDatabaseContextMainKey<String>? {
-        return JVDatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
+        return JVDatabaseContextMainKey(key: "_ID", value: _JVArchive.globalID())
     }
     
     public init(fresh: Bool,
@@ -95,6 +95,6 @@ public final class JVArchiveSliceChange: JVBaseModelChange {
 
 public final class JVArchiveCleanupChange: JVBaseModelChange {
     public override var stringKey: JVDatabaseContextMainKey<String>? {
-        return JVDatabaseContextMainKey(key: "_ID", value: JVArchive.globalID())
+        return JVDatabaseContextMainKey(key: "_ID", value: _JVArchive.globalID())
     }
 }

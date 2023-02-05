@@ -1,5 +1,5 @@
 //
-//  JVAgent+Access.swift
+//  _JVAgent+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -47,7 +47,7 @@ public enum JVAgentOrderingGroup: Int {
     case online
 }
 
-extension JVAgent: JVDisplayable {
+extension _JVAgent: _JVDisplayable {
     public var senderType: JVSenderType {
         return .agent
     }
@@ -89,7 +89,7 @@ extension JVAgent: JVDisplayable {
         set { _stateID = newValue.rawValue }
     }
     
-    public var status: JVAgentRichStatus? {
+    public var status: _JVAgentRichStatus? {
         return _status
     }
     
@@ -101,7 +101,7 @@ extension JVAgent: JVDisplayable {
         return _session?.isWorking ?? _isWorking
     }
     
-    public var channel: JVChannel? {
+    public var channel: _JVChannel? {
         return nil
     }
     
@@ -210,15 +210,15 @@ extension JVAgent: JVDisplayable {
         }
     }
 
-    public var session: JVAgentSession? {
+    public var session: _JVAgentSession? {
         return _session
     }
     
-    public var lastMessage: JVMessage? {
+    public var lastMessage: _JVMessage? {
         return _lastMessage
     }
     
-    public var chat: JVChat? {
+    public var chat: _JVChat? {
         return _chat
     }
     
@@ -242,7 +242,7 @@ extension JVAgent: JVDisplayable {
         return _callingOptions.jv_hasBit(1 << JVAgentCallingOptions.onCall.rawValue)
     }
     
-    public var worktime: JVWorktime? {
+    public var worktime: _JVWorktime? {
         return _worktime
     }
     

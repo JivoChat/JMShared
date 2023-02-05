@@ -1,5 +1,5 @@
 //
-//  JVClient+Update.swift
+//  _JVClient+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVClient {
+extension _JVClient {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientGeneralChange {
             if _ID == 0 { _ID = c.ID }
@@ -17,7 +17,7 @@ extension JVClient {
             _chatID = c.chatID ?? _chatID
             _channelID = c.channelID
             _channelName = c.channelName ?? _channelName
-            _channel = context.object(JVChannel.self, primaryKey: c.channelID)
+            _channel = context.object(_JVChannel.self, primaryKey: c.channelID)
             _displayName = c.displayName ?? String()
             _avatarLink = c.avatarURL ?? _avatarLink
             _comment = c.comment
@@ -61,10 +61,10 @@ extension JVClient {
                 _integrationLink = c.socialLinks[integration]
             }
 
-            _task = context.upsert(of: JVTask.self, with: c.task) ?? _task
+            _task = context.upsert(of: _JVTask.self, with: c.task) ?? _task
             
             if let customData = c.customData {
-                _customData.jv_set(context.insert(of: JVClientCustomData.self, with: customData))
+                _customData.jv_set(context.insert(of: _JVClientCustomData.self, with: customData))
             }
         }
         else if let c = change as? JVClientGuestChange {
@@ -79,7 +79,7 @@ extension JVClient {
             
             if let channelID = c.channelID {
                 _channelID = channelID
-                _channel = context.object(JVChannel.self, primaryKey: channelID)
+                _channel = context.object(_JVChannel.self, primaryKey: channelID)
             }
 
             switch c.assignedAgentID {
@@ -88,7 +88,7 @@ extension JVClient {
             case .some(let agentID): _assignedAgent = context.agent(for: agentID, provideDefault: true)
             }
             
-            _task = context.upsert(of: JVTask.self, with: c.task) ?? _task
+            _task = context.upsert(of: _JVTask.self, with: c.task) ?? _task
         }
         else if let c = change as? JVClientOnlineChange {
             _isOnline = c.isOnline
@@ -97,7 +97,7 @@ extension JVClient {
             _hasActiveCall = c.hasCall
         }
         else if let c = change as? JVClientTaskChange {
-            _task = context.object(JVTask.self, primaryKey: c.taskID)
+            _task = context.object(_JVTask.self, primaryKey: c.taskID)
         }
         else if let c = change as? JVClientBlockingChange {
             _isBlocked = c.blocking

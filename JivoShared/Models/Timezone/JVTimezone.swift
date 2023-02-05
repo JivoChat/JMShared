@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVTimezone: JVBaseModel {
+public final class _JVTimezone: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _identifier: String?
     @objc dynamic public var _displayGMT: String?

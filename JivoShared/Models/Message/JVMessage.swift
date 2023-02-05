@@ -1,5 +1,5 @@
 //
-//  JVMessage.swift
+//  _JVMessage.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 11/05/2017.
@@ -11,20 +11,20 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-open class JVMessage: JVBaseModel {
+open class _JVMessage: JVBaseModel {
     @objc open dynamic var _ID: Int = 0
     @objc open dynamic var _localID: String = ""
     @objc open dynamic var _date: Date?
     @objc open dynamic var _orderingIndex: Int = 0
     @objc open dynamic var _clientID: Int = 0
-    @objc open dynamic var _client: JVClient?
+    @objc open dynamic var _client: _JVClient?
     @objc open dynamic var _chatID: Int = 0
     @objc open dynamic var _type: String = ""
     @objc open dynamic var _isMarkdown: Bool = false
-    @objc open dynamic var _senderClient: JVClient?
-    @objc open dynamic var _senderAgent: JVAgent?
+    @objc open dynamic var _senderClient: _JVClient?
+    @objc open dynamic var _senderAgent: _JVAgent?
     @objc open dynamic var _senderBot = Bool(false)
-    @objc open dynamic var _senderBott: JVBot?
+    @objc open dynamic var _senderBott: _JVBot?
     @objc open dynamic var _status: String = ""
     @objc open dynamic var _reactions: Data?
     @objc open dynamic var _isIncoming: Bool = true
@@ -33,12 +33,12 @@ open class JVMessage: JVBaseModel {
     @objc open dynamic var _interactiveID: String?
     @objc open dynamic var _hasRead: Bool = false
     @objc open dynamic var _text: String = ""
-    @objc open dynamic var _body: JVMessageBody?
-    @objc open dynamic var _media: JVMessageMedia?
+    @objc open dynamic var _body: _JVMessageBody?
+    @objc open dynamic var _media: _JVMessageMedia?
     @objc open dynamic var _iconLink: String?
     @objc open dynamic var _isOffline: Bool = false
     @objc open dynamic var _isHidden: Bool = false
-    @objc open dynamic var _updatedAgent: JVAgent?
+    @objc open dynamic var _updatedAgent: _JVAgent?
     @objc open dynamic var _updatedTimepoint: TimeInterval = 0
     @objc open dynamic var _isDeleted: Bool = false
     

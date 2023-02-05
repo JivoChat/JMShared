@@ -1,5 +1,5 @@
 //
-//  JVChannel.swift
+//  _JVChannel.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 11/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVChannel: JVBaseModel {
+public final class _JVChannel: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _stateID: Int = 0

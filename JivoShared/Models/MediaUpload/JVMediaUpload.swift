@@ -1,5 +1,5 @@
 //  
-//  JVMediaUpload.swift
+//  _JVMediaUpload.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVMediaUpload: JVBaseModel {
+public final class _JVMediaUpload: JVBaseModel {
     @objc dynamic public var _ID: String = ""
     @objc dynamic public var _filePath: String = ""
     @objc dynamic public var _recipientType: String = ""

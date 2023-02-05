@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHitItem+Access.swift
+//  _JVArchiveHitItem+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension JVArchiveHitItem {
-    public var agents: [JVAgent] {
+extension _JVArchiveHitItem {
+    public var agents: [_JVAgent] {
         return _agents.jv_toArray()
     }
     
-    public var chat: JVChat? {
+    public var chat: _JVChat? {
         return _chat
     }
     

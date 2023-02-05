@@ -1,5 +1,5 @@
 //
-//  JVTask+Access.swift
+//  _JVTask+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -21,7 +21,7 @@ public enum JVTaskStatus: String {
     }
 }
 
-extension JVTask {
+extension _JVTask {
     public var ID: Int {
         return _ID
     }
@@ -34,11 +34,11 @@ extension JVTask {
         return _clientID
     }
     
-    public var client: JVClient? {
+    public var client: _JVClient? {
         return _client
     }
     
-    public var agent: JVAgent? {
+    public var agent: _JVAgent? {
         return _agent
     }
     
@@ -62,8 +62,8 @@ extension JVTask {
         }
     }
     
-    public func convertToMessageBody() -> JVMessageBodyTask {
-        return JVMessageBodyTask(
+    public func convertToMessageBody() -> _JVMessageBodyTask {
+        return _JVMessageBodyTask(
             taskID: _ID,
             agent: _agent,
             text: _text,

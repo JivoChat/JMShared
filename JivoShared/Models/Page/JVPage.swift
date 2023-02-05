@@ -1,5 +1,5 @@
 //  
-//  JVPage.swift
+//  _JVPage.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVPage: JVBaseModel {
+public final class _JVPage: JVBaseModel {
     @objc dynamic public var _URL: String = ""
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _time: String?

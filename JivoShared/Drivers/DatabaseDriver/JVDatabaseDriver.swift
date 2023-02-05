@@ -30,7 +30,7 @@ public protocol JVIDatabaseDriver: AnyObject {
     func object<OT, VT>(_ type: OT.Type, primaryKey: VT) -> OT?
     func object<OT, VT>(_ type: OT.Type, mainKey: JVDatabaseContextMainKey<VT>) -> OT?
     
-    func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener
+    func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener
     func subscribe<OT>(object: OT, callback: @escaping (OT?) -> Void) -> JVDatabaseListener
     func unsubscribe(_ token: JVDatabaseSubscriberToken)
     
@@ -120,21 +120,21 @@ open class JVDatabaseDriver: JVIDatabaseDriver {
         return context.object(type, mainKey: mainKey)
     }
     
-    public func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener {
+    public func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener {
         let objects = context.getObjects(type as! Object.Type, options: options)
         let token = objects.observe { change in
             switch change {
             case .initial(let results): callback(Array(results) as! [OT])
             case let .update(results, _, insertions, modifications):
-                if returnEntireCollectionOnUpdate {
+//                if returnEntireCollectionOnUpdate {
                     callback(Array(results) as! [OT])
-                } else {
-                    let modificatedResults = results
-                        .enumerated()
-                        .filter { modifications.contains($0.offset) || insertions.contains($0.offset) }
-                        .map { $0.element }
-                    callback(Array(modificatedResults) as! [OT])
-                }
+//                } else {
+//                    let modificatedResults = results
+//                        .enumerated()
+//                        .filter { modifications.contains($0.offset) || insertions.contains($0.offset) }
+//                        .map { $0.element }
+//                    callback(Array(modificatedResults) as! [OT])
+//                }
             case .error: break
             }
         }

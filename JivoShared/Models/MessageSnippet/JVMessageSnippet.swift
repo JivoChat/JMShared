@@ -1,5 +1,5 @@
 //
-//  JVMessageSnippet.swift
+//  _JVMessageSnippet.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVMessageSnippet: JVBaseModel {
+public final class _JVMessageSnippet: JVBaseModel {
     @objc dynamic public var _URL: String?
     @objc dynamic public var _title: String = ""
     @objc dynamic public var _iconURL: String?

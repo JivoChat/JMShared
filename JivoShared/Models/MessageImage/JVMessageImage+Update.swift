@@ -1,5 +1,5 @@
 //
-//  JVMessageImage+Update.swift
+//  _JVMessageImage+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVMessageImage {
+extension _JVMessageImage {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVMessageImageGeneralChange {
             _fileName = c.fileName

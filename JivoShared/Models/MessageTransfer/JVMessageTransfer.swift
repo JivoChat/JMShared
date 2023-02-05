@@ -1,5 +1,5 @@
 //
-//  JVMessageTransfer.swift
+//  _JVMessageTransfer.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 12/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVMessageTransfer: JVBaseModel {
+public final class _JVMessageTransfer: JVBaseModel {
     @objc dynamic public var _agentID: Int = 0
     @objc dynamic public var _comment: String?
     

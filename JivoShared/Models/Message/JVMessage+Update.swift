@@ -1,5 +1,5 @@
 //
-//  JVMessage+Update.swift
+//  _JVMessage+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVMessage {
+extension _JVMessage {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         func _adjustSender(type: String, ID: Int, body: JVMessageBodyGeneralChange?) {
             if let body = body, let _ = body.callID {
@@ -46,7 +46,7 @@ extension JVMessage {
             _text = slices.first.flatMap(String.init)?.jv_trimmed() ?? String()
             
             if _body == nil {
-                _body = context.insert(of: JVMessageBody.self, with: JVMessageBodyGeneralChange(json: JsonElement()))
+                _body = context.insert(of: _JVMessageBody.self, with: JVMessageBodyGeneralChange(json: JsonElement()))
             }
             
             _body?._buttons = slices.dropFirst()
@@ -87,7 +87,7 @@ extension JVMessage {
             }
         }
 
-        func _adjustTask(task: JVMessageBodyTask?) {
+        func _adjustTask(task: _JVMessageBodyTask?) {
             guard let task = task else { return }
             guard let agentID = task.agent?.ID else { return }
             
@@ -100,7 +100,7 @@ extension JVMessage {
             }
 
             _ = context.upsert(
-                of: JVTask.self,
+                of: _JVTask.self,
                 with: JVTaskGeneralChange(
                     ID: task.taskID,
                     agentID: agentID,
@@ -123,8 +123,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.jv_trimmed()
-            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: _JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
             
             let updatedReactions = try? PropertyListEncoder().encode(c.reactions)
             if updatedReactions != _reactions {
@@ -152,7 +152,7 @@ extension JVMessage {
             _type = "message"
             _isMarkdown = false
             _text = c.text.jv_trimmed()
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
 
             if let date = c.time.jv_parseDateUsingFullFormat() {
                 _date = date
@@ -189,8 +189,8 @@ extension JVMessage {
             _text = c.text.jv_trimmed()
             _type = c.type
             _isMarkdown = c.isMarkdown
-            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: _JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
             _isOffline = c.isOffline
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
@@ -211,8 +211,8 @@ extension JVMessage {
             _type = "message"
             _isMarkdown = false
             _text = c.text.jv_trimmed()
-            _senderClient = context.object(JVClient.self, primaryKey: c.clientID)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _senderClient = context.object(_JVClient.self, primaryKey: c.clientID)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
 
             _adjustBotMeta(text: c.text)
             _adjustIncomingState(clientID: nil)
@@ -228,8 +228,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.jv_trimmed()
-            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: _JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updatedTs ?? 0
             _isDeleted = c.isDeleted
@@ -262,7 +262,7 @@ extension JVMessage {
             
             _adjustHidden()
         }
-        else if let c = change as? JVMessageOutgoingChange {
+        else if let c = change as? _JVMessageOutgoingChange {
             _localID = c.localID
             _date = c.date
             _clientID = c.clientID ?? 0
@@ -287,7 +287,7 @@ extension JVMessage {
                 _text = "🖼 " + name.jv_trimmed()
                 
                 _media = context.insert(
-                    of: JVMessageMedia.self,
+                    of: _JVMessageMedia.self,
                     with: JVMessageMediaGeneralChange(
                         type: "photo",
                         mime: mime,
@@ -303,7 +303,7 @@ extension JVMessage {
                 _text = "📄 " + name.jv_trimmed()
                 
                 _media = context.insert(
-                    of: JVMessageMedia.self,
+                    of: _JVMessageMedia.self,
                     with: JVMessageMediaGeneralChange(
                         type: "document",
                         mime: mime,
@@ -317,6 +317,9 @@ extension JVMessage {
                 
             case .proactive, .offline, .transfer, .transferDepartment, .join, .left, .call, .line, .task, .bot, .order, .conference, .story:
                 assertionFailure()
+                
+            case .contactForm(let status):
+                _text = status.rawValue
             }
             
             _adjustSender(type: c.senderType, ID: c.senderID, body: nil)
@@ -394,8 +397,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text.jv_trimmed()
-            _body = context.insert(of: JVMessageBody.self, with: c.body, validOnly: true)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _body = context.insert(of: _JVMessageBody.self, with: c.body, validOnly: true)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
             _updatedAgent = c.updatedBy.flatMap { context.agent(for: $0, provideDefault: false) }
             _updatedTimepoint = c.updateDate?.timeIntervalSince1970 ?? 0
             _isDeleted = c.isDeleted
@@ -416,8 +419,8 @@ extension JVMessage {
             _type = c.type
             _isMarkdown = c.isMarkdown
             _text = c.text
-            _senderClient = context.object(JVClient.self, primaryKey: clientID)
-            _media = context.insert(of: JVMessageMedia.self, with: c.media, validOnly: true)
+            _senderClient = context.object(_JVClient.self, primaryKey: clientID)
+            _media = context.insert(of: _JVMessageMedia.self, with: c.media, validOnly: true)
             
             _adjustIncomingState(clientID: nil)
             _adjustStatus(status: JVMessageStatus.delivered.rawValue)
@@ -450,8 +453,16 @@ extension JVMessage {
                         _text = newValue
                     }
                     _adjustBotMeta(text: newValue)
+                    
+                case let .details(newValue):
+                    preconditionFailure()
 
                 case let .date(newValue):
+                    if _date != newValue {
+                        _date = newValue
+                    }
+                    
+                case let .dateFreeze(newValue):
                     if _date != newValue {
                         _date = newValue
                     }
@@ -467,7 +478,7 @@ extension JVMessage {
                     }
                     
                 case let .media(newValue):
-                    let media = context.insert(of: JVMessageMedia.self, with: newValue, validOnly: true)
+                    let media = context.insert(of: _JVMessageMedia.self, with: newValue, validOnly: true)
                     if _media?._UUID != media?._UUID {
                         _media = media
                     }
@@ -482,7 +493,7 @@ extension JVMessage {
                         
                     case let .agent(id, displayNameUpdate):
                         let existingAgent = context.agent(for: id, provideDefault: false)
-                        let agent = existingAgent ?? { () -> JVAgent? in
+                        let agent = existingAgent ?? { () -> _JVAgent? in
                             let defaultAgent = context.agent(for: id, provideDefault: true)
                             if case let JVMessagePropertyUpdate.Sender.DisplayNameUpdatingLogic.updating(with: newValue) = displayNameUpdate {
                                 newValue.flatMap { defaultAgent?._displayName = $0 }
@@ -499,6 +510,11 @@ extension JVMessage {
                     
                 case let .type(newValue):
                     if _type != newValue.rawValue {
+                        _type = newValue.rawValue
+                    }
+                
+                case let .typeInitial(newValue):
+                    if _type.jv_valuable == nil {
                         _type = newValue.rawValue
                     }
                 
@@ -897,13 +913,13 @@ public final class JVMessageLocalChange: JVMessageExtendedGeneralChange {
     }
 }
 
-public final class JVMessageOutgoingChange: JVBaseModelChange {
+public final class _JVMessageOutgoingChange: JVBaseModelChange {
     public let localID: String
     public let date: Date
     public let clientID: Int?
     public let chatID: Int
     public let type: String
-    public let contents: JVMessageContent
+    public let contents: _JVMessageContent
     public let senderType: String
     public let senderID: Int
     
@@ -912,7 +928,7 @@ public final class JVMessageOutgoingChange: JVBaseModelChange {
          clientID: Int?,
          chatID: Int,
          type: String,
-         contents: JVMessageContent,
+         contents: _JVMessageContent,
          senderType: String,
          senderID: Int) {
         self.localID = localID
@@ -1085,7 +1101,7 @@ public final class JVMessageStateChange: JVBaseModelChange {
     
     public override var stringKey: JVDatabaseContextMainKey<String>? {
         if let localID = localID {
-            return JVDatabaseContextMainKey(key: "_localID", value: localID)
+            return JVDatabaseContextMainKey(key: "m_local_id", value: localID)
         }
         else {
             return nil
@@ -1147,7 +1163,7 @@ public final class JVMessageSendingChange: JVBaseModelChange {
     }
     
     public override var stringKey: JVDatabaseContextMainKey<String>? {
-        return JVDatabaseContextMainKey(key: "_localID", value: localID)
+        return JVDatabaseContextMainKey(key: "m_local_id", value: localID)
     }
     
     public init(localID: String, sendingDate: TimeInterval?, sendingFailed: Bool?) {
@@ -1241,8 +1257,8 @@ public final class JVMessageTextChange: JVBaseModelChange {
 }
 
 open class JVMessageSdkAgentChange: JVMessageExtendedGeneralChange {
-    public let agent: JVAgent
-    public let chat: JVChat
+    public let agent: _JVAgent
+    public let chat: _JVChat
     public let creationDate: Date?
     public let text: String
     public let media: JVMessageMediaGeneralChange?
@@ -1255,8 +1271,8 @@ open class JVMessageSdkAgentChange: JVMessageExtendedGeneralChange {
     }
     
     public init(id: Int,
-         agent: JVAgent,
-         chat: JVChat,
+         agent: _JVAgent,
+         chat: _JVChat,
          text: String,
          body: JVMessageBodyGeneralChange? = nil,
          media: JVMessageMediaGeneralChange? = nil,
@@ -1345,7 +1361,7 @@ open class JVSdkMessageStatusChange: JVBaseModelChange {
     
     open override var stringKey: JVDatabaseContextMainKey<String>? {
         return !(localId.isEmpty)
-            ? JVDatabaseContextMainKey(key: "_localID", value: localId)
+            ? JVDatabaseContextMainKey(key: "m_local_id", value: localId)
             : nil
     }
     
@@ -1377,12 +1393,15 @@ public enum JVMessagePropertyUpdate {
     case id(Int)
     case localId(String)
     case text(String)
+    case details(String)
     case date(Date)
+    case dateFreeze(Date)
     case status(JVMessageStatus)
     case chatId(Int)
     case media(JVMessageMediaGeneralChange)
     case sender(Sender)
     case type(JVMessageType)
+    case typeInitial(JVMessageType)
     case isHidden(Bool)
     case isIncoming(Bool)
     case isSendingFailed(Bool)
@@ -1405,7 +1424,7 @@ public enum JVSdkMessageAtomChangeInitError: LocalizedError {
 open class JVSdkMessageAtomChange: JVBaseModelChange {
     let id: Int
     let localId: String
-    let updates: [JVMessagePropertyUpdate]
+    public let updates: [JVMessagePropertyUpdate]
     
     public override var primaryValue: Int {
         abort()
@@ -1416,7 +1435,7 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
     }
     
     open override var stringKey: JVDatabaseContextMainKey<String>? {
-        return !localId.isEmpty ? JVDatabaseContextMainKey(key: "_localID", value: localId) : nil
+        return !localId.isEmpty ? JVDatabaseContextMainKey(key: "m_local_id", value: localId) : nil
     }
     
     public convenience init(id: Int, updates: [JVMessagePropertyUpdate]) throws {
@@ -1454,18 +1473,18 @@ open class JVSdkMessageAtomChange: JVBaseModelChange {
 }
 
 public class JVSDKMessageOfflineChange: JVBaseModelChange {
-    let localId = JVSDKMessageOfflineChange.id
-    let date = Date()
-    let type = "offline"
+    public let localId = JVSDKMessageOfflineChange.id
+    public let date = Date()
+    public let type = "offline"
     
-    let content: JVMessageContent
+    public let content: _JVMessageContent
     
     public override var primaryValue: Int {
         abort()
     }
     
     open override var stringKey: JVDatabaseContextMainKey<String>? {
-        return JVDatabaseContextMainKey<String>(key: "_localID", value: localId)
+        return JVDatabaseContextMainKey<String>(key: "m_local_id", value: localId)
     }
     
     public init(message: String) {

@@ -94,10 +94,10 @@ public struct JVSender: Equatable {
 }
 
 public struct JVMetaProviders {
-    public let clientProvider: (Int) -> JVClient?
+    public let clientProvider: (Int) -> _JVClient?
 }
 
-public protocol JVPresentable: JVValidatable {
+public protocol _JVPresentable: JVValidatable {
     var senderType: JVSenderType { get }
     func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem?
 }
@@ -120,8 +120,8 @@ public extension JVDisplayNameKind {
     }
 }
 
-public protocol JVDisplayable: JVPresentable {
-    var channel: JVChannel? { get }
+public protocol _JVDisplayable: _JVPresentable {
+    var channel: _JVChannel? { get }
     func displayName(kind: JVDisplayNameKind) -> String
     var integration: JVChannelJoint? { get }
     var hashedID: String { get }

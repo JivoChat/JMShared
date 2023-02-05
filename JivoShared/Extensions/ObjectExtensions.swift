@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import RealmSwift
 
 public protocol JVValidatable {
@@ -16,6 +17,16 @@ public protocol JVValidatable {
 extension Object: JVValidatable {
     public var jv_isValid: Bool {
         return !isInvalidated
+    }
+    
+    public func jv_ifValid<T>() -> T? {
+        return jv_isValid ? self as? T : nil
+    }
+}
+
+extension NSManagedObject: JVValidatable {
+    public var jv_isValid: Bool {
+        return true
     }
     
     public func jv_ifValid<T>() -> T? {

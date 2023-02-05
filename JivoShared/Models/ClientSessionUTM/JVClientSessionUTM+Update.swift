@@ -1,5 +1,5 @@
 //
-//  JVClientSessionUTM+Update.swift
+//  _JVClientSessionUTM+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVClientSessionUTM {
+extension _JVClientSessionUTM {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientSessionUTMGeneralChange {
             _source = c.source

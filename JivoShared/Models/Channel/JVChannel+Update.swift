@@ -1,5 +1,5 @@
 //
-//  JVChannel+Update.swift
+//  _JVChannel+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVChannel {
+extension _JVChannel {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChannelGeneralChange {
             if _ID == 0 { _ID = c.ID }

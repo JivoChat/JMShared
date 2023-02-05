@@ -1,5 +1,5 @@
 //
-//  JVAgent.swift
+//  _JVAgent.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 10/05/2017.
@@ -10,14 +10,14 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-open class JVAgent: JVBaseModel {
+open class _JVAgent: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _publicID: String = ""
     @objc dynamic public var _email: String = ""
     @objc dynamic public var _emailVerified: Bool = true
     @objc dynamic public var _phone: String = ""
     @objc dynamic public var _stateID: Int = 0
-    @objc dynamic public var _status: JVAgentRichStatus?
+    @objc dynamic public var _status: _JVAgentRichStatus?
     @objc dynamic public var _statusComment: String?
     @objc dynamic public var _avatarLink: String?
     @objc dynamic public var _displayName: String = ""
@@ -28,12 +28,12 @@ open class JVAgent: JVBaseModel {
     @objc dynamic public var _callingDestination: Int = 0
     @objc dynamic public var _callingOptions: Int = 0
     @objc dynamic public var _isWorking: Bool = true
-    @objc dynamic public var _session: JVAgentSession?
-    @objc dynamic public var _worktime: JVWorktime?
+    @objc dynamic public var _session: _JVAgentSession?
+    @objc dynamic public var _worktime: _JVWorktime?
     @objc dynamic public var _hasSession: Bool = false
     @objc dynamic public var _lastMessageDate: Date?
-    @objc dynamic public var _lastMessage: JVMessage?
-    @objc dynamic public var _chat: JVChat?
+    @objc dynamic public var _lastMessage: _JVMessage?
+    @objc dynamic public var _chat: _JVChat?
     @objc dynamic public var _orderingUnread: Bool = false
     @objc dynamic public var _orderingGroup: Int = 0
     @objc dynamic public var _orderingName: String? = nil

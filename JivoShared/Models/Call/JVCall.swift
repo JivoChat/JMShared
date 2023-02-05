@@ -1,5 +1,5 @@
 //  
-//  JVCall.swift
+//  _JVCall.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVCall: JVBaseModel {
+public final class _JVCall: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     
     public override class func primaryKey() -> String? {

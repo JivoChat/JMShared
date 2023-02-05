@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHitCallItem.swift
+//  _JVArchiveHitCallItem.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVArchiveHitCallItem: JVArchiveHitItem {
+public final class _JVArchiveHitCallItem: _JVArchiveHitItem {
     @objc dynamic public var _status: String = ""
     @objc dynamic public var _cost: Float = 0
     @objc dynamic public var _costCurrency: String = ""
-    @objc dynamic public var _call: JVCall?
+    @objc dynamic public var _call: _JVCall?
 
     public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)

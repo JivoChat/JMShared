@@ -1,5 +1,5 @@
 //
-//  JVChatAttendee+Access.swift
+//  _JVChatAttendee+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -18,10 +18,10 @@ public enum JVChatAttendeeNotifying: Int {
     }
 }
 
-public enum JVChatAttendeeRelation: Equatable {
+public enum _JVChatAttendeeRelation: Equatable {
     case invitedBySystem
-    case invitedByAgent(JVAgent, toAssist: Bool, comment: String?)
-    case attendee(agent: JVAgent?, toAssist: Bool, comment: String?)
+    case invitedByAgent(_JVAgent, toAssist: Bool, comment: String?)
+    case attendee(agent: _JVAgent?, toAssist: Bool, comment: String?)
     case team
         public var code: String {
         switch self {
@@ -41,12 +41,12 @@ public enum JVChatAttendeeRelation: Equatable {
     }
 }
 
-extension JVChatAttendee {
-    public var agent: JVAgent? {
+extension _JVChatAttendee {
+    public var agent: _JVAgent? {
         return _agent
     }
     
-    public var relation: JVChatAttendeeRelation {
+    public var relation: _JVChatAttendeeRelation {
         if _relation == "invited" {
             if let agent = _invitedBy {
                 return .invitedByAgent(agent, toAssist: _toAssist, comment: _comment)
@@ -67,7 +67,7 @@ extension JVChatAttendee {
         return _comment
     }
     
-    public var invitedBy: JVAgent? {
+    public var invitedBy: _JVAgent? {
         return _invitedBy
     }
     

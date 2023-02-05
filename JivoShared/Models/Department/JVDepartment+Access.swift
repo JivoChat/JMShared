@@ -1,5 +1,5 @@
 //
-//  JVAgent+Access.swift
+//  _JVAgent+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMRepicKit
 
-extension JVDepartment {
+extension _JVDepartment {
     public var ID: Int {
         return _ID
     }
@@ -26,7 +26,7 @@ extension JVDepartment {
         return _brief
     }
     
-    public func corresponds(to channel: JVChannel) -> Bool {
+    public func corresponds(to channel: _JVChannel) -> Bool {
         return _channelsIds.contains(",\(channel.ID),")
     }
     
@@ -37,7 +37,7 @@ extension JVDepartment {
             .map { String($0).jv_toInt() }
     }
     
-    public var channel: JVChannel? {
+    public var channel: _JVChannel? {
         return nil
     }
     

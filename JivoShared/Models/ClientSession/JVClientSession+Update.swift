@@ -1,5 +1,5 @@
 //
-//  JVClientSession+Update.swift
+//  _JVClientSession+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,28 +9,28 @@
 import Foundation
 import JMCodingKit
 
-extension JVClientSession {
+extension _JVClientSession {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVClientSessionGeneralChange {
             _creationTS = c.creationTS ?? _creationTS
             _lastIP = c.lastIP
             
-            _history.jv_set(context.insert(of: JVPage.self, with: c.history))
+            _history.jv_set(context.insert(of: _JVPage.self, with: c.history))
 
             if let value = c.UTM {
-                _UTM = context.insert(of: JVClientSessionUTM.self, with: value)
+                _UTM = context.insert(of: _JVClientSessionUTM.self, with: value)
             }
             
             if let value = c.geo {
-                _geo = context.insert(of: JVClientSessionGeo.self, with: value)
+                _geo = context.insert(of: _JVClientSessionGeo.self, with: value)
             }
             
             if let value = c.chatStartPage {
-                _chatStartPage = context.insert(of: JVPage.self, with: value)
+                _chatStartPage = context.insert(of: _JVPage.self, with: value)
             }
             
             if let value = c.currentPage {
-                _currentPage = context.insert(of: JVPage.self, with: value)
+                _currentPage = context.insert(of: _JVPage.self, with: value)
             }
         }
     }

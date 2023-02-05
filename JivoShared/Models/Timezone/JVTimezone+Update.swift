@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVTimezone {
+extension _JVTimezone {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVTimezoneGeneralChange {
             let defaultTimezone = TimeZone(identifier: c.code) ?? .current

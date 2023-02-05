@@ -1,5 +1,5 @@
 //
-//  JVAgentRichStatus+Access.swift
+//  _JVAgentRichStatus+Access.swift
 //  JMShared
 //
 //  Created by Yulia on 17.11.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension JVAgentRichStatus {
+extension _JVAgentRichStatus {
     public var statusID: Int {
         return _statusID
     }

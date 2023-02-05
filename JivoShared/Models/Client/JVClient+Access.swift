@@ -1,5 +1,5 @@
 //
-//  JVClient+Access.swift
+//  _JVClient+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -26,7 +26,7 @@ public enum JVClientDetailsUpdateError: Error {
     case tooLong
 }
 
-public struct JVClientProfile {
+public struct _JVClientProfile {
     public let emailByClient: String?
     public let emailByAgent: String?
     public let phoneByClient: String?
@@ -46,7 +46,7 @@ public struct JVClientProfile {
     }
 }
 
-extension JVClient: JVDisplayable {
+extension _JVClient: _JVDisplayable {
     public var senderType: JVSenderType {
         return .client
     }
@@ -72,7 +72,7 @@ extension JVClient: JVDisplayable {
         return _channelID
     }
     
-    public var channel: JVChannel? {
+    public var channel: _JVChannel? {
         return _channel
     }
 
@@ -110,8 +110,8 @@ extension JVClient: JVDisplayable {
         }
     }
     
-    public var profile: JVClientProfile {
-        return JVClientProfile(
+    public var profile: _JVClientProfile {
+        return _JVClientProfile(
             emailByClient: _emailByClient,
             emailByAgent: _emailByAgent,
             phoneByClient: _phoneByClient,
@@ -126,7 +126,7 @@ extension JVClient: JVDisplayable {
         return max(1, _visitsNumber)
     }
     
-    public func assignedAgent() -> JVAgent? {
+    public func assignedAgent() -> _JVAgent? {
         return _assignedAgent
     }
     
@@ -134,18 +134,18 @@ extension JVClient: JVDisplayable {
         return max(1, _navigatesNumber)
     }
     
-    public var session: JVClientSession? {
+    public var session: _JVClientSession? {
         switch integration {
         case .none: return _activeSession
         case .some(let joint): return joint.isStandalone ? nil : _activeSession
         }
     }
     
-    public var customData: [JVClientCustomData] {
+    public var customData: [_JVClientCustomData] {
         return _customData.jv_toArray()
     }
     
-//    var proactiveRule: JVClientProactiveRule? {
+//    var proactiveRule: _JVClientProactiveRule? {
 //        return _proactiveRule
 //    }
     
@@ -218,7 +218,7 @@ extension JVClient: JVDisplayable {
         return _hasActiveCall
     }
 
-    public var task: JVTask? {
+    public var task: _JVTask? {
         return _task
     }
     

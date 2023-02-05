@@ -8,12 +8,12 @@ import RealmSwift
 import JMCodingKit
 import JMRepicKit
 
-public final class JVTask: JVBaseModel {
+public final class _JVTask: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _siteID: Int = 0
     @objc dynamic public var _clientID: Int = 0
-    @objc dynamic public var _client: JVClient?
-    @objc dynamic public var _agent: JVAgent?
+    @objc dynamic public var _client: _JVClient?
+    @objc dynamic public var _agent: _JVAgent?
     @objc dynamic public var _text: String = ""
     @objc dynamic public var _createdTimestamp: TimeInterval = 0
     @objc dynamic public var _modifiedTimestamp: TimeInterval = 0

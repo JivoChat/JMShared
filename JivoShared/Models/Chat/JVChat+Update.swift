@@ -1,5 +1,5 @@
 //
-//  JVChat+Update.swift
+//  _JVChat+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVChat {
+extension _JVChat {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChatGeneralChange {
             if _ID == 0 { _ID = c.ID }
@@ -35,14 +35,14 @@ extension JVChat {
                 _loadedPartialHistory = false
             }
             else if !c.attendees.isEmpty {
-                let attendees = context.insert(of: JVChatAttendee.self, with: c.attendees)
+                let attendees = context.insert(of: _JVChatAttendee.self, with: c.attendees)
                 _attendees.jv_set(attendees.filter { $0.agent != nil })
             }
             else {
                 _isArchived = true
             }
             
-            _client = context.upsert(of: JVClient.self, with: c.client)
+            _client = context.upsert(of: _JVClient.self, with: c.client)
 
             if let clientID = c.client?.ID {
                 context.setValue(clientID, for: c.ID)
@@ -51,7 +51,7 @@ extension JVChat {
                 updateLastMessageIfNeeded(context: context, change: parsedLastMessage)
 
                 let parsedActiveRing = c.activeRing?.attach(clientID: clientID)
-                _activeRing = context.upsert(of: JVMessage.self, with: parsedActiveRing)
+                _activeRing = context.upsert(of: _JVMessage.self, with: parsedActiveRing)
 
                 _client?.apply(
                     inside: context,
@@ -66,7 +66,7 @@ extension JVChat {
                     updateLastMessageIfNeeded(context: context, change: c.lastMessage)
                 }
 
-                _activeRing = context.upsert(of: JVMessage.self, with: c.activeRing)
+                _activeRing = context.upsert(of: _JVMessage.self, with: c.activeRing)
             }
 
             if let attendeeIndex = _attendees.firstIndex(where: { $0.agent?.isMe == true }) {
@@ -141,11 +141,11 @@ extension JVChat {
         else if let c = change as? JVChatShortChange {
             if _ID == 0 { _ID = c.ID }
             
-            if let attendee = context.insert(of: JVChatAttendee.self, with: c.attendee) {
+            if let attendee = context.insert(of: _JVChatAttendee.self, with: c.attendee) {
                 _attendee = attendee
             }
             
-            _client = context.upsert(of: JVClient.self, with: c.client)
+            _client = context.upsert(of: _JVClient.self, with: c.client)
             
             _loadedEntireHistory = false
             _loadedPartialHistory = false
@@ -170,12 +170,12 @@ extension JVChat {
             _isArchived = c.isArchived
         }
         else if let c = change as? JVChatLastMessageChange {
-            let wantedMessage: JVMessage?
+            let wantedMessage: _JVMessage?
             if let key = c.messageGlobalKey {
-                wantedMessage = context.object(JVMessage.self, mainKey: key)
+                wantedMessage = context.object(_JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                wantedMessage = context.object(JVMessage.self, mainKey: key)
+                wantedMessage = context.object(_JVMessage.self, mainKey: key)
             }
             else {
                 wantedMessage = nil
@@ -193,12 +193,12 @@ extension JVChat {
             }
         }
         else if let c = change as? JVChatPreviewMessageChange {
-            let wantedMessage: JVMessage?
+            let wantedMessage: _JVMessage?
             if let key = c.messageGlobalKey {
-                wantedMessage = context.object(JVMessage.self, mainKey: key)
+                wantedMessage = context.object(_JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                wantedMessage = context.object(JVMessage.self, mainKey: key)
+                wantedMessage = context.object(_JVMessage.self, mainKey: key)
             }
             else {
                 wantedMessage = nil
@@ -318,15 +318,15 @@ extension JVChat {
             _draft = c.draft
         }
         else if let c = change as? JVSdkChatAgentsUpdateChange {
-            if c.exclusive {
-                _agents.jv_set(c.agents)
-            } else {
-                c.agents.forEach { agent in
-                    if !_agents.contains(where: { $0.ID == agent.ID }) {
-                        _agents.append(agent)
-                    }
-                }
-            }
+//            if c.exclusive {
+//                _agents.jv_set(c.agentIds.map { context.agent(for: $0, provideDefault: true) })
+//            } else {
+//                c.agents.forEach { agent in
+//                    if !_agents.contains(where: { $0.ID == agent.ID }) {
+//                        _agents.append(agent)
+//                    }
+//                }
+//            }
         }
         else {
             assertionFailure()
@@ -339,7 +339,7 @@ extension JVChat {
     
     private func updateLastMessageIfNeeded(context: JVIDatabaseContext, change: JVMessageLocalChange?) {
         guard let message = _lastMessage else {
-            _lastMessage = context.upsert(of: JVMessage.self, with: change)
+            _lastMessage = context.upsert(of: _JVMessage.self, with: change)
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change?.creationTS ?? 0))
             return
         }
@@ -357,11 +357,11 @@ extension JVChat {
         }
 
         if let _ = context.messageWithCallID(change.body?.callID) {
-             _lastMessage = context.update(of: JVMessage.self, with: change.copy(ID: message.ID))
+             _lastMessage = context.update(of: _JVMessage.self, with: change.copy(ID: message.ID))
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change.creationTS))
         }
         else {
-            _lastMessage = context.upsert(of: JVMessage.self, with: change)
+            _lastMessage = context.upsert(of: _JVMessage.self, with: change)
             _lastActivityTimestamp = max(_lastActivityTimestamp, TimeInterval(change.creationTS))
         }
     }
@@ -476,8 +476,35 @@ public final class JVChatGeneralChange: JVBaseModelChange {
         super.init(json: json)
     }
     
-    public func copy(without me: JVAgent) -> JVChatGeneralChange {
+    public func copy(without me: _JVAgent) -> JVChatGeneralChange {
         if let meAttendee = attendees.first(where: { $0.ID == me.ID }) ?? attendees.first {
+            return JVChatGeneralChange(
+                ID: ID,
+                attendees: attendees.filter({ $0 !== meAttendee }),
+                client: client,
+                agentID: agentID,
+                lastMessage: lastMessage,
+                activeRing: activeRing,
+                relation: meAttendee.relation,
+                isGroup: isGroup,
+                isMain: isMain,
+                title: title,
+                about: about,
+                icon: icon,
+                receivedMessageID: receivedMessageID,
+                unreadNumber: unreadNumber,
+                lastActivityTimestamp: lastActivityTimestamp,
+                hasActiveCall: hasActiveCall,
+                department: department,
+                knownArchived: knownArchived)
+        }
+        else {
+            return self
+        }
+    }
+
+    public func copy(without meId: Int) -> JVChatGeneralChange {
+        if let meAttendee = attendees.first(where: { $0.ID == meId }) ?? attendees.first {
             return JVChatGeneralChange(
                 ID: ID,
                 attendees: attendees.filter({ $0 !== meAttendee }),
@@ -737,7 +764,7 @@ public final class JVChatLastMessageChange: JVBaseModelChange {
     
     public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "m_local_id", value: messageLocalID)
         }
         else {
             return nil
@@ -776,7 +803,7 @@ public final class JVChatPreviewMessageChange: JVBaseModelChange {
 
     public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "m_local_id", value: messageLocalID)
         }
         else {
             return nil
@@ -1062,16 +1089,16 @@ public final class JVChatDraftChange: JVBaseModelChange {
 
 public final class JVSdkChatAgentsUpdateChange: JVBaseModelChange {
     public let id: Int
-    public let agents: [JVAgent]
+    public let agentIds: [Int]
     public let exclusive: Bool
     
     public override var primaryValue: Int {
         return id
     }
     
-    public init(id: Int, agents: [JVAgent], exclusive: Bool) {
+    public init(id: Int, agentIds: [Int], exclusive: Bool) {
         self.id = id
-        self.agents = agents
+        self.agentIds = agentIds
         self.exclusive = exclusive
         
         super.init()

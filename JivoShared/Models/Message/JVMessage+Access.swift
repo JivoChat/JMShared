@@ -1,5 +1,5 @@
 //
-//  JVMessage+Access.swift
+//  _JVMessage+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMRepicKit
 
-public enum JVMessageContent {
+public enum _JVMessageContent {
     case proactive(message: String)
     case offline(message: String)
     case text(message: String)
@@ -19,15 +19,16 @@ public enum JVMessageContent {
     case email(from: String, to: String, subject: String, message: String)
     case photo(mime: String, name: String, link: String, dataSize: Int, width: Int, height: Int)
     case file(mime: String, name: String, link: String, size: Int)
-    case transfer(from: JVAgent, to: JVAgent)
-    case transferDepartment(from: JVAgent, department: JVDepartment, to: JVAgent)
-    case join(assistant: JVAgent, by: JVAgent?)
-    case left(agent: JVAgent, kicker: JVAgent?)
-    case call(call: JVMessageBodyCall)
-    case task(task: JVMessageBodyTask)
+    case transfer(from: _JVAgent, to: _JVAgent)
+    case transferDepartment(from: _JVAgent, department: _JVDepartment, to: _JVAgent)
+    case join(assistant: _JVAgent, by: _JVAgent?)
+    case left(agent: _JVAgent, kicker: _JVAgent?)
+    case call(call: _JVMessageBodyCall)
+    case task(task: _JVMessageBodyTask)
     case conference(conference: JVMessageBodyConference)
     case story(story: JVMessageBodyStory)
     case line
+    case contactForm(status: JVMessageBodyContactFormStatus)
     
     public var isEditable: Bool {
         switch self {
@@ -49,6 +50,7 @@ public enum JVMessageContent {
         case .story: return false
         case .bot: return false
         case .order: return false
+        case .contactForm: return false
         }
     }
     
@@ -72,6 +74,7 @@ public enum JVMessageContent {
         case .story: return false
         case .bot: return false
         case .order: return false
+        case .contactForm: return false
         }
     }
 }
@@ -80,6 +83,11 @@ public struct JVMessageContentHash {
     public let ID: Int
     public let value: Int
     
+    public init(ID: Int, value: Int) {
+        self.ID = ID
+        self.value = value
+    }
+    
     public func hasChanged(relatedTo anotherHash: JVMessageContentHash?) -> Bool {
         guard let anotherHash = anotherHash else { return false }
         guard ID == anotherHash.ID else { return false }
@@ -87,8 +95,8 @@ public struct JVMessageContentHash {
     }
 }
 
-public struct JVMessageUpdateMeta {
-    let agent: JVAgent
+public struct _JVMessageUpdateMeta {
+    let agent: _JVAgent
     let date: Date
 }
 
@@ -119,6 +127,7 @@ public enum JVMessageDirection {
 }
 
 public enum JVMessageStatus: String {
+    case queued = "queued"
     case sent = "sent"
     case delivered = "delivered"
     case seen = "seen"
@@ -135,15 +144,17 @@ public enum JVMessageDelivery {
 
 public enum JVMessageType: String {
     case message = "message"
+    case system = "system"
+    case contactForm = "contact_form"
 }
 
-public extension JVMessage {
+public extension _JVMessage {
     struct Identifiers {
         static let offlineMessage = -1
     }
 }
 
-public extension JVMessage {
+public extension _JVMessage {
     var UUID: String {
         return _UUID
     }
@@ -164,7 +175,7 @@ public extension JVMessage {
         return _clientID
     }
     
-    var client: JVClient? {
+    var client: _JVClient? {
         return jv_validate(_client)
     }
     
@@ -214,7 +225,7 @@ public extension JVMessage {
         }
     }
     
-    var content: JVMessageContent {
+    var content: _JVMessageContent {
         switch type {
         case "proactive":
             return .proactive(
@@ -389,15 +400,15 @@ public extension JVMessage {
         }
     }
     
-    var sender: JVDisplayable? {
+    var sender: _JVDisplayable? {
         return senderAgent ?? senderClient ?? client
     }
     
-    var senderClient: JVClient? {
+    var senderClient: _JVClient? {
         return _senderClient
     }
     
-    var senderAgent: JVAgent? {
+    var senderAgent: _JVAgent? {
         if case .call(let call) = content {
             return call.agent
         }
@@ -410,7 +421,7 @@ public extension JVMessage {
         return _senderBot
     }
     
-    var senderBott: JVBot? {
+    var senderBott: _JVBot? {
         return _senderBott
     }
     
@@ -508,7 +519,8 @@ public extension JVMessage {
              .file,
              .line,
              .bot,
-             .order:
+             .order,
+             .contactForm:
             return nil
             
         case .story:
@@ -598,19 +610,19 @@ public extension JVMessage {
         }
     }
     
-    var media: JVMessageMedia? {
+    var media: _JVMessageMedia? {
         return _media
     }
     
-    var call: JVMessageBodyCall? {
+    var call: _JVMessageBodyCall? {
         return _body?.call
     }
 
-    var order: JVMessageBodyOrder? {
+    var order: _JVMessageBodyOrder? {
         return _body?.order
     }
 
-    var task: JVMessageBodyTask? {
+    var task: _JVMessageBodyTask? {
         return _body?.task
     }
     
@@ -635,10 +647,10 @@ public extension JVMessage {
         return _isDeleted
     }
     
-    var updatedMeta: JVMessageUpdateMeta? {
+    var updatedMeta: _JVMessageUpdateMeta? {
         guard let agent = _updatedAgent else { return nil }
         let date = Date(timeIntervalSince1970: _updatedTimepoint)
-        return JVMessageUpdateMeta(agent: agent, date: date)
+        return _JVMessageUpdateMeta(agent: agent, date: date)
     }
     
     var reactions: [JVMessageReaction] {
@@ -670,7 +682,7 @@ public extension JVMessage {
         }
     }
     
-    func correspondsTo(chat: JVChat) -> Bool {
+    func correspondsTo(chat: _JVChat) -> Bool {
         if let client = _correspondsTo_getSelfClient() {
             let chatClient = _correspondsTo_getChatClient(chat: chat)
             return (client.ID == chatClient?.ID)
@@ -683,7 +695,7 @@ public extension JVMessage {
     }
     
     /**
-     Some extra private methods for <func correspondsTo(chat: JVChat) Bool>
+     Some extra private methods for <func correspondsTo(chat: _JVChat) Bool>
      to make the stacktrace more readable for debug purpose
      */
     
@@ -691,15 +703,15 @@ public extension JVMessage {
         return jv_isValid ? chatID : nil
     }
     
-    private func _correspondsTo_getSelfClient() -> JVClient? {
+    private func _correspondsTo_getSelfClient() -> _JVClient? {
         return jv_isValid ? client : nil
     }
     
-    private func _correspondsTo_getChat(chat: JVChat) -> JVChat? {
+    private func _correspondsTo_getChat(chat: _JVChat) -> _JVChat? {
         return jv_validate(chat)
     }
     
-    private func _correspondsTo_getChatClient(chat: JVChat) -> JVClient? {
+    private func _correspondsTo_getChatClient(chat: _JVChat) -> _JVClient? {
         return chat.jv_isValid ? jv_validate(chat.client) : nil
     }
     

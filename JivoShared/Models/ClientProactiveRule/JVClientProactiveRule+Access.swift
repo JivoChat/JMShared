@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension JVClientProactiveRule {
-    public var agent: JVAgent? {
+extension _JVClientProactiveRule {
+    public var agent: _JVAgent? {
         return _agent
     }
     

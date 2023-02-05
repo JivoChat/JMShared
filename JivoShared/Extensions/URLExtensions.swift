@@ -223,7 +223,7 @@ public extension URL {
         let keyword = queryItems.jv_value(forName: "utm_term") ?? String()
         let content = queryItems.jv_value(forName: "utm_content") ?? String()
         
-        return JVClientSessionUTM.generateHumanReadable(
+        return _JVClientSessionUTM.generateHumanReadable(
             source: source,
             medium: medium,
             campaign: campaign,

@@ -9,10 +9,6 @@
 import Foundation
 
 public extension JVIDatabaseDriver {
-    func subscribe<OT>(_ type: OT.Type, options: JVDatabaseRequestOptions?, returnEntireCollectionOnUpdate: Bool = true, callback: @escaping ([OT]) -> Void) -> JVDatabaseListener {
-        return subscribe(type, options: options, returnEntireCollectionOnUpdate: returnEntireCollectionOnUpdate, callback: callback)
-    }
-    
     func insert<OT: JVBaseModel>(of type: OT.Type, with changes: [JVBaseModelChange]?) -> [OT] {
         var result = [OT]()
         
@@ -63,8 +59,8 @@ public extension JVIDatabaseDriver {
         return result
     }
     
-    func chatWithID(_ ID: Int) -> JVChat? {
-        var chat: JVChat?
+    func chatWithID(_ ID: Int) -> _JVChat? {
+        var chat: _JVChat?
         
         read { context in
             chat = context.chatWithID(ID)
@@ -73,8 +69,8 @@ public extension JVIDatabaseDriver {
         return chat
     }
 
-    func client(for clientID: Int, needsDefault: Bool) -> JVClient? {
-        var client: JVClient?
+    func client(for clientID: Int, needsDefault: Bool) -> _JVClient? {
+        var client: _JVClient?
 
         read { context in
             client = context.client(for: clientID, needsDefault: needsDefault)
@@ -83,7 +79,7 @@ public extension JVIDatabaseDriver {
         return client
     }
     
-    func chatForMessage(_ message: JVMessage, evenArchived: Bool) -> JVChat? {
+    func chatForMessage(_ message: _JVMessage, evenArchived: Bool) -> _JVChat? {
         if let client = message.client {
             return chat(for: client.ID, evenArchived: evenArchived)
         }
@@ -92,8 +88,8 @@ public extension JVIDatabaseDriver {
         }
     }
 
-    func agents(withMe: Bool) -> [JVAgent] {
-        var agents = [JVAgent]()
+    func agents(withMe: Bool) -> [_JVAgent] {
+        var agents = [_JVAgent]()
         
         let predicate: NSPredicate
         if withMe {
@@ -105,7 +101,7 @@ public extension JVIDatabaseDriver {
         
         read { context in
             agents = context.objects(
-                JVAgent.self,
+                _JVAgent.self,
                 options: JVDatabaseRequestOptions(
                     filter: predicate
                 )
@@ -115,8 +111,8 @@ public extension JVIDatabaseDriver {
         return agents
     }
     
-    func agent(for agentID: Int, provideDefault: Bool) -> JVAgent? {
-        var agent: JVAgent?
+    func agent(for agentID: Int, provideDefault: Bool) -> _JVAgent? {
+        var agent: _JVAgent?
         
         read { context in
             agent = context.agent(for: agentID, provideDefault: false)
@@ -131,8 +127,8 @@ public extension JVIDatabaseDriver {
         return agent
     }
     
-    func bot(for botID: Int, provideDefault: Bool) -> JVBot? {
-        var bot: JVBot?
+    func bot(for botID: Int, provideDefault: Bool) -> _JVBot? {
+        var bot: _JVBot?
         
         read { context in
             bot = context.bot(for: botID, provideDefault: false)
@@ -147,8 +143,8 @@ public extension JVIDatabaseDriver {
         return bot
     }
     
-    func chat(for clientID: Int, evenArchived: Bool) -> JVChat? {
-        var chat: JVChat?
+    func chat(for clientID: Int, evenArchived: Bool) -> _JVChat? {
+        var chat: _JVChat?
         
         read { context in
             guard let client = context.client(for: clientID, needsDefault: false) else { return }
@@ -158,8 +154,8 @@ public extension JVIDatabaseDriver {
         return chat
     }
     
-    func message(for UUID: String) -> JVMessage? {
-        var message: JVMessage?
+    func message(for UUID: String) -> _JVMessage? {
+        var message: _JVMessage?
         
         read { context in
             message = context.messageWithUUID(UUID)
@@ -348,32 +344,32 @@ public extension JVIDatabaseContext {
         return IDs.compactMap { self.object(MT.self, primaryKey: $0) }
     }
     
-    func agent(for agentID: Int, provideDefault: Bool) -> JVAgent? {
-        if let value = object(JVAgent.self, primaryKey: agentID) {
+    func agent(for agentID: Int, provideDefault: Bool) -> _JVAgent? {
+        if let value = object(_JVAgent.self, primaryKey: agentID) {
             return value
         }
         else if provideDefault {
-            return upsert(of: JVAgent.self, with: JVAgentGeneralChange(placeholderID: agentID))
+            return upsert(of: _JVAgent.self, with: JVAgentGeneralChange(placeholderID: agentID))
         }
         else {
             return nil
         }
     }
     
-    func bot(for botID: Int, provideDefault: Bool) -> JVBot? {
-        if let value = object(JVBot.self, primaryKey: botID) {
+    func bot(for botID: Int, provideDefault: Bool) -> _JVBot? {
+        if let value = object(_JVBot.self, primaryKey: botID) {
             return value
         }
         else if provideDefault {
-            return upsert(of: JVBot.self, with: JVBotGeneralChange(placeholderID: botID))
+            return upsert(of: _JVBot.self, with: JVBotGeneralChange(placeholderID: botID))
         }
         else {
             return nil
         }
     }
     
-    func department(for departmentID: Int) -> JVDepartment? {
-        if let value = object(JVDepartment.self, primaryKey: departmentID) {
+    func department(for departmentID: Int) -> _JVDepartment? {
+        if let value = object(_JVDepartment.self, primaryKey: departmentID) {
             return value
         }
         else {
@@ -381,12 +377,12 @@ public extension JVIDatabaseContext {
         }
     }
     
-    func client(for clientID: Int, needsDefault: Bool) -> JVClient? {
-        if let value = object(JVClient.self, primaryKey: clientID) {
+    func client(for clientID: Int, needsDefault: Bool) -> _JVClient? {
+        if let value = object(_JVClient.self, primaryKey: clientID) {
             return value
         }
         else if needsDefault {
-            return upsert(of: JVClient.self, with: JVClientGeneralChange(clientID: clientID))
+            return upsert(of: _JVClient.self, with: JVClientGeneralChange(clientID: clientID))
         }
         else {
             return nil
@@ -402,15 +398,15 @@ public extension JVIDatabaseContext {
         }
     }
     
-    func chatWithID(_ ID: Int) -> JVChat? {
-        return object(JVChat.self, primaryKey: ID)
+    func chatWithID(_ ID: Int) -> _JVChat? {
+        return object(_JVChat.self, primaryKey: ID)
     }
     
-    func messageWithUUID(_ UUID: String) -> JVMessage? {
-        return object(JVMessage.self, mainKey: JVDatabaseContextMainKey(key: "_UUID", value: UUID))
+    func messageWithUUID(_ UUID: String) -> _JVMessage? {
+        return object(_JVMessage.self, mainKey: JVDatabaseContextMainKey(key: "_UUID", value: UUID))
     }
     
-    func chatsWithClient(_ client: JVClient, includeArchived: Bool) -> [JVChat] {
+    func chatsWithClient(_ client: _JVClient, includeArchived: Bool) -> [_JVChat] {
         let predicate: NSPredicate
         if includeArchived {
             predicate = NSPredicate(format: "_client._ID == \(client.ID)")
@@ -420,7 +416,7 @@ public extension JVIDatabaseContext {
         }
 
         return objects(
-            JVChat.self,
+            _JVChat.self,
             options: JVDatabaseRequestOptions(
                 filter: predicate,
                 sortBy: [],
@@ -429,25 +425,25 @@ public extension JVIDatabaseContext {
         )
     }
     
-    func createMessage(with change: JVBaseModelChange) -> JVMessage {
-        let message = JVMessage(localizer: localizer)
+    func createMessage(with change: JVBaseModelChange) -> _JVMessage {
+        let message = _JVMessage(localizer: localizer)
         message.apply(inside: self, with: change)
         add([message])
         return message
     }
     
-    func messageWithCallID(_ callID: String?) -> JVMessage? {
+    func messageWithCallID(_ callID: String?) -> _JVMessage? {
         guard let callID = callID else { return nil }
 
         let filter = NSPredicate(format: "_body._callID == %@", callID)
         let options = JVDatabaseRequestOptions(filter: filter)
-        return objects(JVMessage.self, options: options).last
+        return objects(_JVMessage.self, options: options).last
     }
     
-    func removeChat(_ chat: JVChat, cleanup: Bool) {
+    func removeChat(_ chat: _JVChat, cleanup: Bool) {
         if cleanup, let client = chat.client, client.jv_isValid {
             let messages = objects(
-                JVMessage.self,
+                _JVMessage.self,
                 options: JVDatabaseRequestOptions(
                     filter: NSPredicate(format: "_clientID == %d", client.ID),
                     sortBy: []
@@ -464,7 +460,7 @@ public extension JVIDatabaseContext {
         guard !uuids.isEmpty else { return }
 
         let messages = objects(
-            JVMessage.self,
+            _JVMessage.self,
             options: JVDatabaseRequestOptions(
                 filter: NSPredicate(format: "_UUID in %@", uuids)
             )

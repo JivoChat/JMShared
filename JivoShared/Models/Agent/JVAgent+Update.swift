@@ -1,5 +1,5 @@
 //
-//  JVAgent+Update.swift
+//  _JVAgent+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVAgent {
+extension _JVAgent {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentGeneralChange {
             if _ID == 0 { _ID = c.ID }
@@ -17,7 +17,7 @@ extension JVAgent {
             _emailVerified = c.emailVerified ?? _emailVerified
             _phone = c.phone ?? _phone
             _stateID = c.stateID
-            _status = context.upsert(of: JVAgentRichStatus.self, with: c.status)
+            _status = context.upsert(of: _JVAgentRichStatus.self, with: c.status)
             _statusComment = c.statusComment
             _avatarLink = c.avatarLink.jv_valuable
             _displayName = c.displayName
@@ -27,16 +27,16 @@ extension JVAgent {
             _callingDestination = (c.callingDestination > -1 ? c.callingDestination : _callingDestination)
             _callingOptions = c.callingOptions
             _title = c.title
-            _worktime = context.upsert(of: JVWorktime.self, with: c.worktime)
+            _worktime = context.upsert(of: _JVWorktime.self, with: c.worktime)
             _isWorking = c.isWorking ?? _isWorking
-            _session = context.upsert(of: JVAgentSession.self, with: c.session) ?? _session
+            _session = context.upsert(of: _JVAgentSession.self, with: c.session) ?? _session
             _hasSession = (_session != nil)
             
             _orderingName = c.displayName
             adjustOrderingGroup()
         }
         else if let c = change as? JVAgentWorktimeChange {
-            _worktime = context.upsert(of: JVWorktime.self, with: c.worktimeChange)
+            _worktime = context.upsert(of: _JVWorktime.self, with: c.worktimeChange)
         }
         else if let c = change as? JVAgentShortChange {
             if _ID == 0 { _ID = c.ID }
@@ -58,16 +58,16 @@ extension JVAgent {
         }
         else if let c = change as? JVAgentLastMessageChange {
             if let key = c.messageGlobalKey {
-                _lastMessage = context.object(JVMessage.self, mainKey: key)
+                _lastMessage = context.object(_JVMessage.self, mainKey: key)
             }
             else if let key = c.messageLocalKey {
-                _lastMessage = context.object(JVMessage.self, mainKey: key)
+                _lastMessage = context.object(_JVMessage.self, mainKey: key)
             }
             
             _lastMessageDate = _lastMessage?.date
         }
         else if let c = change as? JVAgentChatChange {
-            _chat = context.object(JVChat.self, primaryKey: c.chatID)
+            _chat = context.object(_JVChat.self, primaryKey: c.chatID)
             _lastMessageDate = _chat?.lastMessage?.date
         }
         else if let c = change as? JVAgentDraftChange {
@@ -341,7 +341,7 @@ public final class JVAgentLastMessageChange: JVBaseModelChange {
 
     public var messageLocalKey: JVDatabaseContextMainKey<String>? {
         if let messageLocalID = messageLocalID {
-            return JVDatabaseContextMainKey(key: "_localID", value: messageLocalID)
+            return JVDatabaseContextMainKey(key: "m_local_id", value: messageLocalID)
         }
         else {
             return nil
@@ -502,8 +502,8 @@ public enum AgentPropertyUpdate {
 }
 
 open class SDKAgentAtomChange: JVBaseModelChange {
-    let id: Int
-    let updates: [AgentPropertyUpdate]
+    public let id: Int
+    public let updates: [AgentPropertyUpdate]
     
     public override var primaryValue: Int {
         abort()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class JVCannedPhrase: JVBaseModel {
+public final class _JVCannedPhrase: JVBaseModel {
     @objc dynamic public var _sessionScore: Int = 0
     @objc dynamic public var _totalScore: Int = 0
     @objc dynamic public var _message: String = ""

@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHitCallItem+Access.swift
+//  _JVArchiveHitCallItem+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -8,5 +8,5 @@
 
 import Foundation
 
-extension JVArchiveHitCallItem {
+extension _JVArchiveHitCallItem {
 }

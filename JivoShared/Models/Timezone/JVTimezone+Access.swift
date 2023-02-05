@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVTimezone {
+extension _JVTimezone {
     public var ID: Int {
         return _ID
     }

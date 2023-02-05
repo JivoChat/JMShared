@@ -1,5 +1,5 @@
 //  
-//  JVWorktime+Access.swift
+//  _JVWorktime+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -124,14 +124,24 @@ public struct JVWorktimeDayConfig: Equatable {
 public struct JVWorktimeDayMeta: Equatable {
     public let day: JVWorktimeDay
     public let config: JVWorktimeDayConfig
+    
+    public init(day: JVWorktimeDay, config: JVWorktimeDayConfig) {
+        self.day = day
+        self.config = config
+    }
 }
 
 public struct JVWorktimeDayMetaPair: Equatable {
     public let today: JVWorktimeDayMeta?
     public let anotherDay: JVWorktimeDayMeta?
+    
+    public init(today: JVWorktimeDayMeta?, anotherDay: JVWorktimeDayMeta?) {
+        self.today = today
+        self.anotherDay = anotherDay
+    }
 }
 
-extension JVWorktime {
+extension _JVWorktime {
     public var agentID: Int {
         return _agentID
     }
@@ -145,7 +155,7 @@ extension JVWorktime {
         }
     }
     
-    public var timezone: JVTimezone? {
+    public var timezone: _JVTimezone? {
         return _timezone
     }
     
@@ -171,7 +181,7 @@ extension JVWorktime {
         return Set(activePairs.map { day, config in day.rawValue })
     }
     
-    public func ifEnabled() -> JVWorktime? {
+    public func ifEnabled() -> _JVWorktime? {
         return isEnabled ? self : nil
     }
     

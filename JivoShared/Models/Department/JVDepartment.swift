@@ -1,5 +1,5 @@
 //
-//  JVDepartment.swift
+//  _JVDepartment.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 10/05/2017.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-open class JVDepartment: JVBaseModel {
+open class _JVDepartment: JVBaseModel {
     @objc dynamic public var _ID: Int = 0
     @objc dynamic public var _name: String = ""
     @objc dynamic public var _icon: String = ""

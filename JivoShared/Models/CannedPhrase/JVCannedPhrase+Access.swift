@@ -8,7 +8,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVCannedPhrase {
+extension _JVCannedPhrase {
     public var message: String {
         return _message
     }

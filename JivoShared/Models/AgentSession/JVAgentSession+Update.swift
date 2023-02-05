@@ -1,5 +1,5 @@
 //
-//  JVAgentSession+Update.swift
+//  _JVAgentSession+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -97,7 +97,7 @@ public enum JVAgentLicensedFeature: Int {
     }
 }
 
-extension JVAgentSession {
+extension _JVAgentSession {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVAgentSessionGeneralChange {
             if _siteID == 0 { _siteID = c.siteID }
@@ -115,7 +115,7 @@ extension JVAgentSession {
         }
         else if let c = change as? JVAgentSessionContextChange {
             
-            //            _channels.set(context.upsert(of: JVChannel.self, with: c.channels))
+            //            _channels.set(context.upsert(of: _JVChannel.self, with: c.channels))
             
             if let features = c.techConfig {
                 _globalReceived = true
@@ -147,12 +147,12 @@ extension JVAgentSession {
             _isWorkingHidden = c.isWorkingHidden
         }
         else if let c = change as? JVAgentSessionChannelsChange {
-            _channels.jv_set(context.upsert(of: JVChannel.self, with: c.channels))
+            _channels.jv_set(context.upsert(of: _JVChannel.self, with: c.channels))
         }
         else if let c = change as? JVAgentSessionChannelUpdateChange {
             let oldChannels = Array(_channels.filter { $0.ID != c.channel.ID })
             
-            if let newChannel = context.upsert(of: JVChannel.self, with: c.channel) {
+            if let newChannel = context.upsert(of: _JVChannel.self, with: c.channel) {
                 _channels.jv_set(oldChannels + [newChannel])
             }
             else {

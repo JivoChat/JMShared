@@ -1,5 +1,5 @@
 //  
-//  JVArchiveHitChatItem.swift
+//  _JVArchiveHitChatItem.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 05.09.2020.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVArchiveHitChatItem: JVArchiveHitItem {
+public final class _JVArchiveHitChatItem: _JVArchiveHitItem {
     public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         super.apply(inside: context, with: change)
         performApply(inside: context, with: change)

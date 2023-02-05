@@ -1,5 +1,5 @@
 //
-//  JVClientSession.swift
+//  _JVClientSession.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 26/05/2017.
@@ -10,14 +10,14 @@ import Foundation
 import RealmSwift
 import JMCodingKit
 
-public final class JVClientSession: JVBaseModel {
+public final class _JVClientSession: JVBaseModel {
     @objc dynamic public var _creationTS: TimeInterval = 0
-    @objc dynamic public var _UTM: JVClientSessionUTM?
+    @objc dynamic public var _UTM: _JVClientSessionUTM?
     @objc dynamic public var _lastIP: String = ""
-    @objc dynamic public var _geo: JVClientSessionGeo?
-    @objc dynamic public var _chatStartPage: JVPage?
-    @objc dynamic public var _currentPage: JVPage?
-    public let _history = List<JVPage>()
+    @objc dynamic public var _geo: _JVClientSessionGeo?
+    @objc dynamic public var _chatStartPage: _JVPage?
+    @objc dynamic public var _currentPage: _JVPage?
+    public let _history = List<_JVPage>()
 
     public override func recursiveDelete(context: JVIDatabaseContext) {
         performDelete(inside: context)

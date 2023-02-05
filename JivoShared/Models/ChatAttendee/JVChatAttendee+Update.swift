@@ -1,5 +1,5 @@
 //
-//  JVChatAttendee+Update.swift
+//  _JVChatAttendee+Update.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import JMCodingKit
 
-extension JVChatAttendee {
+extension _JVChatAttendee {
     public func performApply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
         if let c = change as? JVChatAttendeeGeneralChange {
             _agent = context.agent(for: c.ID, provideDefault: true)
@@ -167,7 +167,7 @@ public final class JVChatAttendeeNotificationsChange: JVBaseModelChange {
     }
 }
 
-public func ==(lhs: JVChatAttendeeRelation, rhs: JVChatAttendeeRelation) -> Bool {
+public func ==(lhs: _JVChatAttendeeRelation, rhs: _JVChatAttendeeRelation) -> Bool {
     if case .invitedBySystem = lhs, case .invitedBySystem = rhs {
         return true
     }

@@ -1,5 +1,5 @@
 //
-//  JVClientSessionGeo+Access.swift
+//  _JVClientSessionGeo+Access.swift
 //  JivoMobile
 //
 //  Created by Stan Potemkin on 04.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension JVClientSessionGeo {
+extension _JVClientSessionGeo {
     public var country: String? {
         return _country?.jv_valuable
     }
