@@ -7,14 +7,4 @@
 //
 
 import Foundation
-import RealmSwift
 import JMCodingKit
-
-public final class _JVMessageTransfer: JVBaseModel {
-    @objc dynamic public var _agentID: Int = 0
-    @objc dynamic public var _comment: String?
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-    }
-}

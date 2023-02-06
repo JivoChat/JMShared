@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RealmSwift/RealmSwift-Swift.h"
 
 //! Project version number for JivoShared.
 FOUNDATION_EXPORT double JivoSharedVersionNumber;

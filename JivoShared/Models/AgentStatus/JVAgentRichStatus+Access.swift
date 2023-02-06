@@ -6,21 +6,3 @@
 //
 
 import Foundation
-
-extension _JVAgentRichStatus {
-    public var statusID: Int {
-        return _statusID
-    }
-    
-    public var title: String {
-        return _title
-    }
-    
-    public var emoji: String {
-        return _emoji.jv_convertToEmojis()
-    }
-    
-    public var position: Int {
-        return _position
-    }
-}

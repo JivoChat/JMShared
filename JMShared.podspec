@@ -19,8 +19,6 @@ Pod::Spec.new do |spec|
 
   spec.framework    = 'SystemConfiguration'
 
-  spec.dependency     'Realm'
-  spec.dependency     'RealmSwift', '<= 10.33.0'
   spec.dependency     'JMTimelineKit'
   spec.dependency     'JMRepicKit'
   spec.dependency     'JMMarkdownKit'
@@ -37,6 +35,8 @@ Pod::Spec.new do |spec|
 
   spec.exclude_files = [
     'JivoShared/Info.plist',
+    'JivoShared/Models',
+    'JivoShared/Tools/PureParserTool',
     '**/*Unit.swift'
   ]
 end

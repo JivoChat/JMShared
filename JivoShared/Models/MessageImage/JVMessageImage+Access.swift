@@ -7,17 +7,3 @@
 //
 
 import Foundation
-
-extension _JVMessageImage {
-    public var fileName: String {
-        return _fileName
-    }
-    
-    public var URL: URL {
-        return NSURL(string: _URL)! as URL
-    }
-    
-    public var uploadDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(_uploadTS))
-    }
-}

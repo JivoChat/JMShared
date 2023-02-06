@@ -7,39 +7,3 @@
 //
 
 import Foundation
-
-extension _JVArchive {
-    public var latest: Double? {
-        return (_latest == 0 ? nil : _latest)
-    }
-    
-    public var lastID: String? {
-        return (_lastID == "" ? nil : _lastID)
-    }
-    
-    public var total: Int {
-        return _total
-    }
-    
-    public var archiveTotal: Int {
-        return _archiveTotal
-    }
-    
-    public var hits: [_JVArchiveHit] {
-        return Array(_hits)
-    }
-    
-    public var isCleanedUp: Bool {
-        return _isCleanedUp
-    }
-    
-    public func sortedHits(by sort: JVArchiveHitSort) -> [_JVArchiveHit] {
-        switch sort {
-        case .byTime:
-            return Array(_hits.sorted(byKeyPath: "_latestActivityTime", ascending: false))
-            
-        case .byScore:
-            return Array(_hits.sorted(byKeyPath: "_score", ascending: false))
-        }
-    }
-}

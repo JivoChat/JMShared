@@ -7,17 +7,3 @@
 //
 
 import Foundation
-
-extension _JVClientProactiveRule {
-    public var agent: _JVAgent? {
-        return _agent
-    }
-    
-    public var date: Date {
-        return _date!
-    }
-    
-    public var text: String {
-        return _text
-    }
-}

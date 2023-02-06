@@ -7,35 +7,3 @@
 //
 
 import Foundation
-
-extension _JVTimezone {
-    public var ID: Int {
-        return _ID
-    }
-    
-    public var identifier: String {
-        return _identifier ?? String()
-    }
-    
-    public var GMT: String {
-        return _displayGMT ?? String()
-    }
-    
-    public func displayName(lang: JVLocaleLang) -> String {
-        switch lang {
-        case .ru: return _displayNameRu ?? _identifier ?? String()
-        default: return _displayNameEn ?? _identifier ?? String()
-        }
-    }
-    
-    public var sortingOffset: Int {
-        return _sortingOffset
-    }
-    
-    public func sortingRegion(lang: JVLocaleLang) -> String {
-        switch lang {
-        case .ru: return _sortingRegionRu ?? _identifier ?? String()
-        default: return _sortingRegionEn ?? _identifier ?? String()
-        }
-    }
-}

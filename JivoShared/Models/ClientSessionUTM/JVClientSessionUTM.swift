@@ -8,16 +8,3 @@
 
 import Foundation
 import JMCodingKit
-
-public final class _JVClientSessionUTM: JVBaseModel {
-    @objc dynamic public var _source: String?
-    @objc dynamic public var _keyword: String?
-    @objc dynamic public var _campaign: String?
-    @objc dynamic public var _medium: String?
-    @objc dynamic public var _content: String?
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}

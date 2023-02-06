@@ -7,28 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
 import JMCodingKit
 import JMRepicKit
-
-open class JVBaseModel: Object {
-    @objc dynamic public var _UUID: String = Foundation.UUID().uuidString.lowercased()
-    
-    required public override init() {
-        super.init()
-    }
-    
-    open func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-    }
-    
-    open func simpleDelete(context: JVIDatabaseContext) {
-        _ = context.simpleRemove(objects: [self])
-    }
-
-    open func recursiveDelete(context: JVIDatabaseContext) {
-        simpleDelete(context: context)
-    }
-}
 
 open class JVBaseModelChange: NSObject {
     public let isOK: Bool
@@ -43,10 +23,6 @@ open class JVBaseModelChange: NSObject {
         isOK = json["ok"].boolValue
     }
     
-    open var targetType: JVBaseModel.Type {
-        abort()
-    }
-    
     open var isValid: Bool {
         return true
     }
@@ -55,7 +31,7 @@ open class JVBaseModelChange: NSObject {
         abort()
     }
     
-    open var integerKey: JVDatabaseContextMainKey<Int>? {
+    open var integerKey: CoreDataContextCustomId<Int>? {
         return nil
     }
     
@@ -93,15 +69,6 @@ public struct JVSender: Equatable {
     }
 }
 
-public struct JVMetaProviders {
-    public let clientProvider: (Int) -> _JVClient?
-}
-
-public protocol _JVPresentable: JVValidatable {
-    var senderType: JVSenderType { get }
-    func metaImage(providers: JVMetaProviders?, transparent: Bool, scale: CGFloat?) -> JMRepicItem?
-}
-
 public enum JVDisplayNameKind {
     case original
     case short
@@ -118,13 +85,4 @@ public extension JVDisplayNameKind {
         public static let richStatus = Self(rawValue: 1 << 1)
         public static let all = Self(rawValue: ~0)
     }
-}
-
-public protocol _JVDisplayable: _JVPresentable {
-    var channel: _JVChannel? { get }
-    func displayName(kind: JVDisplayNameKind) -> String
-    var integration: JVChannelJoint? { get }
-    var hashedID: String { get }
-    var isMe: Bool { get }
-    var isAvailable: Bool { get }
 }

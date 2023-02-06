@@ -7,13 +7,3 @@
 //
 
 import Foundation
-
-extension _JVMessageTransfer {
-    public var agentID: Int {
-        return _agentID
-    }
-    
-    public var comment: String? {
-        return _comment
-    }
-}

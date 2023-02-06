@@ -8,16 +8,3 @@
 
 import Foundation
 import JMCodingKit
-
-public final class _JVClientSessionGeo: JVBaseModel {
-    @objc dynamic public var _country: String?
-    @objc dynamic public var _region: String?
-    @objc dynamic public var _city: String?
-    @objc dynamic public var _organization: String?
-    @objc dynamic public var _countryCode: String?
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}

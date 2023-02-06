@@ -7,17 +7,4 @@
 //
 
 import Foundation
-import RealmSwift
 import JMCodingKit
-
-public final class _JVMessageSnippet: JVBaseModel {
-    @objc dynamic public var _URL: String?
-    @objc dynamic public var _title: String = ""
-    @objc dynamic public var _iconURL: String?
-    @objc dynamic public var _HTML: String = ""
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}

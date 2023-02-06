@@ -8,14 +8,3 @@
 
 import Foundation
 import JMCodingKit
-
-public final class _JVClientProactiveRule: JVBaseModel {
-    @objc dynamic public var _agent: _JVAgent?
-    @objc dynamic public var _date: Date?
-    @objc dynamic public var _text: String = ""
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}

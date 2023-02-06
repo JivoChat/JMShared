@@ -7,18 +7,4 @@
 //
 
 import Foundation
-import RealmSwift
 import JMCodingKit
-
-public final class _JVCall: JVBaseModel {
-    @objc dynamic public var _ID: Int = 0
-    
-    public override class func primaryKey() -> String? {
-        return "_ID"
-    }
-    
-    public override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}

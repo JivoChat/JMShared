@@ -7,17 +7,3 @@
 //
 
 import Foundation
-
-public final class JVDatabaseListener {
-    private let token: JVDatabaseSubscriberToken
-    private weak var databaseDriver: JVIDatabaseDriver!
-    
-    public init(token: JVDatabaseSubscriberToken, databaseDriver: JVIDatabaseDriver) {
-        self.token = token
-        self.databaseDriver = databaseDriver
-    }
-    
-    deinit {
-        databaseDriver?.unsubscribe(token)
-    }
-}

@@ -7,6 +7,3 @@
 //
 
 import Foundation
-
-extension _JVArchiveHitChatItem {
-}

@@ -7,28 +7,4 @@
 //
 
 import Foundation
-import RealmSwift
 import JMCodingKit
-
-open class _JVDepartment: JVBaseModel {
-    @objc dynamic public var _ID: Int = 0
-    @objc dynamic public var _name: String = ""
-    @objc dynamic public var _icon: String = ""
-    @objc dynamic public var _brief: String = ""
-    @objc dynamic public var _channelsIds: String = ""
-    @objc dynamic public var _agentsIds: String = ""
-
-    open override class func primaryKey() -> String? {
-        return "_ID"
-    }
-    
-    open override func recursiveDelete(context: JVIDatabaseContext) {
-        performDelete(inside: context)
-        super.recursiveDelete(context: context)
-    }
-    
-    open override func apply(inside context: JVIDatabaseContext, with change: JVBaseModelChange) {
-        super.apply(inside: context, with: change)
-        performApply(inside: context, with: change)
-    }
-}
